@@ -1,6 +1,8 @@
 package br.ufpr.inf.opla.patterns.models;
 
 import arquitetura.representation.Element;
+import br.ufpr.inf.opla.patterns.models.ps.PS;
+import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -8,45 +10,34 @@ import java.util.Objects;
 public class Scope {
 
     private final List<Element> elements;
-    private final List<Element> elementsOfInterest;
-    private DesignPattern PSOf;
-    private DesignPattern PSPLAOf;
+    private final List<PS> ps;
+    private final List<PSPLA> psPla;
 
     public Scope() {
-        this.elementsOfInterest = new ArrayList<>();
         this.elements = new ArrayList<>();
+        this.ps = new ArrayList<>();
+        this.psPla = new ArrayList<>();
     }
 
     public List<Element> getElements() {
         return elements;
     }
 
-    public boolean isPS() {
-        return PSOf != null;
+    public List<PS> getPs() {
+        return ps;
     }
 
-    public boolean isPSPLA() {
-        return PSPLAOf != null;
+    public List<PSPLA> getPsPla() {
+        return psPla;
     }
 
-    public DesignPattern getPSOf() {
-        return PSOf;
+    public void addPs(PS ps) {
+        this.ps.add(ps);
     }
 
-    public void setPSOf(DesignPattern PSOf) {
-        this.PSOf = PSOf;
-    }
-
-    public DesignPattern getPSPLAOf() {
-        return PSPLAOf;
-    }
-
-    public void setPSPLAOf(DesignPattern PSPLAOf) {
-        this.PSPLAOf = PSPLAOf;
-    }
-
-    public List<Element> getElementsOfInterest() {
-        return elementsOfInterest;
+    public void addPsPla(PSPLA psPla) {
+        this.ps.add(psPla);
+        this.psPla.add(psPla);
     }
 
     @Override

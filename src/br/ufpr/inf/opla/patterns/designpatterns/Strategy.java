@@ -1,21 +1,31 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import arquitetura.representation.Class;
 import arquitetura.representation.Element;
-import arquitetura.representation.Interface;
-import arquitetura.representation.Method;
+import arquitetura.representation.Variability;
+import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
+import br.ufpr.inf.opla.patterns.models.ps.PS;
+import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
+import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
+import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Strategy extends DesignPattern {
 
     private static final Strategy INSTANCE = new Strategy();
+    //private static final String[] CONSIDERED_RELATIONSHIPS = new String[]{"usage","dependency"};
+
+    private final AlgorithmFamilyUtil algorithmFamilyUtil;
+    private final RelationshipUtil relationshipUtil;
 
     private Strategy() {
         super("Strategy", "Behavioral");
+        relationshipUtil = RelationshipUtil.getInstance();
+        this.algorithmFamilyUtil = AlgorithmFamilyUtil.getInstance();
     }
 
     public static Strategy getInstance() {
@@ -23,111 +33,89 @@ public class Strategy extends DesignPattern {
     }
 
     @Override
-    protected boolean verifyPS(Scope scope) {
+    public boolean verifyPS(Scope scope) {
         List<AlgorithmFamily> familiesInScope = new ArrayList<>();
 
-        addFamiliesWithSuffixAndPreffix(scope, familiesInScope);
-        addFamiliesWithSameMethod(scope, familiesInScope);
+        algorithmFamilyUtil.addFamiliesWithSuffixAndPreffix(scope, familiesInScope);
+        algorithmFamilyUtil.addFamiliesWithSameMethod(scope, familiesInScope);
 
+        Collections.sort(familiesInScope);
+
+        for (int i = familiesInScope.size() - 1; i >= 0; i--) {
+            AlgorithmFamily iFamily = familiesInScope.get(i);
+            List<Element> participants = iFamily.getParticipants();
+            List<Element> elementsInScope = new ArrayList<>(scope.getElements());
+            elementsInScope.removeAll(participants);
+            List<Element> contexts = new ArrayList<>();
+            for (Element element : elementsInScope) {
+                List<Element> usedElements = new ArrayList<>();
+                for (Relationship relationship : element.getRelationships()) {
+                    List<Element> tempUsedElements = relationshipUtil.getUsedElementsFromRelationship(relationship);
+                    tempUsedElements.remove(element);
+                    usedElements.addAll(tempUsedElements);
+                }
+                for (int j = 0; j < usedElements.size(); j++) {
+                    if (!participants.contains(usedElements.get(j))) {
+                        usedElements.remove(j);
+                        j--;
+                    }
+                }
+                if (!usedElements.isEmpty()) {
+                    contexts.add(element);
+                }
+            }
+            if (!contexts.isEmpty()) {
+                PSStrategy psStrategy = new PSStrategy(contexts, iFamily);
+                scope.addPs(psStrategy);
+                return true;
+            }
+        }
         return false;
     }
 
-    private void addFamiliesWithSuffixAndPreffix(Scope scope, List<AlgorithmFamily> familiesInScope) {
-        for (int i = 0; i < scope.getElements().size(); i++) {
-            List<String> suffixes = new ArrayList<>();
-            List<String> prefixes = new ArrayList<>();
-
-            {
-                final String elementName = scope.getElements().get(i).getName();
-                for (int k = 3; k < elementName.length(); k++) {
-                    suffixes.add(elementName.substring(k - 3, elementName.length()));
-                    prefixes.add(elementName.substring(0, elementName.length() - k + 3));
-                }
-            }
-
-            for (int j = i + 1; j < scope.getElements().size(); j++) {
-                final String elementName = scope.getElements().get(j).getName();
-
-                for (String prefix : prefixes) {
-                    if (elementName.length() >= prefix.length()) {
-                        if (elementName.substring(0, prefix.length()).equals(prefix)) {
-                            AlgorithmFamily algorithmFamily = new AlgorithmFamily();
-                            algorithmFamily.setFamilyName(prefix);
-                            if (!familiesInScope.contains(algorithmFamily)) {
-                                familiesInScope.add(algorithmFamily);
-                                algorithmFamily.getParticipants().add(scope.getElements().get(i));
-                                algorithmFamily.getParticipants().add(scope.getElements().get(j));
-                            } else {
-                                algorithmFamily = familiesInScope.get(familiesInScope.indexOf(algorithmFamily));
-                                if (!algorithmFamily.getParticipants().contains(scope.getElements().get(j))) {
-                                    algorithmFamily.getParticipants().add(scope.getElements().get(j));
-                                }
-                            }
-                        }
-                    }
-                }
-
-                for (String suffix : suffixes) {
-                    if (elementName.length() >= suffix.length()) {
-                        if (elementName.substring(elementName.length() - suffix.length()).equals(suffix)) {
-                            AlgorithmFamily algorithmFamily = new AlgorithmFamily();
-                            algorithmFamily.setFamilyName(suffix);
-                            if (!familiesInScope.contains(algorithmFamily)) {
-                                familiesInScope.add(algorithmFamily);
-                                algorithmFamily.getParticipants().add(scope.getElements().get(i));
-                                algorithmFamily.getParticipants().add(scope.getElements().get(j));
-                            } else {
-                                algorithmFamily = familiesInScope.get(familiesInScope.indexOf(algorithmFamily));
-                                if (!algorithmFamily.getParticipants().contains(scope.getElements().get(j))) {
-                                    algorithmFamily.getParticipants().add(scope.getElements().get(j));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void addFamiliesWithSameMethod(Scope scope, List<AlgorithmFamily> familiesInScope) {
-        for (int i = 0; i < scope.getElements().size(); i++) {
-            Element iElement = scope.getElements().get(i);
-
-            List<Method> iMethods = getMethodsFromElement(iElement);
-            if (iMethods == null || iMethods.isEmpty()) {
-                continue;
-            }
-
-            for (int j = i + 1; j < scope.getElements().size(); j++) {
-                Element jElement = scope.getElements().get(i);
-
-                List<Method> jMethods = getMethodsFromElement(jElement);
-                if (jMethods == null || jMethods.isEmpty()) {
-                    continue;
-                }
-
-                System.out.println("");
-            }
-        }
-    }
-
-    private List<Method> getMethodsFromElement(Element iElement) {
-        List<Method> iMethods;
-        if (iElement instanceof arquitetura.representation.Class) {
-            Class iClass = (Class) iElement;
-            iMethods = iClass.getAllMethods();
-        } else if (iElement instanceof Interface) {
-            Interface iInterface = (Interface) iElement;
-            iMethods = iInterface.getOperations();
-        } else {
-            return null;
-        }
-        return iMethods;
-    }
-
     @Override
-    protected boolean verifyPSPLA(Scope scope) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean verifyPSPLA(Scope scope) {
+        if (verifyPS(scope)) {
+            pSIteratorFor:
+            for (PS ps : scope.getPs()) {
+                if (ps.getPsOf().equals(this)) {
+                    PSStrategy psStrategy = (PSStrategy) ps;
+                    List<Variability> variabilities = null;
+                    for (Element algorithm : psStrategy.getAlgorithmFamily().getParticipants()) {
+                        if (algorithm.getVariant() == null) {
+                            continue pSIteratorFor;
+                        }
+                        if (variabilities == null) {
+                            variabilities = new ArrayList<>();
+                            variabilities.addAll(algorithm.getVariant().getVariabilities());
+                        } else if (!variabilities.isEmpty()) {
+                            for (int i = 0; i < variabilities.size(); i++) {
+                                if (!algorithm.getVariant().getVariabilities().contains(variabilities.get(i))) {
+                                    variabilities.remove(i);
+                                    i--;
+                                }
+                            }
+                        } else {
+                            continue pSIteratorFor;
+                        }
+                    }
+                    if (variabilities == null || variabilities.isEmpty()) {
+                        continue;
+                    }
+                    for (Element context : psStrategy.getContexts()) {
+                        if (context.getVariationPoint() != null) {
+                            List<Variability> contextVariabilities = context.getVariationPoint().getVariabilities();
+                            for (Variability variability : contextVariabilities) {
+                                if (variabilities.contains(variability)) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override

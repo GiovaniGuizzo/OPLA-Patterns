@@ -19,7 +19,7 @@ public class PatternsMutationOperator {
     public Architecture mutateArchitecture(Architecture architecture, ScopeSelectionStrategy scopeSelectionStartegy, DesignPatternSelectionStrategy designPatternSelectionStrategy){
         DesignPattern designPattern = designPatternSelectionStrategy.selectDesignPattern();
         Scope scope = scopeSelectionStartegy.selectScope(architecture);
-        if(designPattern.verifyAsPSOrPSPLA(scope)){
+        if(designPattern.randomlyVerifyAsPSOrPSPLA(scope)){
             designPattern.apply(scope);
         }
         return architecture;

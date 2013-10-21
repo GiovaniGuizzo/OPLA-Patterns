@@ -4,6 +4,7 @@ import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.designpatterns.Facade;
 import br.ufpr.inf.opla.patterns.designpatterns.Mediator;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
+import java.util.Objects;
 import java.util.Random;
 
 public abstract class DesignPattern {
@@ -33,7 +34,7 @@ public abstract class DesignPattern {
         return category;
     }
 
-    public boolean verifyAsPSOrPSPLA(Scope scope) {
+    public boolean randomlyVerifyAsPSOrPSPLA(Scope scope) {
         double PLAProbability = random.nextDouble();
         if (random.nextDouble() < PLAProbability) {
             return verifyPSPLA(scope);
@@ -42,10 +43,29 @@ public abstract class DesignPattern {
         }
     }
 
-    protected abstract boolean verifyPS(Scope scope);
+    public abstract boolean verifyPS(Scope scope);
 
-    protected abstract boolean verifyPSPLA(Scope scope);
+    public abstract boolean verifyPSPLA(Scope scope);
 
     public abstract boolean apply(Scope scope);
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 47 * hash + Objects.hashCode(this.name);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DesignPattern other = (DesignPattern) obj;
+        return Objects.equals(this.name, other.name);
+    }
 
 }

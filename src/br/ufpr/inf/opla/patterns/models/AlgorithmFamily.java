@@ -42,21 +42,13 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
             return false;
         }
         final AlgorithmFamily other = (AlgorithmFamily) obj;
-        if (!Objects.equals(this.familyName, other.familyName)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.familyName, other.familyName);
     }
 
     @Override
     public int compareTo(AlgorithmFamily o) {
-        if (this.getParticipants().size() > o.getParticipants().size()) {
-            return 1;
-        } else if (this.getParticipants().size() < o.getParticipants().size()) {
-            return -1;
-        } else {
-            return 0;
-        }
+        int compare = Integer.compare(this.getParticipants().size(), o.getParticipants().size());
+        return compare != 0 ? compare : Integer.compare(this.getFamilyName().length(), o.getFamilyName().length());
     }
 
 }

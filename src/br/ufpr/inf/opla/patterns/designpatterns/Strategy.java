@@ -99,7 +99,14 @@ public class Strategy extends DesignPattern {
             }
 
             for (int j = i + 1; j < scope.getElements().size(); j++) {
+                Element jElement = scope.getElements().get(i);
 
+                List<Method> jMethods = getMethodsFromElement(jElement);
+                if (jMethods == null || jMethods.isEmpty()) {
+                    continue;
+                }
+
+                System.out.println("");
             }
         }
     }

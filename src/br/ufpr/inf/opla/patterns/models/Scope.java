@@ -36,8 +36,15 @@ public class Scope {
     }
 
     public void addPsPla(PSPLA psPla) {
-        this.ps.add(psPla);
         this.psPla.add(psPla);
+    }
+
+    public boolean isPs() {
+        return !ps.isEmpty();
+    }
+
+    public boolean isPsPla() {
+        return !psPla.isEmpty();
     }
 
     @Override

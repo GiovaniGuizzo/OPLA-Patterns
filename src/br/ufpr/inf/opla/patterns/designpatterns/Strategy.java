@@ -7,6 +7,7 @@ import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
+import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
@@ -41,6 +42,7 @@ public class Strategy extends DesignPattern {
 
         Collections.sort(familiesInScope);
 
+        boolean isPs = false;
         for (int i = familiesInScope.size() - 1; i >= 0; i--) {
             AlgorithmFamily iFamily = familiesInScope.get(i);
             List<Element> participants = iFamily.getParticipants();
@@ -66,15 +68,18 @@ public class Strategy extends DesignPattern {
             }
             if (!contexts.isEmpty()) {
                 PSStrategy psStrategy = new PSStrategy(contexts, iFamily);
-                scope.addPs(psStrategy);
-                return true;
+                if (!scope.getPs().contains(psStrategy)) {
+                    scope.addPs(psStrategy);
+                }
+                isPs = true;
             }
         }
-        return false;
+        return isPs;
     }
 
     @Override
     public boolean verifyPSPLA(Scope scope) {
+        boolean isPsPla = false;
         if (verifyPS(scope)) {
             pSIteratorFor:
             for (PS ps : scope.getPs()) {
@@ -107,7 +112,12 @@ public class Strategy extends DesignPattern {
                             List<Variability> contextVariabilities = context.getVariationPoint().getVariabilities();
                             for (Variability variability : contextVariabilities) {
                                 if (variabilities.contains(variability)) {
-                                    return true;
+                                    PSPLAStrategy psPlaStrategy = new PSPLAStrategy(psStrategy.getContexts(), psStrategy.getAlgorithmFamily());
+                                    if (!scope.getPsPla().contains(psPlaStrategy)) {
+                                        scope.addPsPla(psPlaStrategy);
+                                    }
+                                    isPsPla = true;
+                                    continue pSIteratorFor;
                                 }
                             }
                         }
@@ -115,7 +125,7 @@ public class Strategy extends DesignPattern {
                 }
             }
         }
-        return false;
+        return isPsPla;
     }
 
     @Override

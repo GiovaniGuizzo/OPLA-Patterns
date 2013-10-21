@@ -70,7 +70,7 @@ public class AlgorithmFamilyUtil {
             }
 
             for (int j = i + 1; j < scope.getElements().size(); j++) {
-                Element jElement = scope.getElements().get(i);
+                Element jElement = scope.getElements().get(j);
 
                 List<Method> jMethods = elementUtil.getMethodsFromElement(jElement);
                 if (jMethods == null || jMethods.isEmpty()) {

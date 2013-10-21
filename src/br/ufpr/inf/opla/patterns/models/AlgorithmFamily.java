@@ -48,7 +48,13 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
     @Override
     public int compareTo(AlgorithmFamily o) {
         int compare = Integer.compare(this.getParticipants().size(), o.getParticipants().size());
-        return compare != 0 ? compare : Integer.compare(this.getFamilyName().length(), o.getFamilyName().length());
+        if (compare == 0) {
+            compare = Integer.compare(this.getFamilyName().length(), o.getFamilyName().length());
+            if (compare == 0) {
+                compare = this.getFamilyName().compareToIgnoreCase(o.getFamilyName());
+            }
+        }
+        return compare;
     }
 
 }

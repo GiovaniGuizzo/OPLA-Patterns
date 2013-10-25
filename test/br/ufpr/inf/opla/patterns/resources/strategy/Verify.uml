@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smartyProfile="http:///schemas/smartyProfile/_X4-fUDzXEeO7UKAGd3cQWw/0" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smartyProfile/_X4-fUDzXEeO7UKAGd3cQWw/0 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_X5CJsDzXEeO7UKAGd3cQWw">
+  <uml:Model xmi:id="_oBkAYDy_EeOQvLsAhPBMLQ" name="model">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_m6iaADzXEeO7UKAGd3cQWw" annotatedElement="_uwevcDy_EeOQvLsAhPBMLQ">
+      <body> </body>
+    </ownedComment>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_MAez4DzCEeOQvLsAhPBMLQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_uwevcDy_EeOQvLsAhPBMLQ" clientDependency="_KFy6wDzAEeOQvLsAhPBMLQ _LK1QMDzAEeOQvLsAhPBMLQ _LoJeUDzAEeOQvLsAhPBMLQ" name="ContextClass"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vOaBkDy_EeOQvLsAhPBMLQ" name="QuickSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_kvtGsDzCEeOQvLsAhPBMLQ" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_mmQYoDzCEeOQvLsAhPBMLQ" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vf1v0Dy_EeOQvLsAhPBMLQ" name="ShellSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_o7H-QDzCEeOQvLsAhPBMLQ" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_rDNsIDzCEeOQvLsAhPBMLQ" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vyYRUDy_EeOQvLsAhPBMLQ" name="BubbleSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_HqlxsDzCEeOQvLsAhPBMLQ" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_OJd5oDzCEeOQvLsAhPBMLQ" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_KFy6wDzAEeOQvLsAhPBMLQ" name="sorting" client="_uwevcDy_EeOQvLsAhPBMLQ" supplier="_vyYRUDy_EeOQvLsAhPBMLQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_LK1QMDzAEeOQvLsAhPBMLQ" name="sorting" client="_uwevcDy_EeOQvLsAhPBMLQ" supplier="_vf1v0Dy_EeOQvLsAhPBMLQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_LoJeUDzAEeOQvLsAhPBMLQ" name="sorting" client="_uwevcDy_EeOQvLsAhPBMLQ" supplier="_vOaBkDy_EeOQvLsAhPBMLQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_u2-RoDzCEeOQvLsAhPBMLQ" clientDependency="_18MA0DzCEeOQvLsAhPBMLQ _2WYpgDzCEeOQvLsAhPBMLQ" name="NotAContext"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_xHLZsDzCEeOQvLsAhPBMLQ" name="NoAlgorithm"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_yazkwDzCEeOQvLsAhPBMLQ" name="NoEither"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_18MA0DzCEeOQvLsAhPBMLQ" name="Usage1" client="_u2-RoDzCEeOQvLsAhPBMLQ" supplier="_xHLZsDzCEeOQvLsAhPBMLQ"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_2WYpgDzCEeOQvLsAhPBMLQ" name="Usage2" client="_u2-RoDzCEeOQvLsAhPBMLQ" supplier="_yazkwDzCEeOQvLsAhPBMLQ"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ZripIDzXEeO7UKAGd3cQWw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZrlscDzXEeO7UKAGd3cQWw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_X5CJsDzXEeO7UKAGd3cQWw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+  </uml:Model>
+  <smartyProfile:variability xmi:id="_oIIOgDzXEeO7UKAGd3cQWw" base_Comment="_m6iaADzXEeO7UKAGd3cQWw" name="SortVariability" minSelection="1" maxSelection="3" variants="BubbleSort, QuickSort, ShellSort"/>
+  <smartyProfile:mandatory xmi:id="_hCz8MDzYEeO7UKAGd3cQWw" base_Class="_uwevcDy_EeOQvLsAhPBMLQ"/>
+  <smartyProfile:variationPoint xmi:id="_hDjjEDzYEeO7UKAGd3cQWw" base_Class="_uwevcDy_EeOQvLsAhPBMLQ" numberOfVariants="3" variants="BubbleSort, ShellSort, QuickSort" variabilities="SortVariability"/>
+  <smartyProfile:alternative_OR xmi:id="_ygKj4DzYEeO7UKAGd3cQWw" base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" rootVP="ContextClass" variabilities="SortVariability"/>
+  <smartyProfile:alternative_OR xmi:id="_3cOOMDzYEeO7UKAGd3cQWw" base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" rootVP="ContextClass" variabilities="SortVariability"/>
+  <smartyProfile:alternative_OR xmi:id="_d7-RoDzZEeO7UKAGd3cQWw" base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" rootVP="ContextClass" variabilities="SortVariability"/>
+</xmi:XMI>

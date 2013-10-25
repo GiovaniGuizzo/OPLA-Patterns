@@ -1,4 +1,4 @@
-package br.ufpr.inf.opla.patterns.defaultstrategy;
+package br.ufpr.inf.opla.patterns.strategies.defaultstrategy;
 
 import arquitetura.representation.Architecture;
 import br.ufpr.inf.opla.patterns.models.Scope;

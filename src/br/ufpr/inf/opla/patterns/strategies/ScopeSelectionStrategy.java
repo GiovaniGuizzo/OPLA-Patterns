@@ -1,7 +1,7 @@
 package br.ufpr.inf.opla.patterns.strategies;
 
-import br.ufpr.inf.opla.patterns.models.Scope;
 import arquitetura.representation.Architecture;
+import br.ufpr.inf.opla.patterns.models.Scope;
 
 public interface ScopeSelectionStrategy {
     

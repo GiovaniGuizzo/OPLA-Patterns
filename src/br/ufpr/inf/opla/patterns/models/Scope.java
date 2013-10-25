@@ -11,40 +11,40 @@ public class Scope {
 
     private final List<Element> elements;
     private final List<PS> ps;
-    private final List<PSPLA> psPla;
+    private final List<PSPLA> psPLA;
 
     public Scope() {
         this.elements = new ArrayList<>();
         this.ps = new ArrayList<>();
-        this.psPla = new ArrayList<>();
+        this.psPLA = new ArrayList<>();
     }
 
     public List<Element> getElements() {
         return elements;
     }
 
-    public List<PS> getPs() {
+    public List<PS> getPS() {
         return ps;
     }
 
-    public List<PSPLA> getPsPla() {
-        return psPla;
+    public List<PSPLA> getPSPLA() {
+        return psPLA;
     }
 
-    public void addPs(PS ps) {
+    public void addPS(PS ps) {
         this.ps.add(ps);
     }
 
-    public void addPsPla(PSPLA psPla) {
-        this.psPla.add(psPla);
+    public void addPSPLA(PSPLA psPla) {
+        this.psPLA.add(psPla);
     }
 
-    public boolean isPs() {
+    public boolean isPS() {
         return !ps.isEmpty();
     }
 
-    public boolean isPsPla() {
-        return !psPla.isEmpty();
+    public boolean isPSPLA() {
+        return !psPLA.isEmpty();
     }
 
     @Override
@@ -62,10 +62,7 @@ public class Scope {
             return false;
         }
         final Scope other = (Scope) obj;
-        if (!Objects.equals(this.elements, other.elements)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.elements, other.elements);
     }
 
 }

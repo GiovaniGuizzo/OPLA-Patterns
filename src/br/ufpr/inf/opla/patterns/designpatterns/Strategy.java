@@ -1,15 +1,17 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import arquitetura.representation.Variability;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
-import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,15 +20,16 @@ import java.util.List;
 public class Strategy extends DesignPattern {
 
     private static final Strategy INSTANCE = new Strategy();
-    //private static final String[] CONSIDERED_RELATIONSHIPS = new String[]{"usage","dependency"};
 
     private final AlgorithmFamilyUtil algorithmFamilyUtil;
     private final RelationshipUtil relationshipUtil;
+    private final ElementUtil elementUtil;
 
     private Strategy() {
         super("Strategy", "Behavioral");
-        relationshipUtil = RelationshipUtil.getInstance();
+        this.relationshipUtil = RelationshipUtil.getInstance();
         this.algorithmFamilyUtil = AlgorithmFamilyUtil.getInstance();
+        this.elementUtil = ElementUtil.getInstance();
     }
 
     public static Strategy getInstance() {
@@ -35,10 +38,7 @@ public class Strategy extends DesignPattern {
 
     @Override
     public boolean verifyPS(Scope scope) {
-        List<AlgorithmFamily> familiesInScope = new ArrayList<>();
-
-        algorithmFamilyUtil.addFamiliesWithSuffixAndPreffix(scope, familiesInScope);
-        algorithmFamilyUtil.addFamiliesWithSameMethod(scope, familiesInScope);
+        List<AlgorithmFamily> familiesInScope = algorithmFamilyUtil.getFamiliesFromScope(scope);
 
         Collections.sort(familiesInScope);
 
@@ -68,8 +68,8 @@ public class Strategy extends DesignPattern {
             }
             if (!contexts.isEmpty()) {
                 PSStrategy psStrategy = new PSStrategy(contexts, iFamily);
-                if (!scope.getPs().contains(psStrategy)) {
-                    scope.addPs(psStrategy);
+                if (!scope.getPS().contains(psStrategy)) {
+                    scope.addPS(psStrategy);
                 }
                 isPs = true;
             }
@@ -82,7 +82,7 @@ public class Strategy extends DesignPattern {
         boolean isPsPla = false;
         if (verifyPS(scope)) {
             pSIteratorFor:
-            for (PS ps : scope.getPs()) {
+            for (PS ps : scope.getPS()) {
                 if (ps.getPsOf().equals(this)) {
                     PSStrategy psStrategy = (PSStrategy) ps;
                     List<Variability> variabilities = null;
@@ -113,8 +113,8 @@ public class Strategy extends DesignPattern {
                             for (Variability variability : contextVariabilities) {
                                 if (variabilities.contains(variability)) {
                                     PSPLAStrategy psPlaStrategy = new PSPLAStrategy(psStrategy.getContexts(), psStrategy.getAlgorithmFamily());
-                                    if (!scope.getPsPla().contains(psPlaStrategy)) {
-                                        scope.addPsPla(psPlaStrategy);
+                                    if (!scope.getPSPLA().contains(psPlaStrategy)) {
+                                        scope.addPSPLA(psPlaStrategy);
                                     }
                                     isPsPla = true;
                                     continue pSIteratorFor;
@@ -130,7 +130,14 @@ public class Strategy extends DesignPattern {
 
     @Override
     public boolean apply(Scope scope) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean applied = false;
+        if (scope.isPS()) {
+
+            PSStrategy ps = (PSStrategy) scope.getPS().get(0);
+
+            Interface strategyInterface = algorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(ps.getAlgorithmFamily());
+        }
+        return applied;
     }
 
 }

@@ -1,27 +1,39 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
+import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class AlgorithmFamilyUtil {
 
     private static final AlgorithmFamilyUtil INSTANCE = new AlgorithmFamilyUtil();
 
     private final ElementUtil elementUtil;
+    private final RelationshipUtil relationshipUtil;
 
     private AlgorithmFamilyUtil() {
         this.elementUtil = ElementUtil.getInstance();
+        this.relationshipUtil = RelationshipUtil.getInstance();
     }
 
     public static AlgorithmFamilyUtil getInstance() {
         return INSTANCE;
     }
 
-    public void addFamiliesWithSuffixAndPreffix(Scope scope, List<AlgorithmFamily> familiesInScope) {
+    public List<AlgorithmFamily> getFamiliesFromScope(Scope scope) {
+        List<AlgorithmFamily> familiesInScope = new ArrayList<>();
+        addFamiliesWithSuffixAndPreffix(scope, familiesInScope);
+        addFamiliesWithSameMethod(scope, familiesInScope);
+        return familiesInScope;
+    }
+
+    private void addFamiliesWithSuffixAndPreffix(Scope scope, List<AlgorithmFamily> familiesInScope) {
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
             List<String> suffixes = new ArrayList<>();
@@ -46,7 +58,7 @@ public class AlgorithmFamilyUtil {
                         }
                     }
                 }
-                
+
                 for (String prefix : prefixes) {
                     if (jElementName.length() >= prefix.length()) {
                         if (jElementName.substring(0, prefix.length()).equals(prefix)) {
@@ -60,7 +72,7 @@ public class AlgorithmFamilyUtil {
         }
     }
 
-    public void addFamiliesWithSameMethod(Scope scope, List<AlgorithmFamily> familiesInScope) {
+    private void addFamiliesWithSameMethod(Scope scope, List<AlgorithmFamily> familiesInScope) {
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
 
@@ -105,5 +117,88 @@ public class AlgorithmFamilyUtil {
                 algorithmFamily.getParticipants().add(jElement);
             }
         }
+    }
+
+    /**
+     * Gets the Strategy interface from the algorithm family, if there is one.
+     *
+     * A Strategy interface is an interface implemented by all elements from an algorithm family and with all the methods from these elements (methods are equal if their names and return types are equal).
+     *
+     * @param algorithmFamily The algorithm family you want to get the Strategy interface from.
+     * @return The Strategy interface, or null if there is not one.
+     */
+    public Interface getStrategyInterfaceFromAlgorithmFamily(AlgorithmFamily algorithmFamily) {
+        Interface strategyInterface = null;
+        List<Element> participants = algorithmFamily.getParticipants();
+        List<Interface> interfaces = new ArrayList<>();
+        for (Element participant : participants) {
+            List<Interface> elementInterfaces = new ArrayList<>();
+            for (Relationship relationship : participant.getRelationships()) {
+                Interface implementedInterface = relationshipUtil.getImplementedInterface(relationship);
+                if (implementedInterface != null) {
+                    elementInterfaces.add(implementedInterface);
+                }
+            }
+            if (interfaces.isEmpty()) {
+                interfaces.addAll(elementInterfaces);
+            } else {
+                interfaces = new ArrayList<>(CollectionUtils.intersection(interfaces, elementInterfaces));
+            }
+        }
+
+        List<Method> allMethodsFromAlgorithmFamily = getAllMethodsFromAlgorithmFamily(algorithmFamily);
+        for (Interface aInterface : interfaces) {
+            boolean isStrategyInterface = true;
+            for (Method method : allMethodsFromAlgorithmFamily) {
+                boolean hasMethod = false;
+                for (Method interfaceMethod : aInterface.getOperations()) {
+                    if (elementUtil.areMethodsEqual(interfaceMethod, method)) {
+                        hasMethod = true;
+                        break;
+                    }
+                }
+                if (!hasMethod) {
+                    isStrategyInterface = false;
+                    break;
+                }
+            }
+            if (isStrategyInterface) {
+                strategyInterface = aInterface;
+                break;
+            }
+        }
+
+        return strategyInterface;
+    }
+
+    /**
+     * Gets all methods from the specified algorithm family. Methods are equal if their names and return types are equal.
+     *
+     * @param algorithmFamily The algorithm family from which the methods must be extracted.
+     * @return A List with all the methods from the elements of the algorithm family.
+     */
+    public List<Method> getAllMethodsFromAlgorithmFamily(AlgorithmFamily algorithmFamily) {
+        List<Method> methods = new ArrayList<>();
+        for (Element element : algorithmFamily.getParticipants()) {
+            List<Method> elementMethods = elementUtil.getMethodsFromElement(element);
+            if (methods.isEmpty()) {
+                methods.addAll(elementMethods);
+            } else {
+                for (Method elementMethod : elementMethods) {
+                    boolean hasMethod = false;
+                    for (int i = 0; i < methods.size(); i++) {
+                        Method method = methods.get(i);
+                        if (elementUtil.areMethodsEqual(method, elementMethod)) {
+                            hasMethod = true;
+                            break;
+                        }
+                    }
+                    if (!hasMethod) {
+                        methods.add(elementMethod);
+                    }
+                }
+            }
+        }
+        return methods;
     }
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smartyProfile="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ">
+  <uml:Model xmi:id="_ahT1oD2qEeO0W5WLsM8PpQ" name="Model">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_ahT1oT2qEeO0W5WLsM8PpQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_dAhisD2tEeO0W5WLsM8PpQ" clientDependency="_f-bBwD2uEeO0W5WLsM8PpQ" name="Class1">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_wzikwD2uEeO0W5WLsM8PpQ" name="methodA"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iXfFsD3AEeOSVqhj7G3ZEA" name="methodB">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_l19-wD3AEeOSVqhj7G3ZEA" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_d0NpcD2tEeO0W5WLsM8PpQ" clientDependency="_fceLQD2uEeO0W5WLsM8PpQ" name="Class2">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_vfzE8D2uEeO0W5WLsM8PpQ" name="methodA"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_dtLSsD3AEeOSVqhj7G3ZEA" name="methodB">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_hzmVgD3AEeOSVqhj7G3ZEA" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_eyOw4D2tEeO0W5WLsM8PpQ" name="StrategyInterface">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tQn3oD2uEeO0W5WLsM8PpQ" name="methodA"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ml-fYD3AEeOSVqhj7G3ZEA" name="methodB">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_pS0gID3AEeOSVqhj7G3ZEA" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ri8vsD3AEeOSVqhj7G3ZEA" name="methodB">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_uKojoD3AEeOSVqhj7G3ZEA" name="return" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_fceLQD2uEeO0W5WLsM8PpQ" name="Realization1" client="_d0NpcD2tEeO0W5WLsM8PpQ" supplier="_eyOw4D2tEeO0W5WLsM8PpQ"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_f-bBwD2uEeO0W5WLsM8PpQ" name="Realization2" client="_dAhisD2tEeO0W5WLsM8PpQ" supplier="_eyOw4D2tEeO0W5WLsM8PpQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_B4vyMD2vEeO0W5WLsM8PpQ" clientDependency="_HGBvYD2vEeO0W5WLsM8PpQ" name="AnotherInterfaceToo"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_HGBvYD2vEeO0W5WLsM8PpQ" name="Usage1" client="_B4vyMD2vEeO0W5WLsM8PpQ" supplier="_d0NpcD2tEeO0W5WLsM8PpQ"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ZIjWID2uEeO0W5WLsM8PpQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZJjbsD2uEeO0W5WLsM8PpQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+  </uml:Model>
+  <smartyProfile:interface xmi:id="_cZMngD2uEeO0W5WLsM8PpQ" base_Class="_eyOw4D2tEeO0W5WLsM8PpQ"/>
+</xmi:XMI>

@@ -29,4 +29,9 @@ public class ElementUtil {
         }
         return iMethods;
     }
+
+    public boolean areMethodsEqual(Method method, Method otherMethod) {
+        return method.getName().equals(otherMethod.getName()) && method.getReturnType().equals(otherMethod.getReturnType());
+    }
+
 }

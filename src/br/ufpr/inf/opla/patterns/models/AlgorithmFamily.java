@@ -8,18 +8,18 @@ import java.util.Objects;
 public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
 
     private final List<Element> participants;
-    private String familyName;
+    private String name;
 
     public AlgorithmFamily() {
         this.participants = new ArrayList<>();
     }
 
-    public String getFamilyName() {
-        return familyName;
+    public String getName() {
+        return name;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Element> getParticipants() {
@@ -29,7 +29,7 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.familyName);
+        hash = 37 * hash + Objects.hashCode(this.name);
         return hash;
     }
 
@@ -42,16 +42,16 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
             return false;
         }
         final AlgorithmFamily other = (AlgorithmFamily) obj;
-        return Objects.equals(this.familyName, other.familyName);
+        return Objects.equals(this.name, other.name);
     }
 
     @Override
     public int compareTo(AlgorithmFamily o) {
         int compare = Integer.compare(this.getParticipants().size(), o.getParticipants().size());
         if (compare == 0) {
-            compare = Integer.compare(this.getFamilyName().length(), o.getFamilyName().length());
+            compare = Integer.compare(this.getName().length(), o.getName().length());
             if (compare == 0) {
-                compare = this.getFamilyName().compareToIgnoreCase(o.getFamilyName());
+                compare = this.getName().compareToIgnoreCase(o.getName());
             }
         }
         return compare;

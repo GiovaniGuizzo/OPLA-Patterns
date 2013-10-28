@@ -3,6 +3,7 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Variability;
+import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
@@ -11,25 +12,20 @@ import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
-import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Strategy extends DesignPattern {
 
     private static final Strategy INSTANCE = new Strategy();
 
-    private final AlgorithmFamilyUtil algorithmFamilyUtil;
-    private final RelationshipUtil relationshipUtil;
-    private final ElementUtil elementUtil;
-
     private Strategy() {
         super("Strategy", "Behavioral");
-        this.relationshipUtil = RelationshipUtil.getInstance();
-        this.algorithmFamilyUtil = AlgorithmFamilyUtil.getInstance();
-        this.elementUtil = ElementUtil.getInstance();
     }
 
     public static Strategy getInstance() {
@@ -38,7 +34,7 @@ public class Strategy extends DesignPattern {
 
     @Override
     public boolean verifyPS(Scope scope) {
-        List<AlgorithmFamily> familiesInScope = algorithmFamilyUtil.getFamiliesFromScope(scope);
+        List<AlgorithmFamily> familiesInScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
 
         Collections.sort(familiesInScope);
 
@@ -52,9 +48,10 @@ public class Strategy extends DesignPattern {
             for (Element element : elementsInScope) {
                 List<Element> usedElements = new ArrayList<>();
                 for (Relationship relationship : element.getRelationships()) {
-                    List<Element> tempUsedElements = relationshipUtil.getUsedElementsFromRelationship(relationship);
-                    tempUsedElements.remove(element);
-                    usedElements.addAll(tempUsedElements);
+                    Element usedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
+                    if (usedElement != null && !usedElement.equals(element)) {
+                        usedElements.add(usedElement);
+                    }
                 }
                 for (int j = 0; j < usedElements.size(); j++) {
                     if (!participants.contains(usedElements.get(j))) {
@@ -132,12 +129,80 @@ public class Strategy extends DesignPattern {
     public boolean apply(Scope scope) {
         boolean applied = false;
         if (scope.isPS()) {
-
             PSStrategy ps = (PSStrategy) scope.getPS().get(0);
+            AlgorithmFamily algorithmFamily = ps.getAlgorithmFamily();
 
-            Interface strategyInterface = algorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(ps.getAlgorithmFamily());
+            Interface strategyInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(ps.getAlgorithmFamily());
+            if (strategyInterface == null) {
+                strategyInterface = AlgorithmFamilyUtil.createStrategyInterfaceForAlgorithmFamily(algorithmFamily);
+            }
+            List<Element> participants = ps.getAlgorithmFamily().getParticipants();
+            List<Relationship> interfaceRealizationRelationships = new ArrayList<>(strategyInterface.getRelationships());
+            for (int i = 0; i < interfaceRealizationRelationships.size(); i++) {
+                Relationship relationship = interfaceRealizationRelationships.get(i);
+                if (!(relationship instanceof RealizationRelationship) || !RelationshipUtil.getImplementedInterface(relationship).equals(strategyInterface)) {
+                    interfaceRealizationRelationships.remove(i);
+                    i--;
+                }
+            }
+            for (Element participant : participants) {
+                boolean hasRelationship = false;
+                for (Relationship elementRelationship : participant.getRelationships()) {
+                    if (interfaceRealizationRelationships.contains(elementRelationship)) {
+                        hasRelationship = true;
+                        break;
+                    }
+                }
+                if (!hasRelationship) {
+                    RealizationRelationship realizationRelationship = new RealizationRelationship(participant, strategyInterface, "implements", UUID.randomUUID().toString());
+                    participant.getRelationships().add(realizationRelationship);
+                    strategyInterface.getRelationships().add(realizationRelationship);
+                }
+            }
+
+            //Move relationships
+            for (Element context : ps.getContexts()) {
+                HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
+                for (Relationship relationShip : context.getRelationships()) {
+                    Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationShip);
+                    if (!usedElementFromRelationship.equals(context)
+                            && (participants.contains(usedElementFromRelationship)
+                            || strategyInterface.equals(usedElementFromRelationship))) {
+                        HashMap<String, List<Relationship>> relationshipByType = usingRelationshipsFromAlgorithms.get(relationShip.getType());
+                        if (relationshipByType == null) {
+                            relationshipByType = new HashMap<>();
+                            usingRelationshipsFromAlgorithms.put(relationShip.getType(), relationshipByType);
+                        }
+                        List<Relationship> relationshipByName = relationshipByType.get(relationShip.getName());
+                        if (relationshipByName == null) {
+                            relationshipByName = new ArrayList<>();
+                            relationshipByType.put(relationShip.getName(), relationshipByName);
+                        }
+                        relationshipByName.add(relationShip);
+                    }
+                }
+                for (Map.Entry<String, HashMap<String, List<Relationship>>> byTypeEntry : usingRelationshipsFromAlgorithms.entrySet()) {
+                    String typeKey = byTypeEntry.getKey();
+                    HashMap<String, List<Relationship>> typeMap = byTypeEntry.getValue();
+                    for (Map.Entry<String, List<Relationship>> nameEntry : typeMap.entrySet()) {
+                        String nameKey = nameEntry.getKey();
+                        List<Relationship> nameList = nameEntry.getValue();
+                        Relationship relationship = nameList.get(0);
+
+                        for (Relationship tempRelationship : nameList) {
+                            Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+                            usedElementFromRelationship.getRelationships().remove(tempRelationship);
+                            context.getRelationships().remove(relationship);
+                        }
+
+                        context.getRelationships().add(relationship);
+                        strategyInterface.getRelationships().add(relationship);
+
+                        RelationshipUtil.setRelationshipClientAndSupplier(relationship, context, strategyInterface);
+                    }
+                }
+            }
         }
         return applied;
     }
-
 }

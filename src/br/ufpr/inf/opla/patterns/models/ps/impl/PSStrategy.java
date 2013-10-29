@@ -25,6 +25,11 @@ public class PSStrategy implements PS {
     }
 
     @Override
+    public boolean isPsOf(DesignPattern designPattern) {
+        return Strategy.getInstance().equals(designPattern);
+    }
+
+    @Override
     public List<Element> getParticipants() {
         List<Element> participants = new ArrayList<>(contexts);
         participants.addAll(algorithmFamily.getParticipants());

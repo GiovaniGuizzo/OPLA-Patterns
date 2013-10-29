@@ -8,6 +8,7 @@ import arquitetura.representation.ParameterMethod;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.apache.commons.collections4.CollectionUtils;
@@ -67,6 +68,14 @@ public class MethodUtil {
         return newMethod;
     }
 
+    public static List<Method> cloneMethods(List<Method> methodsToBeCloned) {
+        List<Method> methods = new ArrayList<>();
+        for (Method method : methodsToBeCloned) {
+            methods.add(cloneMethod(method));
+        }
+        return methods;
+    }
+
     public static Method mergeMethodsToNewOne(Method methodA, Method methodB) {
         Method newMethod = cloneMethod(methodA);
 
@@ -76,6 +85,7 @@ public class MethodUtil {
     }
 
     public static void mergeMethodsToMethodA(Method methodA, Method methodB) {
+        //TODO - Édipo - Adicionar loop para alterar o nome do parâmetro.
         ArrayList<ParameterMethod> parameters = new ArrayList<>(methodA.getParameters());
         methodA.getParameters().clear();
         methodA.getParameters().addAll(CollectionUtils.union(parameters, methodB.getParameters()));
@@ -95,7 +105,7 @@ public class MethodUtil {
             methods.addAll(aInterface.getOperations());
         }
         for (Relationship relationship : element.getRelationships()) {
-            Element extendedElement = RelationshipUtil.getExtendedClass(relationship);
+            Element extendedElement = RelationshipUtil.getExtendedElement(relationship);
             if (extendedElement != null && !element.equals(extendedElement)) {
                 methods.addAll(getAllMethodsFromHierarchy(extendedElement));
             }

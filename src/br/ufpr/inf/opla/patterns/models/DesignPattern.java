@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.models;
 
+import br.ufpr.inf.opla.patterns.designpatterns.Adapter;
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.designpatterns.Facade;
 import br.ufpr.inf.opla.patterns.designpatterns.Mediator;
@@ -15,7 +16,7 @@ public abstract class DesignPattern {
         Facade.getInstance(),
         Mediator.getInstance()
     };
-
+    
     private final String name;
     private final String category;
     private final Random random;

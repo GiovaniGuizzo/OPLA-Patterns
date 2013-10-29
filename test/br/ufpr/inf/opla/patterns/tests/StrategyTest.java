@@ -10,7 +10,7 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
-import br.ufpr.inf.opla.patterns.tests.repositories.StrategyModelRepository;
+import br.ufpr.inf.opla.patterns.tests.repositories.ModelRepository;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import java.util.List;
@@ -25,13 +25,19 @@ public class StrategyTest {
 
     private Strategy strategy;
     private ScopeSelectionStrategy scopeSelectionStrategy;
-    private StrategyModelRepository modelRepository;
+    private ModelRepository modelRepository;
+    private String dir;
 
     @Before
     public void setUp() throws Exception {
         this.strategy = Strategy.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
-        modelRepository = StrategyModelRepository.getInstance();
+        
+        this.dir = "test/br/ufpr/inf/opla/patterns/resources/strategy/";
+        this.modelRepository = new ModelRepository();
+        this.modelRepository.loadModel(dir + "Verify.uml");
+        this.modelRepository.loadModel(dir + "Verify2.uml");
+        this.modelRepository.loadModel(dir + "Verify3.uml");
     }
 
     /**
@@ -39,9 +45,9 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel1());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(0));
 
-        assertEquals(7, scope.getElements().size());
+        assertEquals(8, scope.getElements().size());
 
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
@@ -62,7 +68,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel2());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(1));
 
         strategy.verifyPS(scope);
 
@@ -79,9 +85,9 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel1());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(0));
 
-        assertEquals(7, scope.getElements().size());
+        assertEquals(8, scope.getElements().size());
 
         boolean verifyPSPLA = strategy.verifyPSPLA(scope);
         assertTrue(verifyPSPLA);
@@ -102,9 +108,9 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel2());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(1));
 
-        assertEquals(7, scope.getElements().size());
+        assertEquals(8, scope.getElements().size());
 
         boolean verifyPSPLA = strategy.verifyPSPLA(scope);
         assertFalse(verifyPSPLA);
@@ -115,7 +121,7 @@ public class StrategyTest {
      */
     @Test
     public void getSrategyInterfaceTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel3());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(2));
         strategy.verifyPS(scope);
         Interface strategyInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(((PSStrategy) scope.getPS().get(0)).getAlgorithmFamily());
         assertNotNull(strategyInterface);
@@ -127,7 +133,7 @@ public class StrategyTest {
      */
     @Test
     public void getThreeMethodsTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel3());
+        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(2));
         strategy.verifyPS(scope);
         List<Method> methods = MethodUtil.getMethodsFromSetOfElements(((PSStrategy) scope.getPS().get(0)).getAlgorithmFamily().getParticipants());
         assertEquals(3, methods.size());

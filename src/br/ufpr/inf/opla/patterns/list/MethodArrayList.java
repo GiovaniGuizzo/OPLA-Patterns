@@ -34,7 +34,7 @@ public class MethodArrayList extends ArrayList<Method> {
         if (method instanceof Method) {
             for (int i = 0; i < this.size(); i++) {
                 Method iMethod = this.get(i);
-                if(areMethodsEqual(iMethod, (Method) method)){
+                if (areMethodsEqual(iMethod, (Method) method)) {
                     return i;
                 }
             }

@@ -8,6 +8,8 @@ public interface PS {
 
     public DesignPattern getPsOf();
 
+    public boolean isPsOf(DesignPattern designPattern);
+
     public List<Element> getParticipants();
 
 }

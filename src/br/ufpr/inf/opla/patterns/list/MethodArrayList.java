@@ -29,6 +29,21 @@ public class MethodArrayList extends ArrayList<Method> {
         }
     }
 
+    public boolean containsSameName(Object method) {
+        if (method instanceof Method) {
+            Method aMethod = (Method) method;
+            for (int i = 0; i < this.size(); i++) {
+                Method otherMethod = this.get(i);
+                if (otherMethod != null) {
+                    if (aMethod.getName().equals(otherMethod.getName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public int indexOf(Object method) {
         if (method instanceof Method) {

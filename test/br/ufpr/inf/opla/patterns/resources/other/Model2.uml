@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_2IFUQEJTEeO5ft8LcktvPg" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_2IFUQUJTEeO5ft8LcktvPg">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4zE64EJTEeO5ft8LcktvPg" name="Class1">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_7SNPwEJTEeO5ft8LcktvPg" name="Operation1"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-H6RkEJTEeO5ft8LcktvPg" name="Operation2">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_GBVr8EJUEeO5ft8LcktvPg" name="" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7iLI8EJUEeO5ft8LcktvPg" name="teste2">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_52bOQEJTEeO5ft8LcktvPg" name="Class2">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-xtcgEJTEeO5ft8LcktvPg" name="Operation1">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_bpGekEJUEeO5ft8LcktvPg" name="" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="__ZGzsEJTEeO5ft8LcktvPg" name="Operation1">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_CGHMgEJUEeO5ft8LcktvPg" name="return" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_T_21QEJUEeO5ft8LcktvPg" name="Operation2">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_VnHuAEJUEeO5ft8LcktvPg" name="" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_WY03wEJUEeO5ft8LcktvPg" name="Operation2">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_Ytx88EJUEeO5ft8LcktvPg" name="" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_5G6ncEJUEeO5ft8LcktvPg" name="teste">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>

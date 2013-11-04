@@ -1,8 +1,7 @@
-package br.ufpr.inf.opla.patterns.tests;
+package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
@@ -10,7 +9,7 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
-import br.ufpr.inf.opla.patterns.tests.repositories.ModelRepository;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import java.util.List;
@@ -18,26 +17,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import org.junit.Before;
 import org.junit.Test;
 
 public class StrategyTest {
 
-    private Strategy strategy;
-    private ScopeSelectionStrategy scopeSelectionStrategy;
-    private ModelRepository modelRepository;
-    private String dir;
+    private final Strategy strategy;
+    private final ScopeSelectionStrategy scopeSelectionStrategy;
+    private final ArchitectureRepositoryFlyweight architectureRepository;
 
-    @Before
-    public void setUp() throws Exception {
+    public StrategyTest() {
         this.strategy = Strategy.getInstance();
+        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
-        
-        this.dir = "test/br/ufpr/inf/opla/patterns/resources/strategy/";
-        this.modelRepository = new ModelRepository();
-        this.modelRepository.loadModel(dir + "Verify.uml");
-        this.modelRepository.loadModel(dir + "Verify2.uml");
-        this.modelRepository.loadModel(dir + "Verify3.uml");
     }
 
     /**
@@ -45,7 +36,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(0));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]));
 
         assertEquals(8, scope.getElements().size());
 
@@ -68,7 +59,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(1));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[1]));
 
         strategy.verifyPS(scope);
 
@@ -85,7 +76,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(0));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]));
 
         assertEquals(8, scope.getElements().size());
 
@@ -108,35 +99,12 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(1));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[1]));
 
         assertEquals(8, scope.getElements().size());
 
         boolean verifyPSPLA = strategy.verifyPSPLA(scope);
         assertFalse(verifyPSPLA);
-    }
-
-    /**
-     * Verifies if the Strategy interface is being retrieved correctly.
-     */
-    @Test
-    public void getSrategyInterfaceTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(2));
-        strategy.verifyPS(scope);
-        Interface strategyInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(((PSStrategy) scope.getPS().get(0)).getAlgorithmFamily());
-        assertNotNull(strategyInterface);
-        assertEquals("StrategyInterface", strategyInterface.getName());
-    }
-
-    /**
-     * Verifies if the method AlgorithmFamilyUtil.getMethodsFromAlgorithmFamily() returns three methods.
-     */
-    @Test
-    public void getThreeMethodsTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(modelRepository.getModel(2));
-        strategy.verifyPS(scope);
-        List<Method> methods = MethodUtil.getMethodsFromSetOfElements(((PSStrategy) scope.getPS().get(0)).getAlgorithmFamily().getParticipants());
-        assertEquals(3, methods.size());
     }
 
     /**

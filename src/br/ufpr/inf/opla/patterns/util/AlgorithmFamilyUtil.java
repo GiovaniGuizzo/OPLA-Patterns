@@ -147,6 +147,6 @@ public class AlgorithmFamilyUtil {
     }
 
     public static Interface createStrategyInterfaceForAlgorithmFamily(AlgorithmFamily algorithmFamily) {
-        return InterfaceUtil.createInterfaceForSetOfElements(algorithmFamily.getName(), algorithmFamily.getParticipants());
+        return InterfaceUtil.createInterfaceForSetOfElements(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Strategy", algorithmFamily.getParticipants());
     }
 }

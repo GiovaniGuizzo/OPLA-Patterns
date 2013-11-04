@@ -18,13 +18,13 @@ public class MethodUtil {
     private MethodUtil() {
     }
 
-    public static List<Method> getMethodsFromElement(Element iElement) {
+    public static List<Method> getMethodsFromElement(Element element) {
         List<Method> iMethods;
-        if (iElement instanceof arquitetura.representation.Class) {
-            arquitetura.representation.Class iClass = (arquitetura.representation.Class) iElement;
+        if (element instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class iClass = (arquitetura.representation.Class) element;
             iMethods = iClass.getAllMethods();
-        } else if (iElement instanceof Interface) {
-            Interface iInterface = (Interface) iElement;
+        } else if (element instanceof Interface) {
+            Interface iInterface = (Interface) element;
             iMethods = iInterface.getOperations();
         } else {
             return null;
@@ -51,6 +51,10 @@ public class MethodUtil {
             MethodArrayList methodsFromElement = new MethodArrayList(getMethodsFromElement(element));
             for (Method elementMethod : methodsFromElement) {
                 if (!methods.contains(elementMethod)) {
+                    //TODO - Édipo - Adicionar loop para mudança de nome do método.
+//                    int count = 1;
+//                    while(methods.containsSameName(elementMethod)){
+//                    }
                     methods.add(cloneMethod(elementMethod));
                 } else {
                     Method method = methods.get(methods.indexOf(elementMethod));
@@ -62,9 +66,10 @@ public class MethodUtil {
     }
 
     public static Method cloneMethod(Method method) {
-        Method newMethod = new Method(Method.getArchitecture(), method.getName(), method.getReturnType(), method.getNamespace(), method.isAbstract(), UUID.randomUUID().toString());
+        Method newMethod = new Method(method.getArchitecture(), method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
         newMethod.getParameters().addAll(method.getParameters());
         newMethod.getOwnConcerns().addAll(method.getOwnConcerns());
+        newMethod.setNamespace(method.getNamespace());
         return newMethod;
     }
 

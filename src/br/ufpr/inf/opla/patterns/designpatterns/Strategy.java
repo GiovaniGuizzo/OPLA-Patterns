@@ -1,12 +1,13 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Class;
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.Variability;
+import arquitetura.representation.Variant;
 import arquitetura.representation.VariationPoint;
-import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
@@ -16,6 +17,7 @@ import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
@@ -137,38 +139,26 @@ public class Strategy extends DesignPattern {
         for (PS ps : scope.getPS()) {
             if (ps.isPsOf(this)) {
                 psStrategy = (PSStrategy) ps;
+                break;
             }
         }
         if (psStrategy != null) {
             AlgorithmFamily algorithmFamily = psStrategy.getAlgorithmFamily();
+            List<Element> participants = psStrategy.getAlgorithmFamily().getParticipants();
 
             //Get or create Interface
             Interface strategyInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(algorithmFamily);
             if (strategyInterface == null) {
                 strategyInterface = AlgorithmFamilyUtil.createStrategyInterfaceForAlgorithmFamily(algorithmFamily);
+            } else if (participants.contains(strategyInterface)) {
+                participants.remove(strategyInterface);
             }
-            List<Element> participants = psStrategy.getAlgorithmFamily().getParticipants();
 
             //Implement
             List<Element> adapterList = new ArrayList<>();
             List<Element> adapteeList = new ArrayList<>();
-            List<Relationship> interfaceRealizationRelationships = new ArrayList<>(strategyInterface.getRelationships());
-            for (int i = 0; i < interfaceRealizationRelationships.size(); i++) {
-                Relationship relationship = interfaceRealizationRelationships.get(i);
-                if (!(relationship instanceof RealizationRelationship) || !RelationshipUtil.getImplementedInterface(relationship).equals(strategyInterface)) {
-                    interfaceRealizationRelationships.remove(i);
-                    i--;
-                }
-            }
             for (Element participant : participants) {
-                boolean hasRelationship = false;
-                for (Relationship elementRelationship : participant.getRelationships()) {
-                    if (interfaceRealizationRelationships.contains(elementRelationship)) {
-                        hasRelationship = true;
-                        break;
-                    }
-                }
-                if (!hasRelationship) {
+                if (!ElementUtil.isTypeOf(participant, strategyInterface)) {
                     //TODO - Édipo - Adicionar estereótipos Strategy.
                     if (participant instanceof arquitetura.representation.Class) {
                         Class participantClass = (Class) participant;
@@ -186,6 +176,12 @@ public class Strategy extends DesignPattern {
                         Class adapterClass = ADAPTER.applyAdapter(strategyInterface, participant);
                         adapterList.add(adapterClass);
                         adapteeList.add(participant);
+                    }
+                }
+                //Concern
+                for (Concern concern : participant.getOwnConcerns()) {
+                    if (!strategyInterface.containsConcern(concern)) {
+                        strategyInterface.getOwnConcerns().add(concern);
                     }
                 }
             }
@@ -224,8 +220,8 @@ public class Strategy extends DesignPattern {
                         for (Relationship tempRelationship : nameList) {
                             Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
                             usedElementFromRelationship.getRelationships().remove(tempRelationship);
-                            context.getRelationships().remove(relationship);
-                            context.getArchitecture().getAllRelationships().remove(relationship);
+                            context.getRelationships().remove(tempRelationship);
+                            context.getArchitecture().getAllRelationships().remove(tempRelationship);
                         }
 
                         context.getArchitecture().getAllRelationships().add(relationship);
@@ -235,10 +231,19 @@ public class Strategy extends DesignPattern {
                 //Variabilities, variants and variation points.
                 VariationPoint variationPoint = context.getVariationPoint();
                 if (variationPoint != null) {
-                    if (variationPoint.getVariants().containsAll(participants)) {
+                    List<Variant> participantsVariants = new ArrayList<>();
+                    for (Element participant : participants) {
+                        if (participant.getVariant() != null) {
+                            participantsVariants.add(participant.getVariant());
+                        }
+                    }
+                    if (variationPoint.getVariants().containsAll(participantsVariants)) {
                         context.setVariationPoint(null);
                         strategyInterface.setVariationPoint(variationPoint);
                         variationPoint.replaceVariationPointElement(strategyInterface);
+                        for (Variant variant : participantsVariants) {
+                            variant.setRootVP(variationPoint.getVariationPointElement().getName());
+                        }
                     }
                 }
             }

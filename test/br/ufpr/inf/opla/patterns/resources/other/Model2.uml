@@ -5,11 +5,11 @@
   </packageImport>
   <packagedElement xmi:type="uml:Class" xmi:id="_4zE64EJTEeO5ft8LcktvPg" name="Class1">
     <ownedOperation xmi:type="uml:Operation" xmi:id="_7SNPwEJTEeO5ft8LcktvPg" name="Operation1"/>
-    <ownedOperation xmi:type="uml:Operation" xmi:id="_-H6RkEJTEeO5ft8LcktvPg" name="Operation2">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-H6RkEJTEeO5ft8LcktvPg" name="Operation2" visibility="public">
       <ownedParameter xmi:type="uml:Parameter" xmi:id="_GBVr8EJUEeO5ft8LcktvPg" name="" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedParameter>
-      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7iLI8EJUEeO5ft8LcktvPg" name="teste2">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_AD5iMEY7EeO8H8lNgy9OHw" name="teste">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
     </ownedOperation>

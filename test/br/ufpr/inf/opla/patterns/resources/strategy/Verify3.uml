@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smartyProfile="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smartyProfile="http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw">
   <uml:Model xmi:id="_ahT1oD2qEeO0W5WLsM8PpQ" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_ahT1oT2qEeO0W5WLsM8PpQ">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -17,7 +17,7 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_eyOw4D2tEeO0W5WLsM8PpQ" name="StrategyInterface">
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_tQn3oD2uEeO0W5WLsM8PpQ" name="methodA"/>
+        <generalization xmi:type="uml:Generalization" xmi:id="_B_zb8EZAEeO8H8lNgy9OHw" general="_9thucEY_EeO8H8lNgy9OHw"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_ml-fYD3AEeOSVqhj7G3ZEA" name="methodB">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_pS0gID3AEeOSVqhj7G3ZEA" name="return" direction="return">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -38,10 +38,18 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
       </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lNgkAEY5EeO8H8lNgy9OHw" name="methodB">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_pUXrsEY5EeO8H8lNgy9OHw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_9thucEY_EeO8H8lNgy9OHw" name="CommonStrategy">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tQn3oD2uEeO0W5WLsM8PpQ" name="methodA"/>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ZIjWID2uEeO0W5WLsM8PpQ">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZJjbsD2uEeO0W5WLsM8PpQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ"/>
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
     </profileApplication>

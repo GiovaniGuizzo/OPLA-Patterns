@@ -35,12 +35,12 @@ public class InterfaceUtilTest {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
         List<Element> participants = architecture.getElements();
         Interface result = InterfaceUtil.createInterfaceForSetOfElements(interfaceName, participants);
-        assertEquals("Model::ClassPackage", result.getNamespace());
+        assertEquals("Model", result.getNamespace());
         List<Method> operations = result.getOperations();
         assertEquals(3, operations.size());
         assertEquals("methodA", operations.get(0).getName());
-        //TODO - Édipo - Testar.
-        //assertFalse(operations.get(1).getName().equals(operations.get(2).getName()));
+        assertFalse(operations.get(0).getName().equals(operations.get(1).getName()));
+        assertFalse(operations.get(1).getName().equals(operations.get(2).getName()));
         assertEquals("String", operations.get(1).getReturnType());
         assertEquals("Integer", operations.get(2).getReturnType());        
     }

@@ -3,7 +3,6 @@ package br.ufpr.inf.opla.patterns.util;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -68,7 +67,7 @@ public class AlgorithmFamilyUtil {
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
 
-            MethodArrayList iMethods = new MethodArrayList(MethodUtil.getMethodsFromElement(iElement));
+            MethodArrayList iMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(iElement));
             if (iMethods.isEmpty()) {
                 continue;
             }
@@ -76,7 +75,7 @@ public class AlgorithmFamilyUtil {
             for (int j = i + 1; j < scope.getElements().size(); j++) {
                 Element jElement = scope.getElements().get(j);
 
-                MethodArrayList jMethods = new MethodArrayList(MethodUtil.getMethodsFromElement(jElement));
+                MethodArrayList jMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(jElement));
                 if (jMethods.isEmpty()) {
                     continue;
                 }
@@ -120,23 +119,31 @@ public class AlgorithmFamilyUtil {
         List<Element> participants = algorithmFamily.getParticipants();
         List<Interface> interfaces = new ArrayList<>();
         for (Element participant : participants) {
-            List<Interface> elementInterfaces = new ArrayList<>();
-            for (Relationship relationship : participant.getRelationships()) {
-                Interface implementedInterface = RelationshipUtil.getImplementedInterface(relationship);
-                if (implementedInterface != null) {
-                    elementInterfaces.add(implementedInterface);
+            List<Interface> elementInterfaces = ElementUtil.getAllImplementedInterfaces(participant);
+            if (participant instanceof Interface) {
+                List<Element> allExtendedElements = ElementUtil.getAllExtendedElements(participant);
+                for (Element element : allExtendedElements) {
+                    if (element instanceof Interface) {
+                        elementInterfaces.add((Interface) element);
+                    }
                 }
             }
             if (interfaces.isEmpty()) {
                 interfaces.addAll(elementInterfaces);
+                if (participant instanceof Interface) {
+                    elementInterfaces.add((Interface) participant);
+                }
             } else {
+                if (participant instanceof Interface) {
+                    elementInterfaces.add((Interface) participant);
+                }
                 interfaces = new ArrayList<>(CollectionUtils.intersection(interfaces, elementInterfaces));
             }
         }
 
         MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getMethodsFromSetOfElements(algorithmFamily.getParticipants()));
         for (Interface aInterface : interfaces) {
-            MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromHierarchy(aInterface));
+            MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(aInterface));
             if (interfaceMethods.containsAll(allMethodsFromAlgorithmFamily)) {
                 strategyInterface = aInterface;
                 break;

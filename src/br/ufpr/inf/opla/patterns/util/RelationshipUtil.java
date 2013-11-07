@@ -1,6 +1,5 @@
 package br.ufpr.inf.opla.patterns.util;
 
-import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.DependencyRelationship;
@@ -75,9 +74,8 @@ public class RelationshipUtil {
         return realizationRelationship;
     }
 
-    //TODO - Édipo - Remover cast.
     public static GeneralizationRelationship createNewGeneralizationRelationship(String aimplements, Element child, Element parent) {
-        GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship((Class) parent, (Class) child, parent.getArchitecture(), UUID.randomUUID().toString());
+        GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship(parent, child, parent.getArchitecture(), UUID.randomUUID().toString());
         child.getRelationships().add(generalizationRelationship);
         parent.getRelationships().add(generalizationRelationship);
         parent.getArchitecture().getAllRelationships().add(generalizationRelationship);

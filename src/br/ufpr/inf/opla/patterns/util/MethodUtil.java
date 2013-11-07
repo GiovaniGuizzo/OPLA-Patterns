@@ -5,10 +5,8 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.ParameterMethod;
-import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import org.apache.commons.collections4.CollectionUtils;
@@ -32,10 +30,33 @@ public class MethodUtil {
         return iMethods;
     }
 
+    public static List<Method> getAllMethodsFromElement(Element element) {
+        List<Method> iMethods = new ArrayList<>();
+        if (element instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class iClass = (arquitetura.representation.Class) element;
+            iMethods.addAll(iClass.getAllMethods());
+        } else if (element instanceof Interface) {
+            Interface iInterface = (Interface) element;
+            iMethods.addAll(iInterface.getOperations());
+        }
+        List<Element> parents = ElementUtil.getAllExtendedElements(element);
+        for (Element parent : parents) {
+            if (parent.getClass().equals(element.getClass())) {
+                List<Method> parentMethods = getMethodsFromElement(element);
+                for (Method parentMethod : parentMethods) {
+                    if (!iMethods.contains(parentMethod)) {
+                        iMethods.add(parentMethod);
+                    }
+                }
+            }
+        }
+        return iMethods;
+    }
+
     public static List<Method> getMethodsFromSetOfElements(List<Element> elements) {
         MethodArrayList methods = new MethodArrayList();
         for (Element element : elements) {
-            MethodArrayList elementMethods = new MethodArrayList(getMethodsFromElement(element));
+            MethodArrayList elementMethods = new MethodArrayList(getAllMethodsFromElement(element));
             for (Method elementMethod : elementMethods) {
                 if (!methods.contains(elementMethod)) {
                     methods.add(elementMethod);
@@ -48,18 +69,21 @@ public class MethodUtil {
     public static List<Method> createMethodsFromSetOfElements(List<Element> elements) {
         MethodArrayList methods = new MethodArrayList();
         for (Element element : elements) {
-            MethodArrayList methodsFromElement = new MethodArrayList(getMethodsFromElement(element));
+            MethodArrayList methodsFromElement = new MethodArrayList(getAllMethodsFromElement(element));
+            methodFor:
             for (Method elementMethod : methodsFromElement) {
-                if (!methods.contains(elementMethod)) {
-                    //TODO - Édipo - Adicionar loop para mudança de nome do método.
-//                    int count = 1;
-//                    while(methods.containsSameName(elementMethod)){
-//                    }
-                    methods.add(cloneMethod(elementMethod));
-                } else {
-                    Method method = methods.get(methods.indexOf(elementMethod));
-                    mergeMethodsToMethodA(method, elementMethod);
+                Method clonedMethod = cloneMethod(elementMethod);
+                int count = 1;
+                while (methods.containsSameName(clonedMethod)) {
+                    if (methods.contains(clonedMethod)) {
+                        Method method = methods.get(methods.indexOf(clonedMethod));
+                        mergeMethodsToMethodA(method, clonedMethod);
+                        continue methodFor;
+                    }
+                    count++;
+                    clonedMethod.setName(clonedMethod.getName() + Integer.toString(count));
                 }
+                methods.add(clonedMethod);
             }
         }
         return methods;
@@ -90,31 +114,27 @@ public class MethodUtil {
     }
 
     public static void mergeMethodsToMethodA(Method methodA, Method methodB) {
-        //TODO - Édipo - Adicionar loop para alterar o nome do parâmetro.
-        ArrayList<ParameterMethod> parameters = new ArrayList<>(methodA.getParameters());
-        methodA.getParameters().clear();
-        methodA.getParameters().addAll(CollectionUtils.union(parameters, methodB.getParameters()));
+        for (ParameterMethod bParameter : methodB.getParameters()) {
+            ParameterMethod clonedParameter = ParameterMethodUtil.cloneParameter(bParameter);
+            List<ParameterMethod> aParameters = methodA.getParameters();
+            if (aParameters.contains(clonedParameter)) {
+                ParameterMethod aParameter = aParameters.get(aParameters.indexOf(clonedParameter));
+                if (!aParameter.getType().equals(clonedParameter.getType())
+                        || !aParameter.getDirection().equals(clonedParameter.getDirection())) {
+                    int count = 1;
+                    do {
+                        count++;
+                        clonedParameter.setName(clonedParameter.getName() + Integer.toString(count));
+                    } while (aParameters.contains(clonedParameter));
+                    aParameters.add(clonedParameter);
+                }
+            } else {
+                aParameters.add(clonedParameter);
+            }
+        }
 
         ArrayList<Concern> concerns = new ArrayList<>(methodA.getOwnConcerns());
         methodA.getOwnConcerns().clear();
         methodA.getOwnConcerns().addAll(CollectionUtils.union(concerns, methodB.getOwnConcerns()));
-    }
-
-    static List<Method> getAllMethodsFromHierarchy(Element element) {
-        MethodArrayList methods = new MethodArrayList();
-        if (element instanceof arquitetura.representation.Class) {
-            arquitetura.representation.Class klass = (arquitetura.representation.Class) element;
-            methods.addAll(klass.getAllMethods());
-        } else if (element instanceof Interface) {
-            Interface aInterface = (Interface) element;
-            methods.addAll(aInterface.getOperations());
-        }
-        for (Relationship relationship : element.getRelationships()) {
-            Element extendedElement = RelationshipUtil.getExtendedElement(relationship);
-            if (extendedElement != null && !element.equals(extendedElement)) {
-                methods.addAll(getAllMethodsFromHierarchy(extendedElement));
-            }
-        }
-        return methods;
     }
 }

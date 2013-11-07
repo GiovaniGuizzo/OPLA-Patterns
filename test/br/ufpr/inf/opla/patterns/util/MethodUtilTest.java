@@ -52,13 +52,15 @@ public class MethodUtilTest {
      */
     @Test
     public void testCreateMethodsFromSetOfElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
+        String model = ArchitectureRepositoryFlyweight.OTHER_MODELS[1];
+        architectureRepository.clearArchitecture(model);
+        Architecture architecture = architectureRepository.getArchitecture(model);
         List<Method> result = MethodUtil.createMethodsFromSetOfElements(architecture.getElements());
         assertEquals(5, result.size());
         Method method = result.get(1);
         assertEquals("Operation2", method.getName());
         assertEquals("String", method.getReturnType());
-        assertEquals(4, method.getParameters().size());
+        assertEquals(3, method.getParameters().size());
     }
 
     /**
@@ -130,7 +132,7 @@ public class MethodUtilTest {
         assertEquals("Operation2", result.getName());
         assertEquals(method.getNamespace(), result.getNamespace());
         assertEquals(0, result.getOwnConcerns().size());
-        assertEquals(4, result.getParameters().size());
+        assertEquals(3, result.getParameters().size());
         assertEquals("String", result.getReturnType());
     }
 
@@ -158,23 +160,21 @@ public class MethodUtilTest {
         assertNotSame(method2.getId(), method.getId());
         assertEquals("Operation2", method.getName());
         assertEquals(0, method.getOwnConcerns().size());
-        assertEquals(4, method.getParameters().size());
+        assertEquals(3, method.getParameters().size());
         assertEquals("String", method.getReturnType());
     }
 
-    //TODO - Édipo - Caso de teste testGetAllMethodsFromHierarchy.
-//
-//    /**
-//     * Test of getAllMethodsFromHierarchy method, of class MethodUtil.
-//     */
-//    @Test
-//    public void testGetAllMethodsFromHierarchy() {
-//        System.out.println("getAllMethodsFromHierarchy");
-//        Element element = null;
-//        List<Method> expResult = null;
-//        List<Method> result = MethodUtil.getAllMethodsFromHierarchy(element);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of getAllMethodsFromElement method, of class MethodUtil.
+     */
+    @Test
+    public void testGetAllMethodsFromElement() {
+        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        Element element = architecture.getElements().get(0);
+        assertEquals("QuickSort", element.getName());
+        assertEquals(2, element.getRelationships().size());
+        List<Method> allMethodsFromElement = MethodUtil.getAllMethodsFromElement(element);
+        assertEquals(2, allMethodsFromElement.size());
+    }
 }

@@ -11,12 +11,19 @@ public class ArchitectureRepositoryFlyweight {
     public static final String[] STRATEGY_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify2.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify3.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify3.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/strategy/Apply1.uml"
     };
-    
+
     public static final String[] OTHER_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/other/Model1.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/other/Model2.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model2.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model3.uml"
+    };
+
+    public static final String[] OUTPUT = new String[]{
+        "Output1",
+        "Output2"
     };
 
     private static final ArchitectureRepositoryFlyweight INSTANCE = new ArchitectureRepositoryFlyweight();
@@ -43,6 +50,10 @@ public class ArchitectureRepositoryFlyweight {
             }
         }
         return architecture;
+    }
+
+    public void clearArchitecture(String path) {
+        models.remove(path);
     }
 
 }

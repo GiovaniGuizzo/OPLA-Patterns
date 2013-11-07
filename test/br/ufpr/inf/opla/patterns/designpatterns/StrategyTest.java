@@ -1,7 +1,9 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import arquitetura.representation.Interface;
-import arquitetura.representation.Method;
+import arquitetura.representation.Architecture;
+import arquitetura.representation.Element;
+import arquitetura.representation.Variant;
+import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
@@ -10,12 +12,14 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
-import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
+import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.List;
+import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
@@ -110,9 +114,64 @@ public class StrategyTest {
     /**
      * Tests the Strategy application.
      */
-//    @Ignore
-//    @Test
-//    public void applyTest() {
-//
-//    }
+    @Test
+    public void applyTest() {
+        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        boolean verifyPS = strategy.verifyPS(scope);
+        assertTrue(verifyPS);
+        boolean apply = strategy.apply(scope);
+        assertTrue(apply);
+        Element element = architecture.getElements().get(2);
+        assertEquals("Class1", element.getName());
+        assertEquals(1, element.getRelationships().size());
+
+        Element strategyInterface = architecture.getElements().get(4);
+        assertEquals("InterfaceDeTeste", strategyInterface.getName());
+
+        Relationship usage = element.getRelationships().get(0);
+        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(usage);
+        assertEquals(strategyInterface, usedElementFromRelationship);
+        
+        GenerateArchitecture generateArchitecture = new GenerateArchitecture();
+        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[0]);
+        architectureRepository.clearArchitecture(model);
+    }
+    
+    @Test
+    public void applyTest2() {
+        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        boolean verifyPS = strategy.verifyPS(scope);
+        assertTrue(verifyPS);
+        boolean apply = strategy.apply(scope);
+        assertTrue(apply);
+        
+        Element element = architecture.getElements().get(6);
+        assertEquals("ContextClass", element.getName());
+        assertEquals(1, element.getRelationships().size());
+
+        Element strategyInterface = architecture.getElements().get(8);
+        assertEquals("SortStrategy", strategyInterface.getName());
+        assertEquals(1, MethodUtil.getAllMethodsFromElement(strategyInterface).size());
+        assertEquals("model::PackageSort", strategyInterface.getNamespace());
+
+        Relationship usage = element.getRelationships().get(0);
+        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(usage);
+        assertEquals(strategyInterface, usedElementFromRelationship);
+        
+        assertNotNull(strategyInterface.getVariationPoint());
+        assertNull(element.getVariationPoint());
+        assertTrue(strategyInterface.getVariationPoint().getVariationPointElement().equals(strategyInterface));
+        for (Variant variant : strategyInterface.getVariationPoint().getVariants()) {
+            assertTrue(variant.getVariationPoints().contains(strategyInterface.getVariationPoint()));
+        }
+        assertEquals(1, strategyInterface.getOwnConcerns().size());
+        
+        GenerateArchitecture generateArchitecture = new GenerateArchitecture();
+        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[1]);
+        architectureRepository.clearArchitecture(model);
+    }
 }

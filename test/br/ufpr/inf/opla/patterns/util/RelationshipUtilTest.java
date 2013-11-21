@@ -5,6 +5,8 @@
  */
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.exceptions.ClassNotFound;
+import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -13,8 +15,12 @@ import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
 import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -34,7 +40,12 @@ public class RelationshipUtilTest {
     @Test
     public void testGetUsedElementFromRelationship() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]);
-        Element element = architecture.getElements().get(4);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("NotAContext").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("NotAContext", element.getName());
         Relationship relationship = element.getRelationships().get(0);
         assertEquals("Usage1", relationship.getName());
@@ -48,7 +59,12 @@ public class RelationshipUtilTest {
     @Test
     public void testGetImplementedInterface() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
-        Element element = architecture.getElements().get(1);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         Relationship relationship = element.getRelationships().get(0);
         assertEquals("Realization2", relationship.getName());
@@ -62,7 +78,12 @@ public class RelationshipUtilTest {
     @Test
     public void testGetExtendedElement() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
-        Element element = architecture.getElements().get(0);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         Relationship relationship = element.getRelationships().get(0);
         assertEquals("generalization", relationship.getType());
@@ -76,9 +97,24 @@ public class RelationshipUtilTest {
     @Test
     public void testMoveRelationship() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
-        Element element = architecture.getElements().get(0);
-        Element element1 = architecture.getElements().get(1);
-        Element element2 = architecture.getElements().get(2);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element1 = null;
+        try {
+            element1 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findInterfaceByName("Class3");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(RelationshipUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         assertEquals("Class2", element1.getName());
         assertEquals("Class3", element2.getName());
@@ -97,8 +133,18 @@ public class RelationshipUtilTest {
     @Test
     public void testCreateNewRealizationRelationship() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
-        Element element = architecture.getElements().get(0);
-        Element element2 = architecture.getElements().get(2);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findInterfaceByName("Class3");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(RelationshipUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         assertEquals("Class3", element2.getName());
         RealizationRelationship result = RelationshipUtil.createNewRealizationRelationship("RealizationVai", element, element2);
@@ -114,8 +160,18 @@ public class RelationshipUtilTest {
     @Test
     public void testCreateNewGeneralizationRelationship() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
-        Element element = architecture.getElements().get(0);
-        Element element2 = architecture.getElements().get(1);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         assertEquals("Class2", element2.getName());
         GeneralizationRelationship result = RelationshipUtil.createNewGeneralizationRelationship("GeneralizationVai", element2, element);
@@ -131,8 +187,18 @@ public class RelationshipUtilTest {
     @Test
     public void testCreateNewUsageRelationship() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
-        Element element = architecture.getElements().get(0);
-        Element element2 = architecture.getElements().get(1);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class1", element.getName());
         assertEquals("Class2", element2.getName());
         UsageRelationship result = RelationshipUtil.createNewUsageRelationship("GeneralizationVai", element2, element);

@@ -10,7 +10,6 @@ import arquitetura.representation.Package;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,7 +23,8 @@ public class InterfaceUtil {
         if (participants != null && !participants.isEmpty()) {
             Architecture architecture = participants.get(0).getArchitecture();
 
-            anInterface = new Interface(architecture, interfaceName, null, "", UUID.randomUUID().toString());
+            anInterface = architecture.createInterface(interfaceName);
+            architecture.removeInterface(anInterface);
 
             anInterface.getOperations().addAll(MethodUtil.createMethodsFromSetOfElements(participants));
 
@@ -50,21 +50,23 @@ public class InterfaceUtil {
                 }
             }
             anInterface.setNamespace(namespace);
+
+            int count = 1;
+            String name = anInterface.getName();
+            while (architecture.getElements().contains(anInterface)) {
+                count++;
+                anInterface.setName(name + Integer.toString(count));
+            }
+            
             try {
                 Package aPackage = anInterface.getArchitecture().findPackageByName(UtilResources.extractPackageName(namespace));
                 if (aPackage != null) {
-                    aPackage.getElements().add(anInterface);
+                    aPackage.addExternalInterface(anInterface);
                 }
             } catch (PackageNotFound ex) {
                 Logger.getLogger(InterfaceUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            int count = 1;
-            while (architecture.getElements().contains(anInterface)) {
-                count++;
-                anInterface.setName(anInterface.getName() + Integer.toString(count));
-            }
-            architecture.getElements().add(anInterface);
+            architecture.addExternalInterface(anInterface);
         }
         return anInterface;
     }

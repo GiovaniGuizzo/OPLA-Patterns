@@ -12,7 +12,8 @@ public class ArchitectureRepositoryFlyweight {
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify2.uml",
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify3.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/strategy/Apply1.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/strategy/Apply1.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/strategy/Apply2.uml"
     };
 
     public static final String[] OTHER_MODELS = new String[]{
@@ -23,7 +24,8 @@ public class ArchitectureRepositoryFlyweight {
 
     public static final String[] OUTPUT = new String[]{
         "Output1",
-        "Output2"
+        "Output2",
+        "Output3"
     };
 
     private static final ArchitectureRepositoryFlyweight INSTANCE = new ArchitectureRepositoryFlyweight();

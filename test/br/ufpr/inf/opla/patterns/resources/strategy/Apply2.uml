@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16" xmlns:smartyProfile="http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw">
+  <uml:Model xmi:id="_uyeq0FLJEeOqQtPizo-tTQ" name="Model">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_uyeq0VLJEeOqQtPizo-tTQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_vrEfsFLJEeOqQtPizo-tTQ" clientDependency="_z2Si8FLJEeOqQtPizo-tTQ" name="Context"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_w24LgFLJEeOqQtPizo-tTQ" name="Sort1">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_4ULDgFLJEeOqQtPizo-tTQ" name="sort"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_2fDGMFLPEeOqQtPizo-tTQ" name="abstractMethod" isAbstract="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_yHVGwFLJEeOqQtPizo-tTQ" name="Sort2">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_5LUt8FLJEeOqQtPizo-tTQ" name="sort2"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_z2Si8FLJEeOqQtPizo-tTQ" name="Usage1" client="_vrEfsFLJEeOqQtPizo-tTQ" supplier="_w24LgFLJEeOqQtPizo-tTQ"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="__Ie2oFLOEeOqQtPizo-tTQ" name="SomeInterface">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GpkCcFLPEeOqQtPizo-tTQ" name="methodA"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_JBjNgFLPEeOqQtPizo-tTQ" name="methodB"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_JxLToFLPEeOqQtPizo-tTQ" name="methodC"/>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_PLyUcFLKEeOqQtPizo-tTQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PLy7gFLKEeOqQtPizo-tTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_PLzikFLKEeOqQtPizo-tTQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PLzikVLKEeOqQtPizo-tTQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+  </uml:Model>
+  <smartyProfile:interface xmi:id="_RZ5KwFLKEeOqQtPizo-tTQ" base_Class="_yHVGwFLJEeOqQtPizo-tTQ"/>
+  <perfilConcerns:Persistence xmi:id="_UHL3cFLKEeOqQtPizo-tTQ" base_Class="_w24LgFLJEeOqQtPizo-tTQ"/>
+  <perfilConcerns:sorting xmi:id="_VIC3gFLKEeOqQtPizo-tTQ" base_Class="_yHVGwFLJEeOqQtPizo-tTQ"/>
+  <smartyProfile:interface xmi:id="_BZ8i8FLPEeOqQtPizo-tTQ" base_Class="__Ie2oFLOEeOqQtPizo-tTQ"/>
+  <perfilConcerns:Persistence xmi:id="_PJNvUFLPEeOqQtPizo-tTQ" base_Class="__Ie2oFLOEeOqQtPizo-tTQ"/>
+  <perfilConcerns:sorting xmi:id="_PJliwFLPEeOqQtPizo-tTQ" base_Class="__Ie2oFLOEeOqQtPizo-tTQ"/>
+</xmi:XMI>

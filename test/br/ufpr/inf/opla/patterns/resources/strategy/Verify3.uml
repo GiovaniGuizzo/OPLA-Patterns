@@ -8,14 +8,6 @@
     <packagedElement xmi:type="uml:Realization" xmi:id="_f-bBwD2uEeO0W5WLsM8PpQ" name="Realization2" client="_dAhisD2tEeO0W5WLsM8PpQ" supplier="_eyOw4D2tEeO0W5WLsM8PpQ"/>
     <packagedElement xmi:type="uml:Usage" xmi:id="_HGBvYD2vEeO0W5WLsM8PpQ" name="Usage1" client="_B4vyMD2vEeO0W5WLsM8PpQ" supplier="_d0NpcD2tEeO0W5WLsM8PpQ"/>
     <packagedElement xmi:type="uml:Package" xmi:id="_hz7_MECeEeOt8clYlm4AVw" name="ClassPackage">
-      <packagedElement xmi:type="uml:Class" xmi:id="_d0NpcD2tEeO0W5WLsM8PpQ" clientDependency="_fceLQD2uEeO0W5WLsM8PpQ" name="Class2">
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_vfzE8D2uEeO0W5WLsM8PpQ" name="methodA"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_dtLSsD3AEeOSVqhj7G3ZEA" name="methodB">
-          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hzmVgD3AEeOSVqhj7G3ZEA" name="return" direction="return">
-            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-          </ownedParameter>
-        </ownedOperation>
-      </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_eyOw4D2tEeO0W5WLsM8PpQ" name="StrategyInterface">
         <generalization xmi:type="uml:Generalization" xmi:id="_B_zb8EZAEeO8H8lNgy9OHw" general="_9thucEY_EeO8H8lNgy9OHw"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_ml-fYD3AEeOSVqhj7G3ZEA" name="methodB">
@@ -30,19 +22,27 @@
         </ownedOperation>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_B4vyMD2vEeO0W5WLsM8PpQ" clientDependency="_HGBvYD2vEeO0W5WLsM8PpQ" name="AnotherInterfaceToo"/>
-    </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_dAhisD2tEeO0W5WLsM8PpQ" clientDependency="_f-bBwD2uEeO0W5WLsM8PpQ" name="Class1">
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_wzikwD2uEeO0W5WLsM8PpQ" name="methodA"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_iXfFsD3AEeOSVqhj7G3ZEA" name="methodB">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_l19-wD3AEeOSVqhj7G3ZEA" name="return" direction="return">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-        </ownedParameter>
-      </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_lNgkAEY5EeO8H8lNgy9OHw" name="methodB">
-        <ownedParameter xmi:type="uml:Parameter" xmi:id="_pUXrsEY5EeO8H8lNgy9OHw" name="" direction="return">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </ownedParameter>
-      </ownedOperation>
+      <packagedElement xmi:type="uml:Class" xmi:id="_d0NpcD2tEeO0W5WLsM8PpQ" clientDependency="_fceLQD2uEeO0W5WLsM8PpQ" name="Class2">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_vfzE8D2uEeO0W5WLsM8PpQ" name="methodA"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_dtLSsD3AEeOSVqhj7G3ZEA" name="methodB">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_hzmVgD3AEeOSVqhj7G3ZEA" name="return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dAhisD2tEeO0W5WLsM8PpQ" clientDependency="_f-bBwD2uEeO0W5WLsM8PpQ" name="Class1">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_wzikwD2uEeO0W5WLsM8PpQ" name="methodA"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_iXfFsD3AEeOSVqhj7G3ZEA" name="methodB">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_l19-wD3AEeOSVqhj7G3ZEA" name="return" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+          </ownedParameter>
+        </ownedOperation>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_lNgkAEY5EeO8H8lNgy9OHw" name="methodB">
+          <ownedParameter xmi:type="uml:Parameter" xmi:id="_pUXrsEY5EeO8H8lNgy9OHw" name="" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_9thucEY_EeO8H8lNgy9OHw" name="CommonStrategy">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_tQn3oD2uEeO0W5WLsM8PpQ" name="methodA"/>
@@ -55,4 +55,5 @@
     </profileApplication>
   </uml:Model>
   <smartyProfile:interface xmi:id="_cZMngD2uEeO0W5WLsM8PpQ" base_Class="_eyOw4D2tEeO0W5WLsM8PpQ"/>
+  <smartyProfile:interface xmi:id="_C3f0QFFJEeOUw9_Y_H2R8Q" base_Class="_9thucEY_EeO8H8lNgy9OHw"/>
 </xmi:XMI>

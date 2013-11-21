@@ -7,7 +7,9 @@ import arquitetura.representation.Method;
 import arquitetura.representation.ParameterMethod;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -16,8 +18,8 @@ public class MethodUtil {
     private MethodUtil() {
     }
 
-    public static List<Method> getMethodsFromElement(Element element) {
-        List<Method> iMethods;
+    public static Set<Method> getMethodsFromElement(Element element) {
+        Set<Method> iMethods;
         if (element instanceof arquitetura.representation.Class) {
             arquitetura.representation.Class iClass = (arquitetura.representation.Class) element;
             iMethods = iClass.getAllMethods();
@@ -42,7 +44,7 @@ public class MethodUtil {
         List<Element> parents = ElementUtil.getAllExtendedElements(element);
         for (Element parent : parents) {
             if (parent.getClass().equals(element.getClass())) {
-                List<Method> parentMethods = getMethodsFromElement(element);
+                Set<Method> parentMethods = getMethodsFromElement(parent);
                 for (Method parentMethod : parentMethods) {
                     if (!iMethods.contains(parentMethod)) {
                         iMethods.add(parentMethod);
@@ -74,6 +76,7 @@ public class MethodUtil {
             for (Method elementMethod : methodsFromElement) {
                 Method clonedMethod = cloneMethod(elementMethod);
                 int count = 1;
+                String name = clonedMethod.getName();
                 while (methods.containsSameName(clonedMethod)) {
                     if (methods.contains(clonedMethod)) {
                         Method method = methods.get(methods.indexOf(clonedMethod));
@@ -81,7 +84,7 @@ public class MethodUtil {
                         continue methodFor;
                     }
                     count++;
-                    clonedMethod.setName(clonedMethod.getName() + Integer.toString(count));
+                    clonedMethod.setName(name + Integer.toString(count));
                 }
                 methods.add(clonedMethod);
             }
@@ -97,8 +100,8 @@ public class MethodUtil {
         return newMethod;
     }
 
-    public static List<Method> cloneMethods(List<Method> methodsToBeCloned) {
-        List<Method> methods = new ArrayList<>();
+    public static Set<Method> cloneMethods(Set<Method> methodsToBeCloned) {
+        Set<Method> methods = new HashSet<>();
         for (Method method : methodsToBeCloned) {
             methods.add(cloneMethod(method));
         }
@@ -122,9 +125,10 @@ public class MethodUtil {
                 if (!aParameter.getType().equals(clonedParameter.getType())
                         || !aParameter.getDirection().equals(clonedParameter.getDirection())) {
                     int count = 1;
+                    String name = clonedParameter.getName();
                     do {
                         count++;
-                        clonedParameter.setName(clonedParameter.getName() + Integer.toString(count));
+                        clonedParameter.setName(name + Integer.toString(count));
                     } while (aParameters.contains(clonedParameter));
                     aParameters.add(clonedParameter);
                 }

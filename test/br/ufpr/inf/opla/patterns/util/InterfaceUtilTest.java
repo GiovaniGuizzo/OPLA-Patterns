@@ -10,9 +10,11 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import java.util.ArrayList;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -35,13 +37,16 @@ public class InterfaceUtilTest {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
         List<Element> participants = architecture.getElements();
         Interface result = InterfaceUtil.createInterfaceForSetOfElements(interfaceName, participants);
-        assertEquals("Model", result.getNamespace());
-        List<Method> operations = result.getOperations();
+        assertEquals("Model::ClassPackage", result.getNamespace());
+        List<Method> operations = new ArrayList<>(result.getOperations());
         assertEquals(3, operations.size());
-        assertEquals("methodA", operations.get(0).getName());
-        assertFalse(operations.get(0).getName().equals(operations.get(1).getName()));
-        assertFalse(operations.get(1).getName().equals(operations.get(2).getName()));
-        assertEquals("String", operations.get(1).getReturnType());
-        assertEquals("Integer", operations.get(2).getReturnType());        
+        Method tempMethodA = operations.get(0);
+        Method tempMethodB = operations.get(1);
+        Method tempMethodC = operations.get(2);
+        assertEquals("methodA", tempMethodA.getName());
+        assertFalse(tempMethodA.getName().equals(tempMethodB.getName()));
+        assertFalse(tempMethodB.getName().equals(tempMethodC.getName()));
+        assertEquals("Integer", tempMethodB.getReturnType());
+        assertEquals("String", tempMethodC.getReturnType());
     }
 }

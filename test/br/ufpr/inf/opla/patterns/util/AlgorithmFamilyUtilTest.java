@@ -12,8 +12,8 @@ import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
 import java.util.List;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

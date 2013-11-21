@@ -8,4 +8,7 @@ public class ParameterMethodUtil {
         return new ParameterMethod(parameter.getName(), parameter.getType(), parameter.getDirection());
     }
 
+    private ParameterMethodUtil() {
+    }
+
 }

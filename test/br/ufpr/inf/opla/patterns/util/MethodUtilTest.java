@@ -5,13 +5,21 @@
  */
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.exceptions.ClassNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Method;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -31,9 +39,14 @@ public class MethodUtilTest {
     @Test
     public void testGetMethodsFromElement() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
-        Element element = architecture.getElements().get(1);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class2", element.getName());
-        List<Method> result = MethodUtil.getMethodsFromElement(element);
+        Set<Method> result = MethodUtil.getMethodsFromElement(element);
         assertEquals(4, result.size());
     }
 
@@ -57,7 +70,7 @@ public class MethodUtilTest {
         Architecture architecture = architectureRepository.getArchitecture(model);
         List<Method> result = MethodUtil.createMethodsFromSetOfElements(architecture.getElements());
         assertEquals(5, result.size());
-        Method method = result.get(1);
+        Method method = result.get(0);
         assertEquals("Operation2", method.getName());
         assertEquals("String", method.getReturnType());
         assertEquals(3, method.getParameters().size());
@@ -69,11 +82,16 @@ public class MethodUtilTest {
     @Test
     public void testCloneMethod() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
-        Element element = architecture.getElements().get(1);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class2", element.getName());
-        List<Method> methods = MethodUtil.getMethodsFromElement(element);
+        List<Method> methods = new ArrayList<>(MethodUtil.getMethodsFromElement(element));
         assertEquals(4, methods.size());
-        Method method = methods.get(3);
+        Method method = methods.get(0);
         assertEquals("Operation2", method.getName());
         assertEquals("String", method.getReturnType());
         Method result = MethodUtil.cloneMethod(method);
@@ -91,12 +109,14 @@ public class MethodUtilTest {
     @Test
     public void testCloneMethods() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
-        List<Method> methods = MethodUtil.getMethodsFromSetOfElements(architecture.getElements());
+        List<Method> methods = new ArrayList<>(MethodUtil.getMethodsFromSetOfElements(architecture.getElements()));
         assertEquals(5, methods.size());
-        List<Method> result = MethodUtil.cloneMethods(methods);
-        for (int i = 0; i < result.size(); i++) {
-            Method resultMethod = result.get(i);
-            Method method = methods.get(i);
+        Set<Method> result = MethodUtil.cloneMethods(new HashSet(methods));
+        Iterator<Method> iterator = result.iterator();
+        Iterator<Method> methodsIterator = methods.iterator();
+        while (iterator.hasNext()) {
+            Method resultMethod = iterator.next();
+            Method method = methodsIterator.next();
             assertNotSame(method.getId(), resultMethod.getId());
             assertEquals(method.getName(), resultMethod.getName());
             assertEquals(method.getNamespace(), resultMethod.getNamespace());
@@ -112,18 +132,28 @@ public class MethodUtilTest {
     @Test
     public void testMergeMethodsToNewOne() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
-        Element element = architecture.getElements().get(1);
-        Element element2 = architecture.getElements().get(0);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class2", element.getName());
         assertEquals("Class1", element2.getName());
-        List<Method> methods = MethodUtil.getMethodsFromElement(element);
-        List<Method> methods2 = MethodUtil.getMethodsFromElement(element2);
+        List<Method> methods = new ArrayList<>(MethodUtil.getMethodsFromElement(element));
+        List<Method> methods2 = new ArrayList<>(MethodUtil.getMethodsFromElement(element2));
         assertEquals(4, methods.size());
         assertEquals(2, methods2.size());
-        Method method = methods.get(3);
+        Method method = methods.get(0);
         assertEquals("Operation2", method.getName());
         assertEquals("String", method.getReturnType());
-        Method method2 = methods2.get(1);
+        Method method2 = methods2.get(0);
         assertEquals("Operation2", method2.getName());
         assertEquals("String", method2.getReturnType());
         Method result = MethodUtil.mergeMethodsToNewOne(method, method2);
@@ -142,18 +172,28 @@ public class MethodUtilTest {
     @Test
     public void testMergeMethodsToMethodA() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[1]);
-        Element element = architecture.getElements().get(1);
-        Element element2 = architecture.getElements().get(0);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("Class2", element.getName());
         assertEquals("Class1", element2.getName());
-        List<Method> methods = MethodUtil.getMethodsFromElement(element);
-        List<Method> methods2 = MethodUtil.getMethodsFromElement(element2);
+        List<Method> methods = new ArrayList<>(MethodUtil.getMethodsFromElement(element));
+        List<Method> methods2 = new ArrayList<>(MethodUtil.getMethodsFromElement(element2));
         assertEquals(4, methods.size());
         assertEquals(2, methods2.size());
-        Method method = methods.get(3);
+        Method method = methods.get(0);
         assertEquals("Operation2", method.getName());
         assertEquals("String", method.getReturnType());
-        Method method2 = methods2.get(1);
+        Method method2 = methods2.get(0);
         assertEquals("Operation2", method2.getName());
         assertEquals("String", method2.getReturnType());
         MethodUtil.mergeMethodsToMethodA(method, method2);
@@ -171,7 +211,12 @@ public class MethodUtilTest {
     public void testGetAllMethodsFromElement() {
         String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3];
         Architecture architecture = architectureRepository.getArchitecture(model);
-        Element element = architecture.getElements().get(0);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("QuickSort").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("QuickSort", element.getName());
         assertEquals(2, element.getRelationships().size());
         List<Method> allMethodsFromElement = MethodUtil.getAllMethodsFromElement(element);

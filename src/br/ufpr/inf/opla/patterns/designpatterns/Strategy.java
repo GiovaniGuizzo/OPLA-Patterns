@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
+import arquitetura.exceptions.ConcernNotFoundException;
 import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
@@ -25,6 +26,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Strategy extends DesignPattern {
 
@@ -163,13 +166,13 @@ public class Strategy extends DesignPattern {
                     if (participant instanceof arquitetura.representation.Class) {
                         Class participantClass = (Class) participant;
                         RelationshipUtil.createNewRealizationRelationship("implements", participantClass, strategyInterface);
-                        MethodArrayList participantMethods = new MethodArrayList(participantClass.getAllMethods());
+                        MethodArrayList participantMethods = new MethodArrayList(new ArrayList<>(participantClass.getAllMethods()));
                         for (Method interfaceMethod : strategyInterface.getOperations()) {
                             int index = participantMethods.indexOf(interfaceMethod);
                             if (index != -1) {
-                                MethodUtil.mergeMethodsToMethodA(participantClass.getAllMethods().get(index), interfaceMethod);
+                                MethodUtil.mergeMethodsToMethodA(participantMethods.get(index), interfaceMethod);
                             } else {
-                                participantClass.getAllMethods().add(MethodUtil.cloneMethod(interfaceMethod));
+                                participantClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
                             }
                         }
                     } else if (participant instanceof Interface) {
@@ -181,7 +184,11 @@ public class Strategy extends DesignPattern {
                 //Concern
                 for (Concern concern : participant.getOwnConcerns()) {
                     if (!strategyInterface.containsConcern(concern)) {
-                        strategyInterface.getOwnConcerns().add(concern);
+                        try {
+                            strategyInterface.addConcern(concern.getName());
+                        } catch (ConcernNotFoundException ex) {
+                            Logger.getLogger(Strategy.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
@@ -219,12 +226,12 @@ public class Strategy extends DesignPattern {
 
                         for (Relationship tempRelationship : nameList) {
                             Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-                            usedElementFromRelationship.getRelationships().remove(tempRelationship);
-                            context.getRelationships().remove(tempRelationship);
-                            context.getArchitecture().getAllRelationships().remove(tempRelationship);
+                            usedElementFromRelationship.removeRelationship(tempRelationship);
+                            context.removeRelationship(tempRelationship);
+                            context.getArchitecture().removeRelationship(tempRelationship);
                         }
 
-                        context.getArchitecture().getAllRelationships().add(relationship);
+                        context.getArchitecture().addRelationship(relationship);
                         RelationshipUtil.moveRelationship(relationship, context, strategyInterface);
                     }
                 }

@@ -46,47 +46,47 @@ public class RelationshipUtil {
         if (relationship instanceof UsageRelationship) {
             UsageRelationship usage = (UsageRelationship) relationship;
 
-            usage.getSupplier().getRelationships().remove(usage);
-            usage.getClient().getRelationships().remove(usage);
+            usage.getSupplier().removeRelationship(usage);
+            usage.getClient().removeRelationship(usage);
 
             usage.setSupplier(supplier);
             usage.setClient(client);
-            supplier.getRelationships().add(usage);
-            client.getRelationships().add(usage);
+            supplier.addRelationship(usage);
+            client.addRelationship(usage);
         } else if (relationship instanceof DependencyRelationship) {
             DependencyRelationship dependency = (DependencyRelationship) relationship;
 
-            dependency.getSupplier().getRelationships().remove(dependency);
-            dependency.getClient().getRelationships().remove(dependency);
+            dependency.getSupplier().removeRelationship(dependency);
+            dependency.getClient().removeRelationship(dependency);
 
             dependency.setSupplier(supplier);
             dependency.setClient(client);
-            supplier.getRelationships().add(dependency);
-            client.getRelationships().add(dependency);
+            supplier.addRelationship(dependency);
+            client.addRelationship(dependency);
         }
     }
 
     public static RealizationRelationship createNewRealizationRelationship(String relationshipName, Element client, Element supplier) {
         RealizationRelationship realizationRelationship = new RealizationRelationship(client, supplier, relationshipName, UUID.randomUUID().toString());
-        client.getRelationships().add(realizationRelationship);
-        supplier.getRelationships().add(realizationRelationship);
-        client.getArchitecture().getAllRelationships().add(realizationRelationship);
+        client.addRelationship(realizationRelationship);
+        supplier.addRelationship(realizationRelationship);
+        client.getArchitecture().addRelationship(realizationRelationship);
         return realizationRelationship;
     }
 
     public static GeneralizationRelationship createNewGeneralizationRelationship(String aimplements, Element child, Element parent) {
         GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship(parent, child, parent.getArchitecture(), UUID.randomUUID().toString());
-        child.getRelationships().add(generalizationRelationship);
-        parent.getRelationships().add(generalizationRelationship);
-        parent.getArchitecture().getAllRelationships().add(generalizationRelationship);
+        child.addRelationship(generalizationRelationship);
+        parent.addRelationship(generalizationRelationship);
+        parent.getArchitecture().addRelationship(generalizationRelationship);
         return generalizationRelationship;
     }
 
     public static UsageRelationship createNewUsageRelationship(String name, Element client, Element supplier) {
         UsageRelationship usage = new UsageRelationship(name, supplier, client, UUID.randomUUID().toString());
-        client.getRelationships().add(usage);
-        supplier.getRelationships().add(usage);
-        client.getArchitecture().getAllRelationships().add(usage);
+        client.addRelationship(usage);
+        supplier.addRelationship(usage);
+        client.getArchitecture().addRelationship(usage);
         return usage;
     }
 

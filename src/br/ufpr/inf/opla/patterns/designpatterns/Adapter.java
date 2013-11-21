@@ -2,13 +2,15 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Method;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
-import java.util.UUID;
+import java.util.HashSet;
+import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class Adapter extends DesignPattern {
@@ -44,18 +46,25 @@ public class Adapter extends DesignPattern {
                 && adaptee != null
                 && (target instanceof arquitetura.representation.Class || target instanceof Interface)
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
-            arquitetura.representation.Class adapterClass = new arquitetura.representation.Class(target.getArchitecture(), adaptee.getName() + "Adapter", adaptee.getVariant(), false, target.getNamespace(), UUID.randomUUID().toString());
-            adapterClass.getArchitecture().getElements().add(adapterClass);
+            arquitetura.representation.Class adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
+            adapterClass.setNamespace(target.getNamespace());
+            adapterClass.setVariant(adaptee.getVariant());
 
             //Implements/Extends and add all methods.
             if (target instanceof arquitetura.representation.Class) {
                 arquitetura.representation.Class targetClass = (arquitetura.representation.Class) target;
                 RelationshipUtil.createNewGeneralizationRelationship("implements", adapterClass, target);
-                adapterClass.getAllMethods().addAll(MethodUtil.cloneMethods(targetClass.getAllAbstractMethods()));
+                Set<Method> clonedMethods = MethodUtil.cloneMethods(new HashSet<>(targetClass.getAllAbstractMethods()));
+                for (Method method : clonedMethods) {
+                    adapterClass.addExternalMethod(method);
+                }
             } else {
                 Interface targetInterface = (Interface) target;
                 RelationshipUtil.createNewRealizationRelationship("implements", adapterClass, target);
-                adapterClass.getAllMethods().addAll(MethodUtil.cloneMethods(targetInterface.getOperations()));
+                Set<Method> clonedMethods = MethodUtil.cloneMethods(targetInterface.getOperations());
+                for (Method method : clonedMethods) {
+                    adapterClass.addExternalMethod(method);
+                }
             }
 
             RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);

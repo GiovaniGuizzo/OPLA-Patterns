@@ -7,8 +7,9 @@ package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.ParameterMethod;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16" xmlns:smartyProfile="http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="20110701" xsi:schemaLocation="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16 resources/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3 resources/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw">
+  <uml:Model name="model" xmi:id="_cooD4LmGEeKQQp7P9cQvNQ">
+    <profileApplication xmi:id="_AZMtQMLoEeK4buShvBMouA">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_AZV3MMLoEeK4buShvBMouA">
+        <references href="resources/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:id="_AZWeQMLoEeK4buShvBMouA">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_AZdzAMLoEeK4buShvBMouA">
+        <references href="resources/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+  <packagedElement clientDependency="53a821a9-e3f3-4dc3-b982-debc0b41b28b" isAbstract="false" name="Sort2Adapter" xmi:id="11995086-a888-4764-89d1-9011bad4134c" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="baffe54c-0b38-429c-adf3-7ed1b51eae47"/>
+      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="e7b875a3-0220-4e16-995c-eb73f1bec0f7"/>
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="d761569c-75fe-4c19-9ee5-54e604925803"/>
+    </packagedElement>
+    <packagedElement clientDependency="74b131d6-3c9f-4521-9493-d3c20d9db31d" isAbstract="false" name="Sort1" xmi:id="_w24LgFLJEeOqQtPizo-tTQ" xmi:type="uml:Class">
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="_2fDGMFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="_4ULDgFLJEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="4b8ab49e-1c73-4c71-a1e9-acbb9e8dbabe"/>
+    </packagedElement>
+    <packagedElement clientDependency="31f6a9e8-d35a-4559-87b3-981b570140d2" isAbstract="false" name="Context" xmi:id="_vrEfsFLJEeOqQtPizo-tTQ" xmi:type="uml:Class"/>
+    <packagedElement isAbstract="false" name="SomeInterface" xmi:id="__Ie2oFLOEeOqQtPizo-tTQ" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="methodB" visibility="public" xmi:id="_JBjNgFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="methodC" visibility="public" xmi:id="_JxLToFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="methodA" visibility="public" xmi:id="_GpkCcFLPEeOqQtPizo-tTQ"/>
+    </packagedElement>
+    <packagedElement isAbstract="false" name="SortStrategy" xmi:id="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="04d09f60-e82a-433a-b922-936651cd4a8b"/>
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="2ff53405-820f-408a-b1dd-74c7dfd3c96f"/>
+      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="034f8b28-4be2-445c-919d-39931b3a6bde"/>
+    </packagedElement>
+    <packagedElement isAbstract="false" name="Sort2" xmi:id="_yHVGwFLJEeOqQtPizo-tTQ" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="_5LUt8FLJEeOqQtPizo-tTQ"/>
+    </packagedElement>
+    <packagedElement client="11995086-a888-4764-89d1-9011bad4134c" name="implements" supplier="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="d1dd8dea-41cf-4b9e-b370-d258b1eefdd0" xmi:type="uml:Realization"/>
+    <packagedElement client="_w24LgFLJEeOqQtPizo-tTQ" name="implements" supplier="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="74b131d6-3c9f-4521-9493-d3c20d9db31d" xmi:type="uml:Realization"/>
+    <packagedElement client="_vrEfsFLJEeOqQtPizo-tTQ" name="" supplier="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="31f6a9e8-d35a-4559-87b3-981b570140d2" xmi:type="uml:Usage"/>
+    <packagedElement client="11995086-a888-4764-89d1-9011bad4134c" name="" supplier="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="53a821a9-e3f3-4dc3-b982-debc0b41b28b" xmi:type="uml:Usage"/>
+  </uml:Model>
+<perfilConcerns:Persistence base_Class="11995086-a888-4764-89d1-9011bad4134c" xmi:id="5764552a-333b-406c-bda1-ff19ea7fe1cf"/>
+  <perfilConcerns:sorting base_Class="11995086-a888-4764-89d1-9011bad4134c" xmi:id="9c71a420-a40b-45ea-bdc4-43fb013c3e51"/>
+  <perfilConcerns:Persistence base_Class="_w24LgFLJEeOqQtPizo-tTQ" xmi:id="356bd347-0788-4e20-9175-f3f58a5567d8"/>
+  <smartyProfile:interface base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="140c935e-4760-48a6-a659-8464597b15cc"/>
+  <smartyProfile:interface base_Class="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="402515f1-909a-4512-a74f-84da1cf715c1"/>
+  <smartyProfile:interface base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="ca77f6f3-98f9-4388-9185-9c4bd52f315d"/>
+  <perfilConcerns:Persistence base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="550ada35-ae54-4951-821c-f8aad49e3a3c"/>
+  <perfilConcerns:sorting base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="13484fcc-843a-4f71-9c2d-a23d4745f7e5"/>
+  <perfilConcerns:Persistence base_Class="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="ae3278ba-bfe2-4e49-8d3a-38951ff7eb51"/>
+  <perfilConcerns:sorting base_Class="25ecba77-7821-4722-9bf2-12b9cad839f6" xmi:id="29f43111-08df-4ae2-9de6-e1abdccb64a8"/>
+  <perfilConcerns:sorting base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="a6af996f-d09f-4ec8-b8df-008d20db34ad"/>
+</xmi:XMI>

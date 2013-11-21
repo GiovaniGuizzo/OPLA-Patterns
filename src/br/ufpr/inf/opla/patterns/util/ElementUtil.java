@@ -46,7 +46,7 @@ public class ElementUtil {
                 }
                 List<Element> parentSuperTypes = getAllExtendedElements(tempInterface);
                 for (Element parentSuperType : parentSuperTypes) {
-                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains((Interface) parentSuperType)) {
+                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains(parentSuperType)) {
                         implementedInterfaces.add((Interface) parentSuperType);
                     }
                 }
@@ -79,6 +79,10 @@ public class ElementUtil {
             }
         }
         return extendedElements;
+    }
+
+    public static boolean isClassOrInterface(Element element) {
+        return (element instanceof arquitetura.representation.Class || element instanceof Interface);
     }
 
 }

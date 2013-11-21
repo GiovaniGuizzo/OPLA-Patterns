@@ -1,6 +1,5 @@
 package br.ufpr.inf.opla.patterns.models;
 
-import br.ufpr.inf.opla.patterns.designpatterns.Adapter;
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.designpatterns.Facade;
 import br.ufpr.inf.opla.patterns.designpatterns.Mediator;

@@ -4,6 +4,8 @@ import br.ufpr.inf.opla.patterns.models.DesignPattern;
 
 public interface PSPLA extends PS {
 
-    public DesignPattern getPsPlaOf();
+    public DesignPattern getPSPLAOf();
+
+    public boolean isPSPLAOf(DesignPattern designPattern);
 
 }

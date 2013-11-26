@@ -9,7 +9,7 @@ import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -22,10 +22,10 @@ import org.junit.Test;
  */
 public class InterfaceUtilTest {
 
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
 
     public InterfaceUtilTest() {
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -34,7 +34,7 @@ public class InterfaceUtilTest {
     @Test
     public void testCreateInterfaceForSetOfElements() {
         String interfaceName = "TesteInterface";
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         List<Element> participants = architecture.getElements();
         Interface result = InterfaceUtil.createInterfaceForSetOfElements(interfaceName, participants);
         assertEquals("Model::ClassPackage", result.getNamespace());

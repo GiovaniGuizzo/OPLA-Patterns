@@ -1,26 +1,27 @@
 package br.ufpr.inf.opla.patterns.models.ps.impl;
 
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
-import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
+import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import java.util.List;
 
-public class PSPLAStrategy extends PSStrategy implements PSPLA {
+public class PSPLABridge extends PSBridge implements PSPLA {
 
-    public PSPLAStrategy(List<Element> contexts, AlgorithmFamily algorithmFamily) {
-        super(contexts, algorithmFamily);
+    public PSPLABridge(List<Element> contexts, AlgorithmFamily algorithmFamily, List<Concern> commonConcerns) {
+        super(contexts, algorithmFamily, commonConcerns);
     }
 
     @Override
     public DesignPattern getPSPLAOf() {
-        return Strategy.getInstance();
+        return Bridge.getInstance();
     }
 
     @Override
     public boolean isPSPLAOf(DesignPattern designPattern) {
-        return Strategy.getInstance().equals(designPattern);
+        return Bridge.getInstance().equals(designPattern);
     }
 
 }

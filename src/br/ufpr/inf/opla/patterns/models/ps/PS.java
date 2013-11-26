@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PS {
 
-    public DesignPattern getPsOf();
+    public DesignPattern getPSOf();
 
-    public boolean isPsOf(DesignPattern designPattern);
+    public boolean isPSOf(DesignPattern designPattern);
 
     public List<Element> getParticipants();
 

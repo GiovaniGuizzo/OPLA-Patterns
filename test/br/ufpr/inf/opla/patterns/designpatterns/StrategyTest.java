@@ -14,7 +14,7 @@ import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
@@ -35,11 +35,11 @@ public class StrategyTest {
 
     private final Strategy strategy;
     private final ScopeSelectionStrategy scopeSelectionStrategy;
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
 
     public StrategyTest() {
         this.strategy = Strategy.getInstance();
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
     }
 
@@ -48,14 +48,14 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
 
         assertEquals(7, scope.getElements().size());
 
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
 
-        List<PS> psList = scope.getPS();
+        List<PS> psList = scope.getPSs();
         assertEquals(3, psList.size());
 
         for (PS ps : psList) {
@@ -71,11 +71,11 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
 
         strategy.verifyPS(scope);
 
-        List<PS> psList = scope.getPS();
+        List<PS> psList = scope.getPSs();
 
         PSStrategy pSStrategy = (PSStrategy) psList.get(0);
         assertEquals("sort", pSStrategy.getAlgorithmFamily().getName());
@@ -88,14 +88,14 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
 
         assertEquals(7, scope.getElements().size());
 
         boolean verifyPSPLA = strategy.verifyPSPLA(scope);
         assertTrue(verifyPSPLA);
 
-        List<PSPLA> psPLAList = scope.getPSPLA();
+        List<PSPLA> psPLAList = scope.getPSsPLA();
         assertEquals(3, psPLAList.size());
 
         for (PSPLA psPLA : psPLAList) {
@@ -111,7 +111,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
 
         assertEquals(7, scope.getElements().size());
 
@@ -124,8 +124,7 @@ public class StrategyTest {
      */
     @Test
     public void applyTest() {
-        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3];
-        architectureRepository.clearArchitecture(model);
+        String model = ArchitectureRepository.STRATEGY_MODELS[3];
         Architecture architecture = architectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
@@ -149,14 +148,12 @@ public class StrategyTest {
         assertEquals(strategyInterface, usedElementFromRelationship);
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[0]);
-        architectureRepository.clearArchitecture(model);
+        generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[0]);
     }
 
     @Test
     public void applyTest2() {
-        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0];
-        architectureRepository.clearArchitecture(model);
+        String model = ArchitectureRepository.STRATEGY_MODELS[0];
         Architecture architecture = architectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
@@ -196,14 +193,12 @@ public class StrategyTest {
         assertEquals(1, strategyInterface.getOwnConcerns().size());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[1]);
-        architectureRepository.clearArchitecture(model);
+        generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[1]);
     }
 
     @Test
     public void applyTest3() {
-        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[4];
-        architectureRepository.clearArchitecture(model);
+        String model = ArchitectureRepository.STRATEGY_MODELS[4];
         Architecture architecture = architectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
@@ -248,7 +243,6 @@ public class StrategyTest {
         assertEquals(adaptee, usage.getSupplier());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[2]);
-        architectureRepository.clearArchitecture(model);
+        generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[2]);
     }
 }

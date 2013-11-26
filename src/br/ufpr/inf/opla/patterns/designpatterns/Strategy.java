@@ -6,7 +6,6 @@ import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import arquitetura.representation.Variability;
 import arquitetura.representation.Variant;
 import arquitetura.representation.VariationPoint;
 import arquitetura.representation.relationship.Relationship;
@@ -75,7 +74,7 @@ public class Strategy extends DesignPattern {
             }
             if (!contexts.isEmpty()) {
                 PSStrategy psStrategy = new PSStrategy(contexts, iFamily);
-                if (!scope.getPS().contains(psStrategy)) {
+                if (!scope.getPSs(this).contains(psStrategy)) {
                     scope.addPS(psStrategy);
                 }
                 isPs = true;
@@ -88,46 +87,14 @@ public class Strategy extends DesignPattern {
     public boolean verifyPSPLA(Scope scope) {
         boolean isPsPla = false;
         if (verifyPS(scope)) {
-            pSIteratorFor:
-            for (PS ps : scope.getPS()) {
-                if (ps.getPsOf().equals(this)) {
-                    PSStrategy psStrategy = (PSStrategy) ps;
-                    List<Variability> variabilities = null;
-                    for (Element algorithm : psStrategy.getAlgorithmFamily().getParticipants()) {
-                        if (algorithm.getVariant() == null) {
-                            continue pSIteratorFor;
-                        }
-                        if (variabilities == null) {
-                            variabilities = new ArrayList<>();
-                            variabilities.addAll(algorithm.getVariant().getVariabilities());
-                        } else if (!variabilities.isEmpty()) {
-                            for (int i = 0; i < variabilities.size(); i++) {
-                                if (!algorithm.getVariant().getVariabilities().contains(variabilities.get(i))) {
-                                    variabilities.remove(i);
-                                    i--;
-                                }
-                            }
-                        } else {
-                            continue pSIteratorFor;
-                        }
-                    }
-                    if (variabilities == null || variabilities.isEmpty()) {
-                        continue;
-                    }
-                    for (Element context : psStrategy.getContexts()) {
-                        if (context.getVariationPoint() != null) {
-                            List<Variability> contextVariabilities = context.getVariationPoint().getVariabilities();
-                            for (Variability variability : contextVariabilities) {
-                                if (variabilities.contains(variability)) {
-                                    PSPLAStrategy psPlaStrategy = new PSPLAStrategy(psStrategy.getContexts(), psStrategy.getAlgorithmFamily());
-                                    if (!scope.getPSPLA().contains(psPlaStrategy)) {
-                                        scope.addPSPLA(psPlaStrategy);
-                                    }
-                                    isPsPla = true;
-                                    continue pSIteratorFor;
-                                }
-                            }
-                        }
+            for (PS ps : scope.getPSs(this)) {
+                PSStrategy psStrategy = (PSStrategy) ps;
+                List<Element> contexts = psStrategy.getContexts();
+                AlgorithmFamily algorithmFamily = psStrategy.getAlgorithmFamily();
+                if (AlgorithmFamilyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(algorithmFamily, contexts)) {
+                    PSPLAStrategy psPlaStrategy = new PSPLAStrategy(contexts, algorithmFamily);
+                    if (!scope.getPSsPLA(this).contains(psPlaStrategy)) {
+                        scope.addPSPLA(psPlaStrategy);
                     }
                 }
             }
@@ -138,13 +105,7 @@ public class Strategy extends DesignPattern {
     @Override
     public boolean apply(Scope scope) {
         boolean applied = false;
-        PSStrategy psStrategy = null;
-        for (PS ps : scope.getPS()) {
-            if (ps.isPsOf(this)) {
-                psStrategy = (PSStrategy) ps;
-                break;
-            }
-        }
+        PSStrategy psStrategy = (PSStrategy) scope.getPSs(this).get(0);
         if (psStrategy != null) {
             AlgorithmFamily algorithmFamily = psStrategy.getAlgorithmFamily();
             List<Element> participants = psStrategy.getAlgorithmFamily().getParticipants();

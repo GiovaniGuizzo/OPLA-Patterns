@@ -14,7 +14,7 @@ import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
 import arquitetura.representation.relationship.UsageRelationship;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
@@ -28,10 +28,10 @@ import org.junit.Test;
  */
 public class RelationshipUtilTest {
 
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
 
     public RelationshipUtilTest() {
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -39,7 +39,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetUsedElementFromRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("NotAContext").get(0);
@@ -58,7 +58,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetImplementedInterface() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);
@@ -77,7 +77,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetExtendedElement() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);
@@ -96,7 +96,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testMoveRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);
@@ -132,7 +132,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewRealizationRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);
@@ -159,7 +159,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewGeneralizationRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);
@@ -186,7 +186,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewUsageRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.OTHER_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         try {
             element = architecture.findClassByName("Class1").get(0);

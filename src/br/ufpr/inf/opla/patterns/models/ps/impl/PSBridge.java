@@ -1,7 +1,8 @@
 package br.ufpr.inf.opla.patterns.models.ps.impl;
 
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
-import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
+import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
@@ -9,24 +10,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PSStrategy implements PS {
+public class PSBridge implements PS {
 
     private final List<Element> contexts;
     private final AlgorithmFamily algorithmFamily;
+    private final List<Concern> commonConcerns;
 
-    public PSStrategy(List<Element> contexts, AlgorithmFamily algorithmFamily) {
+    public PSBridge(List<Element> contexts, AlgorithmFamily algorithmFamily, List<Concern> commonConcerns) {
         this.contexts = contexts;
         this.algorithmFamily = algorithmFamily;
+        this.commonConcerns = commonConcerns;
     }
 
     @Override
     public DesignPattern getPSOf() {
-        return Strategy.getInstance();
+        return Bridge.getInstance();
     }
 
     @Override
     public boolean isPSOf(DesignPattern designPattern) {
-        return Strategy.getInstance().equals(designPattern);
+        return Bridge.getInstance().equals(designPattern);
     }
 
     @Override
@@ -44,6 +47,10 @@ public class PSStrategy implements PS {
         return algorithmFamily;
     }
 
+    public List<Concern> getCommonConcerns() {
+        return commonConcerns;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -59,8 +66,7 @@ public class PSStrategy implements PS {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final PSStrategy other = (PSStrategy) obj;
+        final PSBridge other = (PSBridge) obj;
         return Objects.equals(this.algorithmFamily, other.algorithmFamily);
     }
-
 }

@@ -9,7 +9,7 @@ import arquitetura.representation.Architecture;
 import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -21,11 +21,11 @@ import org.junit.Test;
  */
 public class AlgorithmFamilyUtilTest {
 
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
 
     public AlgorithmFamilyUtilTest() {
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
         wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
     }
 
@@ -34,7 +34,7 @@ public class AlgorithmFamilyUtilTest {
      */
     @Test
     public void testGetFamiliesFromScope() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         assertEquals(3, familiesFromScope.size());
@@ -45,7 +45,7 @@ public class AlgorithmFamilyUtilTest {
      */
     @Test
     public void testGetStrategyInterfaceFromAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         Interface aInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(familiesFromScope.get(0));
@@ -57,7 +57,7 @@ public class AlgorithmFamilyUtilTest {
      */
     @Test
     public void testCreateStrategyInterfaceForAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[2]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         AlgorithmFamily family = familiesFromScope.get(0);

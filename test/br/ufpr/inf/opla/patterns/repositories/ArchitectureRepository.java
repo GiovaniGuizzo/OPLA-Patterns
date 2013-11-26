@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ArchitectureRepositoryFlyweight {
+public class ArchitectureRepository {
 
     public static final String[] STRATEGY_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
@@ -28,34 +28,24 @@ public class ArchitectureRepositoryFlyweight {
         "Output3"
     };
 
-    private static final ArchitectureRepositoryFlyweight INSTANCE = new ArchitectureRepositoryFlyweight();
-    private final HashMap<String, Architecture> models;
+    private static final ArchitectureRepository INSTANCE = new ArchitectureRepository();
     private final ArchitectureBuilder architectureBuilder;
 
-    private ArchitectureRepositoryFlyweight() {
-        this.models = new HashMap<>();
+    private ArchitectureRepository() {
         this.architectureBuilder = new ArchitectureBuilder();
     }
 
-    public static ArchitectureRepositoryFlyweight getInstance() {
+    public static ArchitectureRepository getInstance() {
         return INSTANCE;
     }
 
     public Architecture getArchitecture(String path) {
-        Architecture architecture = models.get(path);
-        if (architecture == null) {
-            try {
-                architecture = architectureBuilder.create(path);
-                models.put(path, architecture);
-            } catch (Exception ex) {
-                Logger.getLogger(ArchitectureRepositoryFlyweight.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            return architectureBuilder.create(path);
+        } catch (Exception ex) {
+            Logger.getLogger(ArchitectureRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return architecture;
-    }
-
-    public void clearArchitecture(String path) {
-        models.remove(path);
+        return null;
     }
 
 }

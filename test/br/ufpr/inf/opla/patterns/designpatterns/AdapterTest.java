@@ -13,7 +13,7 @@ import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.UsageRelationship;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
@@ -26,12 +26,12 @@ import org.junit.Test;
  */
 public class AdapterTest {
 
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
     private final Adapter adapter;
 
     public AdapterTest() {
         this.adapter = Adapter.getInstance();
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -39,8 +39,7 @@ public class AdapterTest {
      */
     @Test
     public void testApplyAdapter() {
-        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[4];
-        architectureRepository.clearArchitecture(model);
+        String model = ArchitectureRepository.STRATEGY_MODELS[4];
         Architecture architecture = architectureRepository.getArchitecture(model);
 
         Interface target = null;
@@ -71,14 +70,11 @@ public class AdapterTest {
         UsageRelationship usage = (UsageRelationship) adapterClass.getRelationships().get(1);
         assertEquals(adaptee, usage.getSupplier());
 
-//        GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-//        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[2]);
-//        architectureRepository.clearArchitecture(model);
     }
 
     @Test
     public void testApplyAdapterHavingClassAsTarget() {
-        String model = ArchitectureRepositoryFlyweight.STRATEGY_MODELS[4];
+        String model = ArchitectureRepository.STRATEGY_MODELS[4];
         Architecture architecture = architectureRepository.getArchitecture(model);
 
         Class target = null;
@@ -108,10 +104,6 @@ public class AdapterTest {
 
         UsageRelationship usage = (UsageRelationship) adapterClass.getRelationships().get(1);
         assertEquals(adaptee, usage.getSupplier());
-
-//        GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-//        generateArchitecture.generate(architecture, ArchitectureRepositoryFlyweight.OUTPUT[2]);
-//        architectureRepository.clearArchitecture(model);
     }
 
 }

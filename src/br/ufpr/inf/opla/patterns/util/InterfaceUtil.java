@@ -6,6 +6,7 @@ import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Method;
 import arquitetura.representation.Package;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,10 @@ public class InterfaceUtil {
             anInterface = architecture.createInterface(interfaceName);
             architecture.removeInterface(anInterface);
 
-            anInterface.getOperations().addAll(MethodUtil.createMethodsFromSetOfElements(participants));
+            List<Method> methodsFromSetOfElements = MethodUtil.createMethodsFromSetOfElements(participants);
+            for (Method method : methodsFromSetOfElements) {
+                anInterface.addExternalOperation(method);
+            }
 
             HashMap<String, Integer> namespaceList = new HashMap<>();
             for (Element element : participants) {
@@ -57,7 +61,7 @@ public class InterfaceUtil {
                 count++;
                 anInterface.setName(name + Integer.toString(count));
             }
-            
+
             try {
                 Package aPackage = anInterface.getArchitecture().findPackageByName(UtilResources.extractPackageName(namespace));
                 if (aPackage != null) {

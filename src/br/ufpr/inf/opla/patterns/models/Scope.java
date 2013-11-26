@@ -23,12 +23,32 @@ public class Scope {
         return elements;
     }
 
-    public List<PS> getPS() {
+    public List<PS> getPSs() {
         return ps;
     }
 
-    public List<PSPLA> getPSPLA() {
+    public List<PSPLA> getPSsPLA() {
         return psPLA;
+    }
+
+    public List<PS> getPSs(DesignPattern designPattern) {
+        List<PS> psList = new ArrayList<>();
+        for (PS tempPS : ps) {
+            if (tempPS.isPSOf(designPattern)) {
+                psList.add(tempPS);
+            }
+        }
+        return psList;
+    }
+    
+    public List<PSPLA> getPSsPLA(DesignPattern designPattern) {
+        List<PSPLA> psPLAList = new ArrayList<>();
+        for (PSPLA tempPSPLA : psPLA) {
+            if (tempPSPLA.isPSOf(designPattern)) {
+                psPLAList.add(tempPSPLA);
+            }
+        }
+        return psPLAList;
     }
 
     public void addPS(PS ps) {

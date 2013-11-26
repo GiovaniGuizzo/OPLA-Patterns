@@ -10,7 +10,7 @@ import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepositoryFlyweight;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,10 +25,10 @@ import org.junit.Test;
  */
 public class ElementUtilTest {
 
-    private final ArchitectureRepositoryFlyweight architectureRepository;
+    private final ArchitectureRepository architectureRepository;
 
     public ElementUtilTest() {
-        this.architectureRepository = ArchitectureRepositoryFlyweight.getInstance();
+        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -36,7 +36,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testIsTypeOf() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         try {
             child = architecture.findClassByName("QuickSort").get(0);
@@ -65,7 +65,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllImplementedInterfaces() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         try {
             child = architecture.findClassByName("QuickSort").get(0);
@@ -91,7 +91,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllExtendedElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepositoryFlyweight.STRATEGY_MODELS[3]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         try {
             child = architecture.findClassByName("QuickSort").get(0);

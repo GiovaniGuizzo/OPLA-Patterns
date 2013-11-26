@@ -3,6 +3,7 @@ package br.ufpr.inf.opla.patterns.util;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
+import arquitetura.representation.Variability;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -160,5 +161,41 @@ public class AlgorithmFamilyUtil {
 
     public static Interface createStrategyInterfaceForAlgorithmFamily(AlgorithmFamily algorithmFamily) {
         return InterfaceUtil.createInterfaceForSetOfElements(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Strategy", algorithmFamily.getParticipants());
+    }
+
+    public static boolean areTheAlgorithmFamilyAndContextsPartOfAVariability(AlgorithmFamily algorithmFamily, List<Element> contexts) {
+        List<Variability> variabilities = null;
+        for (Element algorithm : algorithmFamily.getParticipants()) {
+            if (algorithm.getVariant() == null) {
+                return false;
+            }
+            if (variabilities == null) {
+                variabilities = new ArrayList<>();
+                variabilities.addAll(algorithm.getVariant().getVariabilities());
+            } else if (!variabilities.isEmpty()) {
+                for (int i = 0; i < variabilities.size(); i++) {
+                    if (!algorithm.getVariant().getVariabilities().contains(variabilities.get(i))) {
+                        variabilities.remove(i);
+                        i--;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+        if (variabilities == null || variabilities.isEmpty()) {
+            return false;
+        }
+        for (Element context : contexts) {
+            if (context.getVariationPoint() != null) {
+                List<Variability> contextVariabilities = context.getVariationPoint().getVariabilities();
+                for (Variability variability : contextVariabilities) {
+                    if (variabilities.contains(variability)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

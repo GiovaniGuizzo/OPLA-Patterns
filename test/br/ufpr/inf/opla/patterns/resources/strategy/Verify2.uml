@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smartyProfile="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smartyProfile/_VqxAoD2uEeO0W5WLsM8PpQ/2 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16" xmlns:smartyProfile="http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_uLUFcEdKEeOtJ7y4-xXe-g/16 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g http:///schemas/smartyProfile/_lbz6MEZDEeO8H8lNgy9OHw/3 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw">
   <uml:Model xmi:id="_oBkAYDy_EeOQvLsAhPBMLQ" name="model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_MAez4DzCEeOQvLsAhPBMLQ">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -47,9 +47,15 @@
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_YVW8gDzbEeO7UKAGd3cQWw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_YVXjkDzbEeO7UKAGd3cQWw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_Vq0D8D2uEeO0W5WLsM8PpQ"/>
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_lb3kkEZDEeO8H8lNgy9OHw"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_-gSVUFhMEeOn1dtk2tmEdA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_-gS8YFhMEeOn1dtk2tmEdA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_uLlyQEdKEeOtJ7y4-xXe-g"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
   </uml:Model>
   <smartyProfile:variability xmi:id="_aRq4MDzbEeO7UKAGd3cQWw" base_Comment="_ED3ZQDzbEeO7UKAGd3cQWw" name="SortVariability" minSelection="1" maxSelection="2" variants="BubbleSort, QuickSort"/>
@@ -57,4 +63,7 @@
   <smartyProfile:variationPoint xmi:id="_hOsUsDzbEeO7UKAGd3cQWw" base_Class="_uwevcDy_EeOQvLsAhPBMLQ" numberOfVariants="2" variants="BubbleSort, QuickSort" variabilities="SortVariability"/>
   <smartyProfile:alternative_OR xmi:id="_L0pYgDzcEeO7UKAGd3cQWw" base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" rootVP="ContextClass" variabilities="SortVariability"/>
   <smartyProfile:alternative_OR xmi:id="_MonzIDzcEeO7UKAGd3cQWw" base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" rootVP="ContextClass" variabilities="SortVariability"/>
+  <perfilConcerns:sorting xmi:id="_Bgog4FhNEeOn1dtk2tmEdA" base_Class="_vyYRUDy_EeOQvLsAhPBMLQ"/>
+  <perfilConcerns:sorting xmi:id="_CqFcQFhNEeOn1dtk2tmEdA" base_Class="_vOaBkDy_EeOQvLsAhPBMLQ"/>
+  <perfilConcerns:sorting xmi:id="_D1HE8FhNEeOn1dtk2tmEdA" base_Class="_xHLZsDzCEeOQvLsAhPBMLQ"/>
 </xmi:XMI>

@@ -55,7 +55,7 @@ public class StrategyTest {
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
 
-        List<PS> psList = scope.getPSs();
+        List<PS> psList = scope.getPSs(strategy);
         assertEquals(3, psList.size());
 
         for (PS ps : psList) {
@@ -73,9 +73,9 @@ public class StrategyTest {
     public void verifyPSTest2() {
         Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
 
-        strategy.verifyPS(scope);
+        assertTrue(strategy.verifyPS(scope));
 
-        List<PS> psList = scope.getPSs();
+        List<PS> psList = scope.getPSs(strategy);
 
         PSStrategy pSStrategy = (PSStrategy) psList.get(0);
         assertEquals("sort", pSStrategy.getAlgorithmFamily().getName());
@@ -95,7 +95,7 @@ public class StrategyTest {
         boolean verifyPSPLA = strategy.verifyPSPLA(scope);
         assertTrue(verifyPSPLA);
 
-        List<PSPLA> psPLAList = scope.getPSsPLA();
+        List<PSPLA> psPLAList = scope.getPSsPLA(strategy);
         assertEquals(3, psPLAList.size());
 
         for (PSPLA psPLA : psPLAList) {

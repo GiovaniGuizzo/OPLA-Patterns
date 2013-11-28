@@ -40,13 +40,13 @@ public class Bridge extends DesignPattern {
                 PSStrategy psStrategy = (PSStrategy) it.next();
 
                 Set<Concern> commonConcerns = new HashSet<>();
-                Element element = psStrategy.getParticipants().get(0);
+                Element element = psStrategy.getAlgorithmFamily().getParticipants().get(0);
                 commonConcerns.addAll(element.getOwnConcerns());
                 for (Method method : MethodUtil.getAllMethodsFromElement(element)) {
                     commonConcerns.addAll(method.getOwnConcerns());
                 }
 
-                for (Element participant : psStrategy.getParticipants()) {
+                for (Element participant : psStrategy.getAlgorithmFamily().getParticipants()) {
                     Set<Concern> participantConcerns = new HashSet<>();
                     participantConcerns.addAll(participant.getOwnConcerns());
                     for (Method method : MethodUtil.getAllMethodsFromElement(participant)) {
@@ -78,6 +78,7 @@ public class Bridge extends DesignPattern {
                     PSPLABridge psPlaBridge = new PSPLABridge(contexts, algorithmFamily, psBridge.getCommonConcerns());
                     if (!scope.getPSsPLA(this).contains(psPlaBridge)) {
                         scope.addPSPLA(psPlaBridge);
+                        psPLA = true;
                     }
                 }
             }

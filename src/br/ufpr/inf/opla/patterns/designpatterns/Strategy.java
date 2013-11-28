@@ -95,6 +95,7 @@ public class Strategy extends DesignPattern {
                     PSPLAStrategy psPlaStrategy = new PSPLAStrategy(contexts, algorithmFamily);
                     if (!scope.getPSsPLA(this).contains(psPlaStrategy)) {
                         scope.addPSPLA(psPlaStrategy);
+                        isPsPla = true;
                     }
                 }
             }

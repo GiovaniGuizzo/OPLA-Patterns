@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -206,6 +207,31 @@ public class RelationshipUtilTest {
         assertEquals("Class1", result.getSupplier().getName());
         assertTrue(element.getRelationships().contains(result));
         assertTrue(element2.getRelationships().contains(result));
+    }
+
+    /**
+     * Test of getSubElement method, of class RelationshipUtil.
+     */
+    @Test
+    public void testGetSubElement() {
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Element element = null;
+        try {
+            element = architecture.findInterfaceByName("StrategyInterface");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(RelationshipUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findInterfaceByName("CommonStrategy");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(RelationshipUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element result = RelationshipUtil.getSubElement(element2.getRelationships().get(0));
+        assertEquals(element, result);
+        
+        result = RelationshipUtil.getSubElement(element.getRelationships().get(1));
+        assertEquals("Class2", result.getName());
     }
 
 }

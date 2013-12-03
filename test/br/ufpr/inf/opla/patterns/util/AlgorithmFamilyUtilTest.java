@@ -6,7 +6,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Architecture;
-import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
@@ -26,7 +25,7 @@ public class AlgorithmFamilyUtilTest {
 
     public AlgorithmFamilyUtilTest() {
         this.architectureRepository = ArchitectureRepository.getInstance();
-        wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
+        this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
     }
 
     /**
@@ -39,32 +38,4 @@ public class AlgorithmFamilyUtilTest {
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         assertEquals(3, familiesFromScope.size());
     }
-
-    /**
-     * Test of getStrategyInterfaceFromAlgorithmFamily method, of class AlgorithmFamilyUtil.
-     */
-    @Test
-    public void testGetStrategyInterfaceFromAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
-        List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
-        Interface aInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(familiesFromScope.get(0));
-        assertEquals("StrategyInterface", aInterface.getName());
-    }
-
-    /**
-     * Test of createStrategyInterfaceForAlgorithmFamily method, of class AlgorithmFamilyUtil.
-     */
-    @Test
-    public void testCreateStrategyInterfaceForAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
-        List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
-        AlgorithmFamily family = familiesFromScope.get(0);
-        assertEquals("Class", family.getName());
-        Interface aInterface = AlgorithmFamilyUtil.createStrategyInterfaceForAlgorithmFamily(family);
-        assertEquals("ClassStrategy", aInterface.getName());
-        assertEquals(3, aInterface.getOperations().size());
-    }
-
 }

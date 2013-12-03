@@ -11,7 +11,10 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLABridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
+import br.ufpr.inf.opla.patterns.util.BridgeUtil;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
+import br.ufpr.inf.opla.patterns.util.StrategyUtil;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -38,22 +41,7 @@ public class Bridge extends DesignPattern {
             List<PS> psStrategyList = scope.getPSs(Strategy.getInstance());
             for (Iterator<PS> it = psStrategyList.iterator(); it.hasNext();) {
                 PSStrategy psStrategy = (PSStrategy) it.next();
-
-                Set<Concern> commonConcerns = new HashSet<>();
-                Element element = psStrategy.getAlgorithmFamily().getParticipants().get(0);
-                commonConcerns.addAll(element.getOwnConcerns());
-                for (Method method : MethodUtil.getAllMethodsFromElement(element)) {
-                    commonConcerns.addAll(method.getOwnConcerns());
-                }
-
-                for (Element participant : psStrategy.getAlgorithmFamily().getParticipants()) {
-                    Set<Concern> participantConcerns = new HashSet<>();
-                    participantConcerns.addAll(participant.getOwnConcerns());
-                    for (Method method : MethodUtil.getAllMethodsFromElement(participant)) {
-                        participantConcerns.addAll(method.getOwnConcerns());
-                    }
-                    commonConcerns = new HashSet<>(CollectionUtils.intersection(commonConcerns, participantConcerns));
-                }
+                Set<Concern> commonConcerns = ElementUtil.getCommonConcernsOfAtLeastTwoElements(psStrategy.getAlgorithmFamily().getParticipants());
                 if (!commonConcerns.isEmpty()) {
                     PSBridge psBridge = new PSBridge(psStrategy.getContexts(), psStrategy.getAlgorithmFamily(), new ArrayList<>(commonConcerns));
                     if (!scope.getPSs(this).contains(psBridge)) {
@@ -74,7 +62,7 @@ public class Bridge extends DesignPattern {
                 PSBridge psBridge = (PSBridge) ps;
                 List<Element> contexts = psBridge.getContexts();
                 AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
-                if (AlgorithmFamilyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(algorithmFamily, contexts)) {
+                if (StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(algorithmFamily, contexts)) {
                     PSPLABridge psPlaBridge = new PSPLABridge(contexts, algorithmFamily, psBridge.getCommonConcerns());
                     if (!scope.getPSsPLA(this).contains(psPlaBridge)) {
                         scope.addPSPLA(psPlaBridge);
@@ -88,7 +76,14 @@ public class Bridge extends DesignPattern {
 
     @Override
     public boolean apply(Scope scope) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean applied = false;
+        List<PS> pSs = scope.getPSs(this);
+        if(!pSs.isEmpty()){
+            PSBridge psBridge = (PSBridge) pSs.get(0);
+            AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
+            List<Element> abstractionClasses = BridgeUtil.getAbstractionClasses(scope, algorithmFamily);
+        }
+        return applied;
     }
 
 }

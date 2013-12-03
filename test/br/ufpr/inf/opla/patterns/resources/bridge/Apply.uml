@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:smartyProfile="http:///schemas/smartyProfile/_nnyUQFwVEeOhVoKAF-nMjA/4" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/smartyProfile/_nnyUQFwVEeOhVoKAF-nMjA/4 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_nn1-oFwVEeOhVoKAF-nMjA">
+  <uml:Model xmi:id="_-WQF8Ft1EeO8GpjV6e9MCg" name="Model">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_-WQF8Vt1EeO8GpjV6e9MCg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="__W31cFt1EeO8GpjV6e9MCg" clientDependency="_VsNN0Ft4EeO8GpjV6e9MCg" name="Context"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="__3NiYFt1EeO8GpjV6e9MCg" name="SortAbstractionClass" isAbstract="true">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_PJwp8Ft3EeO8GpjV6e9MCg" name="sort" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_P2VcEFt3EeO8GpjV6e9MCg" name="persist" isAbstract="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ALctAFt2EeO8GpjV6e9MCg" name="DefaultSortAbstractionClass">
+      <generalization xmi:type="uml:Generalization" xmi:id="_ItbVIFt2EeO8GpjV6e9MCg" general="__3NiYFt1EeO8GpjV6e9MCg"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RpeNoFt3EeO8GpjV6e9MCg" name="sort"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_SQXOgFt3EeO8GpjV6e9MCg" name="persist"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_CUXhUFt2EeO8GpjV6e9MCg" name="SortingImplementationInterface">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OPPicFt3EeO8GpjV6e9MCg" name="sort"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_CvYCUFt2EeO8GpjV6e9MCg" name="PersistenceImplementationInterface">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_M3iIoFt3EeO8GpjV6e9MCg" name="persist"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DiqgcFt2EeO8GpjV6e9MCg" clientDependency="_K6ebgFt2EeO8GpjV6e9MCg" name="QuickSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_D1lnAFt3EeO8GpjV6e9MCg" name="sort"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DxV1oFt2EeO8GpjV6e9MCg" clientDependency="_LSTssFt2EeO8GpjV6e9MCg _nhOZgFt2EeO8GpjV6e9MCg" name="BubbleSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_DNOmgFt3EeO8GpjV6e9MCg" name="sort"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_DgHtUFt3EeO8GpjV6e9MCg" name="persist"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_FLHsAFt2EeO8GpjV6e9MCg" clientDependency="_LllOAFt2EeO8GpjV6e9MCg" name="ShellSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_CVXxcFt3EeO8GpjV6e9MCg" name="persist"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_K6ebgFt2EeO8GpjV6e9MCg" name="Realization1" client="_DiqgcFt2EeO8GpjV6e9MCg" supplier="_CUXhUFt2EeO8GpjV6e9MCg"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_LSTssFt2EeO8GpjV6e9MCg" name="Realization2" client="_DxV1oFt2EeO8GpjV6e9MCg" supplier="_CUXhUFt2EeO8GpjV6e9MCg"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_LllOAFt2EeO8GpjV6e9MCg" name="Realization3" client="_FLHsAFt2EeO8GpjV6e9MCg" supplier="_CvYCUFt2EeO8GpjV6e9MCg"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_nhOZgFt2EeO8GpjV6e9MCg" name="Realization4" client="_DxV1oFt2EeO8GpjV6e9MCg" supplier="_CvYCUFt2EeO8GpjV6e9MCg"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_VsNN0Ft4EeO8GpjV6e9MCg" name="Usage1" client="__W31cFt1EeO8GpjV6e9MCg" supplier="__3NiYFt1EeO8GpjV6e9MCg"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_7yqDYFwbEeOhVoKAF-nMjA" name="sortAbstractionClass_persistenceImplementationInterface_1" memberEnd="_7yqDYVwbEeOhVoKAF-nMjA _7yo1QFwbEeOhVoKAF-nMjA" navigableOwnedEnd="_7yo1QFwbEeOhVoKAF-nMjA">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_7yqDYVwbEeOhVoKAF-nMjA" name="sortAbstractionClass" type="__3NiYFt1EeO8GpjV6e9MCg" association="_7yqDYFwbEeOhVoKAF-nMjA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7yqDYlwbEeOhVoKAF-nMjA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7yqDY1wbEeOhVoKAF-nMjA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_7yo1QFwbEeOhVoKAF-nMjA" name="persistenceImplementationInterface" type="_CvYCUFt2EeO8GpjV6e9MCg" aggregation="shared" association="_7yqDYFwbEeOhVoKAF-nMjA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7yo1QVwbEeOhVoKAF-nMjA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7ypcUFwbEeOhVoKAF-nMjA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_l52HkFwcEeOhVoKAF-nMjA" name="sortAbstractionClass_sortingImplementationInterface_1" memberEnd="_l52HkVwcEeOhVoKAF-nMjA _l51ggFwcEeOhVoKAF-nMjA" navigableOwnedEnd="_l51ggFwcEeOhVoKAF-nMjA">
+      <ownedEnd xmi:type="uml:Property" xmi:id="_l52HkVwcEeOhVoKAF-nMjA" name="sortAbstractionClass" type="__3NiYFt1EeO8GpjV6e9MCg" association="_l52HkFwcEeOhVoKAF-nMjA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l52HklwcEeOhVoKAF-nMjA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l52Hk1wcEeOhVoKAF-nMjA" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="_l51ggFwcEeOhVoKAF-nMjA" name="sortingImplementationInterface" type="_CUXhUFt2EeO8GpjV6e9MCg" aggregation="shared" association="_l52HkFwcEeOhVoKAF-nMjA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_l51ggVwcEeOhVoKAF-nMjA" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_l51gglwcEeOhVoKAF-nMjA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_2BU88FwmEeOhVoKAF-nMjA" clientDependency="_53qVUFwmEeOhVoKAF-nMjA" name="NotYourBusiness"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_53qVUFwmEeOhVoKAF-nMjA" name="Usage2" client="_2BU88FwmEeOhVoKAF-nMjA" supplier="_DxV1oFt2EeO8GpjV6e9MCg"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojbn8Ft3EeO8GpjV6e9MCg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojqRcFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_nn1-oFwVEeOhVoKAF-nMjA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojrfkFt3EeO8GpjV6e9MCg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojsGoFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+  </uml:Model>
+  <smartyProfile:interface xmi:id="_sm5dYFt3EeO8GpjV6e9MCg" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <smartyProfile:interface xmi:id="_tmn1AFt3EeO8GpjV6e9MCg" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_NuvnAFuDEeO8GpjV6e9MCg" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_NvJ2sFuDEeO8GpjV6e9MCg" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_O1J1cFuDEeO8GpjV6e9MCg" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_O1l6UFuDEeO8GpjV6e9MCg" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_PyfAYFuDEeO8GpjV6e9MCg" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_Qhh3sFuDEeO8GpjV6e9MCg" base_Class="_DiqgcFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_ReiSgFuDEeO8GpjV6e9MCg" base_Class="_DxV1oFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_RfAMkFuDEeO8GpjV6e9MCg" base_Class="_DxV1oFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_SWw7AFuDEeO8GpjV6e9MCg" base_Class="_FLHsAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_TM540FuDEeO8GpjV6e9MCg" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+</xmi:XMI>

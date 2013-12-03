@@ -17,7 +17,7 @@ public class ArchitectureRepository {
     };
     
     public static final String[] BRIDGE_MODELS = new String[]{
-        "test/br/ufpr/inf/opla/patterns/resources/bridge/Verify.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/bridge/Apply.uml"
     };
 
     public static final String[] OTHER_MODELS = new String[]{

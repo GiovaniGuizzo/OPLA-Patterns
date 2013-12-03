@@ -20,6 +20,7 @@ import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
+import br.ufpr.inf.opla.patterns.util.StrategyUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -91,7 +92,7 @@ public class Strategy extends DesignPattern {
                 PSStrategy psStrategy = (PSStrategy) ps;
                 List<Element> contexts = psStrategy.getContexts();
                 AlgorithmFamily algorithmFamily = psStrategy.getAlgorithmFamily();
-                if (AlgorithmFamilyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(algorithmFamily, contexts)) {
+                if (StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(algorithmFamily, contexts)) {
                     PSPLAStrategy psPlaStrategy = new PSPLAStrategy(contexts, algorithmFamily);
                     if (!scope.getPSsPLA(this).contains(psPlaStrategy)) {
                         scope.addPSPLA(psPlaStrategy);
@@ -106,15 +107,16 @@ public class Strategy extends DesignPattern {
     @Override
     public boolean apply(Scope scope) {
         boolean applied = false;
-        PSStrategy psStrategy = (PSStrategy) scope.getPSs(this).get(0);
-        if (psStrategy != null) {
+        List<PS> pSs = scope.getPSs(this);
+        if (!pSs.isEmpty()) {
+            PSStrategy psStrategy = (PSStrategy) pSs.get(0);
             AlgorithmFamily algorithmFamily = psStrategy.getAlgorithmFamily();
             List<Element> participants = psStrategy.getAlgorithmFamily().getParticipants();
 
             //Get or create Interface
-            Interface strategyInterface = AlgorithmFamilyUtil.getStrategyInterfaceFromAlgorithmFamily(algorithmFamily);
+            Interface strategyInterface = StrategyUtil.getStrategyInterfaceFromAlgorithmFamily(algorithmFamily);
             if (strategyInterface == null) {
-                strategyInterface = AlgorithmFamilyUtil.createStrategyInterfaceForAlgorithmFamily(algorithmFamily);
+                strategyInterface = StrategyUtil.createStrategyInterfaceForAlgorithmFamily(algorithmFamily);
             } else if (participants.contains(strategyInterface)) {
                 participants.remove(strategyInterface);
             }

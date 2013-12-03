@@ -140,7 +140,12 @@ public class StrategyTest {
         assertEquals("Class1", element.getName());
         assertEquals(1, element.getRelationships().size());
 
-        Element strategyInterface = architecture.getElements().get(4);
+        Interface strategyInterface = null;
+        try {
+            strategyInterface = architecture.findInterfaceByName("InterfaceDeTeste");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
         assertEquals("InterfaceDeTeste", strategyInterface.getName());
 
         Relationship usage = element.getRelationships().get(0);

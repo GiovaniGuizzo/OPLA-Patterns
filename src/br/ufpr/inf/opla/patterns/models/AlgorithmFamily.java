@@ -6,12 +6,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
+    
+    public static final String SUFFIX = "suffix";
+    public static final String PREFIX = "prefix";
+    public static final String METHOD = "method";
 
     private final List<Element> participants;
     private String name;
+    private String type;
 
-    public AlgorithmFamily() {
+    public AlgorithmFamily(String name, String type) {
         this.participants = new ArrayList<>();
+        this.name = name;
+        this.type = type;
     }
 
     public String getName() {
@@ -26,10 +33,19 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
         return participants;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -42,7 +58,13 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
             return false;
         }
         final AlgorithmFamily other = (AlgorithmFamily) obj;
-        return Objects.equals(this.name, other.name);
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

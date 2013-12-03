@@ -42,6 +42,17 @@ public class RelationshipUtil {
         return null;
     }
 
+    public static Element getSubElement(Relationship relationship) {
+        if (relationship instanceof GeneralizationRelationship) {
+            GeneralizationRelationship generalization = (GeneralizationRelationship) relationship;
+            return generalization.getChild();
+        } else if (relationship instanceof RealizationRelationship) {
+            RealizationRelationship realization = (RealizationRelationship) relationship;
+            return realization.getClient();
+        }
+        return null;
+    }
+
     public static void moveRelationship(Relationship relationship, Element client, Element supplier) {
         if (relationship instanceof UsageRelationship) {
             UsageRelationship usage = (UsageRelationship) relationship;

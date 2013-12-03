@@ -2,7 +2,6 @@ package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Element;
 import arquitetura.representation.Method;
-import arquitetura.representation.Variability;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;

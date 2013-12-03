@@ -130,6 +130,15 @@ public class Strategy extends DesignPattern {
                     if (participant instanceof arquitetura.representation.Class) {
                         Class participantClass = (Class) participant;
                         RelationshipUtil.createNewRealizationRelationship("implements", participantClass, strategyInterface);
+                    } else if (participant instanceof Interface) {
+                        Class adapterClass = ADAPTER.applyAdapter(strategyInterface, participant);
+                        adapterList.add(adapterClass);
+                        adapteeList.add(participant);
+                    }
+                }
+                if (participant instanceof arquitetura.representation.Class) {
+                    Class participantClass = (Class) participant;
+                    if (!participantClass.isAbstract()) {
                         MethodArrayList participantMethods = new MethodArrayList(new ArrayList<>(participantClass.getAllMethods()));
                         for (Method interfaceMethod : strategyInterface.getOperations()) {
                             int index = participantMethods.indexOf(interfaceMethod);
@@ -139,10 +148,6 @@ public class Strategy extends DesignPattern {
                                 participantClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
                             }
                         }
-                    } else if (participant instanceof Interface) {
-                        Class adapterClass = ADAPTER.applyAdapter(strategyInterface, participant);
-                        adapterList.add(adapterClass);
-                        adapteeList.add(participant);
                     }
                 }
                 //Concern

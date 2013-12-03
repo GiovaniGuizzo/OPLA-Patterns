@@ -152,6 +152,22 @@ public class StrategyTest {
         Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(usage);
         assertEquals(strategyInterface, usedElementFromRelationship);
 
+        arquitetura.representation.Class element2 = null;
+        try {
+            element2 = architecture.findClassByName("BubbleSort").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals(1, element2.getAllMethods().size());
+        
+        arquitetura.representation.Class element3 = null;
+        try {
+            element3 = architecture.findClassByName("QuickSort").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals(2, element3.getAllMethods().size());
+        
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[0]);
     }

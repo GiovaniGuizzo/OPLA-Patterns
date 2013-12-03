@@ -2,7 +2,6 @@ package br.ufpr.inf.opla.patterns.repositories;
 
 import arquitetura.builders.ArchitectureBuilder;
 import arquitetura.representation.Architecture;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

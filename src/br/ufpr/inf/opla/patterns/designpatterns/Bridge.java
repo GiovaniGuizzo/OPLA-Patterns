@@ -2,7 +2,6 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
-import arquitetura.representation.Method;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -10,17 +9,13 @@ import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLABridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
-import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.BridgeUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
-import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.StrategyUtil;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import org.apache.commons.collections4.CollectionUtils;
 
 public class Bridge extends DesignPattern {
 

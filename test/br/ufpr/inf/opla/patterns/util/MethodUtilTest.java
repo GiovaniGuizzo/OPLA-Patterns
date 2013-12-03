@@ -241,6 +241,6 @@ public class MethodUtilTest {
         assertEquals("QuickSort", element.getName());
         assertEquals(2, element.getRelationships().size());
         List<Method> allMethodsFromElement = MethodUtil.getAllMethodsFromElement(element);
-        assertEquals(2, allMethodsFromElement.size());
+        assertEquals(1, allMethodsFromElement.size());
     }
 }

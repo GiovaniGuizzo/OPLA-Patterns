@@ -11,8 +11,6 @@ import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLABridge;
-import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
-import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
@@ -70,7 +68,7 @@ public class BridgeTest {
         assertEquals(7, scope.getElements().size());
         
         boolean verifyPS = bridge.verifyPS(scope);
-        assertFalse(verifyPS);
+        assertTrue(verifyPS);
     }
     
     @Test

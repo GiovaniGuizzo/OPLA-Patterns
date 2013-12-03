@@ -8,7 +8,6 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.Package;
-import arquitetura.representation.relationship.Relationship;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

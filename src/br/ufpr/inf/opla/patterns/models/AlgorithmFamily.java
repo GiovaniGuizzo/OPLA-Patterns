@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
-    
+
     public static final String SUFFIX = "suffix";
     public static final String PREFIX = "prefix";
     public static final String METHOD = "method";
@@ -61,10 +61,7 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.type, other.type)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.type, other.type);
     }
 
     @Override
@@ -77,6 +74,11 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
             }
         }
         return compare;
+    }
+
+    @Override
+    public String toString() {
+        return "{" + "name=" + name + ", type=" + type + '}';
     }
 
 }

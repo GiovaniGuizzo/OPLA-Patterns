@@ -6,6 +6,7 @@
     </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_PNpEUEZCEeO8H8lNgy9OHw" name="StrategyInterface">
       <generalization xmi:type="uml:Generalization" xmi:id="_qhWGEEZCEeO8H8lNgy9OHw" general="_m7DU0EZCEeO8H8lNgy9OHw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_FWZCwEc8EeOtJ7y4-xXe-g" name="shuffle"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_Q7aNsEZCEeO8H8lNgy9OHw" clientDependency="_Wb6o4EZCEeO8H8lNgy9OHw" name="QuickSort">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_ffW_UEZCEeO8H8lNgy9OHw" name="sort">
@@ -13,9 +14,8 @@
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_FWZCwEc8EeOtJ7y4-xXe-g" name="shuffle"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RXMx0EZCEeO8H8lNgy9OHw" clientDependency="_QbZbcEZDEeO8H8lNgy9OHw" name="BubbleSort">
+    <packagedElement xmi:type="uml:Class" xmi:id="_RXMx0EZCEeO8H8lNgy9OHw" clientDependency="_QbZbcEZDEeO8H8lNgy9OHw" name="BubbleSort" isAbstract="true">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_i-1W4EZCEeO8H8lNgy9OHw" name="sort">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_mF7qsEZCEeO8H8lNgy9OHw" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>

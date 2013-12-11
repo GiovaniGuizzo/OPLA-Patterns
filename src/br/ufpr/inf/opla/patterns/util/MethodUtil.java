@@ -55,12 +55,28 @@ public class MethodUtil {
         return iMethods;
     }
 
-    public static List<Method> getMethodsFromSetOfElements(List<Element> elements) {
+    public static List<Method> getAllMethodsFromSetOfElements(List<Element> elements) {
         MethodArrayList methods = new MethodArrayList();
         for (Element element : elements) {
             MethodArrayList elementMethods = new MethodArrayList(getAllMethodsFromElement(element));
             for (Method elementMethod : elementMethods) {
                 if (!methods.contains(elementMethod)) {
+                    methods.add(elementMethod);
+                }
+            }
+        }
+        return methods;
+    }
+
+    public static List<Method> getMethodsByConcernFromSetOfElements(List<Element> elements, Concern concern) {
+        MethodArrayList methods = new MethodArrayList();
+        for (Element element : elements) {
+            MethodArrayList elementMethods = new MethodArrayList(getAllMethodsFromElement(element));
+            for (Method elementMethod : elementMethods) {
+                if (!methods.contains(elementMethod)
+                        && (concern == null
+                        ? (element.getOwnConcerns().isEmpty() && elementMethod.getOwnConcerns().isEmpty())
+                        : (element.getOwnConcerns().contains(concern) || elementMethod.getOwnConcerns().contains(concern)))) {
                     methods.add(elementMethod);
                 }
             }
@@ -88,6 +104,28 @@ public class MethodUtil {
                 }
                 methods.add(clonedMethod);
             }
+        }
+        return methods;
+    }
+
+    public static List<Method> createMethodsFromSetOfElementsByConcern(List<Element> elements, Concern concern) {
+        MethodArrayList methods = new MethodArrayList();
+        MethodArrayList methodsFromElements = new MethodArrayList(getMethodsByConcernFromSetOfElements(elements, concern));
+        methodFor:
+        for (Method elementMethod : methodsFromElements) {
+            Method clonedMethod = cloneMethod(elementMethod);
+            int count = 1;
+            String name = clonedMethod.getName();
+            while (methods.containsSameName(clonedMethod)) {
+                if (methods.contains(clonedMethod)) {
+                    Method method = methods.get(methods.indexOf(clonedMethod));
+                    mergeMethodsToMethodA(method, clonedMethod);
+                    continue methodFor;
+                }
+                count++;
+                clonedMethod.setName(name + Integer.toString(count));
+            }
+            methods.add(clonedMethod);
         }
         return methods;
     }

@@ -7,6 +7,7 @@ package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.exceptions.ClassNotFound;
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Method;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
@@ -19,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -51,17 +53,17 @@ public class MethodUtilTest {
     }
 
     /**
-     * Test of getMethodsFromSetOfElements method, of class MethodUtil.
+     * Test of getAllMethodsFromSetOfElements method, of class MethodUtil.
      */
     @Test
-    public void testGetMethodsFromSetOfElements() {
+    public void testGetAllMethodsFromSetOfElements() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[1]);
-        List<Method> result = MethodUtil.getMethodsFromSetOfElements(architecture.getElements());
+        List<Method> result = MethodUtil.getAllMethodsFromSetOfElements(architecture.getElements());
         assertEquals(5, result.size());
     }
 
     /**
-     * Test of createMethodsFromSetOfElements method, of class MethodUtil.
+     * Test of createMethodsFromSetOfElementsByConcern method, of class MethodUtil.
      */
     @Test
     public void testCreateMethodsFromSetOfElements() {
@@ -114,7 +116,7 @@ public class MethodUtilTest {
     @Test
     public void testCloneMethods() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[1]);
-        List<Method> methods = new ArrayList<>(MethodUtil.getMethodsFromSetOfElements(architecture.getElements()));
+        List<Method> methods = new ArrayList<>(MethodUtil.getAllMethodsFromSetOfElements(architecture.getElements()));
         assertEquals(5, methods.size());
         Set<Method> result = MethodUtil.cloneMethods(new HashSet(methods));
         Iterator<Method> iterator = result.iterator();
@@ -242,5 +244,35 @@ public class MethodUtilTest {
         assertEquals(2, element.getRelationships().size());
         List<Method> allMethodsFromElement = MethodUtil.getAllMethodsFromElement(element);
         assertEquals(1, allMethodsFromElement.size());
+    }
+
+    /**
+     * Test of getMethodsByConcernFromSetOfElements method, of class MethodUtil.
+     */
+    @Test
+    public void testGetMethodsByConcernFromSetOfElements() {
+        System.out.println("getMethodsByConcernFromSetOfElements");
+        List<Element> elements = null;
+        Concern concern = null;
+        List<Method> expResult = null;
+        List<Method> result = MethodUtil.getMethodsByConcernFromSetOfElements(elements, concern);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createMethodsFromSetOfElementsByConcern method, of class MethodUtil.
+     */
+    @Test
+    public void testCreateMethodsFromSetOfElementsByConcern() {
+        System.out.println("createMethodsFromSetOfElementsByConcern");
+        List<Element> elements = null;
+        Concern concern = null;
+        List<Method> expResult = null;
+        List<Method> result = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }

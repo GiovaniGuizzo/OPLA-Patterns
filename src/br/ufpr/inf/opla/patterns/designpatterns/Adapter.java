@@ -53,7 +53,7 @@ public class Adapter extends DesignPattern {
             //Implements/Extends and add all methods.
             if (target instanceof arquitetura.representation.Class) {
                 arquitetura.representation.Class targetClass = (arquitetura.representation.Class) target;
-                RelationshipUtil.createNewGeneralizationRelationship("implements", adapterClass, target);
+                RelationshipUtil.createNewGeneralizationRelationship(adapterClass, target);
                 Set<Method> clonedMethods = MethodUtil.cloneMethods(new HashSet<>(targetClass.getAllAbstractMethods()));
                 for (Method method : clonedMethods) {
                     adapterClass.addExternalMethod(method);

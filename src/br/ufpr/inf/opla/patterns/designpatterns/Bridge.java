@@ -2,6 +2,7 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -12,10 +13,15 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.BridgeUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.StrategyUtil;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class Bridge extends DesignPattern {
 
@@ -36,7 +42,7 @@ public class Bridge extends DesignPattern {
             List<PS> psStrategyList = scope.getPSs(Strategy.getInstance());
             for (Iterator<PS> it = psStrategyList.iterator(); it.hasNext();) {
                 PSStrategy psStrategy = (PSStrategy) it.next();
-                Set<Concern> commonConcerns = ElementUtil.getCommonConcernsOfAtLeastTwoElements(psStrategy.getAlgorithmFamily().getParticipants());
+                Set<Concern> commonConcerns = ElementUtil.getOwnAndMethodsCommonConcernsOfAtLeastTwoElements(psStrategy.getAlgorithmFamily().getParticipants());
                 if (!commonConcerns.isEmpty()) {
                     PSBridge psBridge = new PSBridge(psStrategy.getContexts(), psStrategy.getAlgorithmFamily(), new ArrayList<>(commonConcerns));
                     if (!scope.getPSs(this).contains(psBridge)) {
@@ -73,10 +79,79 @@ public class Bridge extends DesignPattern {
     public boolean apply(Scope scope) {
         boolean applied = false;
         List<PS> pSs = scope.getPSs(this);
-        if(!pSs.isEmpty()){
+        if (!pSs.isEmpty()) {
             PSBridge psBridge = (PSBridge) pSs.get(0);
             AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
-            List<Element> abstractionClasses = BridgeUtil.getAbstractionClasses(scope, algorithmFamily);
+            List<Element> participants = algorithmFamily.getParticipants();
+
+            //Get or create Abstraction Classes
+            List<Element> abstractionClasses = BridgeUtil.getAbstractionClasses(algorithmFamily);
+            if (abstractionClasses.isEmpty()) {
+                abstractionClasses = BridgeUtil.createAbstractionClasses(algorithmFamily);
+            }
+            participants.removeAll(abstractionClasses);
+
+            if (!participants.isEmpty()) {
+                //Select the abstract abtraction class
+                Collections.sort(abstractionClasses, SubElementsComparator.getDescendingOrderer());
+                arquitetura.representation.Class abstractClass = (arquitetura.representation.Class) abstractionClasses.get(0);
+
+                //Get or create Implementation Interfaces
+                HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(participants);
+                HashMap<Concern, List<Interface>> potentialImplementationInterfaces = BridgeUtil.getImplementationInterfaces(participants);
+                HashMap<Concern, Interface> implementationInterfaces = new HashMap<>();
+                for (Map.Entry<Concern, List<Interface>> entry : potentialImplementationInterfaces.entrySet()) {
+                    Concern concern = entry.getKey();
+                    List<Interface> interfaceList = entry.getValue();
+                    List<Element> elementList = groupedElements.get(concern);
+
+                    Interface concernInterface;
+                    if (interfaceList.isEmpty()) {
+                        concernInterface = BridgeUtil.createImplementationInterface(concern, elementList);
+                    } else {
+                        Collections.sort(interfaceList, SubElementsComparator.getDescendingOrderer());
+                        concernInterface = interfaceList.get(0);
+                    }
+                    elementList.remove(concernInterface);
+                    participants.remove(concernInterface);
+                    implementationInterfaces.put(concern, concernInterface);
+                }
+
+                List<Element> adapterList = new ArrayList<>();
+                List<Element> adapteeList = new ArrayList<>();
+                for (Map.Entry<Concern, Interface> entry : implementationInterfaces.entrySet()) {
+                    Concern concern = entry.getKey();
+                    Interface concernInterface = entry.getValue();
+                    List<Element> elementList = groupedElements.get(concern);
+
+                    //Aggregate Abstraction <>------> Implementation
+                    BridgeUtil.aggregateAbstractionWithImplementation(abstractClass, concernInterface);
+
+                    List<Element> tempAdapterList = new ArrayList<>();
+                    List<Element> tempAdapteeList = new ArrayList<>();
+                    
+                    //Implement
+                    ElementUtil.implementInterface(elementList, concernInterface, tempAdapterList, tempAdapteeList);
+
+                    elementList.removeAll(tempAdapteeList);
+                    elementList.addAll(tempAdapterList);
+
+                    adapteeList.addAll(tempAdapteeList);
+                    adapterList.addAll(tempAdapterList);
+                }
+
+                //Move context relationships
+                List<Element> contexts = psBridge.getContexts();
+                StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, participants, abstractClass);
+
+                //Varaibilities
+                StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, abstractClass);
+                
+                //TODO - Édipo - Adicionar estereótipo Bridge
+                
+                participants.removeAll(adapteeList);
+                participants.addAll(adapterList);
+            }
         }
         return applied;
     }

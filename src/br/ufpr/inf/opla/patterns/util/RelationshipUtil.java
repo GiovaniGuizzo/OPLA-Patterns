@@ -1,7 +1,9 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.relationship.AssociationRelationship;
 import arquitetura.representation.relationship.DependencyRelationship;
 import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
@@ -85,7 +87,7 @@ public class RelationshipUtil {
         return realizationRelationship;
     }
 
-    public static GeneralizationRelationship createNewGeneralizationRelationship(String aimplements, Element child, Element parent) {
+    public static GeneralizationRelationship createNewGeneralizationRelationship(Element child, Element parent) {
         GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship(parent, child, parent.getArchitecture(), UUID.randomUUID().toString());
         child.addRelationship(generalizationRelationship);
         parent.addRelationship(generalizationRelationship);
@@ -93,12 +95,22 @@ public class RelationshipUtil {
         return generalizationRelationship;
     }
 
-    public static UsageRelationship createNewUsageRelationship(String name, Element client, Element supplier) {
-        UsageRelationship usage = new UsageRelationship(name, supplier, client, UUID.randomUUID().toString());
+    public static UsageRelationship createNewUsageRelationship(String relationshipName, Element client, Element supplier) {
+        UsageRelationship usage = new UsageRelationship(relationshipName, supplier, client, UUID.randomUUID().toString());
         client.addRelationship(usage);
         supplier.addRelationship(usage);
         client.getArchitecture().addRelationship(usage);
         return usage;
+    }
+    
+    public static AssociationRelationship createNewAggregationRelationship(Element aggregator, Element aggregated) {
+        AssociationRelationship associationRelationship = new AssociationRelationship(aggregator, aggregated);
+        associationRelationship.setName("aggregateImplementation");
+        associationRelationship.getParticipants().get(1).setAggregation("shared");
+        aggregator.addRelationship(associationRelationship);
+        aggregated.addRelationship(associationRelationship);
+        aggregator.getArchitecture().addRelationship(associationRelationship);
+        return associationRelationship;
     }
 
 }

@@ -13,7 +13,9 @@ import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
@@ -21,6 +23,7 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -166,10 +169,10 @@ public class ElementUtilTest {
     }
 
     /**
-     * Test of getCommonConcerns method, of class ElementUtil.
+     * Test of getOwnAndMethodsCommonConcerns method, of class ElementUtil.
      */
     @Test
-    public void testGetCommonConcerns() {
+    public void testGetOwnAndMethodsCommonConcerns() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Element element = null;
         try {
@@ -184,7 +187,7 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         List<Element> elementList = Arrays.asList(new Element[]{element, element2});
-        Set<Concern> result = ElementUtil.getCommonConcerns(elementList);
+        Set<Concern> result = ElementUtil.getOwnAndMethodsCommonConcerns(elementList);
         assertEquals(1, result.size());
         assertEquals("[sorting]", result.toString());
 
@@ -195,15 +198,15 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         elementList = Arrays.asList(new Element[]{element, element2, element3});
-        result = ElementUtil.getCommonConcerns(elementList);
+        result = ElementUtil.getOwnAndMethodsCommonConcerns(elementList);
         assertEquals(0, result.size());
     }
 
     /**
-     * Test of getAllConcerns method, of class ElementUtil.
+     * Test of getOwnAndMethodsConcerns method, of class ElementUtil.
      */
     @Test
-    public void testGetAllConcerns_List() {
+    public void testGetOwnAndMethodsConcerns_List() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Element element = null;
         try {
@@ -218,7 +221,7 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         List<Element> elementList = Arrays.asList(new Element[]{element, element2});
-        Set<Concern> result = ElementUtil.getAllConcerns(elementList);
+        Set<Concern> result = ElementUtil.getOwnAndMethodsConcerns(elementList);
         assertEquals(2, result.size());
         List<String> concernList = Arrays.asList(new String[]{"Persistence", "sorting"});
         for (Concern concern : result) {
@@ -227,10 +230,10 @@ public class ElementUtilTest {
     }
 
     /**
-     * Test of getAllConcerns method, of class ElementUtil.
+     * Test of getOwnAndMethodsConcerns method, of class ElementUtil.
      */
     @Test
-    public void testGetAllConcerns_Element() {
+    public void testGetOwnAndMethodsConcerns_Element() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Element element = null;
         try {
@@ -238,7 +241,7 @@ public class ElementUtilTest {
         } catch (ClassNotFound ex) {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Set<Concern> result = ElementUtil.getAllConcerns(element);
+        Set<Concern> result = ElementUtil.getOwnAndMethodsConcerns(element);
         assertEquals(2, result.size());
         List<String> concernList = Arrays.asList(new String[]{"Persistence", "sorting"});
         for (Concern resultElement : result) {
@@ -247,10 +250,10 @@ public class ElementUtilTest {
     }
 
     /**
-     * Test of getCommonConcernsOfAtLeastTwoElements method, of class ElementUtil.
+     * Test of getOwnAndMethodsCommonConcernsOfAtLeastTwoElements method, of class ElementUtil.
      */
     @Test
-    public void testGetCommonConcernsOfAtLeastTwoElements() {
+    public void testGetOwnAndMethodsCommonConcernsOfAtLeastTwoElements() {
         Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Element element = null;
         try {
@@ -265,7 +268,7 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         List<Element> elementList = Arrays.asList(new Element[]{element, element2});
-        Set<Concern> result = ElementUtil.getCommonConcernsOfAtLeastTwoElements(elementList);
+        Set<Concern> result = ElementUtil.getOwnAndMethodsCommonConcernsOfAtLeastTwoElements(elementList);
         assertEquals(0, result.size());
 
         Element element3 = null;
@@ -275,10 +278,10 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         elementList = Arrays.asList(new Element[]{element, element2, element3});
-        result = ElementUtil.getCommonConcernsOfAtLeastTwoElements(elementList);
+        result = ElementUtil.getOwnAndMethodsCommonConcernsOfAtLeastTwoElements(elementList);
         assertEquals(2, result.size());
     }
-    
+
     /**
      * Test of getAllAggregatedElements method, of class ElementUtil.
      */
@@ -299,4 +302,123 @@ public class ElementUtilTest {
         }
     }
 
+    /**
+     * Test of getAllCommonSuperInterfaces method, of class InterfaceUtil.
+     */
+    @Test
+    public void testGetAllCommonSuperInterfaces() {
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element3 = null;
+        try {
+            element3 = architecture.findInterfaceByName("StrategyInterface");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(InterfaceUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Element> elementList = Arrays.asList(new Element[]{element, element2, element3});
+        List<Interface> commonSuperInterfacesOfASetOfElements = ElementUtil.getAllCommonSuperInterfaces(elementList);
+        assertEquals(1, commonSuperInterfacesOfASetOfElements.size());
+        assertEquals("CommonStrategy", commonSuperInterfacesOfASetOfElements.get(0).getName());
+    }
+
+    /**
+     * Test of getAllCommonInterfaces method, of class InterfaceUtil.
+     */
+    @Test
+    public void testGetAllCommonInterfaces() {
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element3 = null;
+        try {
+            element3 = architecture.findInterfaceByName("StrategyInterface");
+        } catch (InterfaceNotFound ex) {
+            Logger.getLogger(InterfaceUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Element> elementList = Arrays.asList(new Element[]{element, element2, element3});
+        List<Interface> commonInterfaces = ElementUtil.getAllCommonInterfaces(elementList);
+        assertEquals(2, commonInterfaces.size());
+        List<String> nameList = Arrays.asList(new String[]{"StrategyInterface", "CommonStrategy"});
+        for (Element resultElement : commonInterfaces) {
+            assertTrue(nameList.contains(resultElement.getName()));
+        }
+    }
+
+    /**
+     * Test of groupElementsByConcern method, of class ElementUtil.
+     */
+    @Test
+    public void testGroupElementsByConcern() {
+        System.out.println("groupElementsByConcern");
+        List<Element> elements = null;
+        HashMap<Concern, List<Element>> expResult = null;
+        HashMap<Concern, List<Element>> result = ElementUtil.groupElementsByConcern(elements);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns method, of class ElementUtil.
+     */
+    @Test
+    public void testGetElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns() {
+        System.out.println("getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns");
+        Iterable<Element> elements = null;
+        ArrayList<Element> expResult = null;
+        ArrayList<Element> result = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(elements);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getNameSpace method, of class ElementUtil.
+     */
+    @Test
+    public void testGetNameSpace() {
+        System.out.println("getNameSpace");
+        List<Element> elements = null;
+        String expResult = "";
+        String result = ElementUtil.getNameSpace(elements);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of implementInterface method, of class ElementUtil.
+     */
+    @Test
+    public void testImplementInterface() {
+        System.out.println("implementInterface");
+        List<Element> elements = null;
+        Interface anInterface = null;
+        List<Element> adapterList = null;
+        List<Element> adapteeList = null;
+        ElementUtil.implementInterface(elements, anInterface, adapterList, adapteeList);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

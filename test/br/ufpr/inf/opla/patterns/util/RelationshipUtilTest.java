@@ -10,6 +10,7 @@ import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.relationship.AssociationRelationship;
 import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -174,7 +176,7 @@ public class RelationshipUtilTest {
         }
         assertEquals("Class1", element.getName());
         assertEquals("Class2", element2.getName());
-        GeneralizationRelationship result = RelationshipUtil.createNewGeneralizationRelationship("GeneralizationVai", element2, element);
+        GeneralizationRelationship result = RelationshipUtil.createNewGeneralizationRelationship(element2, element);
         assertEquals("Class2", result.getChild().getName());
         assertEquals("Class1", result.getParent().getName());
         assertTrue(element.getRelationships().contains(result));
@@ -228,9 +230,24 @@ public class RelationshipUtilTest {
         }
         Element result = RelationshipUtil.getSubElement(element2.getRelationships().get(0));
         assertEquals(element, result);
-        
+
         result = RelationshipUtil.getSubElement(element.getRelationships().get(1));
         assertEquals("Class2", result.getName());
+    }
+
+    /**
+     * Test of createNewAggregationRelationship method, of class RelationshipUtil.
+     */
+    @Test
+    public void testCreateNewAggregationRelationship() {
+        System.out.println("createNewAggregationRelationship");
+        Element aggregator = null;
+        Element aggregated = null;
+        AssociationRelationship expResult = null;
+        AssociationRelationship result = RelationshipUtil.createNewAggregationRelationship(aggregator, aggregated);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

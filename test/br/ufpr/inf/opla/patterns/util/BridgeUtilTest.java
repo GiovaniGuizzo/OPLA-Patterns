@@ -5,7 +5,9 @@
  */
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -17,6 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -58,10 +61,52 @@ public class BridgeUtilTest {
             PSBridge psBridge = (PSBridge) ps;
             AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
             if (nameList.contains(algorithmFamily.getName()) && typeList.contains(algorithmFamily.getType())) {
-                List<Element> result = BridgeUtil.getAbstractionClasses(scope, algorithmFamily);
+                List<Element> result = BridgeUtil.getAbstractionClasses(algorithmFamily);
                 assertEquals(2, result.size());
             }
         }
+    }
+
+    /**
+     * Test of createAbstractionClasses method, of class BridgeUtil.
+     */
+    @Test
+    public void testCreateAbstractionClasses() {
+        System.out.println("createAbstractionClasses");
+        AlgorithmFamily algorithmFamily = null;
+        List<Element> expResult = null;
+        List<Element> result = BridgeUtil.createAbstractionClasses(algorithmFamily);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createImplementationInterface method, of class BridgeUtil.
+     */
+    @Test
+    public void testCreateImplementationInterface() {
+        System.out.println("createImplementationInterface");
+        Concern concern = null;
+        List<Element> elements = null;
+        Interface expResult = null;
+        Interface result = BridgeUtil.createImplementationInterface(concern, elements);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of aggregateAbstractionWithImplementation method, of class BridgeUtil.
+     */
+    @Test
+    public void testAggregateAbstractionWithImplementation() {
+        System.out.println("aggregateAbstractionWithImplementation");
+        Element abstractClass = null;
+        Interface concernInterface = null;
+        BridgeUtil.aggregateAbstractionWithImplementation(abstractClass, concernInterface);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 
 }

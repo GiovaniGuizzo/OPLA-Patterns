@@ -6,6 +6,7 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
@@ -19,6 +20,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -102,5 +104,47 @@ public class StrategyUtilTest {
         assertEquals(4, psAlgorithmFamily.getParticipants().size());
         result = StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(psAlgorithmFamily, psStrategy.getContexts());
         assertFalse(result);
+    }
+
+    /**
+     * Test of getAllStrategyInterfacesFromSetOfElements method, of class StrategyUtil.
+     */
+    @Test
+    public void testGetAllStrategyInterfacesFromSetOfElements() {
+        System.out.println("getAllStrategyInterfacesFromSetOfElements");
+        List<Element> elements = null;
+        List<Interface> expResult = null;
+        List<Interface> result = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(elements);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of moveContextsRelationshipWithSameTypeAndName method, of class StrategyUtil.
+     */
+    @Test
+    public void testMoveContextsRelationshipWithSameTypeAndName() {
+        System.out.println("moveContextsRelationshipWithSameTypeAndName");
+        List<Element> contexts = null;
+        List<Element> participants = null;
+        Element target = null;
+        StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, participants, target);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of moveVariabilitiesFromContextsToTarget method, of class StrategyUtil.
+     */
+    @Test
+    public void testMoveVariabilitiesFromContextsToTarget() {
+        System.out.println("moveVariabilitiesFromContextsToTarget");
+        List<Element> contexts = null;
+        List<Element> participants = null;
+        Element target = null;
+        StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, target);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
     }
 }

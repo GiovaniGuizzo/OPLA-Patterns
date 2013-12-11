@@ -1,15 +1,10 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.exceptions.ConcernNotFoundException;
-import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
-import arquitetura.representation.Method;
-import arquitetura.representation.Variant;
-import arquitetura.representation.VariationPoint;
 import arquitetura.representation.relationship.Relationship;
-import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -18,16 +13,14 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.AlgorithmFamilyUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
-import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import br.ufpr.inf.opla.patterns.util.StrategyUtil;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class Strategy extends DesignPattern {
 
@@ -122,35 +115,17 @@ public class Strategy extends DesignPattern {
             }
 
             //Implement
+            //TODO - Édipo - Adicionar estereótipos Strategy.
             List<Element> adapterList = new ArrayList<>();
             List<Element> adapteeList = new ArrayList<>();
+
+            ElementUtil.implementInterface(participants, strategyInterface, adapterList, adapteeList);
+
+            participants.removeAll(adapteeList);
+            participants.addAll(adapterList);
+
+            //Concern
             for (Element participant : participants) {
-                if (!ElementUtil.isTypeOf(participant, strategyInterface)) {
-                    //TODO - Édipo - Adicionar estereótipos Strategy.
-                    if (participant instanceof arquitetura.representation.Class) {
-                        Class participantClass = (Class) participant;
-                        RelationshipUtil.createNewRealizationRelationship("implements", participantClass, strategyInterface);
-                    } else if (participant instanceof Interface) {
-                        Class adapterClass = ADAPTER.applyAdapter(strategyInterface, participant);
-                        adapterList.add(adapterClass);
-                        adapteeList.add(participant);
-                    }
-                }
-                if (participant instanceof arquitetura.representation.Class) {
-                    Class participantClass = (Class) participant;
-                    if (!participantClass.isAbstract()) {
-                        MethodArrayList participantMethods = new MethodArrayList(new ArrayList<>(participantClass.getAllMethods()));
-                        for (Method interfaceMethod : strategyInterface.getOperations()) {
-                            int index = participantMethods.indexOf(interfaceMethod);
-                            if (index != -1) {
-                                MethodUtil.mergeMethodsToMethodA(participantMethods.get(index), interfaceMethod);
-                            } else {
-                                participantClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
-                            }
-                        }
-                    }
-                }
-                //Concern
                 for (Concern concern : participant.getOwnConcerns()) {
                     if (!strategyInterface.containsConcern(concern)) {
                         try {
@@ -162,67 +137,12 @@ public class Strategy extends DesignPattern {
                 }
             }
 
-            participants.removeAll(adapteeList);
-            participants.addAll(adapterList);
-
             //Move context relationships
-            for (Element context : psStrategy.getContexts()) {
-                HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
-                for (Relationship relationShip : context.getRelationships()) {
-                    Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationShip);
-                    if (!usedElementFromRelationship.equals(context)
-                            && (participants.contains(usedElementFromRelationship)
-                            || adapteeList.contains(usedElementFromRelationship)
-                            || strategyInterface.equals(usedElementFromRelationship))) {
-                        HashMap<String, List<Relationship>> relationshipByType = usingRelationshipsFromAlgorithms.get(relationShip.getType());
-                        if (relationshipByType == null) {
-                            relationshipByType = new HashMap<>();
-                            usingRelationshipsFromAlgorithms.put(relationShip.getType(), relationshipByType);
-                        }
-                        List<Relationship> relationshipByName = relationshipByType.get(relationShip.getName());
-                        if (relationshipByName == null) {
-                            relationshipByName = new ArrayList<>();
-                            relationshipByType.put(relationShip.getName(), relationshipByName);
-                        }
-                        relationshipByName.add(relationShip);
-                    }
-                }
-                for (Map.Entry<String, HashMap<String, List<Relationship>>> byTypeEntry : usingRelationshipsFromAlgorithms.entrySet()) {
-                    HashMap<String, List<Relationship>> typeMap = byTypeEntry.getValue();
-                    for (Map.Entry<String, List<Relationship>> nameEntry : typeMap.entrySet()) {
-                        List<Relationship> nameList = nameEntry.getValue();
-                        Relationship relationship = nameList.get(0);
-
-                        for (Relationship tempRelationship : nameList) {
-                            Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-                            usedElementFromRelationship.removeRelationship(tempRelationship);
-                            context.removeRelationship(tempRelationship);
-                            context.getArchitecture().removeRelationship(tempRelationship);
-                        }
-
-                        context.getArchitecture().addRelationship(relationship);
-                        RelationshipUtil.moveRelationship(relationship, context, strategyInterface);
-                    }
-                }
-                //Variabilities, variants and variation points.
-                VariationPoint variationPoint = context.getVariationPoint();
-                if (variationPoint != null) {
-                    List<Variant> participantsVariants = new ArrayList<>();
-                    for (Element participant : participants) {
-                        if (participant.getVariant() != null) {
-                            participantsVariants.add(participant.getVariant());
-                        }
-                    }
-                    if (variationPoint.getVariants().containsAll(participantsVariants)) {
-                        context.setVariationPoint(null);
-                        strategyInterface.setVariationPoint(variationPoint);
-                        variationPoint.replaceVariationPointElement(strategyInterface);
-                        for (Variant variant : participantsVariants) {
-                            variant.setRootVP(variationPoint.getVariationPointElement().getName());
-                        }
-                    }
-                }
-            }
+            List<Element> contexts = psStrategy.getContexts();
+            StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, new ArrayList<>(CollectionUtils.union(participants, adapteeList)), strategyInterface);
+            
+            //Variabilities, variants and variation points.
+            StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, new ArrayList<>(CollectionUtils.union(participants, adapteeList)), strategyInterface);
             applied = true;
         }
         return applied;

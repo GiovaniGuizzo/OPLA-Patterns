@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 resources/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 resources/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+  <uml:Model xmi:id="_cooD4LmGEeKQQp7P9cQvNQ" name="model">
+    <packagedElement xmi:type="uml:Class" xmi:id="6e2c7002-9659-4774-88fd-4657e1698fa5" name="BrickleAbstraction">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="65331b33-ca09-49b1-af28-296841f3e149" name="move" visibility="public" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="4ee0d609-a5bc-44ec-a0f6-b01ea3053d12" name="push" visibility="public" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="f953ec88-64ea-4c57-9e83-8fcfeb7697ba" name="destroy" visibility="public" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="c64c777e-08b7-4167-b8ba-0cacf80c0dd4" name="build" visibility="public" isAbstract="true"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="b0a563f6-9e8f-4128-8bff-13ac54b1676d" name="collide" visibility="public" isAbstract="true"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_COWI0HfFEeONGbxib0jvGA" name="StationaryBrickle">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QLy7IHfFEeONGbxib0jvGA" name="push" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lHc1sHfFEeONGbxib0jvGA" name="build" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_NBCPUHfFEeONGbxib0jvGA" name="collide" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="849b8030-4fe0-4d35-9e3c-67ca761eee3a" name="BrickleAbstractionImpl">
+      <generalization xmi:type="uml:Generalization" xmi:id="f8db8873-fb9c-4a81-a5d4-9ee52c037e4c" general="6e2c7002-9659-4774-88fd-4657e1698fa5"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="4de87563-3cdf-425c-bca6-2d446f72a390" name="move" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ea8492e6-92d7-406e-94f0-77e846dc577c" name="build" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="529c3af4-dcf6-4cf7-b9f7-7cedf01c84f5" name="push" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="ffdf9117-1ac0-48f5-841a-39313d038810" name="collide" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="97c69415-791e-4f31-85d1-0c7f3d5303eb" name="destroy" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Fh9OoHfFEeONGbxib0jvGA" clientDependency="64b5bba5-25f4-4a8e-a815-45cc7fe473e7" name="Context"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DwqQIHfFEeONGbxib0jvGA" name="MovableBrickle">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ny5KEHfFEeONGbxib0jvGA" name="move" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OvNoYHfFEeONGbxib0jvGA" name="destroy" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mPifIHfFEeONGbxib0jvGA" name="build" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="b7e664fa-0d2d-40b9-a0af-9c793d44456e" name="MovementImplementation">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="af093c59-be65-4d54-92de-c2cd182cda6c" name="move" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="0a7458bc-117d-4d43-a3ea-15e607123f7c" name="destroy" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="56f8936a-890e-4719-b1ba-fc7e6bddedd3" name="CollisionImplementation">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="89c20157-6353-4cb6-a862-e398e9b0bab6" name="collide" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="8d627292-d3f5-45b6-9c9d-9cb27cb44f9f" name="push" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="4e09e0a7-1a2a-44d1-87a7-7a6a3795fab5" name="BricklesImplementation">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="456eab97-cf08-4831-be19-8fdce9267420" name="build" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="fc4f7e82-1ce1-46ac-b45b-409c3c6de3c1" name="aggregatedImplementation" memberEnd="3a7b32f1-3896-4b52-b732-842cdf71332b 26cf86d3-898e-4b71-ab62-b755adf9548e">
+      <ownedEnd xmi:type="uml:Property" xmi:id="3a7b32f1-3896-4b52-b732-842cdf71332b" name="BricklesImplementation" type="4e09e0a7-1a2a-44d1-87a7-7a6a3795fab5" aggregation="shared" association="fc4f7e82-1ce1-46ac-b45b-409c3c6de3c1">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="62c53d18-416b-4b74-ae15-2b27e0f71a55" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="753b68ea-d2f4-42c2-9ee2-e388bdbc0d7c" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="26cf86d3-898e-4b71-ab62-b755adf9548e" name="BrickleAbstraction" type="6e2c7002-9659-4774-88fd-4657e1698fa5" association="fc4f7e82-1ce1-46ac-b45b-409c3c6de3c1">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="90ef3c0b-ca16-4485-a9ff-a3a2625115cb" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="232b1ae9-1e94-4862-a3f7-749706a6a4bd" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="589cba53-afa5-43c2-8a3a-7e61eee7151f" name="aggregatedImplementation" memberEnd="80015ebf-7c84-4f76-a5e7-44c0b69b9236 992f5b35-accb-4843-b6a3-0515bdfe5a8b">
+      <ownedEnd xmi:type="uml:Property" xmi:id="80015ebf-7c84-4f76-a5e7-44c0b69b9236" name="MovementImplementation" type="b7e664fa-0d2d-40b9-a0af-9c793d44456e" aggregation="shared" association="589cba53-afa5-43c2-8a3a-7e61eee7151f">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="edcbf673-8d3b-4258-a6cf-16446c9bcd38" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="60fba0f6-8fd7-4e56-82bf-0e9c9f36d9d7" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="992f5b35-accb-4843-b6a3-0515bdfe5a8b" name="BrickleAbstraction" type="6e2c7002-9659-4774-88fd-4657e1698fa5" association="589cba53-afa5-43c2-8a3a-7e61eee7151f">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="6525bd55-cd33-4b2a-8346-c835da74134a" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="2a69f8f4-1d18-4e0e-be38-c58a281b640d" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="b5cc6b6b-b1c4-4f1b-9c61-9d74bc1475ba" name="aggregatedImplementation" memberEnd="aba3b730-469d-4bb1-9c06-b776adbabe20 5f348350-4e1b-42be-9af9-23bd81524264">
+      <ownedEnd xmi:type="uml:Property" xmi:id="aba3b730-469d-4bb1-9c06-b776adbabe20" name="CollisionImplementation" type="56f8936a-890e-4719-b1ba-fc7e6bddedd3" aggregation="shared" association="b5cc6b6b-b1c4-4f1b-9c61-9d74bc1475ba">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="eac4b61f-fbed-4eac-abd1-82347302b784" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="b0abf0b8-bc28-490e-963f-fe0b738e6ba1" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:type="uml:Property" xmi:id="5f348350-4e1b-42be-9af9-23bd81524264" name="BrickleAbstraction" type="6e2c7002-9659-4774-88fd-4657e1698fa5" association="b5cc6b6b-b1c4-4f1b-9c61-9d74bc1475ba">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="65d65920-5522-4435-ac2a-b164cc5375db" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="f7bf2107-6611-4207-bc91-a6dfcec5d2dc" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="64b5bba5-25f4-4a8e-a815-45cc7fe473e7" name="" client="_Fh9OoHfFEeONGbxib0jvGA" supplier="_COWI0HfFEeONGbxib0jvGA"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_AZMtQMLoEeK4buShvBMouA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_AZV3MMLoEeK4buShvBMouA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_AZWeQMLoEeK4buShvBMouA">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_AZdzAMLoEeK4buShvBMouA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+  </uml:Model>
+  <perfilConcerns:movement xmi:id="f6febb08-8673-4441-a5a0-40ccf665e746" base_Class="6e2c7002-9659-4774-88fd-4657e1698fa5"/>
+  <perfilConcerns:brickles xmi:id="f56bad25-a1b7-44d2-a163-5825b2ff836a" base_Class="6e2c7002-9659-4774-88fd-4657e1698fa5"/>
+  <perfilConcerns:collision xmi:id="e04f6db3-e6af-40ed-b8db-7ccaa46da927" base_Class="6e2c7002-9659-4774-88fd-4657e1698fa5"/>
+  <perfilConcerns:movement xmi:id="3bcd408a-ef94-494a-a8c8-6d35daf5335a" base_Class="65331b33-ca09-49b1-af28-296841f3e149"/>
+  <perfilConcerns:collision xmi:id="355d4ae9-a5db-445d-ba9c-1cf769ec4c90" base_Class="4ee0d609-a5bc-44ec-a0f6-b01ea3053d12"/>
+  <perfilConcerns:movement xmi:id="bcf5708c-16ae-4e93-b6c6-b3da4e453c57" base_Class="f953ec88-64ea-4c57-9e83-8fcfeb7697ba"/>
+  <perfilConcerns:brickles xmi:id="cde4001f-2053-486b-9da0-c0dd73c56e6e" base_Class="c64c777e-08b7-4167-b8ba-0cacf80c0dd4"/>
+  <perfilConcerns:collision xmi:id="48af048f-0491-411b-aa97-dd6f4b9da744" base_Class="b0a563f6-9e8f-4128-8bff-13ac54b1676d"/>
+  <perfilConcerns:collision xmi:id="997ccbdc-ad8f-4864-88e5-491cffbb64b0" base_Class="_QLy7IHfFEeONGbxib0jvGA"/>
+  <perfilConcerns:brickles xmi:id="c05b897b-aafc-4e72-be22-dea716a9965d" base_Class="_lHc1sHfFEeONGbxib0jvGA"/>
+  <perfilConcerns:collision xmi:id="d8969a47-ec88-400f-a90f-9c02f7572862" base_Class="_NBCPUHfFEeONGbxib0jvGA"/>
+  <perfilConcerns:movement xmi:id="8a2ebf3a-dc81-4e27-832c-a57a860a66e6" base_Class="849b8030-4fe0-4d35-9e3c-67ca761eee3a"/>
+  <perfilConcerns:brickles xmi:id="872b5b51-eb74-431e-868a-68e168e2a405" base_Class="849b8030-4fe0-4d35-9e3c-67ca761eee3a"/>
+  <perfilConcerns:collision xmi:id="841e87b6-faae-46a3-85ec-32c70bbbc340" base_Class="849b8030-4fe0-4d35-9e3c-67ca761eee3a"/>
+  <perfilConcerns:movement xmi:id="9161ee7c-530b-4a8c-adcf-ca16f3fb3976" base_Class="4de87563-3cdf-425c-bca6-2d446f72a390"/>
+  <perfilConcerns:brickles xmi:id="d084be1c-cc83-479d-b916-1587672d5817" base_Class="ea8492e6-92d7-406e-94f0-77e846dc577c"/>
+  <perfilConcerns:collision xmi:id="337a4651-74f1-4258-b51b-77dc675781ba" base_Class="529c3af4-dcf6-4cf7-b9f7-7cedf01c84f5"/>
+  <perfilConcerns:collision xmi:id="61c835b8-ca95-4dad-93da-1480f36e8796" base_Class="ffdf9117-1ac0-48f5-841a-39313d038810"/>
+  <perfilConcerns:movement xmi:id="966034aa-640b-43b5-aa88-7ba034aa1d9e" base_Class="97c69415-791e-4f31-85d1-0c7f3d5303eb"/>
+  <perfilConcerns:movement xmi:id="0abe6d1d-89e0-4078-839e-2f1ff790351c" base_Class="_Ny5KEHfFEeONGbxib0jvGA"/>
+  <perfilConcerns:movement xmi:id="aef59741-40c2-4fed-8754-b0165311732d" base_Class="_OvNoYHfFEeONGbxib0jvGA"/>
+  <perfilConcerns:brickles xmi:id="3af354d7-d03b-47c2-ad98-eca782083434" base_Class="_mPifIHfFEeONGbxib0jvGA"/>
+  <smartyProfile:interface xmi:id="acba8c53-582d-40af-9975-9cd610372d01" base_Class="b7e664fa-0d2d-40b9-a0af-9c793d44456e"/>
+  <smartyProfile:interface xmi:id="f8ff731e-bc9a-4c6e-8605-512a34bfd0c8" base_Class="56f8936a-890e-4719-b1ba-fc7e6bddedd3"/>
+  <smartyProfile:interface xmi:id="b79b13b0-c894-4d73-afa2-2aa99da4f7d4" base_Class="4e09e0a7-1a2a-44d1-87a7-7a6a3795fab5"/>
+  <perfilConcerns:movement xmi:id="e63971b2-6b08-4027-8e44-8b5a1cc04771" base_Class="af093c59-be65-4d54-92de-c2cd182cda6c"/>
+  <perfilConcerns:movement xmi:id="4df65b14-67af-4871-9edc-d0b6bc0a843e" base_Class="0a7458bc-117d-4d43-a3ea-15e607123f7c"/>
+  <perfilConcerns:movement xmi:id="a3649286-832b-4b81-a1c3-fa013ca70556" base_Class="b7e664fa-0d2d-40b9-a0af-9c793d44456e"/>
+  <perfilConcerns:collision xmi:id="37874c9f-b251-46de-bbeb-443053fce198" base_Class="89c20157-6353-4cb6-a862-e398e9b0bab6"/>
+  <perfilConcerns:collision xmi:id="c22b118a-6a0b-4725-8985-bcb0c37e4037" base_Class="8d627292-d3f5-45b6-9c9d-9cb27cb44f9f"/>
+  <perfilConcerns:collision xmi:id="c8bb8569-8ef1-49b4-b52c-822363d1f3b8" base_Class="56f8936a-890e-4719-b1ba-fc7e6bddedd3"/>
+  <perfilConcerns:brickles xmi:id="97ce77d6-818d-45c5-82db-5e73395ab587" base_Class="456eab97-cf08-4831-be19-8fdce9267420"/>
+  <perfilConcerns:brickles xmi:id="ba7e116d-8870-49b0-8566-42118885b737" base_Class="4e09e0a7-1a2a-44d1-87a7-7a6a3795fab5"/>
+</xmi:XMI>

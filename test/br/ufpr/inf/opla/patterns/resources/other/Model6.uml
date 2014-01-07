@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_Y9R4UHeYEeONGbxib0jvGA" name="Model">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_Y9R4UXeYEeONGbxib0jvGA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Z1boUHeYEeONGbxib0jvGA" clientDependency="_jxQ_UHeYEeONGbxib0jvGA _lIB98HeYEeONGbxib0jvGA _mmhVMHeYEeONGbxib0jvGA _oV0voHeYEeONGbxib0jvGA" name="Context1"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_fePq8HeYEeONGbxib0jvGA" name="Class1">
+    <generalization xmi:type="uml:Generalization" xmi:id="_i06EwHeYEeONGbxib0jvGA" general="_hJ-0AHeYEeONGbxib0jvGA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_f-c1AHeYEeONGbxib0jvGA" name="Class2">
+    <generalization xmi:type="uml:Generalization" xmi:id="_ienEoHeYEeONGbxib0jvGA" general="_hJ-0AHeYEeONGbxib0jvGA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hJ-0AHeYEeONGbxib0jvGA" name="Class3"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_jxQ_UHeYEeONGbxib0jvGA" name="usage" client="_Z1boUHeYEeONGbxib0jvGA" supplier="_f-c1AHeYEeONGbxib0jvGA"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_lIB98HeYEeONGbxib0jvGA" name="usage" client="_Z1boUHeYEeONGbxib0jvGA" supplier="_fePq8HeYEeONGbxib0jvGA"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_mmhVMHeYEeONGbxib0jvGA" name="dependency" client="_Z1boUHeYEeONGbxib0jvGA" supplier="_f-c1AHeYEeONGbxib0jvGA"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_oV0voHeYEeONGbxib0jvGA" name="usage2" client="_Z1boUHeYEeONGbxib0jvGA" supplier="_f-c1AHeYEeONGbxib0jvGA"/>
+</uml:Model>

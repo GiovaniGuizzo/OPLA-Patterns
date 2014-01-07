@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+  <uml:Model xmi:id="_-WQF8Ft1EeO8GpjV6e9MCg" name="Model">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_5IOqIHfKEeONGbxib0jvGA" annotatedElement="_Fh9OoHfFEeONGbxib0jvGA">
+      <body> </body>
+    </ownedComment>
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_-WQF8Vt1EeO8GpjV6e9MCg">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_COWI0HfFEeONGbxib0jvGA" name="StationaryBrickle">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_NBCPUHfFEeONGbxib0jvGA" name="collide"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_QLy7IHfFEeONGbxib0jvGA" name="push"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lHc1sHfFEeONGbxib0jvGA" name="build"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DwqQIHfFEeONGbxib0jvGA" name="MovableBrickle">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ny5KEHfFEeONGbxib0jvGA" name="move"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_OvNoYHfFEeONGbxib0jvGA" name="destroy"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mPifIHfFEeONGbxib0jvGA" name="build"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Fh9OoHfFEeONGbxib0jvGA" clientDependency="_HIP3AHfFEeONGbxib0jvGA _xkADsHfKEeONGbxib0jvGA" name="Context"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_HIP3AHfFEeONGbxib0jvGA" name="Usage1" client="_Fh9OoHfFEeONGbxib0jvGA" supplier="_COWI0HfFEeONGbxib0jvGA"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_xkADsHfKEeONGbxib0jvGA" name="Usage1" client="_Fh9OoHfFEeONGbxib0jvGA" supplier="_DwqQIHfFEeONGbxib0jvGA"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojbn8Ft3EeO8GpjV6e9MCg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojqRcFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojrfkFt3EeO8GpjV6e9MCg">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojsGoFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+  </uml:Model>
+  <perfilConcerns:sorting xmi:id="_NuvnAFuDEeO8GpjV6e9MCg" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_NvJ2sFuDEeO8GpjV6e9MCg" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_O1J1cFuDEeO8GpjV6e9MCg" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_O1l6UFuDEeO8GpjV6e9MCg" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_PyfAYFuDEeO8GpjV6e9MCg" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_Qhh3sFuDEeO8GpjV6e9MCg" base_Class="_DiqgcFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_ReiSgFuDEeO8GpjV6e9MCg" base_Class="_DxV1oFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:sorting xmi:id="_RfAMkFuDEeO8GpjV6e9MCg" base_Class="_DxV1oFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_SWw7AFuDEeO8GpjV6e9MCg" base_Class="_FLHsAFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns:Persistence xmi:id="_TM540FuDEeO8GpjV6e9MCg" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+  <perfilConcerns_1:brickles xmi:id="_nkrtIHfFEeONGbxib0jvGA" base_Operation="_mPifIHfFEeONGbxib0jvGA"/>
+  <perfilConcerns_1:brickles xmi:id="_obnVIHfFEeONGbxib0jvGA" base_Operation="_lHc1sHfFEeONGbxib0jvGA"/>
+  <perfilConcerns_1:collision xmi:id="_p4KysHfFEeONGbxib0jvGA" base_Operation="_QLy7IHfFEeONGbxib0jvGA"/>
+  <perfilConcerns_1:collision xmi:id="_qix18HfFEeONGbxib0jvGA" base_Operation="_NBCPUHfFEeONGbxib0jvGA"/>
+  <perfilConcerns_1:movement xmi:id="_rLZVIHfFEeONGbxib0jvGA" base_Operation="_OvNoYHfFEeONGbxib0jvGA"/>
+  <perfilConcerns_1:movement xmi:id="_r0EesHfFEeONGbxib0jvGA" base_Operation="_Ny5KEHfFEeONGbxib0jvGA"/>
+  <smartyProfile:variationPoint xmi:id="_z9rQ0HfKEeONGbxib0jvGA" base_Class="_Fh9OoHfFEeONGbxib0jvGA" numberOfVariants="2" variants="StationaryBrickle,MovableBrickle" variabilities="BrickleVariability"/>
+  <smartyProfile:alternative_OR xmi:id="_1E2UQHfKEeONGbxib0jvGA" base_Class="_COWI0HfFEeONGbxib0jvGA" rootVP="Context" variabilities="BrickleVariability"/>
+  <smartyProfile:alternative_OR xmi:id="_22XVMHfKEeONGbxib0jvGA" base_Class="_DwqQIHfFEeONGbxib0jvGA" rootVP="Context" variabilities="BrickleVariability"/>
+  <smartyProfile:variability xmi:id="_6NuSkHfKEeONGbxib0jvGA" base_Comment="_5IOqIHfKEeONGbxib0jvGA" name="BrickleVariability" minSelection="1" maxSelection="2" variants="StationaryBrickle,MovableBrickle"/>
+</xmi:XMI>

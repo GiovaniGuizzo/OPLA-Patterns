@@ -9,9 +9,12 @@ import arquitetura.exceptions.ClassNotFound;
 import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.exceptions.PackageNotFound;
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Method;
+import arquitetura.representation.Package;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -370,13 +374,14 @@ public class ElementUtilTest {
      */
     @Test
     public void testGroupElementsByConcern() {
-        System.out.println("groupElementsByConcern");
-        List<Element> elements = null;
-        HashMap<Concern, List<Element>> expResult = null;
-        HashMap<Concern, List<Element>> result = ElementUtil.groupElementsByConcern(elements);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        HashMap<Concern, List<Element>> result = ElementUtil.groupElementsByConcern(architecture.getElements());
+        assertEquals(4, result.size());
+        assertEquals(2, result.get(null).size());
+        assertEquals(2, result.get(architecture.getConcernByName("bowling")).size());
+        assertEquals(1, result.get(architecture.getConcernByName("collision")).size());
+        assertEquals(1, result.get(architecture.getConcernByName("brickles")).size());
     }
 
     /**
@@ -384,13 +389,10 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns() {
-        System.out.println("getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns");
-        Iterable<Element> elements = null;
-        ArrayList<Element> expResult = null;
-        ArrayList<Element> result = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(elements);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        ArrayList<Element> result = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(architecture.getElements());
+        assertEquals(2, result.size());
     }
 
     /**
@@ -398,13 +400,11 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetNameSpace() {
-        System.out.println("getNameSpace");
-        List<Element> elements = null;
-        String expResult = "";
+        String model = ArchitectureRepository.STRATEGY_MODELS[2];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        List<Element> elements = architecture.getElements();
         String result = ElementUtil.getNameSpace(elements);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals("Model::ClassPackage", result);
     }
 
     /**
@@ -412,13 +412,30 @@ public class ElementUtilTest {
      */
     @Test
     public void testImplementInterface() {
-        System.out.println("implementInterface");
-        List<Element> elements = null;
-        Interface anInterface = null;
-        List<Element> adapterList = null;
-        List<Element> adapteeList = null;
-        ElementUtil.implementInterface(elements, anInterface, adapterList, adapteeList);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String model = ArchitectureRepository.STRATEGY_MODELS[2];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+        try {
+            Package aPackage = architecture.findPackageByName("ClassPackage");
+            List<Element> elements = new ArrayList<>(architecture.getElements());
+            elements.remove(aPackage);
+
+            Interface anInterface = architecture.createInterface(model);
+            Method createOperation = anInterface.createOperation("foiDeu");
+            
+            List<Element> adapterList = new ArrayList<>();
+            List<Element> adapteeList = new ArrayList<>();
+            ElementUtil.implementInterface(elements, anInterface, adapterList, adapteeList);
+
+            assertEquals(2, adapterList.size());
+            assertEquals(2, adapteeList.size());
+            
+            Class aClass = architecture.findClassByName("Class1").get(0);
+            assertTrue(aClass.getAllMethods().contains(createOperation));
+        } catch (PackageNotFound | ClassNotFound ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 }

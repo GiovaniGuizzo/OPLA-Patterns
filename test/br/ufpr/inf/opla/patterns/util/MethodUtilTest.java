@@ -20,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -247,18 +246,16 @@ public class MethodUtilTest {
     }
 
     /**
-     * Test of getMethodsByConcernFromSetOfElements method, of class MethodUtil.
+     * Test of getAllMethodsFromSetOfElementsByConcern method, of class MethodUtil.
      */
     @Test
-    public void testGetMethodsByConcernFromSetOfElements() {
-        System.out.println("getMethodsByConcernFromSetOfElements");
-        List<Element> elements = null;
-        Concern concern = null;
-        List<Method> expResult = null;
-        List<Method> result = MethodUtil.getMethodsByConcernFromSetOfElements(elements, concern);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetAllMethodsFromSetOfElementsByConcern() {
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[3]);
+        ArrayList<Element> arrayList = new ArrayList<>(architecture.getElements());
+        List<Method> allMethodsFromSetOfElementsByConcern = MethodUtil.getAllMethodsFromSetOfElementsByConcern(arrayList, new Concern("bowling"));
+        assertEquals(1, allMethodsFromSetOfElementsByConcern.size());
+        allMethodsFromSetOfElementsByConcern = MethodUtil.getAllMethodsFromSetOfElementsByConcern(arrayList, new Concern("collision"));
+        assertEquals(2, allMethodsFromSetOfElementsByConcern.size());
     }
 
     /**
@@ -266,13 +263,15 @@ public class MethodUtilTest {
      */
     @Test
     public void testCreateMethodsFromSetOfElementsByConcern() {
-        System.out.println("createMethodsFromSetOfElementsByConcern");
-        List<Element> elements = null;
-        Concern concern = null;
-        List<Method> expResult = null;
-        List<Method> result = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = architectureRepository.getArchitecture(model);
+
+        List<Method> result = MethodUtil.createMethodsFromSetOfElementsByConcern(architecture.getElements(), new Concern("bowling"));
+        assertEquals(1, result.size());
+        assertEquals(1, result.get(0).getParameters().size());
+        assertEquals(1, result.get(0).getAllConcerns().size());
+
+        result = MethodUtil.createMethodsFromSetOfElementsByConcern(architecture.getElements(), new Concern("collision"));
+        assertEquals(2, result.size());
     }
 }

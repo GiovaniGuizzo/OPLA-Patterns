@@ -103,7 +103,8 @@ public class StrategyUtil {
             HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
             for (Relationship relationShip : context.getRelationships()) {
                 Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationShip);
-                if (!usedElementFromRelationship.equals(context)
+                if (usedElementFromRelationship != null
+                        && !usedElementFromRelationship.equals(context)
                         && (participants.contains(usedElementFromRelationship)
                         || target.equals(usedElementFromRelationship))) {
                     HashMap<String, List<Relationship>> relationshipByType = usingRelationshipsFromAlgorithms.get(relationShip.getType());
@@ -126,7 +127,7 @@ public class StrategyUtil {
                     Relationship relationship = nameList.get(0);
 
                     for (Relationship tempRelationship : nameList) {
-                        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+                        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(tempRelationship);
                         usedElementFromRelationship.removeRelationship(tempRelationship);
                         context.removeRelationship(tempRelationship);
                         context.getArchitecture().removeRelationship(tempRelationship);

@@ -21,7 +21,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.apache.commons.collections4.CollectionUtils;
 
 public class Bridge extends DesignPattern {
 
@@ -129,7 +128,7 @@ public class Bridge extends DesignPattern {
 
                     List<Element> tempAdapterList = new ArrayList<>();
                     List<Element> tempAdapteeList = new ArrayList<>();
-                    
+
                     //Implement
                     ElementUtil.implementInterface(elementList, concernInterface, tempAdapterList, tempAdapteeList);
 
@@ -146,12 +145,12 @@ public class Bridge extends DesignPattern {
 
                 //Varaibilities
                 StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, abstractClass);
-                
+
                 //TODO - Édipo - Adicionar estereótipo Bridge
-                
                 participants.removeAll(adapteeList);
                 participants.addAll(adapterList);
             }
+            applied = true;
         }
         return applied;
     }

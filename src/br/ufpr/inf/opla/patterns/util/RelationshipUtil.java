@@ -1,6 +1,5 @@
 package br.ufpr.inf.opla.patterns.util;
 
-import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.AssociationRelationship;
@@ -102,10 +101,10 @@ public class RelationshipUtil {
         client.getArchitecture().addRelationship(usage);
         return usage;
     }
-    
-    public static AssociationRelationship createNewAggregationRelationship(Element aggregator, Element aggregated) {
+
+    public static AssociationRelationship createNewAggregationRelationship(String name, Element aggregator, Element aggregated) {
         AssociationRelationship associationRelationship = new AssociationRelationship(aggregator, aggregated);
-        associationRelationship.setName("aggregateImplementation");
+        associationRelationship.setName(name);
         associationRelationship.getParticipants().get(1).setAggregation("shared");
         aggregator.addRelationship(associationRelationship);
         aggregated.addRelationship(associationRelationship);

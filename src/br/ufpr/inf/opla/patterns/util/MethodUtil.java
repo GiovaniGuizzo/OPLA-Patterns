@@ -61,23 +61,30 @@ public class MethodUtil {
             MethodArrayList elementMethods = new MethodArrayList(getAllMethodsFromElement(element));
             for (Method elementMethod : elementMethods) {
                 if (!methods.contains(elementMethod)) {
-                    methods.add(elementMethod);
+                    methods.add(cloneMethod(elementMethod));
+                } else {
+                    Method tempMethod = methods.get(methods.indexOf(elementMethod));
+                    mergeMethodsToMethodA(tempMethod, elementMethod);
                 }
             }
         }
         return methods;
     }
 
-    public static List<Method> getMethodsByConcernFromSetOfElements(List<Element> elements, Concern concern) {
+    public static List<Method> getAllMethodsFromSetOfElementsByConcern(List<Element> elements, Concern concern) {
         MethodArrayList methods = new MethodArrayList();
         for (Element element : elements) {
             MethodArrayList elementMethods = new MethodArrayList(getAllMethodsFromElement(element));
             for (Method elementMethod : elementMethods) {
-                if (!methods.contains(elementMethod)
-                        && (concern == null
+                if (concern == null
                         ? (element.getOwnConcerns().isEmpty() && elementMethod.getOwnConcerns().isEmpty())
-                        : (element.getOwnConcerns().contains(concern) || elementMethod.getOwnConcerns().contains(concern)))) {
-                    methods.add(elementMethod);
+                        : (element.getOwnConcerns().contains(concern) || elementMethod.getOwnConcerns().contains(concern))) {
+                    if (!methods.contains(elementMethod)) {
+                        methods.add(cloneMethod(elementMethod));
+                    } else {
+                        Method tempMethod = methods.get(methods.indexOf(elementMethod));
+                        mergeMethodsToMethodA(tempMethod, elementMethod);
+                    }
                 }
             }
         }
@@ -110,7 +117,7 @@ public class MethodUtil {
 
     public static List<Method> createMethodsFromSetOfElementsByConcern(List<Element> elements, Concern concern) {
         MethodArrayList methods = new MethodArrayList();
-        MethodArrayList methodsFromElements = new MethodArrayList(getMethodsByConcernFromSetOfElements(elements, concern));
+        MethodArrayList methodsFromElements = new MethodArrayList(getAllMethodsFromSetOfElementsByConcern(elements, concern));
         methodFor:
         for (Method elementMethod : methodsFromElements) {
             Method clonedMethod = cloneMethod(elementMethod);

@@ -216,13 +216,17 @@ public class ElementUtil {
         Set<Concern> ownAndMethodsCommonConcerns = getOwnAndMethodsConcerns(elements);
         for (Concern concern : ownAndMethodsCommonConcerns) {
             List<Element> concernElements = new ArrayList<>();
-            for (Element element : concernElements) {
+            for (Element element : elements) {
                 Set<Concern> elementConcerns = getOwnAndMethodsConcerns(element);
                 if (elementConcerns.contains(concern)) {
                     concernElements.add(element);
                 }
             }
             groupedElements.put(concern, concernElements);
+        }
+        ArrayList<Element> nullList = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(elements);
+        if (!nullList.isEmpty()) {
+            groupedElements.put(null, nullList);
         }
         return groupedElements;
     }

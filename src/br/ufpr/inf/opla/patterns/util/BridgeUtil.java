@@ -9,9 +9,14 @@ import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
+import arquitetura.representation.relationship.AssociationEnd;
+import arquitetura.representation.relationship.AssociationRelationship;
+import arquitetura.representation.relationship.Multiplicity;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,15 +32,12 @@ public class BridgeUtil {
     public static HashMap<Concern, List<Interface>> getImplementationInterfaces(List<Element> elements) {
         HashMap<Concern, List<Interface>> implementationInterfaces = new HashMap<>();
         HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(elements);
-        ArrayList<Element> nullList = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(elements);
-        if (!nullList.isEmpty()) {
-            groupedElements.put(null, nullList);
-        }
         for (Map.Entry<Concern, List<Element>> entry : groupedElements.entrySet()) {
             Concern concern = entry.getKey();
             List<Element> elementsByConcerns = entry.getValue();
             List<Interface> allCommonInterfaces = ElementUtil.getAllCommonInterfaces(elementsByConcerns);
-            List<Method> allMethods = MethodUtil.getMethodsByConcernFromSetOfElements(elementsByConcerns, concern);
+            Collections.sort(allCommonInterfaces, SubElementsComparator.getDescendingOrderer());
+            List<Method> allMethods = MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
             for (int i = 0; i < allCommonInterfaces.size(); i++) {
                 Interface anInterface = allCommonInterfaces.get(i);
                 MethodArrayList anInterfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
@@ -173,7 +175,7 @@ public class BridgeUtil {
         if (elements != null && !elements.isEmpty()) {
             Architecture architecture = elements.get(0).getArchitecture();
 
-            anInterface = architecture.createInterface(concern != null ? concern.getName() : "Default" + "Implementation");
+            anInterface = architecture.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
             architecture.removeInterface(anInterface);
 
             List<Method> methodsFromSetOfElements = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);
@@ -214,7 +216,11 @@ public class BridgeUtil {
 
     public static void aggregateAbstractionWithImplementation(Element abstractClass, Interface concernInterface) {
         if (!ElementUtil.getAllAggregatedElements(abstractClass).contains(concernInterface)) {
-            RelationshipUtil.createNewAggregationRelationship(abstractClass, concernInterface);
+            AssociationRelationship aggregation = RelationshipUtil.createNewAggregationRelationship("aggregatedImplementation", abstractClass, concernInterface);
+            AssociationEnd end1 = aggregation.getParticipants().get(0);
+            end1.setMultiplicity(new Multiplicity("0", "1"));
+            AssociationEnd end2 = aggregation.getParticipants().get(0);
+            end2.setMultiplicity(new Multiplicity("1", "1"));
         }
     }
 

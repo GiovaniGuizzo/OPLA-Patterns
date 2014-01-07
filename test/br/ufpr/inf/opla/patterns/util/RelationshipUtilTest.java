@@ -21,7 +21,6 @@ import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -240,14 +239,28 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewAggregationRelationship() {
-        System.out.println("createNewAggregationRelationship");
-        Element aggregator = null;
-        Element aggregated = null;
-        AssociationRelationship expResult = null;
-        AssociationRelationship result = RelationshipUtil.createNewAggregationRelationship(aggregator, aggregated);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Element element = null;
+        try {
+            element = architecture.findClassByName("Class1").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Element element2 = null;
+        try {
+            element2 = architecture.findClassByName("Class2").get(0);
+        } catch (ClassNotFound ex) {
+            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        assertEquals("Class1", element.getName());
+        assertEquals("Class2", element2.getName());
+        AssociationRelationship result = RelationshipUtil.createNewAggregationRelationship("Agregação eu escolho você!", element2, element);
+        assertEquals("Class2", result.getParticipants().get(0).getCLSClass().getName());
+        assertEquals("Class1", result.getParticipants().get(1).getCLSClass().getName());
+        assertTrue(result.getParticipants().get(1).isAggregation());
+        assertFalse(result.getParticipants().get(0).isAggregation());
+        assertTrue(element.getRelationships().contains(result));
+        assertTrue(element2.getRelationships().contains(result));
     }
 
 }

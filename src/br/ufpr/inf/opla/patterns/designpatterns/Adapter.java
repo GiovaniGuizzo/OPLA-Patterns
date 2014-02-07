@@ -1,5 +1,7 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
+import arquitetura.exceptions.ConcernNotFoundException;
+import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
@@ -9,8 +11,11 @@ import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class Adapter extends DesignPattern {
@@ -93,7 +98,13 @@ public class Adapter extends DesignPattern {
             }
 
             //Copy concerns
-            adapterClass.getOwnConcerns().addAll(CollectionUtils.union(target.getOwnConcerns(), adaptee.getOwnConcerns()));
+            for (Concern concern : CollectionUtils.union(target.getOwnConcerns(), adaptee.getOwnConcerns())) {
+                try {
+                    adapterClass.addConcern(concern.getName());
+                } catch (ConcernNotFoundException ex) {
+                    Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
 
             //Move variants
             Variant variant = adapterClass.getVariant();

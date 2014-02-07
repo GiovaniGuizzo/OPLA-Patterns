@@ -177,7 +177,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsCommonConcerns() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         try {
             element = architecture.findClassByName("QuickSort").get(0);
@@ -193,7 +193,7 @@ public class ElementUtilTest {
         List<Element> elementList = Arrays.asList(new Element[]{element, element2});
         Set<Concern> result = ElementUtil.getOwnAndMethodsCommonConcerns(elementList);
         assertEquals(1, result.size());
-        assertEquals("[sorting]", result.toString());
+        assertEquals("[bowling]", result.toString());
 
         Element element3 = null;
         try {
@@ -211,7 +211,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsConcerns_List() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         try {
             element = architecture.findClassByName("QuickSort").get(0);
@@ -227,7 +227,7 @@ public class ElementUtilTest {
         List<Element> elementList = Arrays.asList(new Element[]{element, element2});
         Set<Concern> result = ElementUtil.getOwnAndMethodsConcerns(elementList);
         assertEquals(2, result.size());
-        List<String> concernList = Arrays.asList(new String[]{"Persistence", "sorting"});
+        List<String> concernList = Arrays.asList(new String[]{"bowling", "brickles"});
         for (Concern concern : result) {
             assertTrue(concernList.contains(concern.getName()));
         }
@@ -238,7 +238,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsConcerns_Element() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         try {
             element = architecture.findClassByName("SortAbstractionClass").get(0);
@@ -247,7 +247,7 @@ public class ElementUtilTest {
         }
         Set<Concern> result = ElementUtil.getOwnAndMethodsConcerns(element);
         assertEquals(2, result.size());
-        List<String> concernList = Arrays.asList(new String[]{"Persistence", "sorting"});
+        List<String> concernList = Arrays.asList(new String[]{"bowling", "brickles"});
         for (Concern resultElement : result) {
             assertTrue(concernList.contains(resultElement.getName()));
         }
@@ -258,7 +258,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsCommonConcernsOfAtLeastTwoElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         try {
             element = architecture.findClassByName("QuickSort").get(0);
@@ -291,7 +291,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllAggregatedElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         try {
             element = architecture.findClassByName("SortAbstractionClass").get(0);
@@ -300,7 +300,7 @@ public class ElementUtilTest {
         }
         Set<Element> result = ElementUtil.getAllAggregatedElements(element);
         assertEquals(2, result.size());
-        List<String> nameList = Arrays.asList(new String[]{"SortingImplementationInterface", "PersistenceImplementationInterface"});
+        List<String> nameList = Arrays.asList(new String[]{"BowlingImplementationInterface", "BricklesImplementationInterface"});
         for (Element resultElement : result) {
             assertTrue(nameList.contains(resultElement.getName()));
         }

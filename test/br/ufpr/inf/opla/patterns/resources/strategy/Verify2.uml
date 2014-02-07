@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 ../output/resources/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 ../output/resources/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
   <uml:Model xmi:id="_oBkAYDy_EeOQvLsAhPBMLQ" name="model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_MAez4DzCEeOQvLsAhPBMLQ">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -66,4 +66,8 @@
   <perfilConcerns:sorting xmi:id="_Bgog4FhNEeOn1dtk2tmEdA" base_Class="_vyYRUDy_EeOQvLsAhPBMLQ"/>
   <perfilConcerns:sorting xmi:id="_CqFcQFhNEeOn1dtk2tmEdA" base_Class="_vOaBkDy_EeOQvLsAhPBMLQ"/>
   <perfilConcerns:sorting xmi:id="_D1HE8FhNEeOn1dtk2tmEdA" base_Class="_xHLZsDzCEeOQvLsAhPBMLQ"/>
+  <perfilConcerns_1:action xmi:id="_UejXUHoWEeOCurlGGUqmgg" base_Class="_vyYRUDy_EeOQvLsAhPBMLQ"/>
+  <perfilConcerns_1:action xmi:id="_VOGk8HoWEeOCurlGGUqmgg" base_Class="_vOaBkDy_EeOQvLsAhPBMLQ"/>
+  <perfilConcerns_1:action xmi:id="_V3VIIHoWEeOCurlGGUqmgg" base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ"/>
+  <perfilConcerns_1:action xmi:id="_XVu_0HoWEeOCurlGGUqmgg" base_Operation="_xecP4DzSEeO7UKAGd3cQWw"/>
 </xmi:XMI>

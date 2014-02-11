@@ -13,7 +13,6 @@ import jmetal.metaheuristics.nsgaII.NSGAII;
 import jmetal.operators.crossover.Crossover;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.MutationFactory;
 import jmetal.operators.selection.Selection;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.problems.OPLA;
@@ -30,8 +29,8 @@ public class NSGAII_OPLA_FeatMut {
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
  public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
-         int runsNumber = 1; //30;
-         populationSize_ = 100; //100
+         int runsNumber = 2; //30;
+         populationSize_ = 3; //100
          maxEvaluations_ = 300; //300 gera��es
          
          crossoverProbability_ = 0.0; 

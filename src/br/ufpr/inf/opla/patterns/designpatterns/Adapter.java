@@ -54,7 +54,7 @@ public class Adapter extends DesignPattern {
                 && (target instanceof arquitetura.representation.Class || target instanceof Interface)
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
             arquitetura.representation.Class adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
-            adapterClass.setNamespace(target.getNamespace());
+            adapterClass.setNamespace(adaptee.getNamespace());
             adapterClass.setVariant(adaptee.getVariant());
 
             //Implements/Extends and add all methods.
@@ -68,7 +68,6 @@ public class Adapter extends DesignPattern {
             } else {
                 Interface targetInterface = (Interface) target;
                 RelationshipUtil.createNewRealizationRelationship("implements", adapterClass, target);
-                adapterClass.addImplementedInterface(targetInterface);
                 Set<Method> clonedMethods = MethodUtil.cloneMethods(targetInterface.getOperations());
                 for (Method method : clonedMethods) {
                     adapterClass.addExternalMethod(method);

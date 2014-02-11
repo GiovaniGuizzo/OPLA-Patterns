@@ -12,7 +12,7 @@ public class RandomScopeSelection implements ScopeSelectionStrategy {
     @Override
     public Scope selectScope(Architecture architecture) {
         Scope scope = new Scope();
-        int architectureSize = architecture.getAllInterfaces().size() + architecture.getAllClasses().size() + architecture.getAllPackages().size();
+        int architectureSize = architecture.getElements().size();
         if (architectureSize >= 1) {
             Random random = new Random();
             int howManyToSelect = random.nextInt(architectureSize) + 1;

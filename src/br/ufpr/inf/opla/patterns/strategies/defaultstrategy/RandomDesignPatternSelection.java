@@ -8,8 +8,8 @@ public class RandomDesignPatternSelection implements DesignPatternSelectionStrat
 
     @Override
     public DesignPattern selectDesignPattern() {
-        int index = new Random().nextInt(DesignPattern.FEASIBLE.length);
-        return DesignPattern.FEASIBLE[index];
+        int index = new Random().nextInt(DesignPattern.IMPLEMENTED.length);
+        return DesignPattern.IMPLEMENTED[index];
     }
 
 }

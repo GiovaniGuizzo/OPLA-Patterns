@@ -24,14 +24,16 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class Strategy extends DesignPattern {
 
-    private static final Strategy INSTANCE = new Strategy();
-    private static final Adapter ADAPTER = Adapter.getInstance();
+    private static volatile Strategy INSTANCE;
 
     private Strategy() {
         super("Strategy", "Behavioral");
     }
 
-    public static Strategy getInstance() {
+    public synchronized static Strategy getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Strategy();
+        }
         return INSTANCE;
     }
 
@@ -140,7 +142,7 @@ public class Strategy extends DesignPattern {
             //Move context relationships
             List<Element> contexts = psStrategy.getContexts();
             StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, new ArrayList<>(CollectionUtils.union(participants, adapteeList)), strategyInterface);
-            
+
             //Variabilities, variants and variation points.
             StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, new ArrayList<>(CollectionUtils.union(participants, adapteeList)), strategyInterface);
             applied = true;

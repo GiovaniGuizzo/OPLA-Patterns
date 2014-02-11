@@ -11,7 +11,6 @@ import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -20,13 +19,16 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class Adapter extends DesignPattern {
 
-    private static final Adapter INSTANCE = new Adapter();
+    private static volatile Adapter INSTANCE;
 
     private Adapter() {
         super("Adapter", "Structural");
     }
 
-    public static Adapter getInstance() {
+    public synchronized static Adapter getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Adapter();
+        }
         return INSTANCE;
     }
 

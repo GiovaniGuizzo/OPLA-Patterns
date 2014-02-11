@@ -24,13 +24,16 @@ import java.util.Set;
 
 public class Bridge extends DesignPattern {
 
-    private static final Bridge INSTANCE = new Bridge();
+    private static volatile Bridge INSTANCE;
 
     private Bridge() {
         super("Bridge", "Structural");
     }
 
-    public static Bridge getInstance() {
+    public synchronized static Bridge getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Bridge();
+        }
         return INSTANCE;
     }
 

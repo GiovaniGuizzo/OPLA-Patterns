@@ -5,13 +5,16 @@ import br.ufpr.inf.opla.patterns.models.Scope;
 
 public class Mediator extends DesignPattern {
 
-    private static final Mediator INSTANCE = new Mediator();
+    private static volatile Mediator INSTANCE;
 
     private Mediator() {
         super("Mediator", "Behavioral");
     }
 
-    public static Mediator getInstance() {
+    public synchronized static Mediator getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Mediator();
+        }
         return INSTANCE;
     }
 
@@ -30,4 +33,4 @@ public class Mediator extends DesignPattern {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- }
+}

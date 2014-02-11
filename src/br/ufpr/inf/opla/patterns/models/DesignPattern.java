@@ -16,6 +16,11 @@ public abstract class DesignPattern {
         Mediator.getInstance()
     };
     
+    public static final DesignPattern[] IMPLEMENTED = new DesignPattern[]{
+        Strategy.getInstance(),
+        Bridge.getInstance()
+    };
+    
     private final String name;
     private final String category;
     private final Random random;

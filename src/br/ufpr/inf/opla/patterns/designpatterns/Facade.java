@@ -5,13 +5,16 @@ import br.ufpr.inf.opla.patterns.models.Scope;
 
 public class Facade extends DesignPattern {
 
-    private static final Facade INSTANCE = new Facade();
+    private static volatile Facade INSTANCE;
 
     private Facade() {
         super("Facade", "Structural");
     }
 
-    public static Facade getInstance() {
+    public synchronized static Facade getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new Facade();
+        }
         return INSTANCE;
     }
 
@@ -30,4 +33,4 @@ public class Facade extends DesignPattern {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
- }
+}

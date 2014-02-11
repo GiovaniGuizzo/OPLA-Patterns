@@ -159,7 +159,7 @@ public class StrategyTest {
             Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         assertEquals(1, element2.getAllMethods().size());
-        
+
         arquitetura.representation.Class element3 = null;
         try {
             element3 = architecture.findClassByName("QuickSort").get(0);
@@ -167,7 +167,7 @@ public class StrategyTest {
             Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
         assertEquals(2, element3.getAllMethods().size());
-        
+
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[0]);
     }

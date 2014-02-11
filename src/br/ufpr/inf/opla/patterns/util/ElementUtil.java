@@ -273,6 +273,7 @@ public class ElementUtil {
                 if (participant instanceof arquitetura.representation.Class) {
                     arquitetura.representation.Class participantClass = (arquitetura.representation.Class) participant;
                     RelationshipUtil.createNewRealizationRelationship("implements", participantClass, anInterface);
+                    participantClass.addImplementedInterface(anInterface);
                 } else if (participant instanceof Interface) {
                     arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(anInterface, participant);
                     adapterList.add(adapterClass);

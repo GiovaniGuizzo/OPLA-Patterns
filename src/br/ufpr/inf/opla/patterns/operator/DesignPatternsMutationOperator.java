@@ -42,16 +42,10 @@ public class DesignPatternsMutationOperator extends Mutation {
     public Architecture mutateArchitecture(Architecture architecture, ScopeSelectionStrategy scopeSelectionStartegy, DesignPatternSelectionStrategy designPatternSelectionStrategy) {
         DesignPattern designPattern = designPatternSelectionStrategy.selectDesignPattern();
         Scope scope = scopeSelectionStartegy.selectScope(architecture);
-        LOGGER.log(Priority.INFO,
-                "Design Pattern selected: " + designPattern.getName());
-        LOGGER.log(Priority.INFO,
-                "Scope selected: " + scope.getElements().toArray().toString());
         if (designPattern.randomlyVerifyAsPSOrPSPLA(scope)) {
-            LOGGER.log(Priority.INFO,
-                    "Scope Verified = true");
             if (designPattern.apply(scope)) {
                 LOGGER.log(Priority.INFO,
-                        "Design Pattern " + designPattern.getName() + " applied to scope " + scope.getElements().toArray().toString() + " successfully!");
+                        "Design Pattern " + designPattern.getName() + " applied to scope " + scope.getElements().toString() + " successfully!");
             }
         }
         return architecture;

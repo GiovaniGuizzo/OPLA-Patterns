@@ -68,6 +68,7 @@ public class Adapter extends DesignPattern {
             } else {
                 Interface targetInterface = (Interface) target;
                 RelationshipUtil.createNewRealizationRelationship("implements", adapterClass, target);
+                adapterClass.addImplementedInterface(targetInterface);
                 Set<Method> clonedMethods = MethodUtil.cloneMethods(targetInterface.getOperations());
                 for (Method method : clonedMethods) {
                     adapterClass.addExternalMethod(method);

@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import jmetal.core.Solution;
 import jmetal.operators.mutation.Mutation;
+import jmetal.operators.mutation.PLAFeatureMutation;
 import jmetal.problems.OPLA;
 import jmetal.util.Configuration;
 import jmetal.util.JMException;
@@ -28,9 +29,11 @@ import org.apache.log4j.Priority;
 public class DesignPatternsMutationOperator extends Mutation {
 
     private static final Logger LOGGER = LogManager.getLogger(DesignPatternsMutationOperator.class);
+    private final PLAFeatureMutation pLAFeatureMutation;
 
     public DesignPatternsMutationOperator(HashMap<String, Object> parameters) {
         super(parameters);
+        pLAFeatureMutation = new PLAFeatureMutation(parameters);
     }
 
     public Architecture mutateArchitecture(Architecture architecture) {
@@ -64,21 +67,25 @@ public class DesignPatternsMutationOperator extends Mutation {
         }
 
         try {
-            if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
-                if (PseudoRandom.randDouble() < probability) {
-                    Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
-                    this.mutateArchitecture(arch);
+            int random = PseudoRandom.randInt(0, 6);
+            if (random == 0) {
+                if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
+                    if (PseudoRandom.randDouble() < probability) {
+                        Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
+                        this.mutateArchitecture(arch);
+                    }
                 }
+                if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
+                    Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
+                    solution.getDecisionVariables()[0] = clone;
+                    OPLA.contDiscardedSolutions_++;
+                    LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
+                }
+            } else {
+                pLAFeatureMutation.execute(o);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-
-        if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
-            Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
-            solution.getDecisionVariables()[0] = clone;
-            OPLA.contDiscardedSolutions_++;
-            LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
         }
 
         return solution;

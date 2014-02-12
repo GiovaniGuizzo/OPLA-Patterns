@@ -296,4 +296,36 @@ public class ElementUtil {
         }
     }
 
+    public static void verifyAndRemoveRequiredInterface(Element client, Element supplier) {
+        if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
+            for (Relationship relationship : client.getRelationships()) {
+                Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+                if (supplier.equals(usedElementFromRelationship)) {
+                    return;
+                }
+            }
+            ((arquitetura.representation.Class) client).removeRequiredInterface((Interface) supplier);
+        }
+    }
+
+    public static void verifyAndRemoveImplementedInterface(Element client, Element supplier) {
+        if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
+            if (!getAllSuperInterfaces((arquitetura.representation.Class) client).contains((Interface) supplier)) {
+                ((arquitetura.representation.Class) client).removeImplementedInterface((Interface) supplier);
+            }
+        }
+    }
+
+    public static void addRequiredInterface(Element client, Element supplier) {
+        if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
+            ((arquitetura.representation.Class) client).addRequiredInterface((Interface) supplier);
+        }
+    }
+
+    public static void addImplementedInterface(Element client, Element supplier) {
+        if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
+            ((arquitetura.representation.Class) client).addImplementedInterface((Interface) supplier);
+        }
+    }
+
 }

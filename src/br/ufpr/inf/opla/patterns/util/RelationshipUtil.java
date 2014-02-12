@@ -60,21 +60,25 @@ public class RelationshipUtil {
 
             usage.getSupplier().removeRelationship(usage);
             usage.getClient().removeRelationship(usage);
+            ElementUtil.verifyAndRemoveRequiredInterface(usage.getClient(), usage.getSupplier());
 
             usage.setSupplier(supplier);
             usage.setClient(client);
             supplier.addRelationship(usage);
             client.addRelationship(usage);
+            ElementUtil.addRequiredInterface(client, supplier);
         } else if (relationship instanceof DependencyRelationship) {
             DependencyRelationship dependency = (DependencyRelationship) relationship;
 
             dependency.getSupplier().removeRelationship(dependency);
             dependency.getClient().removeRelationship(dependency);
+            ElementUtil.verifyAndRemoveRequiredInterface(dependency.getClient(), dependency.getSupplier());
 
             dependency.setSupplier(supplier);
             dependency.setClient(client);
             supplier.addRelationship(dependency);
             client.addRelationship(dependency);
+            ElementUtil.addRequiredInterface(client, supplier);
         }
     }
 
@@ -83,6 +87,7 @@ public class RelationshipUtil {
         client.addRelationship(realizationRelationship);
         supplier.addRelationship(realizationRelationship);
         client.getArchitecture().addRelationship(realizationRelationship);
+        ElementUtil.addImplementedInterface(client, supplier);
         return realizationRelationship;
     }
 
@@ -91,6 +96,7 @@ public class RelationshipUtil {
         child.addRelationship(generalizationRelationship);
         parent.addRelationship(generalizationRelationship);
         parent.getArchitecture().addRelationship(generalizationRelationship);
+        ElementUtil.addImplementedInterface(child, parent);
         return generalizationRelationship;
     }
 
@@ -99,6 +105,7 @@ public class RelationshipUtil {
         client.addRelationship(usage);
         supplier.addRelationship(usage);
         client.getArchitecture().addRelationship(usage);
+        ElementUtil.addRequiredInterface(client, supplier);
         return usage;
     }
 
@@ -109,6 +116,7 @@ public class RelationshipUtil {
         aggregator.addRelationship(associationRelationship);
         aggregated.addRelationship(associationRelationship);
         aggregator.getArchitecture().addRelationship(associationRelationship);
+        ElementUtil.addRequiredInterface(aggregator, aggregated);
         return associationRelationship;
     }
 

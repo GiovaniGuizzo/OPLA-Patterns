@@ -34,10 +34,16 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_u2-RoDzCEeOQvLsAhPBMLQ" clientDependency="_18MA0DzCEeOQvLsAhPBMLQ _2WYpgDzCEeOQvLsAhPBMLQ" name="NotAContext"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_yazkwDzCEeOQvLsAhPBMLQ" name="NoEither"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_u2-RoDzCEeOQvLsAhPBMLQ" clientDependency="_18MA0DzCEeOQvLsAhPBMLQ _2WYpgDzCEeOQvLsAhPBMLQ" name="NotAContext">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_XfbmsJPmEeOmmu1VHgpZDw" name="foca"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_yazkwDzCEeOQvLsAhPBMLQ" name="NoEither">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_Y8Z7AJPmEeOmmu1VHgpZDw" name="aguia"/>
+      </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_uwevcDy_EeOQvLsAhPBMLQ" clientDependency="_KFy6wDzAEeOQvLsAhPBMLQ _LK1QMDzAEeOQvLsAhPBMLQ _LoJeUDzAEeOQvLsAhPBMLQ" name="ContextClass"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_xHLZsDzCEeOQvLsAhPBMLQ" name="NoAlgorithm"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_xHLZsDzCEeOQvLsAhPBMLQ" name="NoAlgorithm">
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_Yc4GYJPmEeOmmu1VHgpZDw" name="leao"/>
+      </packagedElement>
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ZripIDzXEeO7UKAGd3cQWw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ZrlscDzXEeO7UKAGd3cQWw" source="http://www.eclipse.org/uml2/2.0.0/UML">

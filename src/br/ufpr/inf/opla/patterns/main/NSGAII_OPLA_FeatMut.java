@@ -13,7 +13,6 @@ import jmetal.metaheuristics.nsgaII.NSGAII;
 import jmetal.operators.crossover.Crossover;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.MutationFactory;
 import jmetal.operators.selection.Selection;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.problems.OPLA;
@@ -31,7 +30,7 @@ public class NSGAII_OPLA_FeatMut {
  public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
          int runsNumber = 1; //30;
-         populationSize_ = 100; //100
+         populationSize_ = 3; //100
          maxEvaluations_ = 300; //300 gera��es
          
          crossoverProbability_ = 0.0; 
@@ -44,14 +43,14 @@ public class NSGAII_OPLA_FeatMut {
          File directory = new File("experiment/OPLA/NSGA-II/PatternMutation" + "/");
          if (!directory.exists()) {
              if (!directory.mkdirs()) {
-             	System.out.println("N�o foi poss�vel criar o diret�rio do resultado");
+             	System.out.println("Não foi possível criar o diretório do resultado");
              	System.exit(0);
              }
          }
 
 
          String plas[] = new String[]{
-        		"/home/giovaniguizzo/NetBeansProjects/OPLA-Patterns/AGMFinal/agm.uml" };
+        		"/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/AGMFinal/agm.uml" };
          String xmiFilePath;
           		
          for (String pla : plas) {

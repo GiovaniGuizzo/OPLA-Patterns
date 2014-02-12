@@ -67,7 +67,7 @@ public class DesignPatternsMutationOperator extends Mutation {
             if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
                 if (PseudoRandom.randDouble() < probability) {
                     Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
-                    solution.getDecisionVariables()[0] = this.mutateArchitecture(arch);
+                    this.mutateArchitecture(arch);
                 }
             }
         } catch (ClassNotFoundException e) {
@@ -78,6 +78,7 @@ public class DesignPatternsMutationOperator extends Mutation {
             Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
             solution.getDecisionVariables()[0] = clone;
             OPLA.contDiscardedSolutions_++;
+            LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
         }
 
         return solution;

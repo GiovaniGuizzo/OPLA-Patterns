@@ -96,8 +96,8 @@ public class BridgeUtil {
         if (participants != null && !participants.isEmpty()) {
             Architecture architecture = participants.get(0).getArchitecture();
 
-            Class abstractClass = architecture.createClass(algorithmFamily.getName() + "Abstraction", true);
-            Class concreteClass = architecture.createClass(algorithmFamily.getName() + "AbstractionImpl", false);
+            Class abstractClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Abstraction", true);
+            Class concreteClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "AbstractionImpl", false);
 
             architecture.removeClass(abstractClass);
             architecture.removeClass(concreteClass);

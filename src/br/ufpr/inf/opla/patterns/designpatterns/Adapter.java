@@ -3,6 +3,7 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 import arquitetura.exceptions.ConcernNotFoundException;
 import arquitetura.exceptions.PackageNotFound;
 import arquitetura.helpers.UtilResources;
+import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -12,9 +13,13 @@ import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,16 +57,39 @@ public class Adapter extends DesignPattern {
 
     //TODO - Édipo - Adicionar estereótipos Adapter.
     public arquitetura.representation.Class applyAdapter(Element target, Element adaptee) {
+        arquitetura.representation.Class adapterClass = null;
         if (target != null
                 && adaptee != null
                 && (target instanceof arquitetura.representation.Class || target instanceof Interface)
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
             try {
-                Package aPackage = target.getArchitecture().findPackageByName(UtilResources.extractPackageName(adaptee.getNamespace()));
-                arquitetura.representation.Class adapterClass = aPackage.createClass(adaptee.getName() + "Adapter", false);
+                arquitetura.representation.Package aPackage = null;
+                Architecture architecture = adaptee.getArchitecture();
+
+                List<Element> tempElements;
+
+                String namespace = adaptee.getNamespace();
+                String packageName = UtilResources.extractPackageName(namespace);
+
+                boolean naArquitetura = packageName.equalsIgnoreCase("model");
+                if (naArquitetura) {
+                    adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
+                    
+                    architecture.removeClass(adapterClass);
+
+                    tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
+                } else {
+                    aPackage = architecture.findPackageByName(packageName);
+                    adapterClass = aPackage.createClass(adaptee.getName() + "Adapter", false);
+                    
+                    aPackage.removeClass(adapterClass);
+
+                    tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
+                }
+                
                 adapterClass.setNamespace(adaptee.getNamespace());
                 adapterClass.setVariant(adaptee.getVariant());
-                
+
                 //Implements/Extends and add all methods.
                 if (target instanceof arquitetura.representation.Class) {
                     arquitetura.representation.Class targetClass = (arquitetura.representation.Class) target;
@@ -78,9 +106,9 @@ public class Adapter extends DesignPattern {
                         adapterClass.addExternalMethod(method);
                     }
                 }
-                
+
                 RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
-                
+
                 Relationship relationshipToBeExcluded = null;
                 if (adaptee.getClass().equals(target.getClass())) {
                     for (Relationship relationship : adaptee.getRelationships()) {
@@ -97,13 +125,13 @@ public class Adapter extends DesignPattern {
                         }
                     }
                 }
-                
+
                 if (relationshipToBeExcluded != null) {
                     target.getRelationships().remove(relationshipToBeExcluded);
                     adaptee.getRelationships().remove(relationshipToBeExcluded);
-                    adapterClass.getArchitecture().getAllRelationships().remove(relationshipToBeExcluded);
+                    architecture.getAllRelationships().remove(relationshipToBeExcluded);
                 }
-                
+
                 //Copy concerns
                 for (Concern concern : CollectionUtils.union(target.getOwnConcerns(), adaptee.getOwnConcerns())) {
                     try {
@@ -112,21 +140,33 @@ public class Adapter extends DesignPattern {
                         Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
                 //Move variants
                 Variant variant = adapterClass.getVariant();
                 if (variant != null) {
                     variant.setVariantElement(adapterClass);
                     adaptee.setVariant(null);
                 }
-                return adapterClass;
+                
+                int count = 1;
+                String name = adapterClass.getName();
+                while (tempElements.contains(adapterClass)) {
+                    count++;
+                    adapterClass.setName(name + Integer.toString(count));
+                }
+                
+                if (naArquitetura) {
+                    architecture.addExternalClass(adapterClass);
+                } else if (aPackage != null) {
+                    aPackage.addExternalClass(adapterClass);
+                }
             } catch (PackageNotFound ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return null;
+        return adapterClass;
     }
 
 }

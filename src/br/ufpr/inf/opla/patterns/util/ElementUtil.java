@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -19,12 +20,27 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class ElementUtil {
 
-    private ElementUtil() {
+    public static List<Relationship> getRelationships(Element element) {
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        if (element instanceof arquitetura.representation.Class) {
+            relationships.addAll(((arquitetura.representation.Class) element).getRelationships());
+        } else if (element instanceof Interface) {
+            relationships.addAll(((Interface) element).getRelationships());
+        }
+        return relationships;
+    }
+
+    public static void addRelationship(Architecture architecture, Relationship relationship) {
+        architecture.getRelationshipHolder().addRelationship(relationship);
+    }
+
+    public static void removeRelationship(Architecture architecture, Relationship relationship) {
+        architecture.getRelationshipHolder().removeRelationship(relationship);
     }
 
     public static boolean isTypeOf(Element child, Element parent) {
         boolean isType = false;
-        for (Relationship relationship : child.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Element tempParent = RelationshipUtil.getImplementedInterface(relationship);
             if (tempParent == null) {
                 tempParent = RelationshipUtil.getExtendedElement(relationship);
@@ -45,7 +61,7 @@ public class ElementUtil {
 
     public static List<Interface> getAllSuperInterfaces(Element child) {
         List<Interface> implementedInterfaces = new ArrayList<>();
-        for (Relationship relationship : child.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Interface tempInterface = RelationshipUtil.getImplementedInterface(relationship);
             if (tempInterface != null && !tempInterface.equals(child)) {
                 implementedInterfaces.add(tempInterface);
@@ -57,7 +73,7 @@ public class ElementUtil {
                 }
                 List<Element> parentSuperTypes = getAllExtendedElements(tempInterface);
                 for (Element parentSuperType : parentSuperTypes) {
-                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains((Interface) parentSuperType)) {
+                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains(parentSuperType)) {
                         implementedInterfaces.add((Interface) parentSuperType);
                     }
                 }
@@ -72,7 +88,7 @@ public class ElementUtil {
                 }
             }
             if (child instanceof Interface && extendedElement instanceof Interface) {
-                if (!implementedInterfaces.contains((Interface) extendedElement)) {
+                if (!implementedInterfaces.contains(extendedElement)) {
                     implementedInterfaces.add((Interface) extendedElement);
                 }
             }
@@ -114,7 +130,7 @@ public class ElementUtil {
 
     public static List<Element> getAllExtendedElements(Element child) {
         List<Element> extendedElements = new ArrayList<>();
-        for (Relationship relationship : child.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Element tempParent = RelationshipUtil.getExtendedElement(relationship);
             if (tempParent != null && !tempParent.equals(child)) {
                 extendedElements.add(tempParent);
@@ -131,7 +147,7 @@ public class ElementUtil {
 
     public static List<Element> getAllSubElements(Element parent) {
         List<Element> subElements = new ArrayList<>();
-        for (Relationship relationship : parent.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(parent)) {
             Element tempChild = RelationshipUtil.getSubElement(relationship);
             if (tempChild != null && !tempChild.equals(parent)) {
                 subElements.add(tempChild);
@@ -198,7 +214,7 @@ public class ElementUtil {
 
     public static Set<Element> getAllAggregatedElements(Element element) {
         Set<Element> aggregatedElements = new HashSet<>();
-        for (Relationship relationship : element.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(element)) {
             if (relationship instanceof AssociationRelationship) {
                 AssociationRelationship association = (AssociationRelationship) relationship;
                 for (AssociationEnd end : association.getParticipants()) {
@@ -298,7 +314,7 @@ public class ElementUtil {
 
     public static void verifyAndRemoveRequiredInterface(Element client, Element supplier) {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
-            for (Relationship relationship : client.getRelationships()) {
+            for (Relationship relationship : ElementUtil.getRelationships(client)) {
                 Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
                 if (supplier.equals(usedElementFromRelationship)) {
                     return;
@@ -310,7 +326,7 @@ public class ElementUtil {
 
     public static void verifyAndRemoveImplementedInterface(Element client, Element supplier) {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
-            if (!getAllSuperInterfaces((arquitetura.representation.Class) client).contains((Interface) supplier)) {
+            if (!getAllSuperInterfaces(client).contains(supplier)) {
                 ((arquitetura.representation.Class) client).removeImplementedInterface((Interface) supplier);
             }
         }
@@ -326,6 +342,9 @@ public class ElementUtil {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
             ((arquitetura.representation.Class) client).addImplementedInterface((Interface) supplier);
         }
+    }
+
+    private ElementUtil() {
     }
 
 }

@@ -43,14 +43,14 @@ public class ArchitectureRepository {
     };
 
     private static final ArchitectureRepository INSTANCE = new ArchitectureRepository();
+
+    public static ArchitectureRepository getInstance() {
+        return INSTANCE;
+    }
     private final ArchitectureBuilder architectureBuilder;
 
     private ArchitectureRepository() {
         this.architectureBuilder = new ArchitectureBuilder();
-    }
-
-    public static ArchitectureRepository getInstance() {
-        return INSTANCE;
     }
 
     public Architecture getArchitecture(String path) {

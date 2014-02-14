@@ -6,14 +6,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-
 import jmetal.core.Algorithm;
 import jmetal.core.SolutionSet;
 import jmetal.metaheuristics.nsgaII.NSGAII;
 import jmetal.operators.crossover.Crossover;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.PLAFeatureMutation;
 import jmetal.operators.selection.Selection;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.problems.OPLA;
@@ -171,7 +169,7 @@ public class NSGAII_OPLA_FeatMut {
  }
 
  	private static String getPlaName(String pla) {
- 		int beginIndex = pla.lastIndexOf("/") + 1;
+ 		int beginIndex = pla.lastIndexOf('/') + 1;
 		int endIndex = pla.length() - 4;
 		return pla.substring(beginIndex, endIndex);
  	}

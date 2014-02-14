@@ -7,15 +7,15 @@ public class Mediator extends DesignPattern {
 
     private static volatile Mediator INSTANCE;
 
-    private Mediator() {
-        super("Mediator", "Behavioral");
-    }
-
-    public synchronized static Mediator getInstance() {
+    public static synchronized Mediator getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Mediator();
         }
         return INSTANCE;
+    }
+
+    private Mediator() {
+        super("Mediator", "Behavioral");
     }
 
     @Override

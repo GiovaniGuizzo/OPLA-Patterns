@@ -1,14 +1,12 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.exceptions.ConcernNotFoundException;
-import arquitetura.exceptions.PackageNotFound;
 import arquitetura.helpers.UtilResources;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import arquitetura.representation.Package;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.DesignPattern;
@@ -29,15 +27,15 @@ public class Adapter extends DesignPattern {
 
     private static volatile Adapter INSTANCE;
 
-    private Adapter() {
-        super("Adapter", "Structural");
-    }
-
-    public synchronized static Adapter getInstance() {
+    public static synchronized Adapter getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Adapter();
         }
         return INSTANCE;
+    }
+
+    private Adapter() {
+        super("Adapter", "Structural");
     }
 
     @Override
@@ -74,19 +72,19 @@ public class Adapter extends DesignPattern {
                 boolean naArquitetura = packageName.equalsIgnoreCase("model");
                 if (naArquitetura) {
                     adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
-                    
+
                     architecture.removeClass(adapterClass);
 
                     tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
                 } else {
                     aPackage = architecture.findPackageByName(packageName);
                     adapterClass = aPackage.createClass(adaptee.getName() + "Adapter", false);
-                    
+
                     aPackage.removeClass(adapterClass);
 
                     tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
                 }
-                
+
                 adapterClass.setNamespace(adaptee.getNamespace());
                 adapterClass.setVariant(adaptee.getVariant());
 
@@ -111,14 +109,14 @@ public class Adapter extends DesignPattern {
 
                 Relationship relationshipToBeExcluded = null;
                 if (adaptee.getClass().equals(target.getClass())) {
-                    for (Relationship relationship : adaptee.getRelationships()) {
+                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
                         if (target.equals(RelationshipUtil.getExtendedElement(relationship))) {
                             relationshipToBeExcluded = relationship;
                             break;
                         }
                     }
                 } else {
-                    for (Relationship relationship : adaptee.getRelationships()) {
+                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
                         if (target.equals(RelationshipUtil.getImplementedInterface(relationship))) {
                             relationshipToBeExcluded = relationship;
                             break;
@@ -127,9 +125,9 @@ public class Adapter extends DesignPattern {
                 }
 
                 if (relationshipToBeExcluded != null) {
-                    target.getRelationships().remove(relationshipToBeExcluded);
-                    adaptee.getRelationships().remove(relationshipToBeExcluded);
-                    architecture.getAllRelationships().remove(relationshipToBeExcluded);
+                    ElementUtil.removeRelationship(architecture, relationshipToBeExcluded);
+                    ElementUtil.removeRelationship(architecture, relationshipToBeExcluded);
+                    architecture.removeRelationship(relationshipToBeExcluded);
                 }
 
                 //Copy concerns
@@ -147,21 +145,19 @@ public class Adapter extends DesignPattern {
                     variant.setVariantElement(adapterClass);
                     adaptee.setVariant(null);
                 }
-                
+
                 int count = 1;
                 String name = adapterClass.getName();
                 while (tempElements.contains(adapterClass)) {
                     count++;
                     adapterClass.setName(name + Integer.toString(count));
                 }
-                
+
                 if (naArquitetura) {
                     architecture.addExternalClass(adapterClass);
                 } else if (aPackage != null) {
                     aPackage.addExternalClass(adapterClass);
                 }
-            } catch (PackageNotFound ex) {
-                Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -26,15 +26,15 @@ public class Strategy extends DesignPattern {
 
     private static volatile Strategy INSTANCE;
 
-    private Strategy() {
-        super("Strategy", "Behavioral");
-    }
-
-    public synchronized static Strategy getInstance() {
+    public static synchronized Strategy getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Strategy();
         }
         return INSTANCE;
+    }
+
+    private Strategy() {
+        super("Strategy", "Behavioral");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class Strategy extends DesignPattern {
             List<Element> contexts = new ArrayList<>();
             for (Element element : elementsInScope) {
                 List<Element> usedElements = new ArrayList<>();
-                for (Relationship relationship : element.getRelationships()) {
+                for (Relationship relationship : ElementUtil.getRelationships(element)) {
                     Element usedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
                     if (usedElement != null && !usedElement.equals(element)) {
                         usedElements.add(usedElement);

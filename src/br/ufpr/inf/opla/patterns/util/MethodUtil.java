@@ -15,9 +15,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class MethodUtil {
 
-    private MethodUtil() {
-    }
-
     public static Set<Method> getMethodsFromElement(Element element) {
         Set<Method> iMethods;
         if (element instanceof arquitetura.representation.Class) {
@@ -138,7 +135,7 @@ public class MethodUtil {
     }
 
     public static Method cloneMethod(Method method) {
-        Method newMethod = new Method(method.getArchitecture(), method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
+        Method newMethod = new Method(method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
         newMethod.getParameters().addAll(method.getParameters());
         newMethod.getOwnConcerns().addAll(method.getOwnConcerns());
         newMethod.setNamespace(method.getNamespace());
@@ -185,5 +182,8 @@ public class MethodUtil {
         ArrayList<Concern> concerns = new ArrayList<>(methodA.getOwnConcerns());
         methodA.getOwnConcerns().clear();
         methodA.getOwnConcerns().addAll(CollectionUtils.union(concerns, methodB.getOwnConcerns()));
+    }
+
+    private MethodUtil() {
     }
 }

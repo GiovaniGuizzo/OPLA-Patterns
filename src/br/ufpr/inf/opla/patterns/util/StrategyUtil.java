@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Variability;
@@ -14,9 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 public class StrategyUtil {
-
-    private StrategyUtil() {
-    }
 
     /**
      * Gets the Strategy interface from the algorithm family, if there is one.
@@ -99,9 +97,11 @@ public class StrategyUtil {
     }
 
     public static void moveContextsRelationshipWithSameTypeAndName(List<Element> contexts, List<Element> participants, Element target) {
+        Architecture architecture = target.getArchitecture();
+
         for (Element context : contexts) {
             HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
-            for (Relationship relationShip : context.getRelationships()) {
+            for (Relationship relationShip : ElementUtil.getRelationships(context)) {
                 Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationShip);
                 if (usedElementFromRelationship != null
                         && !usedElementFromRelationship.equals(context)
@@ -128,8 +128,8 @@ public class StrategyUtil {
 
                     for (Relationship tempRelationship : nameList) {
                         Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(tempRelationship);
-                        usedElementFromRelationship.removeRelationship(tempRelationship);
-                        context.removeRelationship(tempRelationship);
+                        ElementUtil.removeRelationship(architecture, tempRelationship);
+                        ElementUtil.removeRelationship(architecture, tempRelationship);
                         context.getArchitecture().removeRelationship(tempRelationship);
                     }
 
@@ -160,6 +160,9 @@ public class StrategyUtil {
                 }
             }
         }
+    }
+
+    private StrategyUtil() {
     }
 
 }

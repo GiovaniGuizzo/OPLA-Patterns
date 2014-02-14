@@ -15,6 +15,7 @@ import br.ufpr.inf.opla.patterns.strategies.defaultstrategy.RandomScopeSelection
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import jmetal.core.Solution;
 import jmetal.operators.mutation.Mutation;
 import jmetal.operators.mutation.PLAFeatureMutation;
@@ -86,6 +87,8 @@ public class DesignPatternsMutationOperator extends Mutation {
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DesignPatternsMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return solution;
@@ -93,7 +96,7 @@ public class DesignPatternsMutationOperator extends Mutation {
 
     private boolean isValidSolution(Architecture solution) {
         boolean isValid = true;
-        List<Interface> allInterfaces = new ArrayList<Interface>(solution.getAllInterfaces());
+        List<Interface> allInterfaces = new ArrayList<>(solution.getAllInterfaces());
         if (!allInterfaces.isEmpty()) {
             for (Interface itf : allInterfaces) {
                 if ((itf.getImplementors().isEmpty()) && (itf.getDependents().isEmpty()) && (!itf.getOperations().isEmpty())) {

@@ -5,8 +5,6 @@
  */
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import arquitetura.exceptions.ClassNotFound;
-import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
 import arquitetura.representation.Interface;
@@ -14,8 +12,7 @@ import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
@@ -43,19 +40,11 @@ public class AdapterTest {
         Architecture architecture = architectureRepository.getArchitecture(model);
 
         Interface target = null;
-        try {
-            target = architecture.findInterfaceByName("SomeInterface");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(AdapterTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        target = architecture.findInterfaceByName("SomeInterface");
         assertEquals("SomeInterface", target.getName());
 
         Interface adaptee = null;
-        try {
-            adaptee = architecture.findInterfaceByName("Sort2");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(AdapterTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        adaptee = architecture.findInterfaceByName("Sort2");
         assertEquals("Sort2", adaptee.getName());
 
         Class adapterClass = adapter.applyAdapter(target, adaptee);
@@ -64,10 +53,10 @@ public class AdapterTest {
         assertEquals(3, adapterClass.getAllMethods().size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        RealizationRelationship realization = (RealizationRelationship) adapterClass.getRelationships().get(0);
+        RealizationRelationship realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
         assertEquals(target, realization.getSupplier());
 
-        UsageRelationship usage = (UsageRelationship) adapterClass.getRelationships().get(1);
+        UsageRelationship usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         assertEquals(adaptee, usage.getSupplier());
 
     }
@@ -78,19 +67,11 @@ public class AdapterTest {
         Architecture architecture = architectureRepository.getArchitecture(model);
 
         Class target = null;
-        try {
-            target = architecture.findClassByName("Sort1").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(AdapterTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        target = architecture.findClassByName("Sort1").get(0);
         assertEquals("Sort1", target.getName());
 
         Interface adaptee = null;
-        try {
-            adaptee = architecture.findInterfaceByName("Sort2");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(AdapterTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        adaptee = architecture.findInterfaceByName("Sort2");
         assertEquals("Sort2", adaptee.getName());
 
         Class adapterClass = adapter.applyAdapter(target, adaptee);
@@ -99,10 +80,10 @@ public class AdapterTest {
         assertEquals(1, adapterClass.getAllMethods().size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        GeneralizationRelationship generalization = (GeneralizationRelationship) adapterClass.getRelationships().get(0);
+        GeneralizationRelationship generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
         assertEquals(target, generalization.getParent());
 
-        UsageRelationship usage = (UsageRelationship) adapterClass.getRelationships().get(1);
+        UsageRelationship usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         assertEquals(adaptee, usage.getSupplier());
     }
 

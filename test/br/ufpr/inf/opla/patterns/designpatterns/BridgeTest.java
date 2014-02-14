@@ -30,11 +30,9 @@ public class BridgeTest {
 
     private final Bridge bridge;
     private final ScopeSelectionStrategy scopeSelectionStrategy;
-    private final ArchitectureRepository architectureRepository;
 
     public BridgeTest() {
         this.bridge = Bridge.getInstance();
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
     }
 
@@ -44,7 +42,7 @@ public class BridgeTest {
     @Test
     public void testVerifyPS() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
 
         assertEquals(7, scope.getElements().size());
@@ -66,7 +64,7 @@ public class BridgeTest {
     @Test
     public void testVerifyPS2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[1];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
 
         assertEquals(7, scope.getElements().size());
@@ -78,7 +76,7 @@ public class BridgeTest {
     @Test
     public void testVerifyPS3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
 
         assertEquals(5, scope.getElements().size());
@@ -93,7 +91,7 @@ public class BridgeTest {
     @Test
     public void testVerifyPSPLA() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
 
         assertEquals(7, scope.getElements().size());
@@ -118,7 +116,7 @@ public class BridgeTest {
     @Test
     public void testApply() {
         String model = ArchitectureRepository.BRIDGE_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         assertEquals(3, scope.getElements().size());
         boolean verifyPSPLA = bridge.verifyPSPLA(scope);

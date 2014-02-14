@@ -30,12 +30,10 @@ import org.junit.Test;
  */
 public class StrategyUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
     private final Strategy strategy;
 
     public StrategyUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
         this.strategy = Strategy.getInstance();
     }
@@ -45,7 +43,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testGetStrategyInterfaceFromAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         Interface aInterface = StrategyUtil.getStrategyInterfaceFromAlgorithmFamily(familiesFromScope.get(0));
@@ -57,7 +55,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testCreateStrategyInterfaceForAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         AlgorithmFamily family = familiesFromScope.get(0);
@@ -72,7 +70,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testAreTheAlgorithmFamilyAndContextsPartOfAVariability() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
 
         assertEquals(7, scope.getElements().size());
 
@@ -93,7 +91,7 @@ public class StrategyUtilTest {
         boolean result = StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(psPLAStrategy.getAlgorithmFamily(), psPLAStrategy.getContexts());
         assertTrue(result);
 
-        scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
         assertEquals(7, scope.getElements().size());
 
         verifyPSPLA = strategy.verifyPSPLA(scope);
@@ -112,7 +110,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testGetAllStrategyInterfacesFromSetOfElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[4]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[4]);
         ArrayList<Element> elements = new ArrayList<>();
         elements.add(architecture.findClassByName("Class1").get(0));
         elements.add(architecture.findClassByName("Class2").get(0));
@@ -125,7 +123,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testMoveContextsRelationshipWithSameTypeAndName() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[5]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[5]);
         ArrayList<Element> contexts = new ArrayList<>();
         final Class context = architecture.findClassByName("Context1").get(0);
         contexts.add(context);
@@ -134,8 +132,8 @@ public class StrategyUtilTest {
         participants.add(architecture.findClassByName("Class2").get(0));
         final Class target = architecture.findClassByName("Class3").get(0);
         StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, participants, target);
-        assertEquals(5, target.getRelationships().size());
-        assertEquals(3, context.getRelationships().size());
+        assertEquals(4, target.getRelationships().size());
+        assertEquals(2, context.getRelationships().size());
         assertEquals(1, architecture.findClassByName("Class1").get(0).getRelationships().size());
         assertEquals(1, architecture.findClassByName("Class2").get(0).getRelationships().size());
     }
@@ -145,7 +143,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testMoveVariabilitiesFromContextsToTarget() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
         ArrayList<Element> contexts = new ArrayList<>();
         contexts.add(architecture.findClassByName("ContextClass").get(0));
         ArrayList<Element> participants = new ArrayList<>();

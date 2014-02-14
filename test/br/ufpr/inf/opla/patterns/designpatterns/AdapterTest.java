@@ -23,12 +23,10 @@ import org.junit.Test;
  */
 public class AdapterTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final Adapter adapter;
 
     public AdapterTest() {
         this.adapter = Adapter.getInstance();
-        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -37,7 +35,7 @@ public class AdapterTest {
     @Test
     public void testApplyAdapter() {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
         Interface target = null;
         target = architecture.findInterfaceByName("SomeInterface");
@@ -53,18 +51,23 @@ public class AdapterTest {
         assertEquals(3, adapterClass.getAllMethods().size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        RealizationRelationship realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        RealizationRelationship realization;
+        UsageRelationship usage;
+        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof RealizationRelationship) {
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+        } else {
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        }
         assertEquals(target, realization.getSupplier());
-
-        UsageRelationship usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         assertEquals(adaptee, usage.getSupplier());
-
     }
 
     @Test
     public void testApplyAdapterHavingClassAsTarget() {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
         Class target = null;
         target = architecture.findClassByName("Sort1").get(0);
@@ -80,10 +83,18 @@ public class AdapterTest {
         assertEquals(1, adapterClass.getAllMethods().size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        GeneralizationRelationship generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        GeneralizationRelationship generalization;
+        UsageRelationship usage;
+        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof GeneralizationRelationship) {
+            generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+        } else {
+            generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        }
+
         assertEquals(target, generalization.getParent());
 
-        UsageRelationship usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         assertEquals(adaptee, usage.getSupplier());
     }
 

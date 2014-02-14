@@ -20,11 +20,9 @@ import org.junit.Test;
  */
 public class AlgorithmFamilyUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
 
     public AlgorithmFamilyUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
     }
 
@@ -33,7 +31,7 @@ public class AlgorithmFamilyUtilTest {
      */
     @Test
     public void testGetFamiliesFromScope() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         assertEquals(3, familiesFromScope.size());

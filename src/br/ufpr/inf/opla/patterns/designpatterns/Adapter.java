@@ -9,8 +9,8 @@ import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
@@ -62,7 +62,7 @@ public class Adapter extends DesignPattern {
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
             try {
                 arquitetura.representation.Package aPackage = null;
-                Architecture architecture = adaptee.getArchitecture();
+                Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
 
                 List<Element> tempElements;
 
@@ -71,7 +71,7 @@ public class Adapter extends DesignPattern {
 
                 boolean naArquitetura = packageName.equalsIgnoreCase("model");
                 if (naArquitetura) {
-                    adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
+                    adapterClass = architecture.createClass(adaptee.getName() + "Adapter", false);
 
                     architecture.removeClass(adapterClass);
 
@@ -125,8 +125,6 @@ public class Adapter extends DesignPattern {
                 }
 
                 if (relationshipToBeExcluded != null) {
-                    ElementUtil.removeRelationship(architecture, relationshipToBeExcluded);
-                    ElementUtil.removeRelationship(architecture, relationshipToBeExcluded);
                     architecture.removeRelationship(relationshipToBeExcluded);
                 }
 

@@ -7,6 +7,7 @@ import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,7 +20,7 @@ public class InterfaceUtil {
         Interface anInterface = null;
         if (participants != null && !participants.isEmpty()) {
             arquitetura.representation.Package aPackage = null;
-            Architecture architecture = participants.get(0).getArchitecture();
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
             List<Element> tempElements;
             String namespace = ElementUtil.getNameSpace(participants);
             String packageName = UtilResources.extractPackageName(namespace);

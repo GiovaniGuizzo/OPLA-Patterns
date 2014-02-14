@@ -25,10 +25,7 @@ import org.junit.Test;
  */
 public class RelationshipUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
-
     public RelationshipUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -36,7 +33,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetUsedElementFromRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("NotAContext").get(0);
         assertEquals("NotAContext", element.getName());
@@ -51,7 +48,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetImplementedInterface() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         assertEquals("Class1", element.getName());
@@ -66,7 +63,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetExtendedElement() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         assertEquals("Class1", element.getName());
@@ -81,7 +78,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testMoveRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element1 = null;
@@ -105,7 +102,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewRealizationRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;
@@ -124,7 +121,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewGeneralizationRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;
@@ -143,7 +140,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewUsageRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;
@@ -162,7 +159,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testGetSubElement() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findInterfaceByName("StrategyInterface");
         Element element2 = null;
@@ -179,7 +176,7 @@ public class RelationshipUtilTest {
      */
     @Test
     public void testCreateNewAggregationRelationship() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;

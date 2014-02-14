@@ -33,12 +33,10 @@ import org.junit.Test;
  */
 public class BridgeUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
     private final Bridge bridge;
 
     public BridgeUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
         this.bridge = Bridge.getInstance();
     }
@@ -48,7 +46,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetImplementationInterfaces() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -73,7 +71,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetAbstractionClasses() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -94,7 +92,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testCreateAbstractionClasses() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
 
         assertTrue(bridge.verifyPS(scope));
@@ -116,7 +114,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testCreateImplementationInterface() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
 
         assertTrue(bridge.verifyPS(scope));
@@ -141,7 +139,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testAggregateAbstractionWithImplementation() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
         Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
 
         assertTrue(bridge.verifyPS(scope));
@@ -154,7 +152,7 @@ public class BridgeUtilTest {
         final Class abstractClass = (arquitetura.representation.Class) result.get(0);
         assertEquals(5, abstractClass.getAllMethods().size());
         assertEquals(3, abstractClass.getAllConcerns().size());
-        
+
         HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(algorithmFamily.getParticipants());
         List<Interface> interfaces = new ArrayList<>();
         for (Map.Entry<Concern, List<Element>> entry : groupedElements.entrySet()) {
@@ -163,7 +161,7 @@ public class BridgeUtilTest {
             BridgeUtil.aggregateAbstractionWithImplementation(abstractClass, anInterface);
         }
         assertEquals(3, interfaces.size());
-        
+
         assertEquals(4, abstractClass.getRelationships().size());
         for (Interface anInterface : interfaces) {
             assertEquals(1, anInterface.getRelationships().size());

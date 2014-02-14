@@ -9,6 +9,7 @@ import arquitetura.representation.VariationPoint;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -97,7 +98,7 @@ public class StrategyUtil {
     }
 
     public static void moveContextsRelationshipWithSameTypeAndName(List<Element> contexts, List<Element> participants, Element target) {
-        Architecture architecture = target.getArchitecture();
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
 
         for (Element context : contexts) {
             HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
@@ -127,13 +128,10 @@ public class StrategyUtil {
                     Relationship relationship = nameList.get(0);
 
                     for (Relationship tempRelationship : nameList) {
-                        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(tempRelationship);
-                        ElementUtil.removeRelationship(architecture, tempRelationship);
-                        ElementUtil.removeRelationship(architecture, tempRelationship);
-                        context.getArchitecture().removeRelationship(tempRelationship);
+                        architecture.removeRelationship(tempRelationship);
                     }
 
-                    context.getArchitecture().addRelationship(relationship);
+                    ArchitectureRepository.getCurrentArchitecture().addRelationship(relationship);
                     RelationshipUtil.moveRelationship(relationship, context, target);
                 }
             }

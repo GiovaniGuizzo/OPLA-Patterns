@@ -1,6 +1,5 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 
 public class Mediator extends DesignPattern {

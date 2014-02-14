@@ -14,6 +14,7 @@ import arquitetura.representation.relationship.Multiplicity;
 import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,7 +50,7 @@ public class BridgeUtil {
 
     public static List<Element> getAbstractionClasses(AlgorithmFamily algorithmFamily) {
         List<Element> abstractionClasses = new ArrayList<>();
-        Set<Class> elements = algorithmFamily.getParticipants().get(0).getArchitecture().getAllClasses();
+        Set<Class> elements = ArchitectureRepository.getCurrentArchitecture().getAllClasses();
         root:
         for (Class classElement : elements) {
             if (classElement.isAbstract()) {
@@ -92,7 +93,7 @@ public class BridgeUtil {
         if (participants != null && !participants.isEmpty()) {
             try {
                 arquitetura.representation.Package aPackage = null;
-                Architecture architecture = participants.get(0).getArchitecture();
+                Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
 
                 Class abstractClass;
                 Class concreteClass;
@@ -183,7 +184,7 @@ public class BridgeUtil {
         Interface anInterface = null;
         if (elements != null && !elements.isEmpty()) {
             arquitetura.representation.Package aPackage = null;
-            Architecture architecture = elements.get(0).getArchitecture();
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
             List<Element> tempElements;
             String namespace = ElementUtil.getNameSpace(elements);
             String packageName = UtilResources.extractPackageName(namespace);

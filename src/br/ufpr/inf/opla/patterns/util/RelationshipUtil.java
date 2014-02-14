@@ -9,6 +9,7 @@ import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
 import arquitetura.representation.relationship.UsageRelationship;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.UUID;
 
 public class RelationshipUtil {
@@ -53,76 +54,64 @@ public class RelationshipUtil {
     }
 
     public static void moveRelationship(Relationship relationship, Element client, Element supplier) {
-        Architecture architecture = client.getArchitecture();
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
         if (relationship instanceof UsageRelationship) {
             UsageRelationship usage = (UsageRelationship) relationship;
 
-            ElementUtil.removeRelationship(architecture, usage);
-            ElementUtil.removeRelationship(architecture, usage);
+            architecture.removeRelationship(usage);
             ElementUtil.verifyAndRemoveRequiredInterface(usage.getClient(), usage.getSupplier());
 
             usage.setSupplier(supplier);
             usage.setClient(client);
-            ElementUtil.addRelationship(architecture, usage);
-            ElementUtil.addRelationship(architecture, usage);
+            architecture.addRelationship(usage);
             ElementUtil.addRequiredInterface(client, supplier);
         } else if (relationship instanceof DependencyRelationship) {
             DependencyRelationship dependency = (DependencyRelationship) relationship;
 
-            ElementUtil.removeRelationship(architecture, dependency);
-            ElementUtil.removeRelationship(architecture, dependency);
+            architecture.removeRelationship(dependency);
             ElementUtil.verifyAndRemoveRequiredInterface(dependency.getClient(), dependency.getSupplier());
 
             dependency.setSupplier(supplier);
             dependency.setClient(client);
-            ElementUtil.addRelationship(architecture, dependency);
-            ElementUtil.addRelationship(architecture, dependency);
+            architecture.addRelationship(dependency);
             ElementUtil.addRequiredInterface(client, supplier);
         }
     }
 
     public static RealizationRelationship createNewRealizationRelationship(String relationshipName, Element client, Element supplier) {
-        Architecture architecture = client.getArchitecture();
-        
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
         RealizationRelationship realizationRelationship = new RealizationRelationship(client, supplier, relationshipName, UUID.randomUUID().toString());
-        ElementUtil.addRelationship(architecture, realizationRelationship);
-        ElementUtil.addRelationship(architecture, realizationRelationship);
-        client.getArchitecture().addRelationship(realizationRelationship);
+        architecture.addRelationship(realizationRelationship);
         ElementUtil.addImplementedInterface(client, supplier);
         return realizationRelationship;
     }
 
     public static GeneralizationRelationship createNewGeneralizationRelationship(Element child, Element parent) {
-        Architecture architecture = child.getArchitecture();
-        
-        GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship(parent, child, parent.getArchitecture().getRelationshipHolder(), UUID.randomUUID().toString());
-        ElementUtil.addRelationship(architecture, generalizationRelationship);
-        ElementUtil.addRelationship(architecture, generalizationRelationship);
-        parent.getArchitecture().addRelationship(generalizationRelationship);
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
+        GeneralizationRelationship generalizationRelationship = new GeneralizationRelationship(parent, child, architecture.getRelationshipHolder(), UUID.randomUUID().toString());
+        architecture.addRelationship(generalizationRelationship);
         ElementUtil.addImplementedInterface(child, parent);
         return generalizationRelationship;
     }
 
     public static UsageRelationship createNewUsageRelationship(String relationshipName, Element client, Element supplier) {
-        Architecture architecture = client.getArchitecture();
-        
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
         UsageRelationship usage = new UsageRelationship(relationshipName, supplier, client, UUID.randomUUID().toString());
-        ElementUtil.addRelationship(architecture, usage);
-        ElementUtil.addRelationship(architecture, usage);
-        client.getArchitecture().addRelationship(usage);
+        architecture.addRelationship(usage);
         ElementUtil.addRequiredInterface(client, supplier);
         return usage;
     }
 
     public static AssociationRelationship createNewAggregationRelationship(String name, Element aggregator, Element aggregated) {
-        Architecture architecture = aggregated.getArchitecture();
-        
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
         AssociationRelationship associationRelationship = new AssociationRelationship(aggregator, aggregated);
         associationRelationship.setName(name);
         associationRelationship.getParticipants().get(1).setAggregation("shared");
-        ElementUtil.addRelationship(architecture, associationRelationship);
-        ElementUtil.addRelationship(architecture, associationRelationship);
-        aggregator.getArchitecture().addRelationship(associationRelationship);
+        architecture.addRelationship(associationRelationship);
         ElementUtil.addRequiredInterface(aggregator, aggregated);
         return associationRelationship;
     }

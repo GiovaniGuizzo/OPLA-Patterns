@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.models;
 
+import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import arquitetura.representation.Element;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;

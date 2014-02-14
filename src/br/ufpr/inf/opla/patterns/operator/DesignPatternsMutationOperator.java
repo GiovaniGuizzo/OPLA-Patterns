@@ -6,8 +6,9 @@ import arquitetura.exceptions.NotFoundException;
 import arquitetura.exceptions.PackageNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Interface;
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
+import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.strategies.DesignPatternSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import br.ufpr.inf.opla.patterns.strategies.defaultstrategy.RandomDesignPatternSelection;
@@ -44,6 +45,7 @@ public class DesignPatternsMutationOperator extends Mutation {
     }
 
     public Architecture mutateArchitecture(Architecture architecture, ScopeSelectionStrategy scopeSelectionStartegy, DesignPatternSelectionStrategy designPatternSelectionStrategy) {
+        ArchitectureRepository.setCurrentArchitecture(architecture);
         DesignPattern designPattern = designPatternSelectionStrategy.selectDesignPattern();
         Scope scope = scopeSelectionStartegy.selectScope(architecture);
         if (designPattern.randomlyVerifyAsPSOrPSPLA(scope)) {

@@ -1,9 +1,10 @@
-package br.ufpr.inf.opla.patterns.models;
+package br.ufpr.inf.opla.patterns.designpatterns;
 
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.designpatterns.Facade;
 import br.ufpr.inf.opla.patterns.designpatterns.Mediator;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
+import br.ufpr.inf.opla.patterns.models.Scope;
 import java.util.Objects;
 import java.util.Random;
 

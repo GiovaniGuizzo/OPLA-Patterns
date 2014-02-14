@@ -1,6 +1,5 @@
 package br.ufpr.inf.opla.patterns.util;
 
-import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -28,14 +27,6 @@ public class ElementUtil {
             relationships.addAll(((Interface) element).getRelationships());
         }
         return relationships;
-    }
-
-    public static void addRelationship(Architecture architecture, Relationship relationship) {
-        architecture.getRelationshipHolder().addRelationship(relationship);
-    }
-
-    public static void removeRelationship(Architecture architecture, Relationship relationship) {
-        architecture.getRelationshipHolder().removeRelationship(relationship);
     }
 
     public static boolean isTypeOf(Element child, Element parent) {

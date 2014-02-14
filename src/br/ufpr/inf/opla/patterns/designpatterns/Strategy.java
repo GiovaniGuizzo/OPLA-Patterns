@@ -6,7 +6,6 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;

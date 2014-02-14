@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.exceptions.ConcernNotFoundException;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -11,6 +12,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class MethodUtil {
@@ -137,7 +140,13 @@ public class MethodUtil {
     public static Method cloneMethod(Method method) {
         Method newMethod = new Method(method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
         newMethod.getParameters().addAll(method.getParameters());
-        newMethod.getOwnConcerns().addAll(method.getOwnConcerns());
+        for (Concern concern : method.getOwnConcerns()) {
+            try {
+                newMethod.addConcern(concern.getName());
+            } catch (ConcernNotFoundException ex) {
+                Logger.getLogger(MethodUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         newMethod.setNamespace(method.getNamespace());
         return newMethod;
     }
@@ -180,8 +189,16 @@ public class MethodUtil {
         }
 
         ArrayList<Concern> concerns = new ArrayList<>(methodA.getOwnConcerns());
-        methodA.getOwnConcerns().clear();
-        methodA.getOwnConcerns().addAll(CollectionUtils.union(concerns, methodB.getOwnConcerns()));
+        for (Concern concern : methodA.getOwnConcerns()) {
+            methodA.removeConcern(concern.getName());
+        }
+        for (Concern concern : CollectionUtils.union(concerns, methodB.getOwnConcerns())) {
+            try {
+                methodA.addConcern(concern.getName());
+            } catch (ConcernNotFoundException ex) {
+                Logger.getLogger(MethodUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     private MethodUtil() {

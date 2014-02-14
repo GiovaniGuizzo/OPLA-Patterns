@@ -35,10 +35,7 @@ import org.junit.Test;
  */
 public class ElementUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
-
     public ElementUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -46,7 +43,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testIsTypeOf() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         child = architecture.findClassByName("QuickSort").get(0);
         assertEquals("QuickSort", child.getName());
@@ -67,7 +64,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllSuperInterfaces() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         child = architecture.findClassByName("QuickSort").get(0);
         assertEquals("QuickSort", child.getName());
@@ -84,7 +81,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllExtendedElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[3]);
         Element child = null;
         child = architecture.findClassByName("QuickSort").get(0);
         assertEquals("QuickSort", child.getName());
@@ -101,7 +98,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllSubElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findInterfaceByName("CommonStrategy");
         List<Element> result = ElementUtil.getAllSubElements(element);
@@ -117,7 +114,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testIsClassOrInterface() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findClassByName("Class2").get(0);
         Element element2 = null;
@@ -134,7 +131,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsCommonConcerns() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         element = architecture.findClassByName("QuickSort").get(0);
         Element element2 = null;
@@ -156,7 +153,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsConcerns_List() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         element = architecture.findClassByName("QuickSort").get(0);
         Element element2 = null;
@@ -175,7 +172,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsConcerns_Element() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         element = architecture.findClassByName("SortAbstractionClass").get(0);
         Set<Concern> result = ElementUtil.getOwnAndMethodsConcerns(element);
@@ -191,7 +188,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetOwnAndMethodsCommonConcernsOfAtLeastTwoElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         element = architecture.findClassByName("QuickSort").get(0);
         Element element2 = null;
@@ -212,7 +209,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllAggregatedElements() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]);
         Element element = null;
         element = architecture.findClassByName("SortAbstractionClass").get(0);
         Set<Element> result = ElementUtil.getAllAggregatedElements(element);
@@ -228,7 +225,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllCommonSuperInterfaces() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;
@@ -246,7 +243,7 @@ public class ElementUtilTest {
      */
     @Test
     public void testGetAllCommonInterfaces() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         Element element = null;
         element = architecture.findClassByName("Class1").get(0);
         Element element2 = null;
@@ -268,7 +265,7 @@ public class ElementUtilTest {
     @Test
     public void testGroupElementsByConcern() {
         String model = ArchitectureRepository.OTHER_MODELS[3];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         HashMap<Concern, List<Element>> result = ElementUtil.groupElementsByConcern(architecture.getElements());
         assertEquals(4, result.size());
         assertEquals(2, result.get(null).size());
@@ -283,7 +280,7 @@ public class ElementUtilTest {
     @Test
     public void testGetElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns() {
         String model = ArchitectureRepository.OTHER_MODELS[3];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         ArrayList<Element> result = ElementUtil.getElementsWithNoOwnConcernsAndWithAtLeastOneMethodWithNoConcerns(architecture.getElements());
         assertEquals(2, result.size());
     }
@@ -294,7 +291,7 @@ public class ElementUtilTest {
     @Test
     public void testGetNameSpace() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         List<Element> elements = architecture.getElements();
         String result = ElementUtil.getNameSpace(elements);
         assertEquals("Model::ClassPackage", result);
@@ -306,7 +303,7 @@ public class ElementUtilTest {
     @Test
     public void testImplementInterface() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         try {
             Package aPackage = architecture.findPackageByName("ClassPackage");
             List<Element> elements = new ArrayList<>(architecture.getElements());
@@ -314,14 +311,14 @@ public class ElementUtilTest {
 
             Interface anInterface = architecture.createInterface(model);
             Method createOperation = anInterface.createOperation("foiDeu");
-            
+
             List<Element> adapterList = new ArrayList<>();
             List<Element> adapteeList = new ArrayList<>();
             ElementUtil.implementInterface(elements, anInterface, adapterList, adapteeList);
 
             assertEquals(2, adapterList.size());
             assertEquals(2, adapteeList.size());
-            
+
             Class aClass = architecture.findClassByName("Class1").get(0);
             assertTrue(aClass.getAllMethods().contains(createOperation));
         } catch (PackageNotFound | ClassNotFound ex) {
@@ -330,15 +327,15 @@ public class ElementUtilTest {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     @Test
-    public void testFindPackage(){
+    public void testFindPackage() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
         Package aPackage = architecture.createPackage("PacoteDeTeste");
         Interface anInterface = aPackage.createInterface("InterfaceDeTeste");
-        
+
         String packageName = UtilResources.extractPackageName(anInterface.getNamespace());
         assertEquals("PacoteDeTeste", packageName);
     }

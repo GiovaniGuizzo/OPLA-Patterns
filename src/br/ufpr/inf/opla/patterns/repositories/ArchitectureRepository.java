@@ -42,24 +42,25 @@ public class ArchitectureRepository {
         "Output10"
     };
 
-    private static final ArchitectureRepository INSTANCE = new ArchitectureRepository();
+    private static final ArchitectureBuilder ARCHITECTURE_BUILDER = new ArchitectureBuilder();
+    private static Architecture CURRENT_ARCHITECTURE;
 
-    public static ArchitectureRepository getInstance() {
-        return INSTANCE;
-    }
-    private final ArchitectureBuilder architectureBuilder;
-
-    private ArchitectureRepository() {
-        this.architectureBuilder = new ArchitectureBuilder();
-    }
-
-    public Architecture getArchitecture(String path) {
+    public static Architecture getArchitecture(String path) {
         try {
-            return architectureBuilder.create(path);
+            setCurrentArchitecture(ARCHITECTURE_BUILDER.create(path));
+            return getCurrentArchitecture();
         } catch (Exception ex) {
             Logger.getLogger(ArchitectureRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public static Architecture getCurrentArchitecture() {
+        return CURRENT_ARCHITECTURE;
+    }
+
+    public static void setCurrentArchitecture(Architecture currentArchitecture) {
+        CURRENT_ARCHITECTURE = currentArchitecture;
     }
 
 }

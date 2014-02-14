@@ -31,11 +31,9 @@ public class StrategyTest {
 
     private final Strategy strategy;
     private final ScopeSelectionStrategy scopeSelectionStrategy;
-    private final ArchitectureRepository architectureRepository;
 
     public StrategyTest() {
         this.strategy = Strategy.getInstance();
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
     }
 
@@ -44,7 +42,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
 
         assertEquals(7, scope.getElements().size());
 
@@ -67,7 +65,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
 
         assertTrue(strategy.verifyPS(scope));
 
@@ -84,7 +82,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
 
         assertEquals(7, scope.getElements().size());
 
@@ -107,7 +105,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
 
         assertEquals(7, scope.getElements().size());
 
@@ -121,7 +119,7 @@ public class StrategyTest {
     @Test
     public void applyTest() {
         String model = ArchitectureRepository.STRATEGY_MODELS[3];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
@@ -155,7 +153,7 @@ public class StrategyTest {
     @Test
     public void applyTest2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
@@ -192,7 +190,7 @@ public class StrategyTest {
     @Test
     public void applyTest3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
-        Architecture architecture = architectureRepository.getArchitecture(model);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
         Scope scope = scopeSelectionStrategy.selectScope(architecture);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
@@ -217,10 +215,17 @@ public class StrategyTest {
         assertEquals(1, MethodUtil.getAllMethodsFromElement(adaptee).size());
         assertEquals(1, adaptee.getOwnConcerns().size());
 
-        RealizationRelationship realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        RealizationRelationship realization;
+        UsageRelationship usage;
+        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof RealizationRelationship) {
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+        } else {
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        }
         assertEquals(strategyInterface, realization.getSupplier());
 
-        UsageRelationship usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         assertEquals(adaptee, usage.getSupplier());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();

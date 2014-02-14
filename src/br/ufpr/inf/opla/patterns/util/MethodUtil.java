@@ -189,7 +189,7 @@ public class MethodUtil {
         }
 
         ArrayList<Concern> concerns = new ArrayList<>(methodA.getOwnConcerns());
-        for (Concern concern : methodA.getOwnConcerns()) {
+        for (Concern concern : concerns) {
             methodA.removeConcern(concern.getName());
         }
         for (Concern concern : CollectionUtils.union(concerns, methodB.getOwnConcerns())) {

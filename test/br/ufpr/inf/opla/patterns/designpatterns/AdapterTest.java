@@ -7,14 +7,16 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
+import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
-import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -52,16 +54,17 @@ public class AdapterTest {
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
         RealizationRelationship realization;
-        UsageRelationship usage;
-        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof RealizationRelationship) {
-            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
-        } else {
-            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-        }
-        assertEquals(target, realization.getSupplier());
-        assertEquals(adaptee, usage.getSupplier());
+        RealizationRelationship realization2;
+
+        realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        realization2 = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+
+        ArrayList<Element> suppliers = new ArrayList<>();
+        suppliers.add(realization.getSupplier());
+        suppliers.add(realization2.getSupplier());
+
+        assertTrue(suppliers.contains(adaptee));
+        assertTrue(suppliers.contains(target));
     }
 
     @Test
@@ -69,33 +72,31 @@ public class AdapterTest {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
-        Class target = null;
-        target = architecture.findClassByName("Sort1").get(0);
+        Class target = architecture.findClassByName("Sort1").get(0);
         assertEquals("Sort1", target.getName());
 
-        Interface adaptee = null;
-        adaptee = architecture.findInterfaceByName("Sort2");
+        Interface adaptee = architecture.findInterfaceByName("Sort2");
         assertEquals("Sort2", adaptee.getName());
 
         Class adapterClass = adapter.applyAdapter(target, adaptee);
         assertNotNull(adapterClass);
         assertEquals("Sort2Adapter", adapterClass.getName());
-        assertEquals(1, adapterClass.getAllMethods().size());
+        assertEquals(2, adapterClass.getAllMethods().size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        GeneralizationRelationship generalization;
-        UsageRelationship usage;
-        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof GeneralizationRelationship) {
-            generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+        RealizationRelationship realization;
+        GeneralizationRelationship generalization2;
+
+        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof RealizationRelationship) {
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+            generalization2 = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
         } else {
-            generalization = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+            generalization2 = (GeneralizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
         }
 
-        assertEquals(target, generalization.getParent());
-
-        assertEquals(adaptee, usage.getSupplier());
+        assertEquals(target, generalization2.getParent());
+        assertEquals(adaptee, realization.getSupplier());
     }
 
 }

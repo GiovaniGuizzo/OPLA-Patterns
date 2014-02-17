@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -64,7 +65,7 @@ public class ElementUtil {
                 }
                 List<Element> parentSuperTypes = getAllExtendedElements(tempInterface);
                 for (Element parentSuperType : parentSuperTypes) {
-                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains(parentSuperType)) {
+                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains((Interface) parentSuperType)) {
                         implementedInterfaces.add((Interface) parentSuperType);
                     }
                 }
@@ -79,7 +80,7 @@ public class ElementUtil {
                 }
             }
             if (child instanceof Interface && extendedElement instanceof Interface) {
-                if (!implementedInterfaces.contains(extendedElement)) {
+                if (!implementedInterfaces.contains((Interface) extendedElement)) {
                     implementedInterfaces.add((Interface) extendedElement);
                 }
             }
@@ -276,31 +277,60 @@ public class ElementUtil {
 
     public static void implementInterface(List<Element> elements, Interface anInterface, List<Element> adapterList, List<Element> adapteeList) {
         for (Element participant : elements) {
-            if (!ElementUtil.isTypeOf(participant, anInterface)) {
-                if (participant instanceof arquitetura.representation.Class) {
-                    arquitetura.representation.Class participantClass = (arquitetura.representation.Class) participant;
-                    RelationshipUtil.createNewRealizationRelationship("implements", participantClass, anInterface);
-                } else if (participant instanceof Interface) {
-                    arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(anInterface, participant);
-                    adapterList.add(adapterClass);
-                    adapteeList.add(participant);
-                }
+            Class adapterClass = implementInterface(participant, anInterface);
+            if (adapterClass != null) {
+                adapterList.add(adapterClass);
+                adapteeList.add(participant);
             }
-            if (participant instanceof arquitetura.representation.Class) {
-                arquitetura.representation.Class participantClass = (arquitetura.representation.Class) participant;
-                if (!participantClass.isAbstract()) {
-                    MethodArrayList participantMethods = new MethodArrayList(new ArrayList<>(participantClass.getAllMethods()));
-                    for (Method interfaceMethod : anInterface.getOperations()) {
-                        int index = participantMethods.indexOf(interfaceMethod);
-                        if (index != -1) {
-                            MethodUtil.mergeMethodsToMethodA(participantMethods.get(index), interfaceMethod);
-                        } else {
-                            participantClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
-                        }
+        }
+    }
+
+    public static arquitetura.representation.Class implementInterface(Element child, Interface anInterface) {
+        if (!ElementUtil.isTypeOf(child, anInterface)) {
+            if (child instanceof arquitetura.representation.Class) {
+                RelationshipUtil.createNewRealizationRelationship("implements", child, anInterface);
+            } else if (child instanceof Interface) {
+                arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(anInterface, child);
+                return adapterClass;
+            }
+        }
+        if (child instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class childClass = (arquitetura.representation.Class) child;
+            if (!childClass.isAbstract()) {
+                MethodArrayList childMethods = new MethodArrayList(new ArrayList<>(childClass.getAllMethods()));
+                for (Method interfaceMethod : anInterface.getOperations()) {
+                    if (!childMethods.containsSameSignature(interfaceMethod)) {
+                        childClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
                     }
                 }
             }
         }
+        return null;
+    }
+
+    public static arquitetura.representation.Class extendClass(Element child, arquitetura.representation.Class aClass) {
+        if (!ElementUtil.isTypeOf(child, aClass)) {
+            if (child instanceof arquitetura.representation.Class) {
+                RelationshipUtil.createNewGeneralizationRelationship(child, aClass);
+            } else if (child instanceof Interface) {
+                arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(aClass, child);
+                return adapterClass;
+            }
+        }
+        if (child instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class childClass = (arquitetura.representation.Class) child;
+            if (!childClass.isAbstract()) {
+                MethodArrayList childMethods = new MethodArrayList(new ArrayList<>(childClass.getAllMethods()));
+                for (Method classMethod : aClass.getAllMethods()) {
+                    if (!childMethods.containsSameSignature(classMethod)) {
+                        Method cloneMethod = MethodUtil.cloneMethod(classMethod);
+                        cloneMethod.setAbstract(false);
+                        childClass.addExternalMethod(cloneMethod);
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public static void verifyAndRemoveRequiredInterface(Element client, Element supplier) {

@@ -1,9 +1,7 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
-import br.ufpr.inf.opla.patterns.designpatterns.Facade;
-import br.ufpr.inf.opla.patterns.designpatterns.Mediator;
-import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
+import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import java.util.Objects;
 import java.util.Random;
@@ -55,6 +53,11 @@ public abstract class DesignPattern {
 
     public abstract boolean apply(Scope scope);
 
+    //TODO Édipo - Implementar
+    public boolean applyDesignPatternStereotype(Element element){
+        return false;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

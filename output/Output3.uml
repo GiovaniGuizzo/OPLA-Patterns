@@ -13,43 +13,43 @@
       </eAnnotations>
       <appliedProfile href="perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
-  <packagedElement clientDependency="75c062d0-3b6d-4bd6-af9a-ce8282529c49" isAbstract="false" name="Sort1" xmi:id="_w24LgFLJEeOqQtPizo-tTQ" xmi:type="uml:Class">
-      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="_2fDGMFLPEeOqQtPizo-tTQ"/>
+  <packagedElement clientDependency="73317279-d8b2-47dd-86ea-ecdac3a07a29" isAbstract="false" name="Sort1" xmi:id="_w24LgFLJEeOqQtPizo-tTQ" xmi:type="uml:Class">
       <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="_4ULDgFLJEeOqQtPizo-tTQ"/>
-      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="7cb9a28e-fcc6-4364-86f5-01968d6ffc14"/>
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="_2fDGMFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="e27757ac-f876-48a3-a289-d9fecbdbc352"/>
     </packagedElement>
-    <packagedElement clientDependency="d5887339-f869-4a98-9c8f-1a09f75015ce" isAbstract="false" name="Sort2Adapter" xmi:id="85814a3c-9bf6-4be3-8187-0ebce9346985" xmi:type="uml:Class">
-      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="64589316-9477-4035-a27f-3bca003b08e8"/>
-      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="b80a3945-ff3d-4415-bb85-128c6c078cbb"/>
-      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="1e861e40-d1ca-44b6-b05c-53d3fd2dd36b"/>
+    <packagedElement clientDependency="d0ad5637-39eb-4feb-a137-a41075af62dd" isAbstract="false" name="Sort2Adapter" xmi:id="585da9eb-7d27-459e-a225-f9d1e1dca55e" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="4ecf8eaa-0115-4c0f-9b07-7be08c615ccc"/>
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="de13a1c3-32dc-4223-8c6a-63af7fd3b8ea"/>
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="88bd3072-34b5-49a8-a79d-8eaa10a20bfb"/>
     </packagedElement>
-    <packagedElement clientDependency="7354b25b-170f-4009-9029-3906609039c6" isAbstract="false" name="Context" xmi:id="_vrEfsFLJEeOqQtPizo-tTQ" xmi:type="uml:Class"/>
+    <packagedElement clientDependency="3cea59d0-94e3-4f4a-9e2c-63ad5f826e21" isAbstract="false" name="Context" xmi:id="_vrEfsFLJEeOqQtPizo-tTQ" xmi:type="uml:Class"/>
     <packagedElement isAbstract="false" name="SomeInterface" xmi:id="__Ie2oFLOEeOqQtPizo-tTQ" xmi:type="uml:Class">
-      <ownedOperation isAbstract="false" name="methodB" visibility="public" xmi:id="_JBjNgFLPEeOqQtPizo-tTQ"/>
-      <ownedOperation isAbstract="false" name="methodC" visibility="public" xmi:id="_JxLToFLPEeOqQtPizo-tTQ"/>
       <ownedOperation isAbstract="false" name="methodA" visibility="public" xmi:id="_GpkCcFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="methodC" visibility="public" xmi:id="_JxLToFLPEeOqQtPizo-tTQ"/>
+      <ownedOperation isAbstract="false" name="methodB" visibility="public" xmi:id="_JBjNgFLPEeOqQtPizo-tTQ"/>
     </packagedElement>
-    <packagedElement isAbstract="false" name="SortStrategy" xmi:id="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:type="uml:Class">
-      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="f041d41a-c6af-4b0c-acb1-50224e81cd3e"/>
-      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="7d44a9c1-ba5d-41cc-a546-dd355713c6aa"/>
-      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="f9d6f710-3f84-40d1-923f-7a1f245b8415"/>
+    <packagedElement isAbstract="false" name="SortStrategy" xmi:id="865556f7-3732-48b8-9479-91a024f54fd7" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="5289ebfc-5296-4a8c-9088-7b4298a8c123"/>
+      <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="9e6a17d0-505e-4ef2-9d34-81acaf348647"/>
+      <ownedOperation isAbstract="true" name="abstractMethod" visibility="public" xmi:id="e4ab92fb-dceb-4048-b793-fbf79f567743"/>
     </packagedElement>
     <packagedElement isAbstract="false" name="Sort2" xmi:id="_yHVGwFLJEeOqQtPizo-tTQ" xmi:type="uml:Class">
       <ownedOperation isAbstract="false" name="sort2" visibility="public" xmi:id="_5LUt8FLJEeOqQtPizo-tTQ"/>
     </packagedElement>
-    <packagedElement client="_w24LgFLJEeOqQtPizo-tTQ" name="implements" supplier="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="75c062d0-3b6d-4bd6-af9a-ce8282529c49" xmi:type="uml:Realization"/>
-    <packagedElement client="85814a3c-9bf6-4be3-8187-0ebce9346985" name="implements" supplier="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="54efe477-0274-441b-8799-f9ec2a7632cc" xmi:type="uml:Realization"/>
-    <packagedElement client="85814a3c-9bf6-4be3-8187-0ebce9346985" name="" supplier="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="d5887339-f869-4a98-9c8f-1a09f75015ce" xmi:type="uml:Usage"/>
-    <packagedElement client="_vrEfsFLJEeOqQtPizo-tTQ" name="" supplier="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="7354b25b-170f-4009-9029-3906609039c6" xmi:type="uml:Usage"/>
+    <packagedElement client="_w24LgFLJEeOqQtPizo-tTQ" name="implements" supplier="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="73317279-d8b2-47dd-86ea-ecdac3a07a29" xmi:type="uml:Realization"/>
+    <packagedElement client="585da9eb-7d27-459e-a225-f9d1e1dca55e" name="adaptee" supplier="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="388d814d-2e02-4048-a7c6-0c42925f3d3d" xmi:type="uml:Realization"/>
+    <packagedElement client="585da9eb-7d27-459e-a225-f9d1e1dca55e" name="implements" supplier="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="d0ad5637-39eb-4feb-a137-a41075af62dd" xmi:type="uml:Realization"/>
+    <packagedElement client="_vrEfsFLJEeOqQtPizo-tTQ" name="" supplier="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="3cea59d0-94e3-4f4a-9e2c-63ad5f826e21" xmi:type="uml:Usage"/>
   </uml:Model>
-<concerns:brickles base_Class="_w24LgFLJEeOqQtPizo-tTQ" xmi:id="cf826b1e-a066-4f99-9c7e-6ef84c7f2c3c"/>
-  <concerns:brickles base_Class="85814a3c-9bf6-4be3-8187-0ebce9346985" xmi:id="6fa2be13-ddba-4ce2-bcd3-4266cd4d6edc"/>
-  <concerns:bowling base_Class="85814a3c-9bf6-4be3-8187-0ebce9346985" xmi:id="7d9c45df-06c2-43cb-ab39-e6b7def24c51"/>
-  <smarty:interface base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="29ccaa2e-9743-4162-bf38-1c3de7a78507"/>
-  <smarty:interface base_Class="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="e25e7bf5-e28f-4ef4-bf40-844b3f781aa5"/>
-  <smarty:interface base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="05ce3d30-e8e5-4607-937f-277982bcb70c"/>
-  <concerns:brickles base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="ed945535-da37-4e9f-b671-ed272f187cb6"/>
-  <concerns:brickles base_Class="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="5c4f04d9-8398-42f2-b196-6eb59eef8313"/>
-  <concerns:bowling base_Class="05d05f8b-a251-4065-8b81-091dd97c234e" xmi:id="018f4420-b6cc-482a-a600-8ff64f47fe29"/>
-  <concerns:bowling base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="aadb91a2-c5fc-4adb-a851-786b0a7b1a53"/>
+<concerns:brickles base_Class="_w24LgFLJEeOqQtPizo-tTQ" xmi:id="e13ad79e-9568-4673-a651-1ff91675123a"/>
+  <concerns:brickles base_Class="585da9eb-7d27-459e-a225-f9d1e1dca55e" xmi:id="3b38ccdf-9b26-49b1-b643-0b0da5170132"/>
+  <concerns:bowling base_Class="585da9eb-7d27-459e-a225-f9d1e1dca55e" xmi:id="eb306133-def5-46b7-9feb-52ba02f78aaf"/>
+  <smarty:interface base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="f6775ed7-22f2-412b-b96d-ee24c49c781d"/>
+  <smarty:interface base_Class="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="165d8853-a7d9-47b5-938e-3e4e88e4ba17"/>
+  <smarty:interface base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="a910b34f-53e6-496f-85be-5459d0616d8e"/>
+  <concerns:brickles base_Class="__Ie2oFLOEeOqQtPizo-tTQ" xmi:id="94327e28-3c89-45da-87b7-15b5d8d846b2"/>
+  <concerns:brickles base_Class="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="8b5b2014-e546-4d38-a5a4-385e03fb1a87"/>
+  <concerns:bowling base_Class="865556f7-3732-48b8-9479-91a024f54fd7" xmi:id="dc2354e9-847b-4eec-b578-b930e8eaf8a6"/>
+  <concerns:bowling base_Class="_yHVGwFLJEeOqQtPizo-tTQ" xmi:id="1c9713f1-322a-4efa-9961-a5201d857317"/>
 </xmi:XMI>

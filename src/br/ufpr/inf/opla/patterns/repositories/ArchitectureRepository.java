@@ -19,6 +19,10 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/bridge/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/bridge/Apply.uml"
     };
+    
+    public static final String[] ADAPTER_MODELS = new String[]{
+        "test/br/ufpr/inf/opla/patterns/resources/adapter/Verify.uml"
+    };
 
     public static final String[] OTHER_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/other/Model1.uml",

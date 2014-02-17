@@ -1,23 +1,21 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.exceptions.ConcernNotFoundException;
-import arquitetura.helpers.UtilResources;
-import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
+import br.ufpr.inf.opla.patterns.util.AdapterUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,51 +59,24 @@ public class Adapter extends DesignPattern {
                 && (target instanceof arquitetura.representation.Class || target instanceof Interface)
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
             try {
-                arquitetura.representation.Package aPackage = null;
-                Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
 
-                List<Element> tempElements;
-
-                String namespace = adaptee.getNamespace();
-                String packageName = UtilResources.extractPackageName(namespace);
-
-                boolean naArquitetura = packageName.equalsIgnoreCase("model");
-                if (naArquitetura) {
-                    adapterClass = architecture.createClass(adaptee.getName() + "Adapter", false);
-
-                    architecture.removeClass(adapterClass);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
-                } else {
-                    aPackage = architecture.findPackageByName(packageName);
-                    adapterClass = aPackage.createClass(adaptee.getName() + "Adapter", false);
-
-                    aPackage.removeClass(adapterClass);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
+                adapterClass = AdapterUtil.getAdapterClass(target, adaptee);
+                if (adapterClass == null) {
+                    adapterClass = AdapterUtil.createAdapterClass(target, adaptee);
                 }
-
-                adapterClass.setNamespace(adaptee.getNamespace());
-                adapterClass.setVariant(adaptee.getVariant());
 
                 //Implements/Extends and add all methods.
                 if (target instanceof arquitetura.representation.Class) {
-                    arquitetura.representation.Class targetClass = (arquitetura.representation.Class) target;
-                    RelationshipUtil.createNewGeneralizationRelationship(adapterClass, target);
-                    Set<Method> clonedMethods = MethodUtil.cloneMethods(new HashSet<>(targetClass.getAllAbstractMethods()));
-                    for (Method method : clonedMethods) {
-                        adapterClass.addExternalMethod(method);
-                    }
+                    ElementUtil.extendClass(adapterClass, (arquitetura.representation.Class) target);
                 } else {
-                    Interface targetInterface = (Interface) target;
-                    RelationshipUtil.createNewRealizationRelationship("implements", adapterClass, target);
-                    Set<Method> clonedMethods = MethodUtil.cloneMethods(targetInterface.getOperations());
-                    for (Method method : clonedMethods) {
-                        adapterClass.addExternalMethod(method);
-                    }
+                    ElementUtil.implementInterface(adapterClass, (Interface) target);
                 }
 
-                RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
+                if (adaptee instanceof arquitetura.representation.Class) {
+                    RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
+                } else {
+                    RelationshipUtil.createNewRealizationRelationship("adaptee", adapterClass, adaptee);
+                }
 
                 Relationship relationshipToBeExcluded = null;
                 if (adaptee.getClass().equals(target.getClass())) {
@@ -125,7 +96,7 @@ public class Adapter extends DesignPattern {
                 }
 
                 if (relationshipToBeExcluded != null) {
-                    architecture.removeRelationship(relationshipToBeExcluded);
+                    ArchitectureRepository.getCurrentArchitecture().removeRelationship(relationshipToBeExcluded);
                 }
 
                 //Copy concerns
@@ -138,23 +109,11 @@ public class Adapter extends DesignPattern {
                 }
 
                 //Move variants
-                Variant variant = adapterClass.getVariant();
+                Variant variant = adaptee.getVariant();
                 if (variant != null) {
-                    variant.setVariantElement(adapterClass);
                     adaptee.setVariant(null);
-                }
-
-                int count = 1;
-                String name = adapterClass.getName();
-                while (tempElements.contains(adapterClass)) {
-                    count++;
-                    adapterClass.setName(name + Integer.toString(count));
-                }
-
-                if (naArquitetura) {
-                    architecture.addExternalClass(adapterClass);
-                } else if (aPackage != null) {
-                    aPackage.addExternalClass(adapterClass);
+                    adapterClass.setVariant(variant);
+                    variant.setVariantElement(adapterClass);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);

@@ -1,6 +1,7 @@
 package br.ufpr.inf.opla.patterns.list;
 
 import arquitetura.representation.Method;
+import arquitetura.representation.ParameterMethod;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +24,9 @@ public class MethodArrayList extends ArrayList<Method> {
                     return true;
                 }
             }
-            return false;
-        } else {
-            return super.contains(method); //To change body of generated methods, choose Tools | Templates.
+
         }
+        return false;
     }
 
     public boolean containsSameName(Object method) {
@@ -36,6 +36,30 @@ public class MethodArrayList extends ArrayList<Method> {
                 Method otherMethod = this.get(i);
                 if (otherMethod != null) {
                     if (aMethod.getName().equals(otherMethod.getName())) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean containsSameSignature(Object method) {
+        if (method instanceof Method) {
+            Method aMethod = (Method) method;
+            rootLoop:
+            for (int i = 0; i < this.size(); i++) {
+                Method otherMethod = this.get(i);
+                if (areMethodsEqual(aMethod, otherMethod)) {
+                    int size = aMethod.getParameters().size();
+                    if (size == otherMethod.getParameters().size()) {
+                        for (int j = 0; j < size; j++) {
+                            ParameterMethod methodParameter = aMethod.getParameters().get(j);
+                            ParameterMethod otherMethodParameter = otherMethod.getParameters().get(j);
+                            if (!methodParameter.equals(otherMethodParameter)) {
+                                continue rootLoop;
+                            }
+                        }
                         return true;
                     }
                 }

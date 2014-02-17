@@ -6,7 +6,6 @@ import arquitetura.representation.Interface;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
-import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
@@ -18,6 +17,7 @@ import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
+import java.util.ArrayList;
 import java.util.List;
 import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
@@ -197,36 +197,32 @@ public class StrategyTest {
         boolean apply = strategy.apply(scope);
         assertTrue(apply);
 
-        Interface strategyInterface = null;
-        strategyInterface = architecture.findInterfaceByName("SortStrategy");
+        Interface strategyInterface = architecture.findInterfaceByName("SortStrategy");
         assertEquals("SortStrategy", strategyInterface.getName());
         assertEquals(3, MethodUtil.getAllMethodsFromElement(strategyInterface).size());
         assertEquals(2, strategyInterface.getOwnConcerns().size());
 
-        arquitetura.representation.Class adapterClass = null;
-        adapterClass = architecture.findClassByName("Sort2Adapter").get(0);
+        arquitetura.representation.Class adapterClass = architecture.findClassByName("Sort2Adapter").get(0);
         assertEquals("Sort2Adapter", adapterClass.getName());
         assertEquals(3, MethodUtil.getAllMethodsFromElement(adapterClass).size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        Interface adaptee = null;
-        adaptee = architecture.findInterfaceByName("Sort2");
+        Interface adaptee = architecture.findInterfaceByName("Sort2");
         assertEquals("Sort2", adaptee.getName());
         assertEquals(1, MethodUtil.getAllMethodsFromElement(adaptee).size());
         assertEquals(1, adaptee.getOwnConcerns().size());
 
         RealizationRelationship realization;
-        UsageRelationship usage;
-        if (ElementUtil.getRelationships(adapterClass).get(0) instanceof RealizationRelationship) {
-            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(1);
-        } else {
-            realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
-            usage = (UsageRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-        }
-        assertEquals(strategyInterface, realization.getSupplier());
+        RealizationRelationship realization2;
+        realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
+        realization2 = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
 
-        assertEquals(adaptee, usage.getSupplier());
+        ArrayList<Element> suppliers = new ArrayList<>();
+        suppliers.add(realization.getSupplier());
+        suppliers.add(realization2.getSupplier());
+
+        assertTrue(suppliers.contains(adaptee));
+        assertTrue(suppliers.contains(strategyInterface));
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[2]);

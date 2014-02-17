@@ -99,4 +99,18 @@ public class AdapterTest {
         assertEquals(adaptee, realization.getSupplier());
     }
 
+    @Test
+    public void testGetAdapterClass() {
+        String model = ArchitectureRepository.ADAPTER_MODELS[0];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        //Interface to Interface
+        Element target = architecture.findElementByName("TargetII");
+        Element adaptee = architecture.findElementByName("AdapteeII");
+        Class localAdapter = architecture.findClassByName("AdapterII").get(0);
+        Class result = adapter.applyAdapter(target, adaptee);
+        assertEquals(localAdapter, result);
+        assertEquals(2, localAdapter.getAllMethods().size());
+    }
+
 }

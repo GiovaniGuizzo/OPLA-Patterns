@@ -1,9 +1,9 @@
 package br.ufpr.inf.opla.patterns.models.ps.impl;
 
 import arquitetura.representation.Element;
+import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
-import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import java.util.ArrayList;
 import java.util.List;

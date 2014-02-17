@@ -1,7 +1,6 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Element;
-import arquitetura.representation.Interface;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import java.util.Objects;
 import java.util.Random;

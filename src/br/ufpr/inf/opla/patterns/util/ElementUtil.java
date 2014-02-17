@@ -65,7 +65,7 @@ public class ElementUtil {
                 }
                 List<Element> parentSuperTypes = getAllExtendedElements(tempInterface);
                 for (Element parentSuperType : parentSuperTypes) {
-                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains((Interface) parentSuperType)) {
+                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains(parentSuperType)) {
                         implementedInterfaces.add((Interface) parentSuperType);
                     }
                 }
@@ -80,7 +80,7 @@ public class ElementUtil {
                 }
             }
             if (child instanceof Interface && extendedElement instanceof Interface) {
-                if (!implementedInterfaces.contains((Interface) extendedElement)) {
+                if (!implementedInterfaces.contains(extendedElement)) {
                     implementedInterfaces.add((Interface) extendedElement);
                 }
             }

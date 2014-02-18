@@ -28,12 +28,12 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.Priority;
 
-public class DesignPatternsMutationOperator extends Mutation {
+public class DesignPatternsAndPLAMutationOperator extends Mutation {
 
     private static final Logger LOGGER = LogManager.getLogger(DesignPatternsAndPLAMutationOperator.class);
     private final PLAFeatureMutation pLAFeatureMutation;
 
-    public DesignPatternsMutationOperator(HashMap<String, Object> parameters) {
+    public DesignPatternsAndPLAMutationOperator(HashMap<String, Object> parameters) {
         super(parameters);
         pLAFeatureMutation = new PLAFeatureMutation(parameters);
     }
@@ -70,19 +70,26 @@ public class DesignPatternsMutationOperator extends Mutation {
         }
 
         try {
-            if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
-                if (PseudoRandom.randDouble() < probability) {
-                    Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
-                    this.mutateArchitecture(arch);
+            int random = PseudoRandom.randInt(0, 6);
+            if (random == 0) {
+                if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
+                    if (PseudoRandom.randDouble() < probability) {
+                        Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
+                        this.mutateArchitecture(arch);
+                    }
                 }
+                if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
+                    Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
+                    solution.getDecisionVariables()[0] = clone;
+                    OPLA.contDiscardedSolutions_++;
+                    LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
+                }
+            } else {
+                pLAFeatureMutation.execute(o);
             }
-            if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
-                Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
-                solution.getDecisionVariables()[0] = clone;
-                OPLA.contDiscardedSolutions_++;
-                LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
-            }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception ex) {
             java.util.logging.Logger.getLogger(DesignPatternsAndPLAMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
         }
 

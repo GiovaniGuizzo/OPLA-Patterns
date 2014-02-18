@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.main;
 
+import br.ufpr.inf.opla.patterns.operator.DesignPatternsAndPLAMutationOperator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,13 +12,12 @@ import jmetal.metaheuristics.nsgaII.NSGAII;
 import jmetal.operators.crossover.Crossover;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.MutationFactory;
 import jmetal.operators.selection.Selection;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.problems.OPLA;
 import jmetal.util.JMException;
 
-public class NSGAII_OPLA_FeatMut {
+public class NSGAII_OPLA_FeatMutWithPatterns {
 
     public static int populationSize_;
     public static int maxEvaluations_;
@@ -38,7 +38,7 @@ public class NSGAII_OPLA_FeatMut {
         String moea = "NSGAII-M";
 
         //File directory = new File("resultado/nsgaii/" + context);
-        File directory = new File("experiment/PLAMutation" + "/");
+        File directory = new File("experiment/PLAMutationWithPatterns" + "/");
         if (!directory.exists()) {
             if (!directory.mkdirs()) {
                 System.out.println("Não foi possível criar o diretório do resultado");
@@ -84,7 +84,7 @@ public class NSGAII_OPLA_FeatMut {
 
             parameters = new HashMap();
             parameters.put("probability", mutationProbability_);
-            mutation = MutationFactory.getMutationOperator("PLAFeatureMutation", parameters);
+            mutation = new DesignPatternsAndPLAMutationOperator(parameters);
 
             // Selection Operator 
             parameters = null;

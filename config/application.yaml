@@ -1,8 +1,8 @@
 --- !DirTarget
-pathToTemplateModelsDirectory: config/
 directoryToSaveModels: manipulation/
 directoryToExportModels: output/
-pathToProfile: config/smarty.profile.uml
-pathToProfileConcern: config/perfilConcerns.profile.uml
-pathToProfileRelationships: config/relationships.profile.uml
-pathToProfilePatterns: config/patterns.profile.uml
+pathToTemplateModelsDirectory: MicrowaveOvenSoftware/Papyrus/
+pathToProfile: MicrowaveOvenSoftware/Papyrus/smarty.profile.uml
+pathToProfileConcern: MicrowaveOvenSoftware/Papyrus/concerns.profile.uml
+pathToProfileRelationships: MicrowaveOvenSoftware/Papyrus/relationships.profile.uml
+pathToProfilePatterns: MicrowaveOvenSoftware/Papyrus/patterns.profile.uml

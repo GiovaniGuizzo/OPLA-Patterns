@@ -6,6 +6,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArchitectureRepository {
+    
+    public static final String MICROWAVE_OVEN_SOFTWARE = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MicrowaveOvenSoftware/Papyrus/MicrowaveOvenSoftware.uml";
 
     public static final String[] STRATEGY_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
@@ -43,7 +45,8 @@ public class ArchitectureRepository {
         "Output7",
         "Output8",
         "Output9",
-        "Output10"
+        "Output10",
+        "Output11"
     };
 
     private static final ArchitectureBuilder ARCHITECTURE_BUILDER = new ArchitectureBuilder();

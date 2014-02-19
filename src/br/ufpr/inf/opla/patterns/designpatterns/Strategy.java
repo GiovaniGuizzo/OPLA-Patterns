@@ -145,6 +145,11 @@ public class Strategy extends DesignPattern {
             //Variabilities, variants and variation points.
             StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, new ArrayList<>(CollectionUtils.union(participants, adapteeList)), strategyInterface);
             applied = true;
+
+            addStereotype(strategyInterface);
+            for (Element participant : participants) {
+                addStereotype(participant);
+            }
         }
         return applied;
     }

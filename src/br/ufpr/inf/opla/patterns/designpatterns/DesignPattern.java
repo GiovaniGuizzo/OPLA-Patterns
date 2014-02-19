@@ -1,6 +1,8 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import java.util.Objects;
 import java.util.Random;
@@ -13,12 +15,12 @@ public abstract class DesignPattern {
         Facade.getInstance(),
         Mediator.getInstance()
     };
-    
+
     public static final DesignPattern[] IMPLEMENTED = new DesignPattern[]{
         Strategy.getInstance(),
         Bridge.getInstance()
     };
-    
+
     private final String name;
     private final String category;
     private final Random random;
@@ -52,11 +54,22 @@ public abstract class DesignPattern {
 
     public abstract boolean apply(Scope scope);
 
-    //TODO Édipo - Implementar
-    public boolean applyDesignPatternStereotype(Element element){
+    public boolean addStereotype(Element element) {
+        Patterns pattern = Patterns.valueOf(this.name.toUpperCase());
+        if (pattern != null) {
+            if (element instanceof arquitetura.representation.Class) {
+                arquitetura.representation.Class elementClass = (arquitetura.representation.Class) element;
+                elementClass.getPatternsOperations().applyPattern(pattern);
+                return true;
+            } else if (element instanceof Interface) {
+                Interface elementInterface = (Interface) element;
+                elementInterface.getPatternsOperations().applyPattern(pattern);
+                return true;
+            }
+        }
         return false;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;

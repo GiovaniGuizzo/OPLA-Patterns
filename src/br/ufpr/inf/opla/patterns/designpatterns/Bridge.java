@@ -148,9 +148,18 @@ public class Bridge extends DesignPattern {
                 //Varaibilities
                 StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, abstractClass);
 
-                //TODO - Édipo - Adicionar estereótipo Bridge
                 participants.removeAll(adapteeList);
                 participants.addAll(adapterList);
+                
+                for (Element abstraction : abstractionClasses) {
+                    addStereotype(abstraction);
+                }
+                for (Interface implementation : implementationInterfaces.values()) {
+                    addStereotype(implementation);
+                }
+                for (Element participant : participants) {
+                    addStereotype(participant);
+                }
             }
             applied = true;
         }

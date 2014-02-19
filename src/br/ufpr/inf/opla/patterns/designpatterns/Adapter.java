@@ -45,7 +45,6 @@ public class Adapter extends DesignPattern {
         return false;
     }
 
-    //TODO - Édipo - Adicionar estereótipos Adapter.
     public arquitetura.representation.Class applyAdapter(Element target, Element adaptee) {
         arquitetura.representation.Class adapterClass = null;
         if (target != null
@@ -109,6 +108,10 @@ public class Adapter extends DesignPattern {
                     adapterClass.setVariant(variant);
                     variant.setVariantElement(adapterClass);
                 }
+
+                addStereotype(target);
+                addStereotype(adaptee);
+                addStereotype(adapterClass);
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             }

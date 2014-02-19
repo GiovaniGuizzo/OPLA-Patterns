@@ -152,7 +152,7 @@ public class StrategyUtilTest {
         participants.add(architecture.findClassByName("ShellSort").get(0));
         final Class target = architecture.findClassByName("NotAContext").get(0);
         StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, target);
-        assertEquals("SortVariability", target.getVariationPoint().getVariabilities().get(0).getName());
+        assertEquals("Sort", target.getVariationPoint().getVariabilities().get(0).getName());
         assertEquals(3, target.getVariationPoint().getVariabilities().get(0).getVariants().size());
         assertEquals("NotAContext", target.getVariationPoint().getVariabilities().get(0).getVariants().get(0).getVariationPoints().get(0).getVariationPointElement().getName());
     }

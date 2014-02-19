@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:patterns="http:///schemas/patterns/_wlXX8JVoEeOWwNcokQBARg/3" xmlns:smarty="http:///schemas/smarty/_1P82oJlsEeO6xcuLaZE19Q/7" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/patterns/_wlXX8JVoEeOWwNcokQBARg/3 resources/patterns.profile.uml#_wlbCUJVoEeOWwNcokQBARg http:///schemas/smarty/_1P82oJlsEeO6xcuLaZE19Q/7 resources/smarty.profile.uml#_1P82oZlsEeO6xcuLaZE19Q">
+  <uml:Model xmi:id="_xqzHwIzdEeO6Yt6TRR4QNg" name="model">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZKxb0EZCEeO8H8lNgy9OHw" clientDependency="a32ee404-a729-4c84-971f-90239d7fbf69" name="Class1"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RXMx0EZCEeO8H8lNgy9OHw" clientDependency="99ecd4fc-8bc9-47d9-a187-cce369808e6b" name="BubbleSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_i-1W4EZCEeO8H8lNgy9OHw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="d350f5db-17e2-4871-8af2-905772894508" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_Q7aNsEZCEeO8H8lNgy9OHw" clientDependency="fcf9d39e-fd8a-4546-b7f2-07333bac377d" name="QuickSort">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="d3fca799-7f53-4d1b-a8a9-4172922272be" name="shuffle" visibility="public"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ffW_UEZCEeO8H8lNgy9OHw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="19e34070-ff1c-464f-8bfe-04613212db6b" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_PNpEUEZCEeO8H8lNgy9OHw" name="StrategyInterface">
+      <generalization xmi:type="uml:Generalization" xmi:id="675e4e26-4d9e-4258-a1c9-ac877b228634" general="_m7DU0EZCEeO8H8lNgy9OHw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_FWZCwEc8EeOtJ7y4-xXe-g" name="shuffle" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_m7DU0EZCEeO8H8lNgy9OHw" name="InterfaceDeTeste">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_rxSrAEZCEeO8H8lNgy9OHw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="0ea8d9f9-6a3c-42c2-a197-90b6288289e2" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tZLJwEc9EeOtJ7y4-xXe-g" name="shuffle" visibility="public"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="99ecd4fc-8bc9-47d9-a187-cce369808e6b" name="Realization2" client="_RXMx0EZCEeO8H8lNgy9OHw" supplier="_m7DU0EZCEeO8H8lNgy9OHw"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="fcf9d39e-fd8a-4546-b7f2-07333bac377d" name="Realization1" client="_Q7aNsEZCEeO8H8lNgy9OHw" supplier="_PNpEUEZCEeO8H8lNgy9OHw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="a32ee404-a729-4c84-971f-90239d7fbf69" name="" client="_ZKxb0EZCEeO8H8lNgy9OHw" supplier="_m7DU0EZCEeO8H8lNgy9OHw"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2Q2s4I9OEeO5xq3Ur4qgFw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2RHyoI9OEeO5xq3Ur4qgFw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/concerns.profile.uml#_2VllIGc8EeORYp21VRaP_A"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/concerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2RXDMI9OEeO5xq3Ur4qgFw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2RlssI9OEeO5xq3Ur4qgFw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/relationships.profile.uml#_ZXU80I9OEeO5S8PTmh49hw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/relationships.profile.uml#__hjjkIzaEeO6Yt6TRR4QNg"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_2RlssY9OEeO5xq3Ur4qgFw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_2R2ycI9OEeO5xq3Ur4qgFw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/smarty.profile.uml#_1P82oZlsEeO6xcuLaZE19Q"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_cyBBIJJmEeOENZsdUoZvrw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_cyb34JJmEeOENZsdUoZvrw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="resources/patterns.profile.uml#_wlbCUJVoEeOWwNcokQBARg"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="resources/patterns.profile.uml#_lDDfsJJlEeOENZsdUoZvrw"/>
+    </profileApplication>
+  </uml:Model>
+  <patterns:strategy xmi:id="a15b8b1c-3e41-475f-a7f3-f58dbb7a015d" base_Class="_RXMx0EZCEeO8H8lNgy9OHw"/>
+  <patterns:strategy xmi:id="f7af1978-9624-448e-91a8-b1df3a5eb245" base_Class="_Q7aNsEZCEeO8H8lNgy9OHw"/>
+  <smarty:interface xmi:id="189c4749-9904-49c8-92b9-e9efdbdafed0" base_Class="_PNpEUEZCEeO8H8lNgy9OHw"/>
+  <smarty:interface xmi:id="c9160ae5-ed60-43ae-9dba-045746860d70" base_Class="_m7DU0EZCEeO8H8lNgy9OHw"/>
+  <patterns:strategy xmi:id="47bff8c2-1722-4921-985f-38b06b8ab037" base_Class="_PNpEUEZCEeO8H8lNgy9OHw"/>
+  <patterns:strategy xmi:id="213a84c0-6c6c-43de-8f4c-8384181429e3" base_Class="_m7DU0EZCEeO8H8lNgy9OHw"/>
+</xmi:XMI>

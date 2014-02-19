@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 ../output/resources/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:smarty="http:///schemas/smarty/_k4ApwJlqEeO6xcuLaZE19Q/6" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 ../output/resources/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/smarty/_k4ApwJlqEeO6xcuLaZE19Q/6 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_k4BQ0JlqEeO6xcuLaZE19Q http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
   <uml:Model xmi:id="_BeX38EZCEeO8H8lNgy9OHw" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_BeX38UZCEeO8H8lNgy9OHw">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -46,9 +46,17 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_WuuQUJlpEeO6xcuLaZE19Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Wu0W8JlpEeO6xcuLaZE19Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_k4BQ0JlqEeO6xcuLaZE19Q"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
+    </profileApplication>
   </uml:Model>
   <smartyProfile:interface xmi:id="_sJONYEZDEeO8H8lNgy9OHw" base_Class="_PNpEUEZCEeO8H8lNgy9OHw"/>
   <smartyProfile:interface xmi:id="_s6ui0EZDEeO8H8lNgy9OHw" base_Class="_m7DU0EZCEeO8H8lNgy9OHw"/>
   <perfilConcerns:sorting xmi:id="_xVNxIEZDEeO8H8lNgy9OHw" base_Class="_Q7aNsEZCEeO8H8lNgy9OHw"/>
   <perfilConcerns:sorting xmi:id="_yCcqkEZDEeO8H8lNgy9OHw" base_Class="_RXMx0EZCEeO8H8lNgy9OHw"/>
+  <smarty:interface xmi:id="_ZTLxIJlpEeO6xcuLaZE19Q" base_Class="_PNpEUEZCEeO8H8lNgy9OHw"/>
+  <smarty:interface xmi:id="_bqMEwJlpEeO6xcuLaZE19Q" base_Class="_m7DU0EZCEeO8H8lNgy9OHw"/>
 </xmi:XMI>

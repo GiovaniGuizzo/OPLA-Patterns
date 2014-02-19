@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smarty="http:///schemas/smarty/_k4ApwJlqEeO6xcuLaZE19Q/6" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smarty/_k4ApwJlqEeO6xcuLaZE19Q/6 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_k4BQ0JlqEeO6xcuLaZE19Q http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
   <uml:Model xmi:id="_ahT1oD2qEeO0W5WLsM8PpQ" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_ahT1oT2qEeO0W5WLsM8PpQ">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -59,6 +59,12 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_jnNwQJlqEeO6xcuLaZE19Q">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jnNwQZlqEeO6xcuLaZE19Q" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_k4BQ0JlqEeO6xcuLaZE19Q"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
+    </profileApplication>
   </uml:Model>
   <smartyProfile:interface xmi:id="_cZMngD2uEeO0W5WLsM8PpQ" base_Class="_eyOw4D2tEeO0W5WLsM8PpQ"/>
   <smartyProfile:interface xmi:id="_C3f0QFFJEeOUw9_Y_H2R8Q" base_Class="_9thucEY_EeO8H8lNgy9OHw"/>
@@ -68,4 +74,6 @@
   <perfilConcerns:sorting xmi:id="_JxCbYFhOEeOn1dtk2tmEdA" base_Class="_eyOw4D2tEeO0W5WLsM8PpQ"/>
   <perfilConcerns_1:action xmi:id="_cSHaQHoWEeOCurlGGUqmgg" base_Class="_d0NpcD2tEeO0W5WLsM8PpQ"/>
   <perfilConcerns_1:action xmi:id="_c5m4EHoWEeOCurlGGUqmgg" base_Class="_dAhisD2tEeO0W5WLsM8PpQ"/>
+  <smarty:interface xmi:id="_AKLacJlrEeO6xcuLaZE19Q" base_Class="_eyOw4D2tEeO0W5WLsM8PpQ"/>
+  <smarty:interface xmi:id="_BqDRwJlrEeO6xcuLaZE19Q" base_Class="_9thucEY_EeO8H8lNgy9OHw"/>
 </xmi:XMI>

@@ -9,7 +9,6 @@ package br.ufpr.inf.opla.patterns;
 import arquitetura.representation.Architecture;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import main.GenerateArchitecture;
-import org.junit.Test;
 
 /**
  *
@@ -17,8 +16,7 @@ import org.junit.Test;
  */
 public class TesteSimples {
     
-    @Test
-    public void testeSimples(){
+    public static void main(String[] args){
         Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE);
         
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();

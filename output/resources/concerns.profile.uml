@@ -1,128 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_9v_84HqaEeK1gM_kVgXLQw" name="concerns" metaclassReference="_ClV7MHqbEeK1gM_kVgXLQw _r2eLkBTiEeORY8N5zhv4gw _kia0QBWUEeObs-pQrJ2skQ">
   <eAnnotations xmi:id="_EgIM4HqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
-    <contents xmi:type="ecore:EPackage" xmi:id="_kLy30JnJEeOxiNx1rb5-sA" name="concerns" nsURI="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21" nsPrefix="concerns">
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy30ZnJEeOxiNx1rb5-sA" name="Concern" abstract="true">
-        <eAnnotations xmi:id="_kLy30pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy305nJEeOxiNx1rb5-sA" name="base_Class" ordered="false" lowerBound="1">
+    <contents xmi:type="ecore:EPackage" xmi:id="_nySogJo5EeO_cZNX6hLEMg" name="concerns" nsURI="http:///schemas/concerns/_nySBcJo5EeO_cZNX6hLEMg/22" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySogZo5EeO_cZNX6hLEMg" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_nySogpo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nySog5o5EeO_cZNX6hLEMg" name="base_Class" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy31ZnJEeOxiNx1rb5-sA" name="base_Property" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nySohZo5EeO_cZNX6hLEMg" name="base_Property" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy315nJEeOxiNx1rb5-sA" name="base_Operation" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_nySoh5o5EeO_cZNX6hLEMg" name="base_Operation" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy32ZnJEeOxiNx1rb5-sA" name="microwaveOvenKernel" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy32pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySoiZo5EeO_cZNX6hLEMg" name="worker" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySoipo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_e8NDgJo3EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy33JnJEeOxiNx1rb5-sA" name="weightSensor" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy33ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySojJo5EeO_cZNX6hLEMg" name="issue" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySojZo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_WYN-UJo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy335nJEeOxiNx1rb5-sA" name="minutePlus" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy34JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySoj5o5EeO_cZNX6hLEMg" name="deploy" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySokJo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_aFm2EJo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy34pnJEeOxiNx1rb5-sA" name="powerLevel" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy345nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySokpo5EeO_cZNX6hLEMg" name="display" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySok5o5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_cLHKAJo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy35ZnJEeOxiNx1rb5-sA" name="todClock" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy35pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySolZo5EeO_cZNX6hLEMg" name="assistance" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySolpo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_d4Wu8Jo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy36JnJEeOxiNx1rb5-sA" name="recipe" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy36ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySomJo5EeO_cZNX6hLEMg" name="selfService" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySomZo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_fXuP8Jo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy365nJEeOxiNx1rb5-sA" name="heatingElement" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy37JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy37pnJEeOxiNx1rb5-sA" name="light" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy375nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy38ZnJEeOxiNx1rb5-sA" name="turntable" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy38pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy39JnJEeOxiNx1rb5-sA" name="beeper" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy39ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy395nJEeOxiNx1rb5-sA" name="hourClock" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy3-JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy3-pnJEeOxiNx1rb5-sA" name="displayUnit" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy3-5nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy3_ZnJEeOxiNx1rb5-sA" name="displayLanguage" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy3_pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4AJnJEeOxiNx1rb5-sA" name="collision" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy4AZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4A5nJEeOxiNx1rb5-sA" name="pause" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy4BJnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4BpnJEeOxiNx1rb5-sA" name="ranking" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
-        <eAnnotations xmi:id="_kLy4B5nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_nySom5o5EeO_cZNX6hLEMg" name="knowledgeBase" eSuperTypes="_nySogZo5EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_nySonJo5EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_iN5y4Jo5EeO_cZNX6hLEMg"/>
       </eClassifiers>
     </contents>
-    <contents xmi:type="ecore:EPackage" xmi:id="_H8ekYJmzEeOWoJCRiS1swg" name="concerns" nsURI="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" nsPrefix="concerns">
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekYZmzEeOWoJCRiS1swg" name="Concern" abstract="true">
-        <eAnnotations xmi:id="_H8ekYpmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_H8ekY5mzEeOWoJCRiS1swg" name="base_Class" ordered="false" lowerBound="1">
+    <contents xmi:type="ecore:EPackage" xmi:id="_6NEMoJo3EeO_cZNX6hLEMg" name="concerns" nsURI="http:///schemas/concerns/_6NDlkJo3EeO_cZNX6hLEMg/21" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_6NEMoZo3EeO_cZNX6hLEMg" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_6NEMopo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_6NEMo5o3EeO_cZNX6hLEMg" name="base_Class" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_H8ekZZmzEeOWoJCRiS1swg" name="base_Property" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_6NEMpZo3EeO_cZNX6hLEMg" name="base_Property" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_H8ekZ5mzEeOWoJCRiS1swg" name="base_Operation" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_6NEMp5o3EeO_cZNX6hLEMg" name="base_Operation" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekaZmzEeOWoJCRiS1swg" name="microwaveOvenKernel" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekapmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_6NEMqZo3EeO_cZNX6hLEMg" name="teste_giovani" eSuperTypes="_6NEMoZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_6NEMqpo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_e8NDgJo3EeO_cZNX6hLEMg"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekbJmzEeOWoJCRiS1swg" name="weightSensor" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekbZmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_rLS2kJo3EeO_cZNX6hLEMg" name="concerns" nsURI="http:///schemas/concerns/_rLSPgJo3EeO_cZNX6hLEMg/20" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2kZo3EeO_cZNX6hLEMg" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_rLS2kpo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_rLS2k5o3EeO_cZNX6hLEMg" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_rLS2lZo3EeO_cZNX6hLEMg" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_rLS2l5o3EeO_cZNX6hLEMg" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekb5mzEeOWoJCRiS1swg" name="minutePlus" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekcJmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2mZo3EeO_cZNX6hLEMg" name="play" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2mpo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekcpmzEeOWoJCRiS1swg" name="powerLevel" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekc5mzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2nJo3EeO_cZNX6hLEMg" name="persistence" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2nZo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekdZmzEeOWoJCRiS1swg" name="todClock" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekdpmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2n5o3EeO_cZNX6hLEMg" name="exceptionhandling" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2oJo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekeJmzEeOWoJCRiS1swg" name="recipe" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekeZmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2opo3EeO_cZNX6hLEMg" name="logging" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2o5o3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8eke5mzEeOWoJCRiS1swg" name="heatingElement" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekfJmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2pZo3EeO_cZNX6hLEMg" name="action" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2ppo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekfpmzEeOWoJCRiS1swg" name="light" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekf5mzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2qJo3EeO_cZNX6hLEMg" name="rule" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2qZo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekgZmzEeOWoJCRiS1swg" name="turntable" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekgpmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2q5o3EeO_cZNX6hLEMg" name="configuration" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2rJo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekhJmzEeOWoJCRiS1swg" name="beeper" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekhZmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2rpo3EeO_cZNX6hLEMg" name="service" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2r5o3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekh5mzEeOWoJCRiS1swg" name="hourClock" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekiJmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2sZo3EeO_cZNX6hLEMg" name="save" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2spo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekipmzEeOWoJCRiS1swg" name="displayUnit" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8eki5mzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2tJo3EeO_cZNX6hLEMg" name="bowling" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2tZo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekjZmzEeOWoJCRiS1swg" name="displayLanguage" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekjpmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2t5o3EeO_cZNX6hLEMg" name="pong" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2uJo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekkJmzEeOWoJCRiS1swg" name="collision" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekkZmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2upo3EeO_cZNX6hLEMg" name="brickles" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2u5o3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekk5mzEeOWoJCRiS1swg" name="pause" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8eklJmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2vZo3EeO_cZNX6hLEMg" name="movement" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2vpo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8eklpmzEeOWoJCRiS1swg" name="ranking" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
-        <eAnnotations xmi:id="_H8ekl5mzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2wJo3EeO_cZNX6hLEMg" name="collision" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2wZo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2w5o3EeO_cZNX6hLEMg" name="pause" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2xJo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2xpo3EeO_cZNX6hLEMg" name="ranking" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2x5o3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_rLS2yZo3EeO_cZNX6hLEMg" name="teste_giovani" eSuperTypes="_rLS2kZo3EeO_cZNX6hLEMg">
+        <eAnnotations xmi:id="_rLS2ypo3EeO_cZNX6hLEMg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_e8NDgJo3EeO_cZNX6hLEMg"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_SsrrURWgEeObs-pQrJ2skQ" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_SsrrUBWgEeObs-pQrJ2skQ/19" nsPrefix="perfilConcerns">
@@ -141,53 +134,53 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Package"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrXBWgEeObs-pQrJ2skQ" name="microwaveOvenKernel" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrXRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrXBWgEeObs-pQrJ2skQ" name="play" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrXRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrXxWgEeObs-pQrJ2skQ" name="weightSensor" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrYBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrXxWgEeObs-pQrJ2skQ" name="persistence" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrYBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrYhWgEeObs-pQrJ2skQ" name="minutePlus" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrYxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrYhWgEeObs-pQrJ2skQ" name="exceptionhandling" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrYxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrZRWgEeObs-pQrJ2skQ" name="powerLevel" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrZhWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrZRWgEeObs-pQrJ2skQ" name="logging" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrZhWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrraBWgEeObs-pQrJ2skQ" name="todClock" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrraRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrraBWgEeObs-pQrJ2skQ" name="action" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrraRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrraxWgEeObs-pQrJ2skQ" name="recipe" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrbBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrraxWgEeObs-pQrJ2skQ" name="rule" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrbBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrbhWgEeObs-pQrJ2skQ" name="heatingElement" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrbxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrbhWgEeObs-pQrJ2skQ" name="configuration" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrbxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrcRWgEeObs-pQrJ2skQ" name="light" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrchWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrcRWgEeObs-pQrJ2skQ" name="service" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrchWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrdBWgEeObs-pQrJ2skQ" name="turntable" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrdRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrdBWgEeObs-pQrJ2skQ" name="save" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrdRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrdxWgEeObs-pQrJ2skQ" name="beeper" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrreBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrdxWgEeObs-pQrJ2skQ" name="bowling" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrreBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrehWgEeObs-pQrJ2skQ" name="hourClock" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrexWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrehWgEeObs-pQrJ2skQ" name="pong" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrexWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrfRWgEeObs-pQrJ2skQ" name="displayUnit" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrfhWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrfRWgEeObs-pQrJ2skQ" name="brickles" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrfhWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrgBWgEeObs-pQrJ2skQ" name="displayLanguage" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrgRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrgBWgEeObs-pQrJ2skQ" name="movement" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_SsrrgRWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrgxWgEeObs-pQrJ2skQ" name="collision" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrhBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_SsrrhBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrhhWgEeObs-pQrJ2skQ" name="pause" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrhxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_SsrrhxWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrriRWgEeObs-pQrJ2skQ" name="ranking" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_SsrrihWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_SsrrihWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_e4e60BWVEeObs-pQrJ2skQ" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_e4PqQBWVEeObs-pQrJ2skQ/18" nsPrefix="perfilConcerns">
@@ -203,53 +196,53 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e62RWVEeObs-pQrJ2skQ" name="microwaveOvenKernel" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e62hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e62RWVEeObs-pQrJ2skQ" name="play" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e62hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e63BWVEeObs-pQrJ2skQ" name="weightSensor" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e63RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e63BWVEeObs-pQrJ2skQ" name="persistence" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e63RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e63xWVEeObs-pQrJ2skQ" name="minutePlus" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e64BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e63xWVEeObs-pQrJ2skQ" name="exceptionhandling" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e64BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e64hWVEeObs-pQrJ2skQ" name="powerLevel" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e64xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e64hWVEeObs-pQrJ2skQ" name="logging" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e64xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e65RWVEeObs-pQrJ2skQ" name="todClock" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e65hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e65RWVEeObs-pQrJ2skQ" name="action" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e65hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e66BWVEeObs-pQrJ2skQ" name="recipe" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e66RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e66BWVEeObs-pQrJ2skQ" name="rule" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e66RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e66xWVEeObs-pQrJ2skQ" name="heatingElement" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e67BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e66xWVEeObs-pQrJ2skQ" name="configuration" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e67BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e67hWVEeObs-pQrJ2skQ" name="light" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e67xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e67hWVEeObs-pQrJ2skQ" name="service" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e67xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e68RWVEeObs-pQrJ2skQ" name="turntable" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e68hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e68RWVEeObs-pQrJ2skQ" name="save" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e68hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69BWVEeObs-pQrJ2skQ" name="beeper" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e69RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69BWVEeObs-pQrJ2skQ" name="bowling" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e69RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69xWVEeObs-pQrJ2skQ" name="hourClock" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e6-BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69xWVEeObs-pQrJ2skQ" name="pong" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e6-BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e6-hWVEeObs-pQrJ2skQ" name="displayUnit" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e6-xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e6-hWVEeObs-pQrJ2skQ" name="brickles" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e6-xWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e6_RWVEeObs-pQrJ2skQ" name="displayLanguage" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e6_hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e6_RWVEeObs-pQrJ2skQ" name="movement" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+        <eAnnotations xmi:id="_e4e6_hWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e7ABWVEeObs-pQrJ2skQ" name="collision" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e7ARWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_e4e7ARWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e7AxWVEeObs-pQrJ2skQ" name="pause" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e7BBWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_e4e7BBWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e7BhWVEeObs-pQrJ2skQ" name="ranking" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
-        <eAnnotations xmi:id="_e4e7BxWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_e4e7BxWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_zcmaARTjEeORY8N5zhv4gw" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_zcmaABTjEeORY8N5zhv4gw/17" nsPrefix="perfilConcerns">
@@ -262,53 +255,53 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaCBTjEeORY8N5zhv4gw" name="microwaveOvenKernel" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaCRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaCBTjEeORY8N5zhv4gw" name="play" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaCRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaCxTjEeORY8N5zhv4gw" name="weightSensor" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaDBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaCxTjEeORY8N5zhv4gw" name="persistence" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaDBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaDhTjEeORY8N5zhv4gw" name="minutePlus" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaDxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaDhTjEeORY8N5zhv4gw" name="exceptionhandling" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaDxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaERTjEeORY8N5zhv4gw" name="powerLevel" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaEhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaERTjEeORY8N5zhv4gw" name="logging" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaEhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaFBTjEeORY8N5zhv4gw" name="todClock" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaFRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaFBTjEeORY8N5zhv4gw" name="action" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaFRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaFxTjEeORY8N5zhv4gw" name="recipe" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaGBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaFxTjEeORY8N5zhv4gw" name="rule" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaGBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaGhTjEeORY8N5zhv4gw" name="heatingElement" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaGxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaGhTjEeORY8N5zhv4gw" name="configuration" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaGxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaHRTjEeORY8N5zhv4gw" name="light" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaHhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaHRTjEeORY8N5zhv4gw" name="service" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaHhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaIBTjEeORY8N5zhv4gw" name="turntable" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaIRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaIBTjEeORY8N5zhv4gw" name="save" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaIRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaIxTjEeORY8N5zhv4gw" name="beeper" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaJBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaIxTjEeORY8N5zhv4gw" name="bowling" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaJBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaJhTjEeORY8N5zhv4gw" name="hourClock" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaJxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaJhTjEeORY8N5zhv4gw" name="pong" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaJxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaKRTjEeORY8N5zhv4gw" name="displayUnit" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaKhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaKRTjEeORY8N5zhv4gw" name="brickles" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaKhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaLBTjEeORY8N5zhv4gw" name="displayLanguage" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaLRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaLBTjEeORY8N5zhv4gw" name="movement" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+        <eAnnotations xmi:id="_zcmaLRTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaLxTjEeORY8N5zhv4gw" name="collision" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaMBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_zcmaMBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaMhTjEeORY8N5zhv4gw" name="pause" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaMxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_zcmaMxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaNRTjEeORY8N5zhv4gw" name="ranking" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
-        <eAnnotations xmi:id="_zcmaNhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_zcmaNhTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_M8wDMBTTEeOYorUb5NKqTw" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_M8vcIBTTEeOYorUb5NKqTw/16" nsPrefix="perfilConcerns">
@@ -318,53 +311,53 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDNRTTEeOYorUb5NKqTw" name="microwaveOvenKernel" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDNhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDNRTTEeOYorUb5NKqTw" name="play" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDNhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDOBTTEeOYorUb5NKqTw" name="weightSensor" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDORTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDOBTTEeOYorUb5NKqTw" name="persistence" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDORTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDOxTTEeOYorUb5NKqTw" name="minutePlus" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDPBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDOxTTEeOYorUb5NKqTw" name="exceptionhandling" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDPBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDPhTTEeOYorUb5NKqTw" name="powerLevel" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDPxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDPhTTEeOYorUb5NKqTw" name="logging" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDPxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDQRTTEeOYorUb5NKqTw" name="todClock" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDQhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDQRTTEeOYorUb5NKqTw" name="action" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDQhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDRBTTEeOYorUb5NKqTw" name="recipe" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDRRTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDRBTTEeOYorUb5NKqTw" name="rule" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDRRTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDRxTTEeOYorUb5NKqTw" name="heatingElement" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDSBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDRxTTEeOYorUb5NKqTw" name="configuration" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDSBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDShTTEeOYorUb5NKqTw" name="light" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDSxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDShTTEeOYorUb5NKqTw" name="service" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDSxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDTRTTEeOYorUb5NKqTw" name="turntable" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDThTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDTRTTEeOYorUb5NKqTw" name="save" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDThTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUBTTEeOYorUb5NKqTw" name="beeper" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDURTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUBTTEeOYorUb5NKqTw" name="bowling" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDURTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUxTTEeOYorUb5NKqTw" name="hourClock" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDVBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUxTTEeOYorUb5NKqTw" name="pong" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDVBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDVhTTEeOYorUb5NKqTw" name="displayUnit" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDVxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDVhTTEeOYorUb5NKqTw" name="brickles" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDVxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDWRTTEeOYorUb5NKqTw" name="displayLanguage" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDWhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDWRTTEeOYorUb5NKqTw" name="movement" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_M8wDWhTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDXBTTEeOYorUb5NKqTw" name="collision" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDXRTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_M8wDXRTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDXxTTEeOYorUb5NKqTw" name="pause" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDYBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_M8wDYBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDYhTTEeOYorUb5NKqTw" name="ranking" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_M8wDYxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_M8wDYxTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_kNdmEBTSEeOYorUb5NKqTw" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_kNZ7sBTSEeOYorUb5NKqTw/15" nsPrefix="perfilConcerns">
@@ -374,50 +367,50 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-IxTSEeOYorUb5NKqTw" name="microwaveOvenKernel" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-JBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-IxTSEeOYorUb5NKqTw" name="play" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-JBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-JhTSEeOYorUb5NKqTw" name="weightSensor" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-JxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-JhTSEeOYorUb5NKqTw" name="persistence" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-JxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-KRTSEeOYorUb5NKqTw" name="minutePlus" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-KhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-KRTSEeOYorUb5NKqTw" name="exceptionhandling" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-KhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-LBTSEeOYorUb5NKqTw" name="powerLevel" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-LRTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-LBTSEeOYorUb5NKqTw" name="logging" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-LRTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-LxTSEeOYorUb5NKqTw" name="todClock" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-MBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-LxTSEeOYorUb5NKqTw" name="action" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-MBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-MhTSEeOYorUb5NKqTw" name="recipe" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-MxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-MhTSEeOYorUb5NKqTw" name="rule" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-MxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-NRTSEeOYorUb5NKqTw" name="heatingElement" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-NhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-NRTSEeOYorUb5NKqTw" name="configuration" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-NhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-OBTSEeOYorUb5NKqTw" name="light" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-ORTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-OBTSEeOYorUb5NKqTw" name="service" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-ORTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-OxTSEeOYorUb5NKqTw" name="turntable" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-PBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-OxTSEeOYorUb5NKqTw" name="save" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-PBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-PhTSEeOYorUb5NKqTw" name="beeper" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-PxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-PhTSEeOYorUb5NKqTw" name="bowling" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-PxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-QRTSEeOYorUb5NKqTw" name="hourClock" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-QhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-QRTSEeOYorUb5NKqTw" name="pong" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-QhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-RBTSEeOYorUb5NKqTw" name="displayUnit" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-RRTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-RBTSEeOYorUb5NKqTw" name="brickles" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-RRTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-RxTSEeOYorUb5NKqTw" name="displayLanguage" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-SBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-RxTSEeOYorUb5NKqTw" name="movement" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+        <eAnnotations xmi:id="_kNn-SBTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-ShTSEeOYorUb5NKqTw" name="collision" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-SxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_kNn-SxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-TRTSEeOYorUb5NKqTw" name="pause" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
-        <eAnnotations xmi:id="_kNn-ThTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+        <eAnnotations xmi:id="_kNn-ThTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_kLtyscPKEeKe-4kh12nOmw" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_kLtysMPKEeKe-4kh12nOmw/14" nsPrefix="perfilConcerns">
@@ -427,7 +420,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLuZxMPKEeKe-4kh12nOmw" name="weightSensor" eSuperTypes="_kLuZwMPKEeKe-4kh12nOmw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLuZxMPKEeKe-4kh12nOmw" name="Persistence" eSuperTypes="_kLuZwMPKEeKe-4kh12nOmw">
         <eAnnotations xmi:id="_kLuZxcPKEeKe-4kh12nOmw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLuZx8PKEeKe-4kh12nOmw" name="sorting" eSuperTypes="_kLuZwMPKEeKe-4kh12nOmw">
@@ -441,7 +434,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_P_8VtXt4EeKj6c5Uq9Fn3w" name="weightSensor" eSuperTypes="_P_8VsXt4EeKj6c5Uq9Fn3w">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_P_8VtXt4EeKj6c5Uq9Fn3w" name="Persistence" eSuperTypes="_P_8VsXt4EeKj6c5Uq9Fn3w">
         <eAnnotations xmi:id="_P_8Vtnt4EeKj6c5Uq9Fn3w" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_P_8VuHt4EeKj6c5Uq9Fn3w" name="sorting" eSuperTypes="_P_8VsXt4EeKj6c5Uq9Fn3w">
@@ -462,7 +455,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_D-6Mxnt4EeK2ob5NxUhyBg" name="weightSensor" eSuperTypes="_D-6Mwnt4EeK2ob5NxUhyBg">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_D-6Mxnt4EeK2ob5NxUhyBg" name="Persistence" eSuperTypes="_D-6Mwnt4EeK2ob5NxUhyBg">
         <eAnnotations xmi:id="_D-6Mx3t4EeK2ob5NxUhyBg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_D-6MyXt4EeK2ob5NxUhyBg" name="sorting" eSuperTypes="_D-6Mwnt4EeK2ob5NxUhyBg">
@@ -483,7 +476,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_7KtzRXt3EeK2ob5NxUhyBg" name="weightSensor" eSuperTypes="_7KtzQXt3EeK2ob5NxUhyBg">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_7KtzRXt3EeK2ob5NxUhyBg" name="Persistence" eSuperTypes="_7KtzQXt3EeK2ob5NxUhyBg">
         <eAnnotations xmi:id="_7KtzRnt3EeK2ob5NxUhyBg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -501,7 +494,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_f7UhdnrBEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_f7UhcnrBEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_f7UhdnrBEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_f7UhcnrBEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_f7Uhd3rBEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -512,7 +505,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_MocU1nq8EeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_MocU0nq8EeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_MocU1nq8EeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_MocU0nq8EeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_MocU13q8EeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -530,7 +523,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0XFORnqxEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_0XFOQnqxEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_0XFORnqxEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_0XFOQnqxEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_0XFOR3qxEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -548,7 +541,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_E-aGhnqqEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_E-aGgnqqEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_E-aGhnqqEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_E-aGgnqqEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_E-aGh3qqEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -566,7 +559,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="__n3fpnqpEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="__n3fonqpEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="__n3fpnqpEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="__n3fonqpEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="__n3fp3qpEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="__n3fqXqpEeK1gM_kVgXLQw" name="GenericStereotype">
@@ -587,7 +580,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_cfyipXqpEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_cfyioXqpEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_cfyipXqpEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_cfyioXqpEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_cfyipnqpEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -605,7 +598,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ztybpnqbEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_ztybonqbEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ztybpnqbEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_ztybonqbEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_ztybp3qbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -616,7 +609,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_mapxpXqbEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_mapxoXqbEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_mapxpXqbEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_mapxoXqbEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_mapxpnqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -627,7 +620,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_h8e9NHqbEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_h8e9MHqbEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_h8e9NHqbEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_h8e9MHqbEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_h8e9NXqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -645,7 +638,7 @@
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_bWBmlnqbEeK1gM_kVgXLQw" name="weightSensor" eSuperTypes="_bWBmknqbEeK1gM_kVgXLQw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_bWBmlnqbEeK1gM_kVgXLQw" name="Persistence" eSuperTypes="_bWBmknqbEeK1gM_kVgXLQw">
         <eAnnotations xmi:id="_bWBml3qbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
@@ -689,58 +682,31 @@
   <packagedElement xmi:type="uml:Extension" xmi:id="_DFk6cHqbEeK1gM_kVgXLQw" name="E_Concern_Class1" memberEnd="_DFk6cXqbEeK1gM_kVgXLQw _DFkTYHqbEeK1gM_kVgXLQw">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_DFk6cXqbEeK1gM_kVgXLQw" name="extension_Concern" type="_-WptMHqaEeK1gM_kVgXLQw" aggregation="composite" association="_DFk6cHqbEeK1gM_kVgXLQw"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_pkw50NmpEeKpzZi5SPat7w" name="microwaveOvenKernel">
-    <generalization xmi:id="_H80XwBTOEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_ptY50BTPEeOYorUb5NKqTw" name="weightSensor">
-    <generalization xmi:id="_QFzJsBTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_wz2mMBTPEeOYorUb5NKqTw" name="minutePlus">
-    <generalization xmi:id="_ZZjNABTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_AfA3gBTQEeOYorUb5NKqTw" name="powerLevel">
-    <generalization xmi:id="_iEgyABTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_DPfbEBTQEeOYorUb5NKqTw" name="todClock">
-    <generalization xmi:id="_tzyckBTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_LNw5MBTQEeOYorUb5NKqTw" name="recipe">
-    <generalization xmi:id="_zZN0ABTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_OUBfgBTQEeOYorUb5NKqTw" name="heatingElement">
-    <generalization xmi:id="_2NmAIBTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_QiErcBTQEeOYorUb5NKqTw" name="light">
-    <generalization xmi:id="_7KcUoBTREeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_ipmRgBTQEeOYorUb5NKqTw" name="turntable">
-    <generalization xmi:id="_Bt720BTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_zJ0ikBTQEeOYorUb5NKqTw" name="beeper">
-    <generalization xmi:id="_EQodEBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_047IsBTQEeOYorUb5NKqTw" name="hourClock">
-    <generalization xmi:id="_IQ_UIBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_4zW98BTQEeOYorUb5NKqTw" name="displayUnit">
-    <generalization xmi:id="_LzIlMBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_7LcPoBTQEeOYorUb5NKqTw" name="displayLanguage">
-    <generalization xmi:id="_PHJ6sBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_-Ux_IBTQEeOYorUb5NKqTw" name="collision">
-    <generalization xmi:id="_R-3usBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_BlapcBTREeOYorUb5NKqTw" name="pause">
-    <generalization xmi:id="_UK9y0BTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_JC3nkBTTEeOYorUb5NKqTw" name="ranking">
-    <generalization xmi:id="_KmTwQBTTEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
-  </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_DrrGIBTjEeORY8N5zhv4gw" name="E_Concern_Property" memberEnd="_LG_BIBTjEeORY8N5zhv4gw _nC2PEBTjEeORY8N5zhv4gw">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_nC2PEBTjEeORY8N5zhv4gw" type="_-WptMHqaEeK1gM_kVgXLQw" association="_DrrGIBTjEeORY8N5zhv4gw"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_7PheUBWUEeObs-pQrJ2skQ" name="E_Concern_Operation" memberEnd="_BSpeYBWVEeObs-pQrJ2skQ _YQ_CYBWVEeObs-pQrJ2skQ" navigableOwnedEnd="_YQ_CYBWVEeObs-pQrJ2skQ">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_YQ_CYBWVEeObs-pQrJ2skQ" type="_-WptMHqaEeK1gM_kVgXLQw" association="_7PheUBWUEeObs-pQrJ2skQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_e8NDgJo3EeO_cZNX6hLEMg" name="worker">
+    <generalization xmi:id="_izbzwJo3EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_WYN-UJo5EeO_cZNX6hLEMg" name="issue">
+    <generalization xmi:id="_YzEQIJo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_aFm2EJo5EeO_cZNX6hLEMg" name="deploy">
+    <generalization xmi:id="_aFm2EZo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_cLHKAJo5EeO_cZNX6hLEMg" name="display">
+    <generalization xmi:id="_cLHKAZo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_d4Wu8Jo5EeO_cZNX6hLEMg" name="assistance">
+    <generalization xmi:id="_d4Wu8Zo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_fXuP8Jo5EeO_cZNX6hLEMg" name="selfService">
+    <generalization xmi:id="_fXuP8Zo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_iN5y4Jo5EeO_cZNX6hLEMg" name="knowledgeBase">
+    <generalization xmi:id="_iN5y4Zo5EeO_cZNX6hLEMg" general="_-WptMHqaEeK1gM_kVgXLQw"/>
   </packagedElement>
 </uml:Profile>

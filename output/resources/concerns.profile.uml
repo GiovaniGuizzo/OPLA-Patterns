@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_9v_84HqaEeK1gM_kVgXLQw" name="concerns" metaclassReference="_ClV7MHqbEeK1gM_kVgXLQw _r2eLkBTiEeORY8N5zhv4gw _kia0QBWUEeObs-pQrJ2skQ">
   <eAnnotations xmi:id="_EgIM4HqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_kLy30JnJEeOxiNx1rb5-sA" name="concerns" nsURI="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy30ZnJEeOxiNx1rb5-sA" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_kLy30pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy305nJEeOxiNx1rb5-sA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy31ZnJEeOxiNx1rb5-sA" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_kLy315nJEeOxiNx1rb5-sA" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy32ZnJEeOxiNx1rb5-sA" name="microwaveOvenKernel" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy32pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_pkw50NmpEeKpzZi5SPat7w"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy33JnJEeOxiNx1rb5-sA" name="weightSensor" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy33ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ptY50BTPEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy335nJEeOxiNx1rb5-sA" name="minutePlus" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy34JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_wz2mMBTPEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy34pnJEeOxiNx1rb5-sA" name="powerLevel" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy345nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_AfA3gBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy35ZnJEeOxiNx1rb5-sA" name="todClock" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy35pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_DPfbEBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy36JnJEeOxiNx1rb5-sA" name="recipe" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy36ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_LNw5MBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy365nJEeOxiNx1rb5-sA" name="heatingElement" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy37JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_OUBfgBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy37pnJEeOxiNx1rb5-sA" name="light" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy375nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_QiErcBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy38ZnJEeOxiNx1rb5-sA" name="turntable" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy38pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_ipmRgBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy39JnJEeOxiNx1rb5-sA" name="beeper" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy39ZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy395nJEeOxiNx1rb5-sA" name="hourClock" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy3-JnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy3-pnJEeOxiNx1rb5-sA" name="displayUnit" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy3-5nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4zW98BTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy3_ZnJEeOxiNx1rb5-sA" name="displayLanguage" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy3_pnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_7LcPoBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4AJnJEeOxiNx1rb5-sA" name="collision" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy4AZnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-Ux_IBTQEeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4A5nJEeOxiNx1rb5-sA" name="pause" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy4BJnJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BlapcBTREeOYorUb5NKqTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kLy4BpnJEeOxiNx1rb5-sA" name="ranking" eSuperTypes="_kLy30ZnJEeOxiNx1rb5-sA">
+        <eAnnotations xmi:id="_kLy4B5nJEeOxiNx1rb5-sA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_JC3nkBTTEeOYorUb5NKqTw"/>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_H8ekYJmzEeOWoJCRiS1swg" name="concerns" nsURI="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" nsPrefix="concerns">
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekYZmzEeOWoJCRiS1swg" name="Concern" abstract="true">
         <eAnnotations xmi:id="_H8ekYpmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
@@ -44,7 +106,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekhJmzEeOWoJCRiS1swg" name="beeper" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
         <eAnnotations xmi:id="_H8ekhZmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekh5mzEeOWoJCRiS1swg" name="_12_24HourClock" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekh5mzEeOWoJCRiS1swg" name="hourClock" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
         <eAnnotations xmi:id="_H8ekiJmzEeOWoJCRiS1swg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_H8ekipmzEeOWoJCRiS1swg" name="displayUnit" eSuperTypes="_H8ekYZmzEeOWoJCRiS1swg">
@@ -109,7 +171,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrdxWgEeObs-pQrJ2skQ" name="beeper" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
         <eAnnotations xmi:id="_SsrreBWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrehWgEeObs-pQrJ2skQ" name="12_24HourClock" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrehWgEeObs-pQrJ2skQ" name="hourClock" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
         <eAnnotations xmi:id="_SsrrexWgEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrfRWgEeObs-pQrJ2skQ" name="displayUnit" eSuperTypes="_SsrrUhWgEeObs-pQrJ2skQ">
@@ -171,7 +233,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69BWVEeObs-pQrJ2skQ" name="beeper" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
         <eAnnotations xmi:id="_e4e69RWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69xWVEeObs-pQrJ2skQ" name="12_24HourClock" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e69xWVEeObs-pQrJ2skQ" name="hourClock" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
         <eAnnotations xmi:id="_e4e6-BWVEeObs-pQrJ2skQ" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_e4e6-hWVEeObs-pQrJ2skQ" name="displayUnit" eSuperTypes="_e4e60RWVEeObs-pQrJ2skQ">
@@ -230,7 +292,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaIxTjEeORY8N5zhv4gw" name="beeper" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
         <eAnnotations xmi:id="_zcmaJBTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaJhTjEeORY8N5zhv4gw" name="12_24HourClock" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaJhTjEeORY8N5zhv4gw" name="hourClock" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
         <eAnnotations xmi:id="_zcmaJxTjEeORY8N5zhv4gw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_zcmaKRTjEeORY8N5zhv4gw" name="displayUnit" eSuperTypes="_zcmaAhTjEeORY8N5zhv4gw">
@@ -286,7 +348,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUBTTEeOYorUb5NKqTw" name="beeper" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
         <eAnnotations xmi:id="_M8wDURTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUxTTEeOYorUb5NKqTw" name="12_24HourClock" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDUxTTEeOYorUb5NKqTw" name="hourClock" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
         <eAnnotations xmi:id="_M8wDVBTTEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_M8wDVhTTEeOYorUb5NKqTw" name="displayUnit" eSuperTypes="_M8wDMRTTEeOYorUb5NKqTw">
@@ -342,7 +404,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-PhTSEeOYorUb5NKqTw" name="beeper" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
         <eAnnotations xmi:id="_kNn-PxTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_zJ0ikBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-QRTSEeOYorUb5NKqTw" name="12_24HourClock" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-QRTSEeOYorUb5NKqTw" name="hourClock" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
         <eAnnotations xmi:id="_kNn-QhTSEeOYorUb5NKqTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_047IsBTQEeOYorUb5NKqTw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_kNn-RBTSEeOYorUb5NKqTw" name="displayUnit" eSuperTypes="_kNdmERTSEeOYorUb5NKqTw">
@@ -657,7 +719,7 @@
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_zJ0ikBTQEeOYorUb5NKqTw" name="beeper">
     <generalization xmi:id="_EQodEBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="_047IsBTQEeOYorUb5NKqTw" name="12_24HourClock">
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_047IsBTQEeOYorUb5NKqTw" name="hourClock">
     <generalization xmi:id="_IQ_UIBTSEeOYorUb5NKqTw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_4zW98BTQEeOYorUb5NKqTw" name="displayUnit">

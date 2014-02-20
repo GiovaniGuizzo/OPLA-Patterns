@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concerns="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smarty="http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20 concerns.profile.uml#_H8ekYJmzEeOWoJCRiS1swg http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3 smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concerns="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21" xmlns:concerns_1="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smarty="http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21 concerns.profile.uml#_kLy30JnJEeOxiNx1rb5-sA http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20 concerns.profile.uml#_H8ekYJmzEeOWoJCRiS1swg http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4 smarty.profile.uml#_li3_gJnJEeOxiNx1rb5-sA">
   <uml:Model xmi:id="_iVblMJmfEeOaWL3_pov7wg" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_iVblMZmfEeOaWL3_pov7wg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -685,21 +685,18 @@
     </packagedElement>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_oORn4JmfEeOaWL3_pov7wg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_oORn4ZmfEeOaWL3_pov7wg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="concerns.profile.uml#_H8ekYJmzEeOWoJCRiS1swg"/>
+        <references xmi:type="ecore:EPackage" href="concerns.profile.uml#_kLy30JnJEeOxiNx1rb5-sA"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="concerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_oORn4pmfEeOaWL3_pov7wg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_oORn45mfEeOaWL3_pov7wg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw"/>
+        <references xmi:type="ecore:EPackage" href="smarty.profile.uml#_li3_gJnJEeOxiNx1rb5-sA"/>
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
     </profileApplication>
   </uml:Model>
-  <concerns:microwaveOvenKernel xmi:id="_yxRskJmfEeOaWL3_pov7wg" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
-  <smarty:mandatory xmi:id="_yxu_kJmfEeOaWL3_pov7wg" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
   <concerns:microwaveOvenKernel xmi:id="_7vOfAJmfEeOaWL3_pov7wg" base_Class="_4fyukJmfEeOaWL3_pov7wg"/>
-  <smarty:mandatory xmi:id="_7vrK8JmfEeOaWL3_pov7wg" base_Class="_4fyukJmfEeOaWL3_pov7wg"/>
   <smarty:variationPoint xmi:id="_7wNWcJmfEeOaWL3_pov7wg" base_Class="_4fyukJmfEeOaWL3_pov7wg" numberOfVariants="2" variants="BooleanWeightSensorInterface,AnalogWeightSensorInterface" variabilities="Weight Sensor"/>
   <concerns:weightSensor xmi:id="_Dl1O4JmgEeOaWL3_pov7wg" base_Class="_86_ukJmfEeOaWL3_pov7wg"/>
   <smarty:alternative_XOR xmi:id="_DmWzUJmgEeOaWL3_pov7wg" base_Class="_86_ukJmfEeOaWL3_pov7wg"/>
@@ -747,7 +744,7 @@
   <concerns:weightSensor xmi:id="_RHDl8JmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
   <concerns:heatingElement xmi:id="_RHYWEJmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
   <concerns:todClock xmi:id="_RH0a8JmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
-  <concerns:_12_24HourClock xmi:id="_RINcgJmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
+  <concerns_1:hourCLock xmi:id="_RINcgJmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
   <concerns:recipe xmi:id="_RImeEJmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
   <smarty:mandatory xmi:id="_RI_foJmlEeOaWL3_pov7wg" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
   <concerns:heatingElement xmi:id="_FT-kAJmmEeOaWL3_pov7wg" base_Property="_29FW8JmlEeOaWL3_pov7wg"/>
@@ -802,4 +799,8 @@
   <concerns:displayLanguage xmi:id="_zo8zEJmtEeOaWL3_pov7wg" base_Class="_zo7k8JmtEeOaWL3_pov7wg"/>
   <smarty:alternative_XOR xmi:id="_zo8zEZmtEeOaWL3_pov7wg" base_Class="_zo7k8JmtEeOaWL3_pov7wg" rootVP="DisplayPrompts" variabilities="Display Language"/>
   <smarty:variability xmi:id="_cZ-VkJmuEeOaWL3_pov7wg" base_Comment="_a8ttYJmuEeOaWL3_pov7wg" name="Display Language" minSelection="1" maxSelection="1" allowAddingVar="true" variants="EnglishDisplayPrompts, ItalianDisplayPrompts, SpanishDisplayPrompts, GermanDisplayPrompts, FrenchDisplayPrompts"/>
+  <concerns:hourClock xmi:id="_209n0JnIEeOxiNx1rb5-sA" base_Class="_Ir27QJmlEeOaWL3_pov7wg"/>
+  <concerns:microwaveOvenKernel xmi:id="_-Z0q8JnJEeOxiNx1rb5-sA" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
+  <smarty:mandatory xmi:id="_-aMeYJnJEeOxiNx1rb5-sA" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
+  <smarty:mandatory xmi:id="_Iah64JnKEeOxiNx1rb5-sA" base_Class="_4fyukJmfEeOaWL3_pov7wg"/>
 </xmi:XMI>

@@ -6,9 +6,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ArchitectureRepository {
-    
-    public static final String MICROWAVE_OVEN_SOFTWARE = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MicrowaveOvenSoftware/Papyrus/MicrowaveOvenSoftware.uml";
 
+    public static final String MICROWAVE_OVEN_SOFTWARE = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MicrowaveOvenSoftware/Papyrus/MicrowaveOvenSoftware.uml";
+    public static final String SERVICE_AND_SUPPORT_SYSTEM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/ServiceAndSupportSystem/Papyrus/ServiceAndSupportSystem.uml";
     public static final String[] STRATEGY_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify2.uml",
@@ -21,7 +21,7 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/bridge/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/bridge/Apply.uml"
     };
-    
+
     public static final String[] ADAPTER_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/adapter/Verify.uml"
     };

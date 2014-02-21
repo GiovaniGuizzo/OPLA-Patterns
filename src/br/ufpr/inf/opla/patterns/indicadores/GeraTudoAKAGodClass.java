@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.indicadores;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -40,7 +41,8 @@ public class GeraTudoAKAGodClass {
             }
 
             executaHypervolume(directoryPath, pla, contexts);
-            createFriedmanFiles(directoryPath, pla, contexts);
+            runFriedman(directoryPath, contexts);
+            runWilcoxon(directoryPath, contexts);
             executeEuclideanDistance(directoryPath, pla, contexts);
         }
     }
@@ -80,14 +82,14 @@ public class GeraTudoAKAGodClass {
         }
     }
 
-    private static void executaHypervolume(String directoryPath, String pla, String[] contextos) throws IOException, InterruptedException {
+    private static void executaHypervolume(String directoryPath, String pla, String[] contexts) throws IOException, InterruptedException {
         MetricsUtil mu = new MetricsUtil();
         double[] referencePoint = Hypervolume.printReferencePoint(mu.readFront(directoryPath + "FUN_All_" + pla + ".txt"), directoryPath + "/HYPERVOLUME_REFERENCE.txt", 2);
 
         try (FileWriter sh = new FileWriter(directoryPath + "run_hypervolume.sh")) {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("#!/bin/sh\n");
-            for (String context : contextos) {
+            for (String context : contexts) {
                 stringBuilder.append("\n");
                 stringBuilder.append("#-----------------------------------------\n");
                 stringBuilder.append("system=").append(directoryPath).append(context).append("\n");
@@ -103,16 +105,14 @@ public class GeraTudoAKAGodClass {
                 stringBuilder.append("for f in $FILES\n");
                 stringBuilder.append("do\n");
                 stringBuilder.append("\techo \"Processing $f\"\n");
-//                stringBuilder.append("\techo $f >> ./$system/HYPERVOLUME_RESULT.txt\n");
                 stringBuilder.append("\t./experiment/hv-1.3-src/hv -r \"$reference\" $f >> ./$system/HYPERVOLUME_RESULT.txt\n");
-//                stringBuilder.append("\techo \"\\n\" >> ./$system/HYPERVOLUME_RESULT.txt\n");
                 stringBuilder.append("done\n");
                 stringBuilder.append("echo \"\\n\"\n");
             }
             sh.write(stringBuilder.toString());
         }
 
-        for (String context : contextos) {
+        for (String context : contexts) {
             Hypervolume.clearFile(directoryPath + context + "/HYPERVOLUME_RESULT.txt");
         }
 
@@ -121,10 +121,10 @@ public class GeraTudoAKAGodClass {
         process.waitFor();
     }
 
-    public static void createFriedmanFiles(String directoryPath, String pla, String[] contextos) throws IOException {
-        try (FileWriter friedman = new FileWriter(directoryPath + "friedman_" + pla + ".txt")) {
+    public static void runFriedman(String directoryPath, String[] contexts) throws IOException, InterruptedException {
+        try (FileWriter friedman = new FileWriter(directoryPath + "friedman_script.txt")) {
             StringBuilder stringBuilder = new StringBuilder();
-            for (String context : contextos) {
+            for (String context : contexts) {
                 stringBuilder.append(context).append("<- c(");
                 Scanner scanner = new Scanner(new FileInputStream(directoryPath + context + "/HYPERVOLUME_RESULT.txt"));
                 while (scanner.hasNextLine()) {
@@ -142,7 +142,7 @@ public class GeraTudoAKAGodClass {
             stringBuilder.append("AR1 <-cbind(");
 
             StringBuilder contextNames = new StringBuilder();
-            for (String context : contextos) {
+            for (String context : contexts) {
                 contextNames.append(context).append(", ");
             }
             contextNames.delete(contextNames.length() - 2, contextNames.length());
@@ -151,24 +151,70 @@ public class GeraTudoAKAGodClass {
             stringBuilder.append("result<-friedman.test(AR1)\n");
             stringBuilder.append("\n");
             stringBuilder.append("m<-data.frame(result$statistic,result$p.value)\n");
-            stringBuilder.append("write.csv2(m,file=\"").append(pla).append("-Friedman.csv\")\n");
+            stringBuilder.append("write.csv2(m,file=\"./").append(directoryPath).append("friedman.csv\")\n");
             stringBuilder.append("\n");
             stringBuilder.append("pos_teste<-friedmanmc(AR1)\n");
-            stringBuilder.append("write.csv2(pos_teste,file=\"").append(pla).append("-compara-Friedman.csv\")\n");
-            stringBuilder.append("png(file=\"boxplot_").append(pla).append(".png\", width=500, height=500)\n");
+            stringBuilder.append("write.csv2(m,file=\"./").append(directoryPath).append("friedman-compara.csv\")\n");
+            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=500, height=500)\n");
             stringBuilder.append("boxplot(").append(contextNames.toString());
 
             contextNames = new StringBuilder();
-            for (String context : contextos) {
+            for (String context : contexts) {
                 contextNames.append("\"").append(context).append("\", ");
             }
             contextNames.delete(contextNames.length() - 2, contextNames.length());
 
-            stringBuilder.append(", names=c(").append(contextNames.toString()).append("))\n");
-            stringBuilder.append("dev.off()");
+            stringBuilder.append(", names=c(").append(contextNames.toString()).append("))");
 
             friedman.write(stringBuilder.toString());
         }
+
+        ProcessBuilder processBuilder = new ProcessBuilder("R", "--no-save");
+        Process process = processBuilder.redirectInput(new File("./" + directoryPath + "friedman_script.txt")).start();
+        process.waitFor();
+    }
+
+    private static void runWilcoxon(String directoryPath, String[] contexts) throws IOException, InterruptedException {
+        try (FileWriter wilcoxon = new FileWriter(directoryPath + "wilcoxon_script.txt")) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String context : contexts) {
+                stringBuilder.append(context).append("<- c(");
+                Scanner scanner = new Scanner(new FileInputStream(directoryPath + context + "/HYPERVOLUME_RESULT.txt"));
+                while (scanner.hasNextLine()) {
+                    String value = scanner.nextLine().trim();
+                    if (!value.isEmpty()) {
+                        stringBuilder.append(value).append(", ");
+                    }
+                }
+                stringBuilder.delete(stringBuilder.length() - 2, stringBuilder.length());
+                stringBuilder.append(")\n");
+                stringBuilder.append("\n");
+            }
+
+            StringBuilder contextNames = new StringBuilder();
+            for (String context : contexts) {
+                contextNames.append(context).append(", ");
+            }
+            contextNames.delete(contextNames.length() - 2, contextNames.length());
+
+            stringBuilder.append("wilcox.test(").append(contextNames.toString()).append(")\n");
+            stringBuilder.append("png(file=\"./").append(directoryPath).append("wilcoxon-boxplot.png\", width=500, height=500)\n");
+            stringBuilder.append("boxplot(").append(contextNames.toString());
+
+            contextNames = new StringBuilder();
+            for (String context : contexts) {
+                contextNames.append("\"").append(context).append("\", ");
+            }
+            contextNames.delete(contextNames.length() - 2, contextNames.length());
+
+            stringBuilder.append(", names=c(").append(contextNames.toString()).append("))");
+
+            wilcoxon.write(stringBuilder.toString());
+        }
+
+        ProcessBuilder processBuilder = new ProcessBuilder("R", "--no-save");
+        Process process = processBuilder.redirectInput(new File("./" + directoryPath + "wilcoxon_script.txt")).start();
+        process.waitFor();
     }
 
     public static SolutionSet removeDominadas(SolutionSet result) {
@@ -210,5 +256,4 @@ public class GeraTudoAKAGodClass {
 
         return result;
     }
-
 }

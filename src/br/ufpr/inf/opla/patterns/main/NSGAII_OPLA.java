@@ -51,6 +51,7 @@ public class NSGAII_OPLA {
 //        
 //        String context = "OnlyPatternsMutation";
 //        Mutation mutation = new DesignPatternsMutationOperator(parameters);
+        
         String plaName = getPlaName(pla);
 
         File directory = ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/");

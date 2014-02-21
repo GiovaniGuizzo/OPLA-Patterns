@@ -29,9 +29,9 @@ public class NSGAII_OPLA {
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
-        int runsNumber = 1; //30;
-        populationSize_ = 2; //100; 
-        maxEvaluations_ = 30; //300 geraçõeshttp://loggr.net/
+        int runsNumber = 30; //30;
+        populationSize_ = 100; //100; 
+        maxEvaluations_ = 30000; //300 geraçõeshttp://loggr.net/
 
         crossoverProbability_ = 0.0;
         mutationProbability_ = 0.9;
@@ -51,7 +51,6 @@ public class NSGAII_OPLA {
 //        
 //        String context = "OnlyPatternsMutation";
 //        Mutation mutation = new DesignPatternsMutationOperator(parameters);
-        
         String plaName = getPlaName(pla);
 
         File directory = ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/");
@@ -111,7 +110,6 @@ public class NSGAII_OPLA {
         long time[] = new long[runsNumber];
 
         Hypervolume.clearFile(directory + "/HYPERVOLUME.txt");
-        Hypervolume.clearFile(directory + "/HYPERVOLUME_RESULT.txt");
 
         for (int runs = 0; runs < runsNumber; runs++) {
 
@@ -131,7 +129,7 @@ public class NSGAII_OPLA {
             // resultFront.saveVariablesToFile(directory + "/VAR_" + runs + "_");
             resultFront.saveVariablesToFile("VAR_" + runs + "_");
 
-            Hypervolume.printFormatedHypervolumeFile(resultFront, directory + "/HYPERVOLUME.txt");
+            Hypervolume.printFormatedHypervolumeFile(resultFront, directory + "/HYPERVOLUME.txt", true);
 
             //armazena as solucoes de todas runs
             todasRuns = todasRuns.union(resultFront);
@@ -143,7 +141,6 @@ public class NSGAII_OPLA {
         }
 
         todasRuns.printTimeToFile(directory + "/TIME_" + plaName, runsNumber, time, pla);
-        Hypervolume.printReferencePoint(allSolutions, directory + "/HYPERVOLUME_REFERENCE.txt", 2);
 
         todasRuns = problem.removeDominadas(todasRuns);
         todasRuns = problem.removeRepetidas(todasRuns);

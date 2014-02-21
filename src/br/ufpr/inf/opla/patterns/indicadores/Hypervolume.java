@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import jmetal.core.SolutionSet;
+import jmetal.qualityIndicator.util.MetricsUtil;
 
 /**
  *
@@ -23,10 +24,10 @@ public class Hypervolume {
         }
     }
 
-    public static void printFormatedHypervolumeFile(SolutionSet allSolutions, String path) throws IOException {
+    public static void printFormatedHypervolumeFile(SolutionSet allSolutions, String path, boolean append) throws IOException {
         File file = new File(path);
         file.getParentFile().mkdirs();
-        try (FileWriter fileWriter = new FileWriter(file, true)) {
+        try (FileWriter fileWriter = new FileWriter(file, append)) {
             for (int i = 0; i < allSolutions.size(); i++) {
                 fileWriter.write(allSolutions.get(i).toString());
                 fileWriter.write("\n");
@@ -35,24 +36,16 @@ public class Hypervolume {
         }
     }
 
-    public static void printReferencePoint(SolutionSet allSolutions, String path, int objectives) throws IOException {
+    public static double[] printReferencePoint(double[][] allSolutions, String path, int objectives) throws IOException {
         File file = new File(path);
         file.getParentFile().mkdirs();
-        double[] max = new double[objectives];
-        for (int i = 0; i < max.length; i++) {
-            max[i] = Double.MIN_VALUE;
-            for (int j = 0; j < allSolutions.size(); j++) {
-                double solutionValue = allSolutions.get(j).getObjective(i);
-                if (solutionValue > max[i]) {
-                    max[i] = solutionValue;
-                }
-            }
-        }
+        double[] max = new MetricsUtil().getMaximumValues(allSolutions, objectives);
         try (FileWriter fileWriter = new FileWriter(file)) {
             for (double d : max) {
                 fileWriter.write(Double.toString(d + 0.1D) + " ");
             }
         }
+        return max;
     }
 
 }

@@ -2,6 +2,7 @@ package br.ufpr.inf.opla.patterns.repositories;
 
 import arquitetura.builders.ArchitectureBuilder;
 import arquitetura.representation.Architecture;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,6 +53,17 @@ public class ArchitectureRepository {
     private static final ArchitectureBuilder ARCHITECTURE_BUILDER = new ArchitectureBuilder();
     private static Architecture CURRENT_ARCHITECTURE;
 
+    public static File getOrCreateDirectory(String path){
+        File directory = new File(path);
+        if (!directory.exists()) {
+            if (!directory.mkdirs()) {
+                System.out.println("Não foi possível criar o diretório " + path);
+                System.exit(0);
+            }
+        }
+        return directory;
+    }
+    
     public static Architecture getArchitecture(String path) {
         try {
             setCurrentArchitecture(ARCHITECTURE_BUILDER.create(path));

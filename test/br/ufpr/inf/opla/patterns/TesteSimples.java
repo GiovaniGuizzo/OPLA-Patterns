@@ -17,7 +17,7 @@ import main.GenerateArchitecture;
 public class TesteSimples {
     
     public static void main(String[] args){
-        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM);
         
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[7]);

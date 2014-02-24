@@ -117,6 +117,17 @@ public class StrategyUtilTest {
         List<Interface> result = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(elements);
         assertEquals(2, result.size());
     }
+    
+    @Test
+    public void testGetAllStrategyInterfacesFromSetOfElements2(){
+        String model = ArchitectureRepository.OTHER_MODELS[6];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Interface target1 = architecture.findInterfaceByName("Target1");
+        List<Interface> strategyInterfaces = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(wholeArchitectureScopeSelection.selectScope(architecture).getElements());
+        
+        assertTrue(strategyInterfaces.contains(target1));
+    }
 
     /**
      * Test of moveContextsRelationshipWithSameTypeAndName method, of class StrategyUtil.

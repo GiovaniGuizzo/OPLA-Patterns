@@ -90,15 +90,19 @@ public class ElementUtil {
 
     public static List<Interface> getAllCommonInterfaces(List<Element> participants) {
         List<Interface> interfaces = new ArrayList<>();
+        boolean first = true;
         for (Element participant : participants) {
             List<Interface> elementInterfaces = ElementUtil.getAllSuperInterfaces(participant);
-            if (interfaces.isEmpty()) {
+            if (first) {
                 interfaces.addAll(elementInterfaces);
                 if (participant instanceof Interface) {
+                    interfaces = new ArrayList<>(CollectionUtils.union(interfaces, AdapterUtil.getAllTargetInterfaces((Interface) participant)));
                     interfaces.add((Interface) participant);
                 }
+                first = false;
             } else {
                 if (participant instanceof Interface) {
+                    elementInterfaces = new ArrayList<>(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces((Interface) participant)));
                     elementInterfaces.add((Interface) participant);
                 }
                 interfaces = new ArrayList<>(CollectionUtils.intersection(interfaces, elementInterfaces));

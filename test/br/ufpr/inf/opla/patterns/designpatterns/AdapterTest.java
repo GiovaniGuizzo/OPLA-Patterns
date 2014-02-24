@@ -11,9 +11,11 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.GeneralizationRelationship;
 import arquitetura.representation.relationship.RealizationRelationship;
+import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import java.util.ArrayList;
+import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -111,6 +113,38 @@ public class AdapterTest {
         Class result = adapter.applyAdapter(target, adaptee);
         assertEquals(localAdapter, result);
         assertEquals(2, localAdapter.getAllMethods().size());
+    }
+
+    @Test
+    public void testApplyAdapter2() {
+        String model = ArchitectureRepository.OTHER_MODELS[6];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Interface target = architecture.findInterfaceByName("Target1");
+        assertEquals("Target1", target.getName());
+
+        Interface adaptee = architecture.findInterfaceByName("Adaptee1");
+        assertEquals("Adaptee1", adaptee.getName());
+
+        Class adapterClass = adapter.applyAdapter(target, adaptee);
+        assertNotNull(adapterClass);
+        assertEquals("Adapter1", adapterClass.getName());
+        assertEquals(2, adapterClass.getAllMethods().size());
+
+        RealizationRelationship realization;
+        RealizationRelationship realization2;
+
+        List<Relationship> relationships = ElementUtil.getRelationships(adapterClass);
+
+        realization = (RealizationRelationship) relationships.get(0);
+        realization2 = (RealizationRelationship) relationships.get(1);
+
+        ArrayList<Element> suppliers = new ArrayList<>();
+        suppliers.add(realization.getSupplier());
+        suppliers.add(realization2.getSupplier());
+
+        assertTrue(suppliers.contains(architecture.findInterfaceByName("Adaptee2")));
+        assertTrue(suppliers.contains(architecture.findInterfaceByName("Target2")));
     }
 
 }

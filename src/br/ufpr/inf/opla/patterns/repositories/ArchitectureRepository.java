@@ -33,7 +33,8 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/other/Model3.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model4.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model5.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/other/Model6.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model6.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model7.uml"
     };
 
     public static final String[] OUTPUT = new String[]{

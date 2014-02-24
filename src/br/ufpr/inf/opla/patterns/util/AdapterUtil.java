@@ -9,11 +9,13 @@ import arquitetura.helpers.UtilResources;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
 import arquitetura.representation.Element;
+import arquitetura.representation.Interface;
 import arquitetura.representation.relationship.Relationship;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  *
@@ -43,7 +45,7 @@ public class AdapterUtil {
             }
         } else {
             for (Element element : allTargetSubElements) {
-                if (element instanceof Class) {
+                if (element instanceof Class && !((Class) element).isAbstract()) {
                     List<Element> allAdapteeSubElements = ElementUtil.getAllSubElements(adaptee);
                     if (allAdapteeSubElements.contains(element)) {
                         adapterClass = (Class) element;
@@ -53,6 +55,21 @@ public class AdapterUtil {
             }
         }
         return adapterClass;
+    }
+
+    public static List<Interface> getAllTargetInterfaces(Interface adaptee) {
+        List<Interface> targetInterfaces = new ArrayList<>();
+        List<Element> allSubElements = ElementUtil.getAllSubElements(adaptee);
+        for (Element element : allSubElements) {
+            if (element instanceof Class && !((Class) element).isAbstract()) {
+                List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(element);
+                allSuperInterfaces.remove(adaptee);
+                allSuperInterfaces.removeAll(allSubElements);
+                allSuperInterfaces.removeAll(ElementUtil.getAllSuperInterfaces(adaptee));
+                targetInterfaces = new ArrayList<>(CollectionUtils.union(targetInterfaces, allSuperInterfaces));
+            }
+        }
+        return targetInterfaces;
     }
 
     public static arquitetura.representation.Class createAdapterClass(Element target, Element adaptee) {

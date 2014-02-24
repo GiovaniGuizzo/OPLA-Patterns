@@ -7,10 +7,12 @@ import arquitetura.representation.Variability;
 import arquitetura.representation.Variant;
 import arquitetura.representation.VariationPoint;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,23 +28,18 @@ public class StrategyUtil {
      * @return The Strategy interface, or null if there is not one.
      */
     public static Interface getStrategyInterfaceFromAlgorithmFamily(AlgorithmFamily algorithmFamily) {
-        Interface strategyInterface = null;
         List<Element> participants = algorithmFamily.getParticipants();
-        List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(participants);
-
-        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()));
-        for (Interface anInterface : interfaces) {
-            MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
-            if (interfaceMethods.containsAll(allMethodsFromAlgorithmFamily)) {
-                strategyInterface = anInterface;
-                break;
-            }
+        List<Interface> interfaces = getAllStrategyInterfacesFromSetOfElements(participants);
+        
+        if (!interfaces.isEmpty()) {
+            Collections.sort(interfaces, SubElementsComparator.getDescendingOrderer());
+            return interfaces.get(0);
+        } else {
+            return null;
         }
-
-        return strategyInterface;
     }
 
-    public static List<Interface> getAllStrategyInterfacesFromSetOfElements(List<Element> elements) {
+    protected static List<Interface> getAllStrategyInterfacesFromSetOfElements(List<Element> elements) {
         List<Interface> strategyInterfaces = new ArrayList<>();
         List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(elements);
 

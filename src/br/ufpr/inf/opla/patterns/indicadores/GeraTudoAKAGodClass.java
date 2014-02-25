@@ -22,7 +22,8 @@ public class GeraTudoAKAGodClass {
 
         String[] contexts = {
             "PLAMutation",
-            "PLAMutationWithPatterns", //            "OnlyPatternsMutation"
+            "PLAMutationWithPatterns",
+            "OnlyPatternsMutation"
         };
 
         MetricsUtil mu = new MetricsUtil();
@@ -33,7 +34,7 @@ public class GeraTudoAKAGodClass {
 
             try (FileWriter funAll = new FileWriter(directoryPath + "FUN_All_" + pla + ".txt")) {
                 for (String contexto : contexts) {
-                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_ALL_" + pla + ".txt");
+                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_All_" + pla + ".txt");
                     for (double[] solucao : front) {
                         funAll.write(solucao[0] + " " + solucao[1] + "\n");
                     }
@@ -61,7 +62,7 @@ public class GeraTudoAKAGodClass {
                     List<Integer> melhoresSolucoesPorContexto = new ArrayList<>();
                     double menorDistancia = Double.MAX_VALUE;
 
-                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_ALL_" + pla + ".txt");
+                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_All_" + pla + ".txt");
                     for (int i = 0; i < front.length; i++) {
                         double distanciaEuclidiana = mu.distance(min, front[i]);
                         todosEds.write(distanciaEuclidiana + "\n");
@@ -154,8 +155,8 @@ public class GeraTudoAKAGodClass {
             stringBuilder.append("write.csv2(m,file=\"./").append(directoryPath).append("friedman.csv\")\n");
             stringBuilder.append("\n");
             stringBuilder.append("pos_teste<-friedmanmc(AR1)\n");
-            stringBuilder.append("write.csv2(m,file=\"./").append(directoryPath).append("friedman-compara.csv\")\n");
-            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=500, height=500)\n");
+            stringBuilder.append("write.csv2(pos_teste,file=\"./").append(directoryPath).append("friedman-compara.csv\")\n");
+            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=900, height=500)\n");
             stringBuilder.append("boxplot(").append(contextNames.toString());
 
             contextNames = new StringBuilder();

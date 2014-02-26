@@ -30,6 +30,24 @@ public class ElementUtil {
         return relationships;
     }
 
+    public static List<Relationship> getRelationships(List<Element> elements) {
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        for (Element element : elements) {
+            Set<Relationship> tempRelationships;
+            if (element instanceof arquitetura.representation.Class) {
+                tempRelationships = ((arquitetura.representation.Class) element).getRelationships();
+            } else {
+                tempRelationships = ((Interface) element).getRelationships();
+            }
+            for (Relationship relationship : tempRelationships) {
+                if (!relationships.contains(relationship)) {
+                    relationships.add(relationship);
+                }
+            }
+        }
+        return relationships;
+    }
+
     public static boolean isTypeOf(Element child, Element parent) {
         boolean isType = false;
         for (Relationship relationship : ElementUtil.getRelationships(child)) {

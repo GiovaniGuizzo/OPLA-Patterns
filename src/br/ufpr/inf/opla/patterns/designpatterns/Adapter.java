@@ -55,7 +55,7 @@ public class Adapter extends DesignPattern {
 
                 adapterClass = AdapterUtil.getAdapterClass(target, adaptee);
                 if (adapterClass == null) {
-                    adapterClass = AdapterUtil.createAdapterClass(target, adaptee);
+                    adapterClass = AdapterUtil.createAdapterClass(adaptee);
                 }
 
                 //Implements/Extends and add all methods.
@@ -65,11 +65,7 @@ public class Adapter extends DesignPattern {
                     ElementUtil.implementInterface(adapterClass, (Interface) target);
                 }
 
-                if (adaptee instanceof arquitetura.representation.Class) {
-                    RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
-                } else {
-                    RelationshipUtil.createNewRealizationRelationship("adaptee", adapterClass, adaptee);
-                }
+                RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
 
                 Relationship relationshipToBeExcluded = null;
                 if (adaptee.getClass().equals(target.getClass())) {

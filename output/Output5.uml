@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:concerns="http:///schemas/concerns/_RL_yAJ1jEeOLoqRf7Zycww/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:patterns="http:///schemas/patterns/_wlXX8JVoEeOWwNcokQBARg/3" xmlns:relationships="http:///schemas/relationships/_ZXR5gI9OEeO5S8PTmh49hw/2" xmlns:smarty="http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="20110701" xsi:schemaLocation="http:///schemas/patterns/_wlXX8JVoEeOWwNcokQBARg/3 resources/patterns.profile.uml#_wlbCUJVoEeOWwNcokQBARg http:///schemas/concerns/_SsrrUBWgEeObs-pQrJ2skQ/19 resources/concerns.profile.uml#_SsrrURWgEeObs-pQrJ2skQ http:///schemas/relationships/_ZXR5gI9OEeO5S8PTmh49hw/2 resources/relationships.profile.uml#_ZXU80I9OEeO5S8PTmh49hw http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3 resources/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw http:///schemas/concerns/_RL_yAJ1jEeOLoqRf7Zycww/20 resources/concerns.profile.uml#_RMC1UJ1jEeOLoqRf7Zycww ">
+  <uml:Model name="model" xmi:id="_xqzHwIzdEeO6Yt6TRR4QNg">
+    <profileApplication xmi:id="_2Q2s4I9OEeO5xq3Ur4qgFw">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_2RHyoI9OEeO5xq3Ur4qgFw">
+        <references href="resources/concerns.profile.uml#_RMC1UJ1jEeOLoqRf7Zycww" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/concerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+    </profileApplication>
+    <profileApplication xmi:id="_2RXDMI9OEeO5xq3Ur4qgFw">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_2RlssI9OEeO5xq3Ur4qgFw">
+        <references href="resources/relationships.profile.uml#_ZXU80I9OEeO5S8PTmh49hw" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/relationships.profile.uml#__hjjkIzaEeO6Yt6TRR4QNg"/>
+    </profileApplication>
+    <profileApplication xmi:id="_2RlssY9OEeO5xq3Ur4qgFw">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_2R2ycI9OEeO5xq3Ur4qgFw">
+        <references href="resources/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
+    </profileApplication>
+    <profileApplication xmi:id="_cyBBIJJmEeOENZsdUoZvrw">
+      <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML" xmi:id="_cyb34JJmEeOENZsdUoZvrw">
+        <references href="resources/patterns.profile.uml#_wlbCUJVoEeOWwNcokQBARg" xmi:type="ecore:EPackage"/>
+      </eAnnotations>
+      <appliedProfile href="resources/patterns.profile.uml#_lDDfsJJlEeOENZsdUoZvrw"/>
+    </profileApplication>
+  <packagedElement isAbstract="false" name="StationaryBrickle" xmi:id="_COWI0HfFEeONGbxib0jvGA" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="push" visibility="public" xmi:id="_QLy7IHfFEeONGbxib0jvGA"/>
+      <ownedOperation isAbstract="false" name="build" visibility="public" xmi:id="_lHc1sHfFEeONGbxib0jvGA"/>
+      <ownedOperation isAbstract="false" name="collide" visibility="public" xmi:id="_NBCPUHfFEeONGbxib0jvGA"/>
+    </packagedElement>
+    <packagedElement clientDependency="a5cddc45-c07c-44d1-87d9-5666f4308e65" isAbstract="false" name="Context" xmi:id="_Fh9OoHfFEeONGbxib0jvGA" xmi:type="uml:Class"/>
+    <packagedElement isAbstract="false" name="MovableBrickle" xmi:id="_DwqQIHfFEeONGbxib0jvGA" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="destroy" visibility="public" xmi:id="_OvNoYHfFEeONGbxib0jvGA"/>
+      <ownedOperation isAbstract="false" name="build" visibility="public" xmi:id="_mPifIHfFEeONGbxib0jvGA"/>
+      <ownedOperation isAbstract="false" name="move" visibility="public" xmi:id="_Ny5KEHfFEeONGbxib0jvGA"/>
+    </packagedElement>
+    <packagedElement isAbstract="false" name="MovementImplementation" xmi:id="2f179b39-f731-4b00-8f7a-5e7776a3aa5f" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="move" visibility="public" xmi:id="bd356aa8-7bf4-43aa-ae13-81a34e035a47"/>
+      <ownedOperation isAbstract="false" name="destroy" visibility="public" xmi:id="b9f1039b-bf4f-4ce9-8cfe-8b0ddae18761"/>
+    </packagedElement>
+    <packagedElement isAbstract="false" name="CollisionImplementation" xmi:id="5edb482f-6973-4a41-a7a8-330385b199b2" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="collide" visibility="public" xmi:id="74f548dd-6c6a-471a-9510-bc70886d4b41"/>
+      <ownedOperation isAbstract="false" name="push" visibility="public" xmi:id="97166996-061a-40ab-b781-292b36ecb7a3"/>
+    </packagedElement>
+    <packagedElement isAbstract="false" name="BricklesImplementation" xmi:id="ee165669-77f3-47c7-804b-0820c131e511" xmi:type="uml:Class">
+      <ownedOperation isAbstract="false" name="build" visibility="public" xmi:id="fe571119-f704-4d8f-aede-2a70eab7e308"/>
+    </packagedElement>
+    <packagedElement client="_Fh9OoHfFEeONGbxib0jvGA" name="" supplier="_DwqQIHfFEeONGbxib0jvGA" xmi:id="982089c7-2b02-4dde-86e8-09ca971db9bf" xmi:type="uml:Usage"/>
+    <packagedElement client="_Fh9OoHfFEeONGbxib0jvGA" name="" supplier="_COWI0HfFEeONGbxib0jvGA" xmi:id="a5cddc45-c07c-44d1-87d9-5666f4308e65" xmi:type="uml:Usage"/>
+    <ownedComment annotatedElement="_Fh9OoHfFEeONGbxib0jvGA" xmi:id="3f5d8402-8722-4e56-931a-0000e15ec8da">
+      <body/>
+    </ownedComment>
+  </uml:Model>
+<concerns:collision base_Class="_QLy7IHfFEeONGbxib0jvGA" xmi:id="69026c6b-fa01-475f-a415-7ddb0e47e0fd"/>
+  <concerns:brickles base_Class="_lHc1sHfFEeONGbxib0jvGA" xmi:id="41190bad-ba88-4b47-a366-9b919dfdd863"/>
+  <concerns:collision base_Class="_NBCPUHfFEeONGbxib0jvGA" xmi:id="96719070-5f84-461c-83b0-929fc3808200"/>
+  <smarty:alternative_OR base_Class="_COWI0HfFEeONGbxib0jvGA" rootVP="Context" variabilities="Brickle" xmi:id="3b8f1a3f-7379-4294-b263-264654773394"/>
+  <smarty:variationPoint base_Class="_Fh9OoHfFEeONGbxib0jvGA" bindingTime="DESIGN_TIME" numberOfVariants="2" variabilities="Brickle" variants="StationaryBrickle, MovableBrickle" xmi:id="1a098e5f-19b4-4fd9-bf89-fb98c9c760af"/>
+  <concerns:movement base_Class="_OvNoYHfFEeONGbxib0jvGA" xmi:id="5cd23ad0-25c9-4047-95b3-5e66809cf70c"/>
+  <concerns:brickles base_Class="_mPifIHfFEeONGbxib0jvGA" xmi:id="9581ce7b-830a-4b16-947c-693ae01cc35f"/>
+  <concerns:movement base_Class="_Ny5KEHfFEeONGbxib0jvGA" xmi:id="46cdc0a5-38eb-4897-b112-c524b792ca08"/>
+  <smarty:alternative_OR base_Class="_DwqQIHfFEeONGbxib0jvGA" rootVP="Context" variabilities="Brickle" xmi:id="518fa81b-bf18-4699-b067-262527e42593"/>
+  <smarty:interface base_Class="2f179b39-f731-4b00-8f7a-5e7776a3aa5f" xmi:id="6356acf5-d23c-4f0a-819e-2c76813c6360"/>
+  <smarty:interface base_Class="5edb482f-6973-4a41-a7a8-330385b199b2" xmi:id="a321adbd-eb89-4a2d-a1c3-ab889480a9ee"/>
+  <smarty:interface base_Class="ee165669-77f3-47c7-804b-0820c131e511" xmi:id="ec8cf39e-bffe-4373-ba84-b34cb69977aa"/>
+  <concerns:movement base_Class="bd356aa8-7bf4-43aa-ae13-81a34e035a47" xmi:id="11199b0a-e2f1-435d-b901-9b63c94e606c"/>
+  <concerns:movement base_Class="b9f1039b-bf4f-4ce9-8cfe-8b0ddae18761" xmi:id="c6778f5d-b8b9-499b-a1ad-19c0ae6378b1"/>
+  <concerns:movement base_Class="2f179b39-f731-4b00-8f7a-5e7776a3aa5f" xmi:id="a0b69d50-9710-4d76-af88-f9081b567ed2"/>
+  <concerns:collision base_Class="74f548dd-6c6a-471a-9510-bc70886d4b41" xmi:id="08c61f93-c282-4570-893e-f9c075c58a6c"/>
+  <concerns:collision base_Class="97166996-061a-40ab-b781-292b36ecb7a3" xmi:id="1bd05c19-8c09-40ab-a8d0-93a22899e319"/>
+  <concerns:collision base_Class="5edb482f-6973-4a41-a7a8-330385b199b2" xmi:id="e5dcf845-0e4c-44e9-ab6f-1a6b7de56f43"/>
+  <concerns:brickles base_Class="fe571119-f704-4d8f-aede-2a70eab7e308" xmi:id="ba03629e-e498-4d59-a675-9c3480a99914"/>
+  <concerns:brickles base_Class="ee165669-77f3-47c7-804b-0820c131e511" xmi:id="078fefe9-eb9e-49dd-aaa6-82be1e9d6aaf"/>
+  <smarty:variability base_Comment="3f5d8402-8722-4e56-931a-0000e15ec8da" bindingTime="DESIGN_TIME" maxSelection="2" minSelection="1" name="Brickle" variants="StationaryBrickle, MovableBrickle" xmi:id="981867ac-ea88-4563-99c8-72724ec96aad"/>
+</xmi:XMI>

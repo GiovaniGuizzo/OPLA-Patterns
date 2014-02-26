@@ -26,6 +26,18 @@ public class RelationshipUtil {
         return supplier;
     }
 
+    public static Element getClientElementFromRelationship(Relationship relationship) {
+        Element client = null;
+        if (relationship instanceof UsageRelationship) {
+            UsageRelationship usage = (UsageRelationship) relationship;
+            client = usage.getClient();
+        } else if (relationship instanceof DependencyRelationship) {
+            DependencyRelationship dependency = (DependencyRelationship) relationship;
+            client = dependency.getClient();
+        }
+        return client;
+    }
+
     public static Interface getImplementedInterface(Relationship relationship) {
         if (relationship instanceof RealizationRelationship) {
             RealizationRelationship realization = (RealizationRelationship) relationship;

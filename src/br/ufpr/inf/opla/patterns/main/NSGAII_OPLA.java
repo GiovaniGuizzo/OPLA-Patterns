@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
-
 import jmetal.core.Algorithm;
 import jmetal.core.SolutionSet;
 import jmetal.metaheuristics.nsgaII.NSGAII;
@@ -160,7 +159,7 @@ public class NSGAII_OPLA {
     }
 
     private static String getPlaName(String pla) {
-        int beginIndex = pla.lastIndexOf("/") + 1;
+        int beginIndex = pla.lastIndexOf('/') + 1;
         int endIndex = pla.length() - 4;
         return pla.substring(beginIndex, endIndex);
     }

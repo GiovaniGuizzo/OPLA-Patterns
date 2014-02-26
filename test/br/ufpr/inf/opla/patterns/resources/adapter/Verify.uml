@@ -21,7 +21,7 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_I_phQJf1EeOb9rmfNEo3dw" clientDependency="_WyT_4Jf1EeOb9rmfNEo3dw _Xi8yoJf1EeOb9rmfNEo3dw" name="AdapterII">
+    <packagedElement xmi:type="uml:Class" xmi:id="_I_phQJf1EeOb9rmfNEo3dw" clientDependency="_WyT_4Jf1EeOb9rmfNEo3dw __-8RMJ8EEeOynK50UizR3Q" name="AdapterII">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_0Slm4Jf1EeOb9rmfNEo3dw" name="sort">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_0Slm4Zf1EeOb9rmfNEo3dw" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -37,8 +37,7 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Realization" xmi:id="_WyT_4Jf1EeOb9rmfNEo3dw" name="Realization1" client="_I_phQJf1EeOb9rmfNEo3dw" supplier="_FPbX8Jf1EeOb9rmfNEo3dw"/>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_Xi8yoJf1EeOb9rmfNEo3dw" name="Realization2" client="_I_phQJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="_ZbdMYJf1EeOb9rmfNEo3dw" clientDependency="_ayNj8Jf1EeOb9rmfNEo3dw _bV9KMJf1EeOb9rmfNEo3dw" name="NoAdapterII">
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZbdMYJf1EeOb9rmfNEo3dw" clientDependency="_ayNj8Jf1EeOb9rmfNEo3dw _AaCRwJ8FEeOynK50UizR3Q" name="NoAdapterII">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_BNIKsJf2EeOb9rmfNEo3dw" name="sort" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_BNIKsZf2EeOb9rmfNEo3dw" name="" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -54,7 +53,6 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Realization" xmi:id="_ayNj8Jf1EeOb9rmfNEo3dw" name="Realization3" client="_ZbdMYJf1EeOb9rmfNEo3dw" supplier="_FPbX8Jf1EeOb9rmfNEo3dw"/>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_bV9KMJf1EeOb9rmfNEo3dw" name="Realization4" client="_ZbdMYJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_R09foJf2EeOb9rmfNEo3dw" clientDependency="_h0yZYJf2EeOb9rmfNEo3dw _jHk28Jf2EeOb9rmfNEo3dw" name="NoAdapterIC">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_R09foZf2EeOb9rmfNEo3dw" name="sort" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_R09fopf2EeOb9rmfNEo3dw" name="" direction="return">
@@ -142,7 +140,7 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RDns05f3EeOb9rmfNEo3dw" clientDependency="_ct6wwJf3EeOb9rmfNEo3dw" name="NoAdapterCI">
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDns05f3EeOb9rmfNEo3dw" clientDependency="_DKtCkJ8FEeOynK50UizR3Q" name="NoAdapterCI">
       <generalization xmi:type="uml:Generalization" xmi:id="_bBDmUJf3EeOb9rmfNEo3dw" general="_RDns0Jf3EeOb9rmfNEo3dw"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_RDns1Zf3EeOb9rmfNEo3dw" name="sort" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDns1pf3EeOb9rmfNEo3dw" name="" direction="return">
@@ -150,7 +148,7 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_RDoT4Jf3EeOb9rmfNEo3dw" clientDependency="_cKU7gJf3EeOb9rmfNEo3dw" name="AdapterCI">
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDoT4Jf3EeOb9rmfNEo3dw" clientDependency="_CuwGYJ8FEeOynK50UizR3Q" name="AdapterCI">
       <generalization xmi:type="uml:Generalization" xmi:id="_al3fIJf3EeOb9rmfNEo3dw" general="_RDns0Jf3EeOb9rmfNEo3dw"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_RDoT4pf3EeOb9rmfNEo3dw" name="sort" visibility="public">
         <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDoT45f3EeOb9rmfNEo3dw" name="" direction="return">
@@ -158,8 +156,10 @@
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_cKU7gJf3EeOb9rmfNEo3dw" name="Realization7" client="_RDoT4Jf3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
-    <packagedElement xmi:type="uml:Realization" xmi:id="_ct6wwJf3EeOb9rmfNEo3dw" name="Realization8" client="_RDns05f3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="__-8RMJ8EEeOynK50UizR3Q" name="Usage5" client="_I_phQJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_AaCRwJ8FEeOynK50UizR3Q" name="Usage6" client="_ZbdMYJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_CuwGYJ8FEeOynK50UizR3Q" name="Usage7" client="_RDoT4Jf3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_DKtCkJ8FEeOynK50UizR3Q" name="Usage8" client="_RDns05f3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_SBZOkJf1EeOb9rmfNEo3dw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SBq7YJf1EeOb9rmfNEo3dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw"/>

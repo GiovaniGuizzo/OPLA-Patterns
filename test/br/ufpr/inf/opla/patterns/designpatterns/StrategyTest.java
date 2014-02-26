@@ -6,6 +6,7 @@ import arquitetura.representation.Interface;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
+import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
@@ -17,7 +18,6 @@ import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
-import java.util.ArrayList;
 import java.util.List;
 import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
@@ -212,17 +212,21 @@ public class StrategyTest {
         assertEquals(1, MethodUtil.getAllMethodsFromElement(adaptee).size());
         assertEquals(1, adaptee.getOwnConcerns().size());
 
-        RealizationRelationship realization;
-        RealizationRelationship realization2;
-        realization = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(0);
-        realization2 = (RealizationRelationship) ElementUtil.getRelationships(adapterClass).get(1);
+        UsageRelationship usage;
+        RealizationRelationship generalization;
 
-        ArrayList<Element> suppliers = new ArrayList<>();
-        suppliers.add(realization.getSupplier());
-        suppliers.add(realization2.getSupplier());
+        final List<Relationship> relationships = ElementUtil.getRelationships(adapterClass);
 
-        assertTrue(suppliers.contains(adaptee));
-        assertTrue(suppliers.contains(strategyInterface));
+        if (relationships.get(0) instanceof UsageRelationship) {
+            usage = (UsageRelationship) relationships.get(0);
+            generalization = (RealizationRelationship) relationships.get(1);
+        } else {
+            usage = (UsageRelationship) relationships.get(1);
+            generalization = (RealizationRelationship) relationships.get(0);
+        }
+
+        assertEquals(adaptee, usage.getSupplier());
+        assertEquals(strategyInterface, generalization.getSupplier());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[2]);

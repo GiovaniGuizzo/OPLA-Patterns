@@ -29,27 +29,17 @@ public class AdapterUtil {
     public static Class getAdapterClass(Element target, Element adaptee) {
         Class adapterClass = null;
         List<Element> allTargetSubElements = ElementUtil.getAllSubElements(target);
-        if (adaptee instanceof Class) {
-            rootFor:
-            for (Element element : allTargetSubElements) {
-                if (element instanceof Class) {
-                    List<Relationship> elementRelationships = ElementUtil.getRelationships(element);
-                    for (Relationship relationship : elementRelationships) {
-                        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-                        if (usedElementFromRelationship != null && usedElementFromRelationship.equals(adaptee)) {
-                            adapterClass = (Class) element;
-                            break rootFor;
-                        }
-                    }
-                }
-            }
-        } else {
-            for (Element element : allTargetSubElements) {
-                if (element instanceof Class && !((Class) element).isAbstract()) {
-                    List<Element> allAdapteeSubElements = ElementUtil.getAllSubElements(adaptee);
-                    if (allAdapteeSubElements.contains(element)) {
+        List<Element> allAdapteeSubElements = ElementUtil.getAllSubElements(adaptee);
+        rootFor:
+        for (Element element : allTargetSubElements) {
+            if (element instanceof Class && !((Class) element).isAbstract()) {
+                List<Relationship> elementRelationships = ElementUtil.getRelationships(element);
+                for (Relationship relationship : elementRelationships) {
+                    Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+                    if (usedElementFromRelationship != null
+                            && (usedElementFromRelationship.equals(adaptee) || allAdapteeSubElements.contains(usedElementFromRelationship))) {
                         adapterClass = (Class) element;
-                        break;
+                        break rootFor;
                     }
                 }
             }
@@ -59,20 +49,27 @@ public class AdapterUtil {
 
     public static List<Interface> getAllTargetInterfaces(Interface adaptee) {
         List<Interface> targetInterfaces = new ArrayList<>();
-        List<Element> allSubElements = ElementUtil.getAllSubElements(adaptee);
-        for (Element element : allSubElements) {
-            if (element instanceof Class && !((Class) element).isAbstract()) {
-                List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(element);
-                allSuperInterfaces.remove(adaptee);
-                allSuperInterfaces.removeAll(allSubElements);
-                allSuperInterfaces.removeAll(ElementUtil.getAllSuperInterfaces(adaptee));
-                targetInterfaces = new ArrayList<>(CollectionUtils.union(targetInterfaces, allSuperInterfaces));
+
+        List<Element> adapteeSubElements = ElementUtil.getAllSubElements(adaptee);
+        adapteeSubElements.add(adaptee);
+        List<Relationship> allRelationships = ElementUtil.getRelationships(adapteeSubElements);
+        for (Relationship relationship : allRelationships) {
+            Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+            if (usedElementFromRelationship != null && adapteeSubElements.contains(usedElementFromRelationship)) {
+                Element client = RelationshipUtil.getClientElementFromRelationship(relationship);
+                if (client instanceof Class && !((Class) client).isAbstract()) {
+                    List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(client);
+                    allSuperInterfaces.remove(adaptee);
+                    allSuperInterfaces.removeAll(adapteeSubElements);
+                    allSuperInterfaces.removeAll(ElementUtil.getAllSuperInterfaces(adaptee));
+                    targetInterfaces = new ArrayList<>(CollectionUtils.union(targetInterfaces, allSuperInterfaces));
+                }
             }
         }
         return targetInterfaces;
     }
 
-    public static arquitetura.representation.Class createAdapterClass(Element target, Element adaptee) {
+    public static arquitetura.representation.Class createAdapterClass(Element adaptee) {
         Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
         arquitetura.representation.Class adapterClass;
         arquitetura.representation.Package aPackage = null;

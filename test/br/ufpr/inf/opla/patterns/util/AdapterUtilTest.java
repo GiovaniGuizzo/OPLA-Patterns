@@ -70,20 +70,9 @@ public class AdapterUtilTest {
 
         Interface target1 = architecture.findInterfaceByName("Target1");
         Interface target2 = architecture.findInterfaceByName("Target2");
-
-        List<Interface> allTargetInterfaces = AdapterUtil.getAllTargetInterfaces(target1);
-        Assert.assertEquals(3, allTargetInterfaces.size());
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee1));
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee2));
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee3));
-
-        allTargetInterfaces = AdapterUtil.getAllTargetInterfaces(target2);
-        Assert.assertEquals(3, allTargetInterfaces.size());
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee1));
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee2));
-        Assert.assertTrue(allTargetInterfaces.contains(adaptee3));
-
-        allTargetInterfaces = AdapterUtil.getAllTargetInterfaces(adaptee3);
+        
+        List<Interface> allTargetInterfaces = AdapterUtil.getAllTargetInterfaces(adaptee3);
+        
         Assert.assertEquals(2, allTargetInterfaces.size());
         Assert.assertTrue(allTargetInterfaces.contains(target1));
         Assert.assertTrue(allTargetInterfaces.contains(target2));

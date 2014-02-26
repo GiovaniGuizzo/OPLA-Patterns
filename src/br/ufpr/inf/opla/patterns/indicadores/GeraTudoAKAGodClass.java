@@ -246,7 +246,7 @@ public class GeraTudoAKAGodClass {
 
                 if (dominador) {
                     result.remove(j);
-                    j = j - 1;
+                    j -= 1;
                 } else if (dominado) {
                     result.remove(i);
                     j = i;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_9v_84HqaEeK1gM_kVgXLQw" name="perfilConcerns" metaclassReference="_ClV7MHqbEeK1gM_kVgXLQw _r2eLkBTiEeORY8N5zhv4gw _kia0QBWUEeObs-pQrJ2skQ _KfKswBWfEeObs-pQrJ2skQ">
+<uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_9v_84HqaEeK1gM_kVgXLQw" name="concerns" metaclassReference="_ClV7MHqbEeK1gM_kVgXLQw _r2eLkBTiEeORY8N5zhv4gw _kia0QBWUEeObs-pQrJ2skQ">
   <eAnnotations xmi:id="_EgIM4HqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
     <contents xmi:type="ecore:EPackage" xmi:id="_SsrrURWgEeObs-pQrJ2skQ" name="perfilConcerns" nsURI="http:///schemas/perfilConcerns/_SsrrUBWgEeObs-pQrJ2skQ/19" nsPrefix="perfilConcerns">
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_SsrrUhWgEeObs-pQrJ2skQ" name="Concern" abstract="true">
@@ -550,9 +550,6 @@
   <elementImport xmi:id="_kia0QBWUEeObs-pQrJ2skQ" alias="Operation">
     <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
   </elementImport>
-  <elementImport xmi:id="_KfKswBWfEeObs-pQrJ2skQ" alias="Package">
-    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
-  </elementImport>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="_-WptMHqaEeK1gM_kVgXLQw" name="Concern" isAbstract="true">
     <ownedAttribute xmi:id="_DFkTYHqbEeK1gM_kVgXLQw" name="base_Class" association="_DFk6cHqbEeK1gM_kVgXLQw">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
@@ -563,10 +560,6 @@
     <ownedAttribute xmi:id="_BSpeYBWVEeObs-pQrJ2skQ" name="base_Operation" association="_7PheUBWUEeObs-pQrJ2skQ">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
       <defaultValue xmi:type="uml:LiteralString" xmi:id="_RfF30BWVEeObs-pQrJ2skQ" value=""/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_Paq9cBWfEeObs-pQrJ2skQ" name="base_Package" association="_u_1NUBWfEeObs-pQrJ2skQ">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
-      <defaultValue xmi:type="uml:LiteralString" xmi:id="_Qw2tQBWfEeObs-pQrJ2skQ" value="base_Package"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_DFk6cHqbEeK1gM_kVgXLQw" name="E_Concern_Class1" memberEnd="_DFk6cXqbEeK1gM_kVgXLQw _DFkTYHqbEeK1gM_kVgXLQw">
@@ -625,8 +618,5 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_7PheUBWUEeObs-pQrJ2skQ" name="E_Concern_Operation" memberEnd="_BSpeYBWVEeObs-pQrJ2skQ _YQ_CYBWVEeObs-pQrJ2skQ" navigableOwnedEnd="_YQ_CYBWVEeObs-pQrJ2skQ">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_YQ_CYBWVEeObs-pQrJ2skQ" type="_-WptMHqaEeK1gM_kVgXLQw" association="_7PheUBWUEeObs-pQrJ2skQ"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="_u_1NUBWfEeObs-pQrJ2skQ" name="E_Concern_Package" memberEnd="_Paq9cBWfEeObs-pQrJ2skQ _02p2wBWfEeObs-pQrJ2skQ" navigableOwnedEnd="_02p2wBWfEeObs-pQrJ2skQ">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_02p2wBWfEeObs-pQrJ2skQ" association="_u_1NUBWfEeObs-pQrJ2skQ"/>
   </packagedElement>
 </uml:Profile>

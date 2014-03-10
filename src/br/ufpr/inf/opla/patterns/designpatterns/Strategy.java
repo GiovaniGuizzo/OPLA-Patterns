@@ -123,7 +123,12 @@ public class Strategy extends DesignPattern {
             ElementUtil.implementInterface(participants, strategyInterface, adapterList, adapteeList);
 
             participants.removeAll(adapteeList);
-            participants.addAll(adapterList);
+            
+            for (Element adapterClass : adapterList) {
+                if(!participants.contains(adapterClass)){
+                    participants.add(adapterClass);
+                }
+            }
 
             //Concern
             for (Element participant : participants) {

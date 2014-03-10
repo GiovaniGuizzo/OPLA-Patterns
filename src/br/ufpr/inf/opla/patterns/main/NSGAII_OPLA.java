@@ -28,9 +28,9 @@ public class NSGAII_OPLA {
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
-        int runsNumber = 1; //30;
-        populationSize_ = 2; //100; 
-        maxEvaluations_ = 30; //300 geraçõeshttp://loggr.net/
+        int runsNumber = 30; //30;
+        populationSize_ = 100; //100; 
+        maxEvaluations_ = 30000; //300 geraçõeshttp://loggr.net/
 
         crossoverProbability_ = 0.0;
         mutationProbability_ = 0.9;

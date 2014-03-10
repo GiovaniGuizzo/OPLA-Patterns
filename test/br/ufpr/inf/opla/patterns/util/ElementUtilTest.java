@@ -309,17 +309,17 @@ public class ElementUtilTest {
             List<Element> elements = new ArrayList<>(architecture.getElements());
             elements.remove(aPackage);
 
-            Interface anInterface = architecture.createInterface(model);
+            Interface anInterface = architecture.createInterface("VaiFoiDeuInterface");
             Method createOperation = anInterface.createOperation("foiDeu");
 
             List<Element> adapterList = new ArrayList<>();
             List<Element> adapteeList = new ArrayList<>();
             ElementUtil.implementInterface(elements, anInterface, adapterList, adapteeList);
 
-            assertEquals(2, adapterList.size());
-            assertEquals(2, adapteeList.size());
+            assertTrue(adapterList.size() == 1 || adapterList.size() == 2);
+            assertEquals(4, adapteeList.size());
 
-            Class aClass = architecture.findClassByName("Class1").get(0);
+            Class aClass = architecture.findClassByName("CommonStrategyAdapter").get(0);
             assertTrue(aClass.getAllMethods().contains(createOperation));
         } catch (PackageNotFound | ClassNotFound ex) {
             Logger.getLogger(ElementUtilTest.class.getName()).log(Level.SEVERE, null, ex);

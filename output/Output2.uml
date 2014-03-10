@@ -26,36 +26,36 @@
       <appliedProfile href="resources/patterns.profile.uml#_lDDfsJJlEeOENZsdUoZvrw"/>
     </profileApplication>
   <packagedElement name="PackageSort" xmi:id="_HT9gcECeEeOt8clYlm4AVw" xmi:type="uml:Package">
-      <packagedElement clientDependency="a74f9156-b112-4891-b4ff-10067b1f3cb4" isAbstract="false" name="QuickSort" xmi:id="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
+      <packagedElement clientDependency="fd42abff-4ad6-4f1f-8fe6-ee2c72ea2cc7" isAbstract="false" name="QuickSort" xmi:id="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="_kvtGsDzCEeOQvLsAhPBMLQ">
-          <ownedParameter direction="return" name="" xmi:id="02eb62b3-531b-4530-b149-cd8c3a0ecfab">
+          <ownedParameter direction="return" name="" xmi:id="a2bb3f58-fd8f-4319-9a80-08d050ad7cfb">
             <type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer" xmi:type="uml:PrimitiveType"/>
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement clientDependency="21d3c9ca-aa43-4d00-a802-67a9b93482ad" isAbstract="false" name="BubbleSort" xmi:id="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
+      <packagedElement clientDependency="f24aaac0-bb82-41f5-bd49-4b9b3ffd59d5" isAbstract="false" name="BubbleSort" xmi:id="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="_HqlxsDzCEeOQvLsAhPBMLQ">
-          <ownedParameter direction="return" name="" xmi:id="b5ce9ae2-9101-4bcd-91c5-5bb71a66d354">
+          <ownedParameter direction="return" name="" xmi:id="4d387123-bddf-4b4f-afb8-695d2d7221c3">
             <type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer" xmi:type="uml:PrimitiveType"/>
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement isAbstract="false" name="SortStrategy" xmi:id="e51d041f-a090-4139-9830-832e26dc59cb" xmi:type="uml:Class">
-        <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="d63da1f1-f1fc-4aac-ac12-9933b97b487c">
-          <ownedParameter direction="return" name="" xmi:id="6e0f401a-d137-421a-97aa-4d8d1f0edffe">
+      <packagedElement isAbstract="false" name="SortStrategy" xmi:id="ad6fad78-9914-4625-a61b-cb603494393b" xmi:type="uml:Class">
+        <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="3e019992-93e7-490f-bb70-e51c3ca95c80">
+          <ownedParameter direction="return" name="" xmi:id="3e63f066-11a6-4c19-b939-f01192d4bce4">
             <type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer" xmi:type="uml:PrimitiveType"/>
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement clientDependency="b080eea1-6738-4a9b-bc1b-c374e75dc7a6" isAbstract="false" name="NotAContext" xmi:id="_u2-RoDzCEeOQvLsAhPBMLQ" xmi:type="uml:Class">
+      <packagedElement clientDependency="54028829-7619-45f5-95e8-381396bd110a" isAbstract="false" name="NotAContext" xmi:id="_u2-RoDzCEeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="foca" visibility="public" xmi:id="_XfbmsJPmEeOmmu1VHgpZDw"/>
       </packagedElement>
       <packagedElement isAbstract="false" name="NoEither" xmi:id="_yazkwDzCEeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="aguia" visibility="public" xmi:id="_Y8Z7AJPmEeOmmu1VHgpZDw"/>
       </packagedElement>
-      <packagedElement clientDependency="e3424c8e-7021-4ad9-ac33-4eb8cdfd6588" isAbstract="false" name="ShellSort" xmi:id="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
+      <packagedElement clientDependency="8c981b0b-1a7f-4f75-84d7-99655a68f2b0" isAbstract="false" name="ShellSort" xmi:id="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="sort" visibility="public" xmi:id="_o7H-QDzCEeOQvLsAhPBMLQ">
-          <ownedParameter direction="return" name="" xmi:id="95e866d8-542a-4e9a-ab2b-837c39bd3fd2">
+          <ownedParameter direction="return" name="" xmi:id="c8807883-efd2-4238-b9a4-9033b756cabd">
             <type href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer" xmi:type="uml:PrimitiveType"/>
           </ownedParameter>
         </ownedOperation>
@@ -63,31 +63,31 @@
       <packagedElement isAbstract="false" name="NoAlgorithm" xmi:id="_xHLZsDzCEeOQvLsAhPBMLQ" xmi:type="uml:Class">
         <ownedOperation isAbstract="false" name="leao" visibility="public" xmi:id="_Yc4GYJPmEeOmmu1VHgpZDw"/>
       </packagedElement>
-      <packagedElement clientDependency="86126ff6-cc37-4701-af7b-51a56a80a277" isAbstract="false" name="ContextClass" xmi:id="_uwevcDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class"/>
-      <ownedComment annotatedElement="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="9f6bbaab-3172-43db-9930-49ff7f471c66">
+      <packagedElement clientDependency="1f181119-eda6-47fb-a7b4-e4351e3bfb3f" isAbstract="false" name="ContextClass" xmi:id="_uwevcDy_EeOQvLsAhPBMLQ" xmi:type="uml:Class"/>
+      <ownedComment annotatedElement="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="663e4775-07da-4d20-aa01-0aa688172e8f">
         <body/>
       </ownedComment>
     </packagedElement>
-    <packagedElement client="_vOaBkDy_EeOQvLsAhPBMLQ" name="implements" supplier="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="a74f9156-b112-4891-b4ff-10067b1f3cb4" xmi:type="uml:Realization"/>
-    <packagedElement client="_vf1v0Dy_EeOQvLsAhPBMLQ" name="implements" supplier="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="e3424c8e-7021-4ad9-ac33-4eb8cdfd6588" xmi:type="uml:Realization"/>
-    <packagedElement client="_vyYRUDy_EeOQvLsAhPBMLQ" name="implements" supplier="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="21d3c9ca-aa43-4d00-a802-67a9b93482ad" xmi:type="uml:Realization"/>
-    <packagedElement client="_uwevcDy_EeOQvLsAhPBMLQ" name="" supplier="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="86126ff6-cc37-4701-af7b-51a56a80a277" xmi:type="uml:Usage"/>
-    <packagedElement client="_u2-RoDzCEeOQvLsAhPBMLQ" name="" supplier="_xHLZsDzCEeOQvLsAhPBMLQ" xmi:id="f2f19128-aefe-4ee3-a24a-79f96b16a1c0" xmi:type="uml:Usage"/>
-    <packagedElement client="_u2-RoDzCEeOQvLsAhPBMLQ" name="" supplier="_yazkwDzCEeOQvLsAhPBMLQ" xmi:id="b080eea1-6738-4a9b-bc1b-c374e75dc7a6" xmi:type="uml:Usage"/>
+    <packagedElement client="_vOaBkDy_EeOQvLsAhPBMLQ" name="implements" supplier="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="fd42abff-4ad6-4f1f-8fe6-ee2c72ea2cc7" xmi:type="uml:Realization"/>
+    <packagedElement client="_vf1v0Dy_EeOQvLsAhPBMLQ" name="implements" supplier="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="8c981b0b-1a7f-4f75-84d7-99655a68f2b0" xmi:type="uml:Realization"/>
+    <packagedElement client="_vyYRUDy_EeOQvLsAhPBMLQ" name="implements" supplier="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="f24aaac0-bb82-41f5-bd49-4b9b3ffd59d5" xmi:type="uml:Realization"/>
+    <packagedElement client="_uwevcDy_EeOQvLsAhPBMLQ" name="" supplier="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="1f181119-eda6-47fb-a7b4-e4351e3bfb3f" xmi:type="uml:Usage"/>
+    <packagedElement client="_u2-RoDzCEeOQvLsAhPBMLQ" name="" supplier="_xHLZsDzCEeOQvLsAhPBMLQ" xmi:id="ab0b3481-e4c3-43f5-902d-4253dbed2dba" xmi:type="uml:Usage"/>
+    <packagedElement client="_u2-RoDzCEeOQvLsAhPBMLQ" name="" supplier="_yazkwDzCEeOQvLsAhPBMLQ" xmi:id="54028829-7619-45f5-95e8-381396bd110a" xmi:type="uml:Usage"/>
   </uml:Model>
-<concerns:brickles base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:id="a9658174-8176-4993-a0f4-0b84c1058622"/>
-  <patterns:strategy base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:id="0c4c33a8-d55e-405b-a214-a3d2d2b52ad2"/>
-  <smarty:alternative_OR base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="c9a33db1-5a8d-452e-9406-351e6827ca38"/>
-  <concerns:brickles base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:id="f2abea73-9544-42b8-b22d-efce471394d1"/>
-  <patterns:strategy base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:id="eab11d0a-03f6-4eca-8bfd-35b1fa484a6e"/>
-  <smarty:alternative_OR base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="382b2014-a680-4ef1-bed1-85f414cd8105"/>
-  <concerns:brickles base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:id="f9c73e1c-909c-4209-9ca2-4ea3106fa4b7"/>
-  <patterns:strategy base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:id="5f7acc5d-3edc-4b79-8ea6-1435ceb6ee9f"/>
-  <smarty:alternative_OR base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="e5f892b2-5ac6-4b7b-9843-5c6a9bbb84fb"/>
-  <smarty:mandatory base_Class="_uwevcDy_EeOQvLsAhPBMLQ" rootVP="" variabilities="" xmi:id="f8dfc5f6-b1d9-4a87-b75c-be0755577cb3"/>
-  <smarty:variationPoint base_Class="e51d041f-a090-4139-9830-832e26dc59cb" bindingTime="DESIGN_TIME" numberOfVariants="3" variabilities="Sort" variants="BubbleSort, QuickSort, ShellSort" xmi:id="62b23b91-aea5-4812-bcab-9ce021510675"/>
-  <smarty:interface base_Class="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="b986ae8a-f768-4fc9-92ec-d059ff20ce28"/>
-  <concerns:brickles base_Class="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="20f094aa-2acf-4938-8ee2-a40a9eacc9e7"/>
-  <patterns:strategy base_Class="e51d041f-a090-4139-9830-832e26dc59cb" xmi:id="b09b9e5e-903b-454e-be28-4ea08f878f88"/>
-  <smarty:variability base_Comment="9f6bbaab-3172-43db-9930-49ff7f471c66" bindingTime="DESIGN_TIME" maxSelection="3" minSelection="1" name="Sort" variants="BubbleSort, QuickSort, ShellSort" xmi:id="7160888b-b1ae-4241-8178-72bfec05f338"/>
+<concerns:brickles base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:id="c6a31933-0642-4d7e-817b-3977eb8fc1cc"/>
+  <patterns:strategy base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" xmi:id="3ba30583-4bb7-4e11-a10c-9181b9c70365"/>
+  <smarty:alternative_OR base_Class="_vOaBkDy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="99176708-4d38-4062-9ceb-6ea063d926e3"/>
+  <concerns:brickles base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:id="e88e852f-f367-496e-93f2-870477455546"/>
+  <patterns:strategy base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" xmi:id="4531b445-f0ee-4545-8973-90de0401f9d8"/>
+  <smarty:alternative_OR base_Class="_vyYRUDy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="682293bd-eebe-4354-999c-c88fcc436d74"/>
+  <concerns:brickles base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:id="94d28e46-56cc-4cd7-82a8-fb5896b8e02e"/>
+  <patterns:strategy base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" xmi:id="2d46970c-7140-41b1-9c80-3dbd019d0390"/>
+  <smarty:alternative_OR base_Class="_vf1v0Dy_EeOQvLsAhPBMLQ" rootVP="SortStrategy" variabilities="Sort" xmi:id="6819cad1-8ae2-4fdf-a5d9-2de2dc40ad31"/>
+  <smarty:mandatory base_Class="_uwevcDy_EeOQvLsAhPBMLQ" rootVP="" variabilities="" xmi:id="2f247241-075a-45c3-925d-a949245c6f12"/>
+  <smarty:variationPoint base_Class="ad6fad78-9914-4625-a61b-cb603494393b" bindingTime="DESIGN_TIME" numberOfVariants="3" variabilities="Sort" variants="BubbleSort, QuickSort, ShellSort" xmi:id="8d100bfb-04a1-4c76-8192-e3834a9c3e24"/>
+  <smarty:interface base_Class="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="ef1a4c98-f2c3-44b9-98d5-2f1056fdb9ff"/>
+  <concerns:brickles base_Class="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="894496a7-af5d-4a2f-bd6f-d748a0f869a8"/>
+  <patterns:strategy base_Class="ad6fad78-9914-4625-a61b-cb603494393b" xmi:id="440eac96-d62d-4bb6-bd26-14f5bade53d4"/>
+  <smarty:variability base_Comment="663e4775-07da-4d20-aa01-0aa688172e8f" bindingTime="DESIGN_TIME" maxSelection="3" minSelection="1" name="Sort" variants="BubbleSort, QuickSort, ShellSort" xmi:id="5af8c076-4785-44e5-bcfc-e44d3b2cfb02"/>
 </xmi:XMI>

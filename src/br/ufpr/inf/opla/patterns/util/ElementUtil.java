@@ -8,9 +8,11 @@ import arquitetura.representation.Method;
 import arquitetura.representation.relationship.AssociationEnd;
 import arquitetura.representation.relationship.AssociationRelationship;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.designpatterns.Adapter;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +32,7 @@ public class ElementUtil {
         return relationships;
     }
 
-    public static List<Relationship> getRelationships(List<Element> elements) {
+    public static List<Relationship> getRelationships(List<? extends Element> elements) {
         ArrayList<Relationship> relationships = new ArrayList<>();
         for (Element element : elements) {
             Set<Relationship> tempRelationships;
@@ -112,15 +114,14 @@ public class ElementUtil {
         for (Element participant : participants) {
             List<Interface> elementInterfaces = ElementUtil.getAllSuperInterfaces(participant);
             if (first) {
-                interfaces.addAll(elementInterfaces);
+                interfaces.addAll(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces(participant)));
                 if (participant instanceof Interface) {
-                    interfaces = new ArrayList<>(CollectionUtils.union(interfaces, AdapterUtil.getAllTargetInterfaces((Interface) participant)));
                     interfaces.add((Interface) participant);
                 }
                 first = false;
             } else {
+                elementInterfaces = new ArrayList<>(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces(participant)));
                 if (participant instanceof Interface) {
-                    elementInterfaces = new ArrayList<>(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces((Interface) participant)));
                     elementInterfaces.add((Interface) participant);
                 }
                 interfaces = new ArrayList<>(CollectionUtils.intersection(interfaces, elementInterfaces));
@@ -298,25 +299,30 @@ public class ElementUtil {
     }
 
     public static void implementInterface(List<Element> elements, Interface anInterface, List<Element> adapterList, List<Element> adapteeList) {
+        Collections.sort(elements, SubElementsComparator.getDescendingOrderer());
         for (Element participant : elements) {
             Class adapterClass = implementInterface(participant, anInterface);
             if (adapterClass != null) {
-                adapterList.add(adapterClass);
-                adapteeList.add(participant);
+                if (!adapterList.contains(adapterClass)) {
+                    adapterList.add(adapterClass);
+                }
+                if (!adapteeList.contains(participant)) {
+                    adapteeList.add(participant);
+                }
             }
         }
     }
 
     public static arquitetura.representation.Class implementInterface(Element child, Interface anInterface) {
-        if (!ElementUtil.isTypeOf(child, anInterface)) {
+        if (!ElementUtil.isTypeOf(child, anInterface) && !AdapterUtil.getAllTargetInterfaces(child).contains(anInterface)) {
             if (child instanceof arquitetura.representation.Class) {
                 RelationshipUtil.createNewRealizationRelationship("implements", child, anInterface);
             } else if (child instanceof Interface) {
-                arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(anInterface, child);
-                return adapterClass;
+                return Adapter.getInstance().applyAdapter(anInterface, child);
             }
         }
-        if (child instanceof arquitetura.representation.Class) {
+
+        if (ElementUtil.isTypeOf(child, anInterface) && child instanceof arquitetura.representation.Class) {
             arquitetura.representation.Class childClass = (arquitetura.representation.Class) child;
             if (!childClass.isAbstract()) {
                 MethodArrayList childMethods = new MethodArrayList(new ArrayList<>(childClass.getAllMethods()));
@@ -326,6 +332,8 @@ public class ElementUtil {
                     }
                 }
             }
+        } else if (AdapterUtil.getAllTargetInterfaces(child).contains(anInterface)) {
+            return AdapterUtil.getAdapterClass(anInterface, child);
         }
         return null;
     }
@@ -385,6 +393,10 @@ public class ElementUtil {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
             ((arquitetura.representation.Class) client).addImplementedInterface((Interface) supplier);
         }
+    }
+
+    public static List<Element> getAllSuperElements(Element element) {
+        return new ArrayList<>(CollectionUtils.union(getAllExtendedElements(element), getAllSuperInterfaces(element)));
     }
 
     private ElementUtil() {

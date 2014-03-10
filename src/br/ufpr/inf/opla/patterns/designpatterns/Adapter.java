@@ -56,58 +56,58 @@ public class Adapter extends DesignPattern {
                 adapterClass = AdapterUtil.getAdapterClass(target, adaptee);
                 if (adapterClass == null) {
                     adapterClass = AdapterUtil.createAdapterClass(adaptee);
-                }
 
-                //Implements/Extends and add all methods.
-                if (target instanceof arquitetura.representation.Class) {
-                    ElementUtil.extendClass(adapterClass, (arquitetura.representation.Class) target);
-                } else {
-                    ElementUtil.implementInterface(adapterClass, (Interface) target);
-                }
+                    //Implements/Extends and add all methods.
+                    if (target instanceof arquitetura.representation.Class) {
+                        ElementUtil.extendClass(adapterClass, (arquitetura.representation.Class) target);
+                    } else {
+                        ElementUtil.implementInterface(adapterClass, (Interface) target);
+                    }
 
-                RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
+                    RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
 
-                Relationship relationshipToBeExcluded = null;
-                if (adaptee.getClass().equals(target.getClass())) {
-                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
-                        if (target.equals(RelationshipUtil.getExtendedElement(relationship))) {
-                            relationshipToBeExcluded = relationship;
-                            break;
+                    Relationship relationshipToBeExcluded = null;
+                    if (adaptee.getClass().equals(target.getClass())) {
+                        for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
+                            if (target.equals(RelationshipUtil.getExtendedElement(relationship))) {
+                                relationshipToBeExcluded = relationship;
+                                break;
+                            }
+                        }
+                    } else {
+                        for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
+                            if (target.equals(RelationshipUtil.getImplementedInterface(relationship))) {
+                                relationshipToBeExcluded = relationship;
+                                break;
+                            }
                         }
                     }
-                } else {
-                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
-                        if (target.equals(RelationshipUtil.getImplementedInterface(relationship))) {
-                            relationshipToBeExcluded = relationship;
-                            break;
+
+                    if (relationshipToBeExcluded != null) {
+                        ArchitectureRepository.getCurrentArchitecture().removeRelationship(relationshipToBeExcluded);
+                    }
+
+                    //Copy concerns
+                    for (Concern concern : CollectionUtils.union(target.getOwnConcerns(), adaptee.getOwnConcerns())) {
+                        try {
+                            adapterClass.addConcern(concern.getName());
+                        } catch (ConcernNotFoundException ex) {
+                            Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
-                }
 
-                if (relationshipToBeExcluded != null) {
-                    ArchitectureRepository.getCurrentArchitecture().removeRelationship(relationshipToBeExcluded);
-                }
-
-                //Copy concerns
-                for (Concern concern : CollectionUtils.union(target.getOwnConcerns(), adaptee.getOwnConcerns())) {
-                    try {
-                        adapterClass.addConcern(concern.getName());
-                    } catch (ConcernNotFoundException ex) {
-                        Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
+                    //Move variants
+                    Variant variant = adaptee.getVariant();
+                    if (variant != null) {
+                        adaptee.setVariant(null);
+                        adapterClass.setVariant(variant);
+                        variant.setVariantElement(adapterClass);
                     }
-                }
 
-                //Move variants
-                Variant variant = adaptee.getVariant();
-                if (variant != null) {
-                    adaptee.setVariant(null);
-                    adapterClass.setVariant(variant);
-                    variant.setVariantElement(adapterClass);
+                    addStereotype(target);
+                    addStereotype(adaptee);
+                    addStereotype(adapterClass);
                 }
-
-                addStereotype(target);
-                addStereotype(adaptee);
-                addStereotype(adapterClass);
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             }

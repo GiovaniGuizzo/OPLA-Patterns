@@ -148,7 +148,7 @@ public class AdapterTest {
             generalization = (RealizationRelationship) relationships.get(0);
         }
 
-        assertEquals(usage.getSupplier(), architecture.findInterfaceByName("Adaptee2"));
+        assertEquals(usage.getSupplier(), architecture.findInterfaceByName("Adaptee1"));
         assertEquals(generalization.getSupplier(), architecture.findInterfaceByName("Target2"));
     }
 

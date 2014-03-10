@@ -29,7 +29,7 @@ public class AdapterUtil {
     public static Class getAdapterClass(Element target, Element adaptee) {
         Class adapterClass = null;
         List<Element> allTargetSubElements = ElementUtil.getAllSubElements(target);
-        List<Element> allAdapteeSubElements = ElementUtil.getAllSubElements(adaptee);
+        List<Element> allAdapteeSuperElements = ElementUtil.getAllSuperElements(adaptee);
         rootFor:
         for (Element element : allTargetSubElements) {
             if (element instanceof Class && !((Class) element).isAbstract()) {
@@ -37,7 +37,7 @@ public class AdapterUtil {
                 for (Relationship relationship : elementRelationships) {
                     Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
                     if (usedElementFromRelationship != null
-                            && (usedElementFromRelationship.equals(adaptee) || allAdapteeSubElements.contains(usedElementFromRelationship))) {
+                            && (usedElementFromRelationship.equals(adaptee) || allAdapteeSuperElements.contains(usedElementFromRelationship))) {
                         adapterClass = (Class) element;
                         break rootFor;
                     }
@@ -47,21 +47,20 @@ public class AdapterUtil {
         return adapterClass;
     }
 
-    public static List<Interface> getAllTargetInterfaces(Interface adaptee) {
+    public static List<Interface> getAllTargetInterfaces(Element adaptee) {
         List<Interface> targetInterfaces = new ArrayList<>();
 
-        List<Element> adapteeSubElements = ElementUtil.getAllSubElements(adaptee);
-        adapteeSubElements.add(adaptee);
-        List<Relationship> allRelationships = ElementUtil.getRelationships(adapteeSubElements);
+        List<Element> adapteeSuperElements = ElementUtil.getAllSuperElements(adaptee);
+        adapteeSuperElements.add(adaptee);
+        List<Relationship> allRelationships = ElementUtil.getRelationships(adapteeSuperElements);
         for (Relationship relationship : allRelationships) {
             Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-            if (usedElementFromRelationship != null && adapteeSubElements.contains(usedElementFromRelationship)) {
+            if (usedElementFromRelationship != null && adapteeSuperElements.contains(usedElementFromRelationship)) {
                 Element client = RelationshipUtil.getClientElementFromRelationship(relationship);
                 if (client instanceof Class && !((Class) client).isAbstract()) {
                     List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(client);
                     allSuperInterfaces.remove(adaptee);
-                    allSuperInterfaces.removeAll(adapteeSubElements);
-                    allSuperInterfaces.removeAll(ElementUtil.getAllSuperInterfaces(adaptee));
+                    allSuperInterfaces.removeAll(adapteeSuperElements);
                     targetInterfaces = new ArrayList<>(CollectionUtils.union(targetInterfaces, allSuperInterfaces));
                 }
             }

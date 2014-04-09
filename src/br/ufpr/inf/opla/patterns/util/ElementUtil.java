@@ -402,10 +402,12 @@ public class ElementUtil {
     public static List<Element> getChainOfRelatedElementsWithSameConcern(List<Element> mainElements, Concern concern) {
         List<Element> elements = new ArrayList<>();
         for (Element element : mainElements) {
-            if (!elements.contains(element) && element.getAllConcerns().contains(concern)) {
-                elements.add(element);
+            if (element instanceof Class || element instanceof Interface) {
+                if (!elements.contains(element) && element.getAllConcerns().contains(concern)) {
+                    elements.add(element);
+                }
+                getChainOfRelatedElementsWithSameConcern(element, concern, elements);
             }
-            getChainOfRelatedElementsWithSameConcern(element, concern, elements);
         }
         return elements;
     }
@@ -416,7 +418,8 @@ public class ElementUtil {
             Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
             if (!usedElementFromRelationship.equals(element)
                     && usedElementFromRelationship.getAllConcerns().contains(concern)
-                    && !elements.contains(usedElementFromRelationship)) {
+                    && !elements.contains(usedElementFromRelationship)
+                    && (usedElementFromRelationship instanceof Class || usedElementFromRelationship instanceof Interface)) {
                 elements.add(usedElementFromRelationship);
                 getChainOfRelatedElementsWithSameConcern(usedElementFromRelationship, concern, elements);
             }

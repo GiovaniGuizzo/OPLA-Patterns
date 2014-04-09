@@ -17,13 +17,16 @@ public class GeraTudoAKAGodClass {
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            "MicrowaveOvenSoftware", //            "ServiceAndSupportSystem"
+            "MicrowaveOvenSoftware", 
+            "ServiceAndSupportSystem",
+            "agm"
         };
 
         String[] contexts = {
             "PLAMutation",
-            "PLAMutationWithPatterns",
-            "OnlyPatternsMutation"
+            "PLAMutationWithPatterns0.1",
+            "OnlyPatternsMutation0.1",
+//            "Original"
         };
 
         MetricsUtil mu = new MetricsUtil();

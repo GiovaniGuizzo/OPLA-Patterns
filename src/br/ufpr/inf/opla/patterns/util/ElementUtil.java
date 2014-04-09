@@ -399,6 +399,45 @@ public class ElementUtil {
         return new ArrayList<>(CollectionUtils.union(getAllExtendedElements(element), getAllSuperInterfaces(element)));
     }
 
+    public static List<Element> getChainOfRelatedElementsWithSameConcern(List<Element> mainElements, Concern concern) {
+        List<Element> elements = new ArrayList<>();
+        for (Element element : mainElements) {
+            if (!elements.contains(element) && element.getAllConcerns().contains(concern)) {
+                elements.add(element);
+            }
+            getChainOfRelatedElementsWithSameConcern(element, concern, elements);
+        }
+        return elements;
+    }
+
+    private static void getChainOfRelatedElementsWithSameConcern(Element element, Concern concern, List<Element> elements) {
+        List<Relationship> relationships = getRelationships(element);
+        for (Relationship relationship : relationships) {
+            Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+            if (!usedElementFromRelationship.equals(element)
+                    && usedElementFromRelationship.getAllConcerns().contains(concern)
+                    && !elements.contains(usedElementFromRelationship)) {
+                elements.add(usedElementFromRelationship);
+                getChainOfRelatedElementsWithSameConcern(usedElementFromRelationship, concern, elements);
+            }
+        }
+    }
+
+//    private static void getChainOfRelatedElementsWithSameConcern(Element element, List<Element> excluded, Concern concern) {
+//        List<Element> elements = new ArrayList<>();
+//            if (element.getAllConcerns().contains(concern) && !elements.contains(element)) {
+//                elements.add(element);
+//                List<Relationship> relationships = getRelationships(element);
+//                for (Relationship relationship : relationships) {
+//                    Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
+//                    if (!usedElementFromRelationship.equals(element) && !elements.contains(usedElementFromRelationship)) {
+//
+//                    }
+//                }
+//            }
+//        }
+//        return elements;
+//    }
     private ElementUtil() {
     }
 

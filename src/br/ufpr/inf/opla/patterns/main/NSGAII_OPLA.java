@@ -39,9 +39,9 @@ public class NSGAII_OPLA {
         parameters = new HashMap();
         parameters.put("probability", mutationProbability_);
 
-//        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
+        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
 //        String pla = ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM;
-        String pla = ArchitectureRepository.AGM;
+//        String pla = ArchitectureRepository.AGM;
 
         String context = "PLAMutation";
         Mutation mutation = new PLAFeatureMutation(parameters);
@@ -51,7 +51,6 @@ public class NSGAII_OPLA {
 //        
 //        String context = "OnlyPatternsMutation";
 //        Mutation mutation = new DesignPatternsMutationOperator(parameters);
-        
         String plaName = getPlaName(pla);
 
         File directory = ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/");

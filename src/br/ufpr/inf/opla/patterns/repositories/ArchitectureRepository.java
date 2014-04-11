@@ -11,10 +11,10 @@ public class ArchitectureRepository {
     public static final String MICROWAVE_OVEN_SOFTWARE = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MicrowaveOvenSoftware/Papyrus/MicrowaveOvenSoftware.uml";
     public static final String SERVICE_AND_SUPPORT_SYSTEM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/ServiceAndSupportSystem/Papyrus/ServiceAndSupportSystem.uml";
     public static final String AGM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/agm/Papyrus/agm.uml";
-    
+
     //Arquivos de teste
     public static final String MICROWAVE_TEST = "test/br/ufpr/inf/opla/patterns/resources/microwave/MicrowaveOvenSoftware.uml";
-    
+
     public static final String[] STRATEGY_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify.uml",
         "test/br/ufpr/inf/opla/patterns/resources/strategy/Verify2.uml",
@@ -39,7 +39,8 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/other/Model4.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model5.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model6.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/other/Model7.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model7.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model8.uml"
     };
 
     public static final String[] OUTPUT = new String[]{

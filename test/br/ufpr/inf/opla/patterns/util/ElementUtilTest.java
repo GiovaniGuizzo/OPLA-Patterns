@@ -340,4 +340,28 @@ public class ElementUtilTest {
         assertEquals("PacoteDeTeste", packageName);
     }
 
+    @Test
+    public void testGetChainOfRelatedElementsWithSameConcern() {
+        String model = ArchitectureRepository.OTHER_MODELS[7];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Element klass2 = architecture.findClassByName("Class2").get(0);
+        Element klass3 = architecture.findClassByName("Class3").get(0);
+        Element klass4 = architecture.findClassByName("Class4").get(0);
+        Element klass5 = architecture.findClassByName("Class5").get(0);
+        Element klass6 = architecture.findClassByName("Class6").get(0);
+
+        ArrayList classes = new ArrayList();
+        classes.add(klass5);
+
+        List<Element> chain = ElementUtil.getChainOfRelatedElementsWithSameConcern(classes, new Concern("action"));
+
+        assertEquals(5, chain.size());
+        assertTrue(chain.contains(klass2));
+        assertTrue(chain.contains(klass3));
+        assertTrue(chain.contains(klass4));
+        assertTrue(chain.contains(klass5));
+        assertTrue(chain.contains(klass6));
+    }
+
 }

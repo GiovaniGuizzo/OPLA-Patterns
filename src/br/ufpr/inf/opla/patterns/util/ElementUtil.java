@@ -415,13 +415,16 @@ public class ElementUtil {
     private static void getChainOfRelatedElementsWithSameConcern(Element element, Concern concern, List<Element> elements) {
         List<Relationship> relationships = getRelationships(element);
         for (Relationship relationship : relationships) {
-            Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-            if (!usedElementFromRelationship.equals(element)
-                    && usedElementFromRelationship.getAllConcerns().contains(concern)
-                    && !elements.contains(usedElementFromRelationship)
-                    && (usedElementFromRelationship instanceof Class || usedElementFromRelationship instanceof Interface)) {
-                elements.add(usedElementFromRelationship);
-                getChainOfRelatedElementsWithSameConcern(usedElementFromRelationship, concern, elements);
+            Element chainedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
+            if (chainedElement.equals(element)) {
+                chainedElement = RelationshipUtil.getClientElementFromRelationship(relationship);
+            }
+            if (!chainedElement.equals(element)
+                    && chainedElement.getAllConcerns().contains(concern)
+                    && !elements.contains(chainedElement)
+                    && (chainedElement instanceof Class || chainedElement instanceof Interface)) {
+                elements.add(chainedElement);
+                getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements);
             }
         }
     }

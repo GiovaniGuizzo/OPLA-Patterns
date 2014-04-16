@@ -69,7 +69,7 @@ public class Adapter extends DesignPattern {
                     Relationship relationshipToBeExcluded = null;
                     if (adaptee.getClass().equals(target.getClass())) {
                         for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
-                            if (target.equals(RelationshipUtil.getExtendedElement(relationship))) {
+                            if (target.equals(RelationshipUtil.getSuperElement(relationship))) {
                                 relationshipToBeExcluded = relationship;
                                 break;
                             }

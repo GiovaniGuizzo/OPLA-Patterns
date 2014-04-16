@@ -350,18 +350,22 @@ public class ElementUtilTest {
         Element klass4 = architecture.findClassByName("Class4").get(0);
         Element klass5 = architecture.findClassByName("Class5").get(0);
         Element klass6 = architecture.findClassByName("Class6").get(0);
+        Element klass8 = architecture.findClassByName("Class8").get(0);
+        Element klass9 = architecture.findInterfaceByName("Class9");
 
         ArrayList classes = new ArrayList();
         classes.add(klass5);
 
         List<Element> chain = ElementUtil.getChainOfRelatedElementsWithSameConcern(classes, new Concern("action"));
 
-        assertEquals(5, chain.size());
+        assertEquals(7, chain.size());
         assertTrue(chain.contains(klass2));
         assertTrue(chain.contains(klass3));
         assertTrue(chain.contains(klass4));
         assertTrue(chain.contains(klass5));
         assertTrue(chain.contains(klass6));
+        assertTrue(chain.contains(klass8));
+        assertTrue(chain.contains(klass9));
     }
 
 }

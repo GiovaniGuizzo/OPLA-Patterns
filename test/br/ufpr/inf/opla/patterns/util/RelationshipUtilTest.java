@@ -59,17 +59,16 @@ public class RelationshipUtilTest {
     }
 
     /**
-     * Test of getExtendedElement method, of class RelationshipUtil.
+     * Test of getSuperElement method, of class RelationshipUtil.
      */
     @Test
-    public void testGetExtendedElement() {
+    public void testGetSuperElement() {
         Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[0]);
-        Element element = null;
-        element = architecture.findClassByName("Class1").get(0);
+        Element element = architecture.findClassByName("Class1").get(0);
         assertEquals("Class1", element.getName());
         Relationship relationship = ElementUtil.getRelationships(element).get(0);
         assertEquals("generalization", relationship.getType());
-        Element result = RelationshipUtil.getExtendedElement(relationship);
+        Element result = RelationshipUtil.getSuperElement(relationship);
         assertEquals("Class2", result.getName());
     }
 

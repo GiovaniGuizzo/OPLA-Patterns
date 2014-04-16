@@ -46,7 +46,7 @@ public class RelationshipUtil {
         return null;
     }
 
-    public static Element getExtendedElement(Relationship relationship) {
+    public static Element getSuperElement(Relationship relationship) {
         if (relationship instanceof GeneralizationRelationship) {
             GeneralizationRelationship generalization = (GeneralizationRelationship) relationship;
             return generalization.getParent();

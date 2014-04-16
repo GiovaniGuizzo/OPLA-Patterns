@@ -55,7 +55,7 @@ public class ElementUtil {
         for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Element tempParent = RelationshipUtil.getImplementedInterface(relationship);
             if (tempParent == null) {
-                tempParent = RelationshipUtil.getExtendedElement(relationship);
+                tempParent = RelationshipUtil.getSuperElement(relationship);
                 if (tempParent == null) {
                     continue;
                 }
@@ -146,7 +146,7 @@ public class ElementUtil {
     public static List<Element> getAllExtendedElements(Element child) {
         List<Element> extendedElements = new ArrayList<>();
         for (Relationship relationship : ElementUtil.getRelationships(child)) {
-            Element tempParent = RelationshipUtil.getExtendedElement(relationship);
+            Element tempParent = RelationshipUtil.getSuperElement(relationship);
             if (tempParent != null && !tempParent.equals(child)) {
                 extendedElements.add(tempParent);
                 List<Element> parentSuperTypes = getAllExtendedElements(tempParent);
@@ -416,34 +416,29 @@ public class ElementUtil {
         List<Relationship> relationships = getRelationships(element);
         for (Relationship relationship : relationships) {
             Element chainedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
-            if (chainedElement.equals(element)) {
+            if (element.equals(chainedElement)) {
                 chainedElement = RelationshipUtil.getClientElementFromRelationship(relationship);
+            } else if (chainedElement == null) {
+                chainedElement = RelationshipUtil.getSubElement(relationship);
+                if (element.equals(chainedElement)) {
+                    chainedElement = RelationshipUtil.getSuperElement(relationship);
+                    if (chainedElement == null || element.equals(chainedElement)) {
+                        chainedElement = RelationshipUtil.getImplementedInterface(relationship);
+                    }
+                }
             }
-            if (!chainedElement.equals(element)
+            if (chainedElement != null
+                    && !chainedElement.equals(element)
                     && chainedElement.getAllConcerns().contains(concern)
                     && !elements.contains(chainedElement)
                     && (chainedElement instanceof Class || chainedElement instanceof Interface)) {
                 elements.add(chainedElement);
                 getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements);
             }
+
         }
     }
 
-//    private static void getChainOfRelatedElementsWithSameConcern(Element element, List<Element> excluded, Concern concern) {
-//        List<Element> elements = new ArrayList<>();
-//            if (element.getAllConcerns().contains(concern) && !elements.contains(element)) {
-//                elements.add(element);
-//                List<Relationship> relationships = getRelationships(element);
-//                for (Relationship relationship : relationships) {
-//                    Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
-//                    if (!usedElementFromRelationship.equals(element) && !elements.contains(usedElementFromRelationship)) {
-//
-//                    }
-//                }
-//            }
-//        }
-//        return elements;
-//    }
     private ElementUtil() {
     }
 

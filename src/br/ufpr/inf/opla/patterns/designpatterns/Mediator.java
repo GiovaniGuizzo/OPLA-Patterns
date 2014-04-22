@@ -8,6 +8,7 @@ import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSMediator;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MediatorUtil;
+import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -69,23 +70,57 @@ public class Mediator extends DesignPattern {
         if (!scope.getPSs(this).isEmpty()) {
             try {
                 PSMediator psMediator = (PSMediator) scope.getPSs(this).get(0);
+                List<Element> participants = psMediator.getParticipants();
+                final Concern concern = psMediator.getConcern();
 
                 // Identificar ou criar classe EventOfInterest
                 Class eventOfInterest = MediatorUtil.getOrCreateEventOfInterestClass();
+                participants.remove(eventOfInterest);
 
                 // "" interface Mediator
-                Interface mediatorInterface = MediatorUtil.getOrCreateMediatorInterface(psMediator.getParticipants(), psMediator.getConcern());
-                psMediator.getParticipants().remove(mediatorInterface);
+                Interface mediatorInterface = MediatorUtil.getOrCreateMediatorInterface(participants, concern, eventOfInterest);
+                participants.remove(mediatorInterface);
 
                 // "" classe Mediator
+                Class mediatorClass = MediatorUtil.getOrCreateMediatorClass(participants, concern, mediatorInterface);
+                participants.remove(mediatorClass);
+
                 // "" interfaces colleagues
-                // Implementar Mediator
-                // Criar método para Mediator
-                // Implementar Colleague
-                // Criar método para Colleagues
-                // Usar interface Mediator
+                Interface colleagueInterface = MediatorUtil.getOrCreateColleagueInterface(participants, concern, mediatorInterface, eventOfInterest);
+                participants.remove(colleagueInterface);
+
+                // Atualiza lista de participantes
+                participants = ElementUtil.getChainOfRelatedElementsWithSameConcern(participants, concern);
+                psMediator.setParticipants(participants);
+
+                // Implementar interface Colleague
+                List<Element> adapterList = new ArrayList<>();
+                List<Element> adapteeList = new ArrayList<>();
+
+                ElementUtil.implementInterface(participants, colleagueInterface, adapterList, adapteeList);
+
+                participants.removeAll(adapteeList);
+                for (Element adapterClass : adapterList) {
+                    if (!participants.contains(adapterClass)) {
+                        participants.add(adapterClass);
+                    }
+                }
+
                 // Usar colleagues
+                for (Element element : participants) {
+                    RelationshipUtil.createNewUsageRelationship("usesColleague", mediatorClass, element);
+                }
+
+                // Remover relacionamentos
+                MediatorUtil.removeRelationships(participants, concern);
+
                 // Aplicar Estereótipo
+                addStereotype(eventOfInterest);
+                addStereotype(mediatorInterface);
+                addStereotype(mediatorClass);
+                for (Element element : participants) {
+                    addStereotype(element);
+                }
             } catch (Exception ex) {
                 Logger.getLogger(Mediator.class.getName()).log(Level.SEVERE, null, ex);
             }

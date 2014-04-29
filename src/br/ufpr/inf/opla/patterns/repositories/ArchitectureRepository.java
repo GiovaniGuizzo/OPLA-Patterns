@@ -32,6 +32,10 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/adapter/Verify.uml"
     };
 
+    public static final String[] MEDIATOR_MODELS = new String[]{
+        "test/br/ufpr/inf/opla/patterns/resources/mediator/Apply.uml"
+    };
+
     public static final String[] OTHER_MODELS = new String[]{
         "test/br/ufpr/inf/opla/patterns/resources/other/Model1.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model2.uml",
@@ -40,7 +44,9 @@ public class ArchitectureRepository {
         "test/br/ufpr/inf/opla/patterns/resources/other/Model5.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model6.uml",
         "test/br/ufpr/inf/opla/patterns/resources/other/Model7.uml",
-        "test/br/ufpr/inf/opla/patterns/resources/other/Model8.uml"
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model8.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model9.uml",
+        "test/br/ufpr/inf/opla/patterns/resources/other/Model10.uml"
     };
 
     public static final String[] OUTPUT = new String[]{
@@ -53,8 +59,7 @@ public class ArchitectureRepository {
         "Output7",
         "Output8",
         "Output9",
-        "Output10",
-        "Output11"
+        "Output10"
     };
 
     private static final ArchitectureBuilder ARCHITECTURE_BUILDER = new ArchitectureBuilder();

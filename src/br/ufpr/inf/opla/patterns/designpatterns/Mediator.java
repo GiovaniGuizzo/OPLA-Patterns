@@ -44,12 +44,12 @@ public class Mediator extends DesignPattern {
             if (concern != null) {
                 List<Element> chainOfElements = ElementUtil.getChainOfRelatedElementsWithSameConcern(list, concern);
                 if (chainOfElements.size() > 2) {
-                    PSMediator psMediator = new PSMediator(list, concern);
+                    PSMediator psMediator = new PSMediator(chainOfElements, concern);
                     if (!scope.getPSs().contains(psMediator)) {
                         scope.addPS(psMediator);
                     } else {
                         psMediator = (PSMediator) scope.getPSs().get(scope.getPSs().indexOf(psMediator));
-                        psMediator.setParticipants(new ArrayList<>(CollectionUtils.union(list, psMediator.getParticipants())));
+                        psMediator.setParticipants(new ArrayList<>(CollectionUtils.union(chainOfElements, psMediator.getParticipants())));
                     }
                     isPs = true;
                 }
@@ -89,9 +89,8 @@ public class Mediator extends DesignPattern {
                 Interface colleagueInterface = MediatorUtil.getOrCreateColleagueInterface(participants, concern, mediatorInterface, eventOfInterest);
                 participants.remove(colleagueInterface);
 
-                // Atualiza lista de participantes
-                participants = ElementUtil.getChainOfRelatedElementsWithSameConcern(participants, concern);
-                psMediator.setParticipants(participants);
+                // Remover relacionamentos
+                MediatorUtil.removeRelationships(participants, concern);
 
                 // Implementar interface Colleague
                 List<Element> adapterList = new ArrayList<>();
@@ -111,16 +110,15 @@ public class Mediator extends DesignPattern {
                     RelationshipUtil.createNewUsageRelationship("usesColleague", mediatorClass, element);
                 }
 
-                // Remover relacionamentos
-                MediatorUtil.removeRelationships(participants, concern);
-
                 // Aplicar Estereótipo
                 addStereotype(eventOfInterest);
                 addStereotype(mediatorInterface);
                 addStereotype(mediatorClass);
+                addStereotype(colleagueInterface);
                 for (Element element : participants) {
                     addStereotype(element);
                 }
+                applied = true;
             } catch (Exception ex) {
                 Logger.getLogger(Mediator.class.getName()).log(Level.SEVERE, null, ex);
             }

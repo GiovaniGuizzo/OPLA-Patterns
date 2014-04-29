@@ -1,6 +1,8 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.exceptions.AttributeNotFoundException;
 import arquitetura.exceptions.ConcernNotFoundException;
+import arquitetura.exceptions.MethodNotFoundException;
 import arquitetura.helpers.UtilResources;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
@@ -10,7 +12,9 @@ import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
 import arquitetura.representation.Package;
 import arquitetura.representation.ParameterMethod;
+import arquitetura.representation.relationship.DependencyRelationship;
 import arquitetura.representation.relationship.Relationship;
+import arquitetura.representation.relationship.UsageRelationship;
 import arquitetura.touml.Types;
 import arquitetura.touml.VisibilityKind;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
@@ -25,7 +29,7 @@ public class MediatorUtil {
 
         List<arquitetura.representation.Class> eventOfInterestList = architecture.findClassByName("EventOfInterest");
         Class eventOfInterest;
-        if (eventOfInterestList.isEmpty()) {
+        if (eventOfInterestList == null || eventOfInterestList.isEmpty()) {
             eventOfInterest = architecture.createClass("EventOfInterest", false);
 
             //Cria atributos
@@ -43,6 +47,58 @@ public class MediatorUtil {
             eventOfInterest.createMethod("setParameters", "void", false, Arrays.asList(new ParameterMethod[]{new ParameterMethod("parameters", "Object", "in")}));
         } else {
             eventOfInterest = eventOfInterestList.get(0);
+
+            try {
+                //Cria atributos
+                eventOfInterest.findAttributeByName("invoker");
+            } catch (AttributeNotFoundException ex) {
+                eventOfInterest.createAttribute("invoker", Types.custom("Object"), VisibilityKind.PRIVATE_LITERAL);
+            }
+            try {
+                eventOfInterest.findAttributeByName("action");
+            } catch (AttributeNotFoundException ex) {
+                eventOfInterest.createAttribute("action", Types.STRING, VisibilityKind.PRIVATE_LITERAL);
+            }
+            try {
+                eventOfInterest.findAttributeByName("parameters");
+            } catch (AttributeNotFoundException ex) {
+                eventOfInterest.createAttribute("parameters", Types.custom("Object"), VisibilityKind.PRIVATE_LITERAL);
+            }
+
+            try {
+                //Cria métodos
+                eventOfInterest.findMethodByName("getInvoker");
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("getInvoker", "Object", false, null);
+            }
+            try {
+                eventOfInterest.findMethodByName("getAction");
+
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("getAction", "String", false, null);
+            }
+            try {
+                eventOfInterest.findMethodByName("getParameters");
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("getParameters", "Object", false, null);
+            }
+
+            try {
+                eventOfInterest.findMethodByName("setInvoker");
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("setInvoker", "void", false, Arrays.asList(new ParameterMethod[]{new ParameterMethod("invoker", "Object", "in")}));
+            }
+            try {
+                eventOfInterest.findMethodByName("setAction");
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("setAction", "void", false, Arrays.asList(new ParameterMethod[]{new ParameterMethod("action", "String", "in")}));
+            }
+            try {
+                eventOfInterest.findMethodByName("setParameters");
+            } catch (MethodNotFoundException ex) {
+                eventOfInterest.createMethod("setParameters", "void", false, Arrays.asList(new ParameterMethod[]{new ParameterMethod("parameters", "Object", "in")}));
+            }
+
         }
 
         return eventOfInterest;
@@ -137,10 +193,13 @@ public class MediatorUtil {
                     && maybeColleague instanceof Interface
                     && maybeColleague.getName().endsWith("Colleague")) {
                 for (Relationship relationshipMediator : ElementUtil.getRelationships(maybeColleague)) {
-                    if (RelationshipUtil.getClientElementFromRelationship(relationshipMediator).equals(maybeColleague)
-                            && RelationshipUtil.getUsedElementFromRelationship(relationshipMediator).equals(mediatorInterface)) {
-                        colleague = (Interface) maybeColleague;
-                        break root;
+                    if (relationshipMediator instanceof UsageRelationship
+                            || relationshipMediator instanceof DependencyRelationship) {
+                        if (RelationshipUtil.getClientElementFromRelationship(relationshipMediator).equals(maybeColleague)
+                                && RelationshipUtil.getUsedElementFromRelationship(relationshipMediator).equals(mediatorInterface)) {
+                            colleague = (Interface) maybeColleague;
+                            break root;
+                        }
                     }
                 }
             }

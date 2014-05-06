@@ -17,8 +17,9 @@ public abstract class DesignPattern {
     };
 
     public static final DesignPattern[] IMPLEMENTED = new DesignPattern[]{
-        Strategy.getInstance(),
-        Bridge.getInstance()
+        //        Strategy.getInstance(),
+        //        Bridge.getInstance(),
+        Mediator.getInstance()
     };
 
     private final String name;

@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.logging.Level;
 import jmetal.core.Solution;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.PLAFeatureMutation;
 import jmetal.problems.OPLA;
 import jmetal.util.Configuration;
 import jmetal.util.JMException;
@@ -31,11 +30,9 @@ import org.apache.log4j.Priority;
 public class DesignPatternsMutationOperator extends Mutation {
 
     private static final Logger LOGGER = LogManager.getLogger(DesignPatternsAndPLAMutationOperator.class);
-    private final PLAFeatureMutation pLAFeatureMutation;
 
     public DesignPatternsMutationOperator(HashMap<String, Object> parameters) {
         super(parameters);
-        pLAFeatureMutation = new PLAFeatureMutation(parameters);
     }
 
     public Architecture mutateArchitecture(Architecture architecture) {

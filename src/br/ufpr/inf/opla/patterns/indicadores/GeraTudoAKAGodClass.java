@@ -19,13 +19,17 @@ public class GeraTudoAKAGodClass {
         String[] plas = {
             "MicrowaveOvenSoftware", 
             "ServiceAndSupportSystem",
-            "agm"
+//            "agm"
         };
 
         String[] contexts = {
             "PLAMutation",
-            "PLAMutationWithPatterns0.1",
-            "OnlyPatternsMutation0.1",
+            "PLAMutationWithPatterns",
+            "OnlyPatternsMutation",
+            "PLAMutationWithMediator",
+            "OnlyMediatorMutation",
+            "PLAMutationWithAllPatterns",
+            "OnlyAllPatternsMutation",
 //            "Original"
         };
 
@@ -159,7 +163,7 @@ public class GeraTudoAKAGodClass {
             stringBuilder.append("\n");
             stringBuilder.append("pos_teste<-friedmanmc(AR1)\n");
             stringBuilder.append("write.csv2(pos_teste,file=\"./").append(directoryPath).append("friedman-compara.csv\")\n");
-            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=900, height=500)\n");
+            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=1440, height=500)\n");
             stringBuilder.append("boxplot(").append(contextNames.toString());
 
             contextNames = new StringBuilder();

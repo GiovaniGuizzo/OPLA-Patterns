@@ -1,6 +1,7 @@
 package br.ufpr.inf.opla.patterns.main;
 
 import br.ufpr.inf.opla.patterns.indicadores.Hypervolume;
+import br.ufpr.inf.opla.patterns.operator.DesignPatternsMutationOperator;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +13,6 @@ import jmetal.metaheuristics.nsgaII.NSGAII;
 import jmetal.operators.crossover.Crossover;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.PLAFeatureMutation;
 import jmetal.operators.selection.Selection;
 import jmetal.operators.selection.SelectionFactory;
 import jmetal.problems.OPLA;
@@ -28,29 +28,29 @@ public class NSGAII_OPLA {
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
-        int runsNumber = 30; //30;
-        populationSize_ = 100; //100; 
-        maxEvaluations_ = 30000; //300 geraçõeshttp://loggr.net/
+        int runsNumber = 1; //30;
+        populationSize_ = 2; //100; 
+        maxEvaluations_ = 300; //300 geraçõeshttp://loggr.net/
 
         crossoverProbability_ = 0.0;
-        mutationProbability_ = 0.9;
+        mutationProbability_ = 0.1;
 
         HashMap parameters; // Operator parameters
         parameters = new HashMap();
         parameters.put("probability", mutationProbability_);
 
-        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
+//        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
 //        String pla = ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM;
-//        String pla = ArchitectureRepository.AGM;
+        String pla = ArchitectureRepository.AGM;
 
-        String context = "PLAMutation";
-        Mutation mutation = new PLAFeatureMutation(parameters);
-
+//        String context = "PLAMutation";
+//        Mutation mutation = new PLAFeatureMutation(parameters);
 //        String context = "PLAMutationWithPatterns";
 //        Mutation mutation = new DesignPatternsAndPLAMutationOperator(parameters);
 //        
-//        String context = "OnlyPatternsMutation";
-//        Mutation mutation = new DesignPatternsMutationOperator(parameters);
+        String context = "OnlyPatternsMutation";
+        Mutation mutation = new DesignPatternsMutationOperator(parameters);
+
         String plaName = getPlaName(pla);
 
         File directory = ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/");

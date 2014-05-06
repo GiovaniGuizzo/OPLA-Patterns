@@ -399,6 +399,7 @@ public class ElementUtil {
         return new ArrayList<>(CollectionUtils.union(getAllExtendedElements(element), getAllSuperInterfaces(element)));
     }
 
+    //TODO Arrumar bug de adicionar elementos não ligados na lista.
     public static List<Element> getChainOfRelatedElementsWithSameConcern(List<Element> mainElements, Concern concern) {
         List<Element> elements = new ArrayList<>();
         for (Element element : mainElements) {

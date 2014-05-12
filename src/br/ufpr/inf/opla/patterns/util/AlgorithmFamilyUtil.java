@@ -21,7 +21,7 @@ public class AlgorithmFamilyUtil {
 
     private static void addFamiliesWithSuffixAndPreffix(Scope scope, List<AlgorithmFamily> familiesInScope) {
         WholeArchitectureScopeSelection selectionStrategy = new WholeArchitectureScopeSelection();
-        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture());
+        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture(), null);
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
             if (ElementUtil.isClassOrInterface(iElement)) {
@@ -64,7 +64,7 @@ public class AlgorithmFamilyUtil {
 
     private static void addFamiliesWithSameMethod(Scope scope, List<AlgorithmFamily> familiesInScope) {
         WholeArchitectureScopeSelection selectionStrategy = new WholeArchitectureScopeSelection();
-        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture());
+        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture(), null);
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
             if (ElementUtil.isClassOrInterface(iElement)) {

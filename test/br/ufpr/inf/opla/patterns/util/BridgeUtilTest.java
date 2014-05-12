@@ -10,6 +10,7 @@ import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -46,7 +47,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetImplementationInterfaces() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]), Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -71,7 +72,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetAbstractionClasses() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]), Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -93,7 +94,7 @@ public class BridgeUtilTest {
     @Test
     public void testCreateAbstractionClasses() {
         final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -115,7 +116,7 @@ public class BridgeUtilTest {
     @Test
     public void testCreateImplementationInterface() {
         final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -140,7 +141,7 @@ public class BridgeUtilTest {
     @Test
     public void testAggregateAbstractionWithImplementation() {
         final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);

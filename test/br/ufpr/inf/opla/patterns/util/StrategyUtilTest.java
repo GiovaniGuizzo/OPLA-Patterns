@@ -9,6 +9,7 @@ import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -44,7 +45,7 @@ public class StrategyUtilTest {
     @Test
     public void testGetStrategyInterfaceFromAlgorithmFamily() {
         Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         Interface aInterface = StrategyUtil.getStrategyInterfaceFromAlgorithmFamily(familiesFromScope.get(0));
         assertEquals("StrategyInterface", aInterface.getName());
@@ -56,7 +57,7 @@ public class StrategyUtilTest {
     @Test
     public void testCreateStrategyInterfaceForAlgorithmFamily() {
         Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         AlgorithmFamily family = familiesFromScope.get(0);
         assertEquals("Class", family.getName());
@@ -70,7 +71,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testAreTheAlgorithmFamilyAndContextsPartOfAVariability() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -91,7 +92,7 @@ public class StrategyUtilTest {
         boolean result = StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(psPLAStrategy.getAlgorithmFamily(), psPLAStrategy.getContexts());
         assertTrue(result);
 
-        scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
         assertEquals(7, scope.getElements().size());
 
         verifyPSPLA = strategy.verifyPSPLA(scope);
@@ -124,7 +125,7 @@ public class StrategyUtilTest {
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
         Interface target1 = architecture.findInterfaceByName("Target1");
-        List<Interface> strategyInterfaces = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(wholeArchitectureScopeSelection.selectScope(architecture).getElements());
+        List<Interface> strategyInterfaces = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY).getElements());
         
         assertTrue(strategyInterfaces.contains(target1));
     }

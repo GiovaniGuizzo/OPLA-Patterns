@@ -6,6 +6,7 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
@@ -32,7 +33,7 @@ public class AlgorithmFamilyUtilTest {
     @Test
     public void testGetFamiliesFromScope() {
         Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         assertEquals(3, familiesFromScope.size());
     }

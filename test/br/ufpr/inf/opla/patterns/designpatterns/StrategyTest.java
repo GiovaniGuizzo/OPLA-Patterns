@@ -3,6 +3,7 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
@@ -42,7 +43,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -65,7 +66,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
 
         assertTrue(strategy.verifyPS(scope));
 
@@ -82,7 +83,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -105,7 +106,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -120,7 +121,7 @@ public class StrategyTest {
     public void applyTest() {
         String model = ArchitectureRepository.STRATEGY_MODELS[3];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);
@@ -154,7 +155,7 @@ public class StrategyTest {
     public void applyTest2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);
@@ -191,7 +192,7 @@ public class StrategyTest {
     public void applyTest3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);

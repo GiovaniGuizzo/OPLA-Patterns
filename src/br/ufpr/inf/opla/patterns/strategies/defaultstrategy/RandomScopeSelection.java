@@ -1,6 +1,7 @@
 package br.ufpr.inf.opla.patterns.strategies.defaultstrategy;
 
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Random;
 public class RandomScopeSelection implements ScopeSelectionStrategy {
 
     @Override
-    public Scope selectScope(Architecture architecture) {
+    public Scope selectScope(Architecture architecture, Patterns pattern) {
         Scope scope = new Scope();
         int architectureSize = architecture.getElements().size();
         if (architectureSize >= 1) {

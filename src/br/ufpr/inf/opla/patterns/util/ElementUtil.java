@@ -399,15 +399,21 @@ public class ElementUtil {
         return new ArrayList<>(CollectionUtils.union(getAllExtendedElements(element), getAllSuperInterfaces(element)));
     }
 
-    //TODO Arrumar bug de adicionar elementos não ligados na lista.
     public static List<Element> getChainOfRelatedElementsWithSameConcern(List<Element> mainElements, Concern concern) {
         List<Element> elements = new ArrayList<>();
         for (Element element : mainElements) {
-            if (element instanceof Class || element instanceof Interface) {
-                if (!elements.contains(element) && element.getAllConcerns().contains(concern)) {
-                    elements.add(element);
+            if ((element instanceof Class || element instanceof Interface)
+                    && !elements.contains(element)) {
+                List<Element> tempElements = new ArrayList<>();
+                if (!tempElements.contains(element) && element.getAllConcerns().contains(concern)) {
+                    tempElements.add(element);
                 }
-                getChainOfRelatedElementsWithSameConcern(element, concern, elements);
+
+                getChainOfRelatedElementsWithSameConcern(element, concern, tempElements);
+
+                if (tempElements.size() > elements.size()) {
+                    elements = tempElements;
+                }
             }
         }
         return elements;
@@ -437,6 +443,18 @@ public class ElementUtil {
                 getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements);
             }
 
+        }
+    }
+
+    public static Set<String> getAppliedDesignPatterns(Element element) {
+        if (element instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class elementClass = (arquitetura.representation.Class) element;
+            return elementClass.getPatternsOperations().getAllPatterns();
+        } else if (element instanceof Interface) {
+            Interface elementInterface = (Interface) element;
+            return elementInterface.getPatternsOperations().getAllPatterns();
+        } else {
+            return new HashSet<>();
         }
     }
 

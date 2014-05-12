@@ -6,6 +6,7 @@ import arquitetura.exceptions.NotFoundException;
 import arquitetura.exceptions.PackageNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
@@ -29,10 +30,14 @@ import org.apache.log4j.Priority;
 
 public class DesignPatternsMutationOperator extends Mutation {
 
-    private static final Logger LOGGER = LogManager.getLogger(DesignPatternsAndPLAMutationOperator.class);
+    protected static final Logger LOGGER = LogManager.getLogger(DesignPatternsAndPLAMutationOperator.class);
+    protected final ScopeSelectionStrategy scopeSelectionStrategy;
+    protected final DesignPatternSelectionStrategy designPatternSelectionStrategy;
 
-    public DesignPatternsMutationOperator(HashMap<String, Object> parameters) {
+    public DesignPatternsMutationOperator(HashMap<String, Object> parameters, ScopeSelectionStrategy scopeSelectionStrategy, DesignPatternSelectionStrategy designPatternSelectionStrategy) {
         super(parameters);
+        this.scopeSelectionStrategy = scopeSelectionStrategy;
+        this.designPatternSelectionStrategy = designPatternSelectionStrategy;
     }
 
     public Architecture mutateArchitecture(Architecture architecture) {
@@ -41,10 +46,20 @@ public class DesignPatternsMutationOperator extends Mutation {
         return mutateArchitecture(architecture, rss, rdps);
     }
 
+    public Architecture mutateArchitecture(Architecture architecture, ScopeSelectionStrategy scopeSelectionStartegy) {
+        RandomDesignPatternSelection rdps = new RandomDesignPatternSelection();
+        return mutateArchitecture(architecture, scopeSelectionStartegy, rdps);
+    }
+
+    public Architecture mutateArchitecture(Architecture architecture, DesignPatternSelectionStrategy designPatternSelectionStrategy) {
+        RandomScopeSelection rss = new RandomScopeSelection();
+        return mutateArchitecture(architecture, rss, designPatternSelectionStrategy);
+    }
+
     public Architecture mutateArchitecture(Architecture architecture, ScopeSelectionStrategy scopeSelectionStartegy, DesignPatternSelectionStrategy designPatternSelectionStrategy) {
         ArchitectureRepository.setCurrentArchitecture(architecture);
         DesignPattern designPattern = designPatternSelectionStrategy.selectDesignPattern();
-        Scope scope = scopeSelectionStartegy.selectScope(architecture);
+        Scope scope = scopeSelectionStartegy.selectScope(architecture, Patterns.valueOf(designPattern.getName().toUpperCase()));
         if (designPattern.randomlyVerifyAsPSOrPSPLA(scope)) {
             if (designPattern.apply(scope)) {
                 LOGGER.log(Priority.INFO,
@@ -67,23 +82,35 @@ public class DesignPatternsMutationOperator extends Mutation {
         }
 
         try {
-            if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
-                if (PseudoRandom.randDouble() < probability) {
-                    Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
-                    this.mutateArchitecture(arch);
-                }
-            }
-            if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
-                Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
-                solution.getDecisionVariables()[0] = clone;
-                OPLA.contDiscardedSolutions_++;
-                LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DesignPatternsAndPLAMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
+            hookMutation(solution, probability);
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(DesignPatternsMutationOperator.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return solution;
+    }
+
+    protected void hookMutation(Solution solution, Double probability) throws Exception {
+        if (solution.getDecisionVariables()[0].getVariableType() == java.lang.Class.forName(Architecture.ARCHITECTURE_TYPE)) {
+            if (PseudoRandom.randDouble() < probability) {
+                Architecture arch = ((Architecture) solution.getDecisionVariables()[0]);
+                if (scopeSelectionStrategy == null && designPatternSelectionStrategy == null) {
+                    this.mutateArchitecture(arch);
+                } else if (scopeSelectionStrategy == null) {
+                    this.mutateArchitecture(arch, designPatternSelectionStrategy);
+                } else if (designPatternSelectionStrategy == null) {
+                    this.mutateArchitecture(arch, scopeSelectionStrategy);
+                } else {
+                    this.mutateArchitecture(arch, scopeSelectionStrategy, designPatternSelectionStrategy);
+                }
+            }
+        }
+        if (!this.isValidSolution(((Architecture) solution.getDecisionVariables()[0]))) {
+            Architecture clone = ((Architecture) solution.getDecisionVariables()[0]).deepClone();
+            solution.getDecisionVariables()[0] = clone;
+            OPLA.contDiscardedSolutions_++;
+            LOGGER.log(Priority.INFO, "Invalid Solution. Reverting Modifications.");
+        }
     }
 
     private boolean isValidSolution(Architecture solution) {

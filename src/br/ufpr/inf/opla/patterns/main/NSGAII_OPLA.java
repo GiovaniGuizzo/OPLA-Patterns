@@ -1,8 +1,10 @@
 package br.ufpr.inf.opla.patterns.main;
 
 import br.ufpr.inf.opla.patterns.indicadores.Hypervolume;
-import br.ufpr.inf.opla.patterns.operator.DesignPatternsMutationOperator;
+import br.ufpr.inf.opla.patterns.operator.DesignPatternsAndPLAMutationOperator;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
+import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.impl.ElementWithSameDesignPatternSelection;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -39,17 +41,25 @@ public class NSGAII_OPLA {
         parameters = new HashMap();
         parameters.put("probability", mutationProbability_);
 
+//        Scope Strategy
+//        
+        ScopeSelectionStrategy scopeSelection = null;
+        scopeSelection = new ElementWithSameDesignPatternSelection();
+
+//        PLA
+//        
 //        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
 //        String pla = ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM;
         String pla = ArchitectureRepository.AGM;
 
+//        Type of Mutation
+//        
 //        String context = "PLAMutation";
 //        Mutation mutation = new PLAFeatureMutation(parameters);
-//        String context = "PLAMutationWithPatterns";
-//        Mutation mutation = new DesignPatternsAndPLAMutationOperator(parameters);
-//        
-        String context = "OnlyPatternsMutation";
-        Mutation mutation = new DesignPatternsMutationOperator(parameters);
+        String context = "PLAMutationWithPatterns";
+        Mutation mutation = new DesignPatternsAndPLAMutationOperator(parameters, scopeSelection, null);
+//        String context = "OnlyPatternsMutation";
+//        Mutation mutation = new DesignPatternsMutationOperator(parameters, scopeSelection, null);
 
         String plaName = getPlaName(pla);
 

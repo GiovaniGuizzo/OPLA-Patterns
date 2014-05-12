@@ -7,6 +7,7 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
@@ -43,7 +44,7 @@ public class BridgeTest {
     public void testVerifyPS() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -65,7 +66,7 @@ public class BridgeTest {
     public void testVerifyPS2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[1];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -77,7 +78,7 @@ public class BridgeTest {
     public void testVerifyPS3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(5, scope.getElements().size());
 
@@ -92,7 +93,7 @@ public class BridgeTest {
     public void testVerifyPSPLA() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -117,7 +118,7 @@ public class BridgeTest {
     public void testApply() {
         String model = ArchitectureRepository.BRIDGE_MODELS[0];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
         assertEquals(3, scope.getElements().size());
         boolean verifyPSPLA = bridge.verifyPSPLA(scope);
         assertTrue(verifyPSPLA);

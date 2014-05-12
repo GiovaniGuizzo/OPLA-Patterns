@@ -7,6 +7,7 @@ package br.ufpr.inf.opla.patterns.strategies.impl;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
 import java.util.Iterator;
@@ -18,7 +19,7 @@ import java.util.Iterator;
 public class WholeArchitectureWithoutPackageScopeSelection implements ScopeSelectionStrategy {
 
     @Override
-    public Scope selectScope(Architecture architecture) {
+    public Scope selectScope(Architecture architecture, Patterns pattern) {
         Scope scope = new Scope();
         scope.getElements().addAll(architecture.getElements());
         for (Iterator<Element> it = scope.getElements().iterator(); it.hasNext();) {

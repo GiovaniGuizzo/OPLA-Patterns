@@ -34,7 +34,10 @@ public class BridgeUtil {
             List<Element> elementsByConcerns = entry.getValue();
             List<Interface> allCommonInterfaces = ElementUtil.getAllCommonInterfaces(elementsByConcerns);
             Collections.sort(allCommonInterfaces, SubElementsComparator.getDescendingOrderer());
-            List<Method> allMethods = MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
+            List<Method> allMethods = MethodUtil.getAllCommonMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
+            if (allMethods.isEmpty()) {
+                allMethods = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern));
+            }
             for (int i = 0; i < allCommonInterfaces.size(); i++) {
                 Interface anInterface = allCommonInterfaces.get(i);
                 MethodArrayList anInterfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
@@ -56,7 +59,11 @@ public class BridgeUtil {
             if (classElement.isAbstract()) {
                 Set<Concern> allConcernsFromSetOfElements = ElementUtil.getOwnAndMethodsConcerns(algorithmFamily.getParticipants());
                 MethodArrayList methodArrayList = new MethodArrayList(MethodUtil.getAllMethodsFromElement(classElement));
-                if (methodArrayList.containsAll(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()))) {
+                MethodArrayList allMethods = new MethodArrayList(MethodUtil.getAllCommonMethodsFromSetOfElements(algorithmFamily.getParticipants()));
+                if (allMethods.isEmpty()) {
+                    allMethods = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()));
+                }
+                if (methodArrayList.containsAll(allMethods)) {
                     if (ElementUtil.getOwnAndMethodsConcerns(classElement).containsAll(allConcernsFromSetOfElements)) {
                         Set<Element> aggregatedElements = ElementUtil.getAllAggregatedElements(classElement);
                         boolean contains = false;
@@ -192,14 +199,14 @@ public class BridgeUtil {
             if (naArquitetura) {
                 anInterface = architecture.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
                 architecture.removeInterface(anInterface);
-                
+
                 tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
             } else {
                 aPackage = architecture.findPackageByName(UtilResources.extractPackageName(namespace));
-                
+
                 anInterface = aPackage.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
                 aPackage.removeInterface(anInterface);
-                
+
                 tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
             }
             List<Method> methodsFromSetOfElements = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);

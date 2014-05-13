@@ -30,9 +30,14 @@ public class StrategyUtil {
     public static Interface getStrategyInterfaceFromAlgorithmFamily(AlgorithmFamily algorithmFamily) {
         List<Element> participants = algorithmFamily.getParticipants();
         List<Interface> interfaces = getAllStrategyInterfacesFromSetOfElements(participants);
-        
+
         if (!interfaces.isEmpty()) {
             Collections.sort(interfaces, SubElementsComparator.getDescendingOrderer());
+            for (Interface anInterface : interfaces) {
+                if (new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface)).containsAll(MethodUtil.getAllMethodsFromSetOfElements(participants))) {
+                    return anInterface;
+                }
+            }
             return interfaces.get(0);
         } else {
             return null;
@@ -43,7 +48,10 @@ public class StrategyUtil {
         List<Interface> strategyInterfaces = new ArrayList<>();
         List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(elements);
 
-        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(elements));
+        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllCommonMethodsFromSetOfElements(elements));
+        if (allMethodsFromAlgorithmFamily.isEmpty()) {
+            allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(elements));
+        }
         for (Interface anInterface : interfaces) {
             MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
             if (interfaceMethods.containsAll(allMethodsFromAlgorithmFamily)) {

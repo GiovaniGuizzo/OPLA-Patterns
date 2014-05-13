@@ -1,7 +1,7 @@
 package br.ufpr.inf.opla.patterns.operator;
 
-import br.ufpr.inf.opla.patterns.strategies.DesignPatternSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.designpatternselection.DesignPatternSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
 import java.util.HashMap;
 import jmetal.core.Solution;
 import jmetal.operators.mutation.PLAFeatureMutation;

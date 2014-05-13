@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
@@ -239,5 +240,81 @@ public class MethodUtilTest {
 
         result = MethodUtil.createMethodsFromSetOfElementsByConcern(architecture.getElements(), new Concern("collision"));
         assertEquals(2, result.size());
+    }
+
+    @Test
+    public void testGetAllMethodsFromElementByConcern() {
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Element element = architecture.findClassByName("Class3").get(0);
+
+        List<Method> methods = MethodUtil.getAllMethodsFromElementByConcern(element, null);
+        assertEquals(1, methods.size());
+        assertEquals("nothing", methods.get(0).getName());
+        assertEquals("", methods.get(0).getReturnType());
+
+        methods = MethodUtil.getAllMethodsFromElementByConcern(element, new Concern("brickles"));
+        assertEquals(1, methods.size());
+        assertEquals("nothing", methods.get(0).getName());
+        assertEquals("Integer", methods.get(0).getReturnType());
+
+        element = architecture.findClassByName("Class2").get(0);
+
+        methods = MethodUtil.getAllMethodsFromElementByConcern(element, new Concern("collision"));
+        assertEquals(2, methods.size());
+    }
+
+    @Test
+    public void testGetAllCommonMethodsFromSetOfElements() {
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Element klass1 = architecture.findClassByName("Class1").get(0);
+        Element klass2 = architecture.findClassByName("Class2").get(0);
+        Element klass3 = architecture.findClassByName("Class3").get(0);
+        Element klass4 = architecture.findClassByName("Class4").get(0);
+
+        List<Method> methods = MethodUtil.getAllCommonMethodsFromSetOfElements(architecture.getElements());
+        assertTrue(methods.isEmpty());
+
+        List<Element> elements = new ArrayList<>();
+        elements.add(klass4);
+        elements.add(klass3);
+
+        methods = MethodUtil.getAllCommonMethodsFromSetOfElements(elements);
+        assertEquals(1, methods.size());
+
+        elements = new ArrayList<>();
+        elements.add(klass1);
+        elements.add(klass2);
+
+        methods = MethodUtil.getAllCommonMethodsFromSetOfElements(elements);
+        assertEquals(1, methods.size());
+    }
+
+    @Test
+    public void testGetAllCommonMethodsFromSetOfElementsByConcern() {
+        String model = ArchitectureRepository.OTHER_MODELS[3];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Element klass1 = architecture.findClassByName("Class1").get(0);
+        Element klass2 = architecture.findClassByName("Class2").get(0);
+        Element klass3 = architecture.findClassByName("Class3").get(0);
+        Element klass4 = architecture.findClassByName("Class4").get(0);
+
+        List<Element> elements = new ArrayList<>();
+        elements.add(klass4);
+        elements.add(klass3);
+
+        List<Method> methods = MethodUtil.getAllCommonMethodsFromSetOfElementsByConcern(elements, null);
+        assertEquals(1, methods.size());
+
+        elements = new ArrayList<>();
+        elements.add(klass1);
+        elements.add(klass2);
+
+        methods = MethodUtil.getAllCommonMethodsFromSetOfElementsByConcern(elements, new Concern("bowling"));
+        assertEquals(1, methods.size());
     }
 }

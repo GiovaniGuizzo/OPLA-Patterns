@@ -1,4 +1,4 @@
-package br.ufpr.inf.opla.patterns.strategies;
+package br.ufpr.inf.opla.patterns.strategies.designpatternselection;
 
 import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 

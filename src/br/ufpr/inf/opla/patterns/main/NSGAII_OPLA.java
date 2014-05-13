@@ -3,8 +3,8 @@ package br.ufpr.inf.opla.patterns.main;
 import br.ufpr.inf.opla.patterns.indicadores.Hypervolume;
 import br.ufpr.inf.opla.patterns.operator.DesignPatternsAndPLAMutationOperator;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.impl.ElementWithSameDesignPatternSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.ElementsWithSameDesignPatternSelection;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class NSGAII_OPLA {
 //        Scope Strategy
 //        
         ScopeSelectionStrategy scopeSelection = null;
-        scopeSelection = new ElementWithSameDesignPatternSelection();
+        scopeSelection = new ElementsWithSameDesignPatternSelection();
 
 //        PLA
 //        

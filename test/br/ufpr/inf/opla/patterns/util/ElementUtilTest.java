@@ -345,27 +345,51 @@ public class ElementUtilTest {
         String model = ArchitectureRepository.OTHER_MODELS[7];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
+        Element klass1 = architecture.findClassByName("Class1").get(0);
         Element klass2 = architecture.findClassByName("Class2").get(0);
         Element klass3 = architecture.findClassByName("Class3").get(0);
         Element klass4 = architecture.findClassByName("Class4").get(0);
         Element klass5 = architecture.findClassByName("Class5").get(0);
         Element klass6 = architecture.findClassByName("Class6").get(0);
+        Element klass7 = architecture.findClassByName("Class7").get(0);
         Element klass8 = architecture.findClassByName("Class8").get(0);
         Element klass9 = architecture.findInterfaceByName("Class9");
 
         ArrayList classes = new ArrayList();
+        classes.add(klass1);
+        classes.add(klass2);
+        classes.add(klass3);
+        classes.add(klass4);
         classes.add(klass5);
+        classes.add(klass6);
+        classes.add(klass7);
+        classes.add(klass8);
+        classes.add(klass9);
 
         List<Element> chain = ElementUtil.getChainOfRelatedElementsWithSameConcern(classes, new Concern("action"));
 
         assertEquals(7, chain.size());
+        assertFalse(chain.contains(klass1));
         assertTrue(chain.contains(klass2));
         assertTrue(chain.contains(klass3));
         assertTrue(chain.contains(klass4));
         assertTrue(chain.contains(klass5));
         assertTrue(chain.contains(klass6));
+        assertFalse(chain.contains(klass7));
         assertTrue(chain.contains(klass8));
         assertTrue(chain.contains(klass9));
+    }
+
+    @Test
+    public void testGetAppliedDesignPatterns() {
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[8]);
+        arquitetura.representation.Class klass1 = architecture.findClassByName("Class1").get(0);
+        arquitetura.representation.Class klass2 = architecture.findClassByName("Class2").get(0);
+        arquitetura.representation.Class klass3 = architecture.findClassByName("Class3").get(0);
+
+        assertEquals(2, ElementUtil.getAppliedDesignPatterns(klass1).size());
+        assertEquals(1, ElementUtil.getAppliedDesignPatterns(klass2).size());
+        assertEquals(0, ElementUtil.getAppliedDesignPatterns(klass3).size());
     }
 
 }

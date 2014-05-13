@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufpr.inf.opla.patterns.strategies.impl;
+package br.ufpr.inf.opla.patterns.strategies.scopeselection.impl;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
 import java.util.Iterator;
 
 /**

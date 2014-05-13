@@ -55,6 +55,18 @@ public class MethodUtil {
         return iMethods;
     }
 
+    public static List<Method> getAllMethodsFromElementByConcern(Element element, Concern concern) {
+        List<Method> methods = getAllMethodsFromElement(element);
+        for (int i = 0; i < methods.size(); i++) {
+            Method method = methods.get(i);
+            if (concern == null ? !method.getAllConcerns().isEmpty() : (!method.containsConcern(concern) && !element.getOwnConcerns().contains(concern))) {
+                methods.remove(i);
+                i--;
+            }
+        }
+        return methods;
+    }
+
     public static List<Method> getAllMethodsFromSetOfElements(List<Element> elements) {
         MethodArrayList methods = new MethodArrayList();
         for (Element element : elements) {
@@ -159,6 +171,14 @@ public class MethodUtil {
         return methods;
     }
 
+    public static List<Method> cloneMethods(List<Method> methodsToBeCloned) {
+        List<Method> methods = new ArrayList<>();
+        for (Method method : methodsToBeCloned) {
+            methods.add(cloneMethod(method));
+        }
+        return methods;
+    }
+
     public static Method mergeMethodsToNewOne(Method methodA, Method methodB) {
         Method newMethod = cloneMethod(methodA);
 
@@ -199,6 +219,48 @@ public class MethodUtil {
                 Logger.getLogger(MethodUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public static List<Method> getAllCommonMethodsFromSetOfElements(List<Element> elements) {
+        List<Method> methods = new ArrayList<>();
+        if (!elements.isEmpty()) {
+            methods.addAll(cloneMethods(getAllMethodsFromElement(elements.get(0))));
+            for (int i = 1; i < elements.size(); i++) {
+                Element iElement = elements.get(i);
+                MethodArrayList iMethods = new MethodArrayList(getAllMethodsFromElement(iElement));
+                for (int j = 0; j < methods.size(); j++) {
+                    Method method = methods.get(j);
+                    if (iMethods.contains(method)) {
+                        mergeMethodsToMethodA(method, iMethods.get(iMethods.indexOf(method)));
+                    } else {
+                        methods.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+        return methods;
+    }
+
+    public static List<Method> getAllCommonMethodsFromSetOfElementsByConcern(List<Element> elements, Concern concern) {
+        List<Method> methods = new ArrayList<>();
+        if (!elements.isEmpty()) {
+            methods.addAll(cloneMethods(getAllMethodsFromElementByConcern(elements.get(0), concern)));
+            for (int i = 1; i < elements.size(); i++) {
+                Element iElement = elements.get(i);
+                MethodArrayList iMethods = new MethodArrayList(getAllMethodsFromElementByConcern(iElement, concern));
+                for (int j = 0; j < methods.size(); j++) {
+                    Method method = methods.get(j);
+                    if (iMethods.contains(method)) {
+                        mergeMethodsToMethodA(method, iMethods.get(iMethods.indexOf(method)));
+                    } else {
+                        methods.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+        return methods;
     }
 
     private MethodUtil() {

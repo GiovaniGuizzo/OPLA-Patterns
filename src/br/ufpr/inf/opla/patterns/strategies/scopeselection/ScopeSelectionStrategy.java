@@ -1,4 +1,4 @@
-package br.ufpr.inf.opla.patterns.strategies;
+package br.ufpr.inf.opla.patterns.strategies.scopeselection;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Patterns;

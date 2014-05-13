@@ -9,14 +9,15 @@ import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import arquitetura.representation.relationship.DependencyRelationship;
 import arquitetura.representation.relationship.Relationship;
 import arquitetura.representation.relationship.UsageRelationship;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSMediator;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.ArrayList;
@@ -46,9 +47,7 @@ public class MediatorTest {
         String model = ArchitectureRepository.OTHER_MODELS[7];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
-        Element klass2 = architecture.findClassByName("Class2").get(0);
-        Scope scope = new Scope();
-        scope.getElements().add(klass2);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.MEDIATOR);
 
         Assert.assertTrue(mediator.verifyPS(scope));
         Assert.assertEquals(7, scope.getPSs().get(0).getParticipants().size());
@@ -60,9 +59,7 @@ public class MediatorTest {
         String model = ArchitectureRepository.OTHER_MODELS[7];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
-        Element initclass = architecture.findClassByName("Class2").get(0);
-        Scope scope = new Scope();
-        scope.getElements().add(initclass);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.MEDIATOR);
 
         Assert.assertTrue(mediator.verifyPS(scope));
 
@@ -137,9 +134,7 @@ public class MediatorTest {
         String model = ArchitectureRepository.MEDIATOR_MODELS[0];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
-        Element initclass = architecture.findClassByName("Class2").get(0);
-        Scope scope = new Scope();
-        scope.getElements().add(initclass);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.MEDIATOR);
 
         Assert.assertTrue(mediator.verifyPS(scope));
 

@@ -407,9 +407,8 @@ public class ElementUtil {
                 List<Element> tempElements = new ArrayList<>();
                 if (!tempElements.contains(element) && element.getAllConcerns().contains(concern)) {
                     tempElements.add(element);
+                    getChainOfRelatedElementsWithSameConcern(element, concern, tempElements, mainElements);
                 }
-
-                getChainOfRelatedElementsWithSameConcern(element, concern, tempElements);
 
                 if (tempElements.size() > elements.size()) {
                     elements = tempElements;
@@ -419,7 +418,7 @@ public class ElementUtil {
         return elements;
     }
 
-    private static void getChainOfRelatedElementsWithSameConcern(Element element, Concern concern, List<Element> elements) {
+    private static void getChainOfRelatedElementsWithSameConcern(Element element, Concern concern, List<Element> elements, List<Element> mainElements) {
         List<Relationship> relationships = getRelationships(element);
         for (Relationship relationship : relationships) {
             Element chainedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
@@ -435,12 +434,13 @@ public class ElementUtil {
                 }
             }
             if (chainedElement != null
+                    && (chainedElement instanceof Class || chainedElement instanceof Interface)
                     && !chainedElement.equals(element)
                     && chainedElement.getAllConcerns().contains(concern)
                     && !elements.contains(chainedElement)
-                    && (chainedElement instanceof Class || chainedElement instanceof Interface)) {
+                    && mainElements.contains(chainedElement)) {
                 elements.add(chainedElement);
-                getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements);
+                getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements, mainElements);
             }
 
         }

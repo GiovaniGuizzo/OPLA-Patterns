@@ -17,7 +17,7 @@ import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

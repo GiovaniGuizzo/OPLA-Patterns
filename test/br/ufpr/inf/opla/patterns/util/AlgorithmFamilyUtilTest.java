@@ -10,7 +10,7 @@ import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;

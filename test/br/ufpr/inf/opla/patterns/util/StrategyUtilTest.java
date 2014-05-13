@@ -17,7 +17,7 @@ import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
@@ -118,15 +118,15 @@ public class StrategyUtilTest {
         List<Interface> result = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(elements);
         assertEquals(2, result.size());
     }
-    
+
     @Test
-    public void testGetAllStrategyInterfacesFromSetOfElements2(){
+    public void testGetAllStrategyInterfacesFromSetOfElements2() {
         String model = ArchitectureRepository.OTHER_MODELS[6];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
         Interface target1 = architecture.findInterfaceByName("Target1");
         List<Interface> strategyInterfaces = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY).getElements());
-        
+
         assertTrue(strategyInterfaces.contains(target1));
     }
 

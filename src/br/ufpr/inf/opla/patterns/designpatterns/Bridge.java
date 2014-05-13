@@ -150,7 +150,7 @@ public class Bridge extends DesignPattern {
 
                 participants.removeAll(adapteeList);
                 participants.addAll(adapterList);
-                
+
                 for (Element abstraction : abstractionClasses) {
                     addStereotype(abstraction);
                 }

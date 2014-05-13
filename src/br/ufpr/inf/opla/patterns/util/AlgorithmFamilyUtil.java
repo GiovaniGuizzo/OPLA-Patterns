@@ -5,8 +5,6 @@ import arquitetura.representation.Method;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
-import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +18,6 @@ public class AlgorithmFamilyUtil {
     }
 
     private static void addFamiliesWithSuffixAndPreffix(Scope scope, List<AlgorithmFamily> familiesInScope) {
-        WholeArchitectureScopeSelection selectionStrategy = new WholeArchitectureScopeSelection();
-        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture(), null);
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
             if (ElementUtil.isClassOrInterface(iElement)) {
@@ -34,8 +30,8 @@ public class AlgorithmFamilyUtil {
                     prefixes.add(iElementName.substring(0, iElementName.length() - k + 3));
                 }
 
-                for (int j = i + 1; j < architectureScope.getElements().size(); j++) {
-                    Element jElement = architectureScope.getElements().get(j);
+                for (int j = i + 1; j < scope.getElements().size(); j++) {
+                    Element jElement = scope.getElements().get(j);
                     if (ElementUtil.isClassOrInterface(jElement)) {
                         final String jElementName = jElement.getName();
 
@@ -63,8 +59,6 @@ public class AlgorithmFamilyUtil {
     }
 
     private static void addFamiliesWithSameMethod(Scope scope, List<AlgorithmFamily> familiesInScope) {
-        WholeArchitectureScopeSelection selectionStrategy = new WholeArchitectureScopeSelection();
-        Scope architectureScope = selectionStrategy.selectScope(ArchitectureRepository.getCurrentArchitecture(), null);
         for (int i = 0; i < scope.getElements().size(); i++) {
             Element iElement = scope.getElements().get(i);
             if (ElementUtil.isClassOrInterface(iElement)) {
@@ -74,8 +68,8 @@ public class AlgorithmFamilyUtil {
                     continue;
                 }
 
-                for (int j = i + 1; j < architectureScope.getElements().size(); j++) {
-                    Element jElement = architectureScope.getElements().get(j);
+                for (int j = i + 1; j < scope.getElements().size(); j++) {
+                    Element jElement = scope.getElements().get(j);
                     if (ElementUtil.isClassOrInterface(jElement)) {
                         MethodArrayList jMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(jElement));
                         if (jMethods.isEmpty()) {

@@ -1,7 +1,8 @@
-package br.ufpr.inf.opla.patterns.strategies.defaultstrategy;
+package br.ufpr.inf.opla.patterns.strategies.designpatternselection.defaultstrategy;
 
 import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
-import br.ufpr.inf.opla.patterns.strategies.DesignPatternSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.designpatternselection.DesignPatternSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.designpatternselection.DesignPatternSelectionStrategy;
 import java.util.Random;
 
 public class RandomDesignPatternSelection implements DesignPatternSelectionStrategy {

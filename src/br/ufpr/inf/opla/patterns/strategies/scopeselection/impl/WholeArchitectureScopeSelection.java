@@ -1,9 +1,9 @@
-package br.ufpr.inf.opla.patterns.strategies.impl;
+package br.ufpr.inf.opla.patterns.strategies.scopeselection.impl;
 
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
 
 public class WholeArchitectureScopeSelection implements ScopeSelectionStrategy{
 

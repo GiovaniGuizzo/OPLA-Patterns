@@ -123,9 +123,9 @@ public class Strategy extends DesignPattern {
             ElementUtil.implementInterface(participants, strategyInterface, adapterList, adapteeList);
 
             participants.removeAll(adapteeList);
-            
+
             for (Element adapterClass : adapterList) {
-                if(!participants.contains(adapterClass)){
+                if (!participants.contains(adapterClass)) {
                     participants.add(adapterClass);
                 }
             }
@@ -152,9 +152,8 @@ public class Strategy extends DesignPattern {
             applied = true;
 
             addStereotype(strategyInterface);
-            for (Element participant : participants) {
-                addStereotype(participant);
-            }
+            addStereotype(participants);
+            addStereotype(adapteeList);
         }
         return applied;
     }

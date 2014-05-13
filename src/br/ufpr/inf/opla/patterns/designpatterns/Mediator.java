@@ -115,9 +115,8 @@ public class Mediator extends DesignPattern {
                 addStereotype(mediatorInterface);
                 addStereotype(mediatorClass);
                 addStereotype(colleagueInterface);
-                for (Element element : participants) {
-                    addStereotype(element);
-                }
+                addStereotype(participants);
+                addStereotype(adapteeList);
                 applied = true;
             } catch (Exception ex) {
                 Logger.getLogger(Mediator.class.getName()).log(Level.SEVERE, null, ex);

@@ -4,6 +4,7 @@ import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Random;
 
@@ -69,6 +70,12 @@ public abstract class DesignPattern {
             }
         }
         return false;
+    }
+
+    protected void addStereotype(Collection<? extends Element> elements) {
+        for (Element element : elements) {
+            addStereotype(element);
+        }
     }
 
     @Override

@@ -151,15 +151,10 @@ public class Bridge extends DesignPattern {
                 participants.removeAll(adapteeList);
                 participants.addAll(adapterList);
 
-                for (Element abstraction : abstractionClasses) {
-                    addStereotype(abstraction);
-                }
-                for (Interface implementation : implementationInterfaces.values()) {
-                    addStereotype(implementation);
-                }
-                for (Element participant : participants) {
-                    addStereotype(participant);
-                }
+                addStereotype(abstractionClasses);
+                addStereotype(implementationInterfaces.values());
+                addStereotype(participants);
+                addStereotype(adapteeList);
             }
             applied = true;
         }

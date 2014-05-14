@@ -55,6 +55,29 @@ public class MediatorTest {
     }
 
     @Test
+    public void testVerifyPS2() {
+        String model = ArchitectureRepository.OTHER_MODELS[7];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+
+        Class klass2 = architecture.findClassByName("Class2").get(0);
+        Class klass4 = architecture.findClassByName("Class4").get(0);
+        Class klass6 = architecture.findClassByName("Class6").get(0);
+        Class klass8 = architecture.findClassByName("Class8").get(0);
+        Interface interface9 = architecture.findInterfaceByName("Class9");
+
+        Scope scope = new Scope();
+        scope.getElements().add(interface9);
+        scope.getElements().add(klass8);
+        scope.getElements().add(klass6);
+        scope.getElements().add(klass4);
+        Assert.assertFalse(mediator.verifyPS(scope));
+
+        scope.getElements().add(klass2);
+        Assert.assertTrue(mediator.verifyPS(scope));
+
+    }
+
+    @Test
     public void testApply() {
         String model = ArchitectureRepository.OTHER_MODELS[7];
         Architecture architecture = ArchitectureRepository.getArchitecture(model);

@@ -43,7 +43,28 @@ public class Mediator extends DesignPattern {
             List<Element> list = entry.getValue();
             if (concern != null) {
                 List<Element> chainOfElements = ElementUtil.getChainOfRelatedElementsWithSameConcern(list, concern);
-                if (chainOfElements.size() > 2) {
+                int count = 0;
+                for (int i = 0; i < chainOfElements.size(); i++) {
+                    Element iElement = chainOfElements.get(i);
+                    boolean isTypeOfOtherParticipant = false;
+                    for (int j = 0; j < chainOfElements.size(); j++) {
+                        if (i == j) {
+                            continue;
+                        }
+                        Element jElement = chainOfElements.get(j);
+                        if (ElementUtil.isTypeOf(iElement, jElement)) {
+                            isTypeOfOtherParticipant = true;
+                            break;
+                        }
+                    }
+                    if (!isTypeOfOtherParticipant) {
+                        count++;
+                        if (count > 2) {
+                            break;
+                        }
+                    }
+                }
+                if (count > 2) {
                     PSMediator psMediator = new PSMediator(chainOfElements, concern);
                     if (!scope.getPSs().contains(psMediator)) {
                         scope.addPS(psMediator);

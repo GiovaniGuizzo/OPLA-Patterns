@@ -26,27 +26,35 @@ import java.util.logging.Logger;
 
 public class BridgeUtil {
 
-    public static HashMap<Concern, List<Interface>> getImplementationInterfaces(List<Element> elements) {
+    public static HashMap<Concern, List<Interface>> getImplementationInterfaces(AlgorithmFamily algorithmFamily) {
+        List<Element> elements = algorithmFamily.getParticipants();
         HashMap<Concern, List<Interface>> implementationInterfaces = new HashMap<>();
         HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(elements);
         for (Map.Entry<Concern, List<Element>> entry : groupedElements.entrySet()) {
             Concern concern = entry.getKey();
             List<Element> elementsByConcerns = entry.getValue();
-            List<Interface> allCommonInterfaces = ElementUtil.getAllCommonInterfaces(elementsByConcerns);
-            Collections.sort(allCommonInterfaces, SubElementsComparator.getDescendingOrderer());
+            List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(elementsByConcerns);
+            Collections.sort(allSuperInterfaces, SubElementsComparator.getDescendingOrderer());
             List<Method> allMethods = MethodUtil.getAllCommonMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
             if (allMethods.isEmpty()) {
                 allMethods = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern));
             }
-            for (int i = 0; i < allCommonInterfaces.size(); i++) {
-                Interface anInterface = allCommonInterfaces.get(i);
+            for (int i = 0; i < allSuperInterfaces.size(); i++) {
+                Interface anInterface = allSuperInterfaces.get(i);
                 MethodArrayList anInterfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
-                if (!anInterface.getAllConcerns().contains(concern) && !anInterfaceMethods.containsAll(allMethods)) {
-                    allCommonInterfaces.remove(anInterface);
+                if (concern != null ? !anInterface.getAllConcerns().contains(concern) && !anInterfaceMethods.containsAll(allMethods) : !anInterfaceMethods.containsAll(allMethods)) {
+                    allSuperInterfaces.remove(anInterface);
                     i--;
                 }
             }
-            implementationInterfaces.put(concern, allCommonInterfaces);
+            if (allSuperInterfaces.isEmpty()) {
+                String preffix = concern == null ? "Default" : Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1);
+                Interface anInterface = ArchitectureRepository.getCurrentArchitecture().findInterfaceByName(preffix + "Implementation");
+                if (anInterface != null) {
+                    allSuperInterfaces.add(anInterface);
+                }
+            }
+            implementationInterfaces.put(concern, allSuperInterfaces);
         }
         return implementationInterfaces;
     }
@@ -91,6 +99,14 @@ public class BridgeUtil {
                 }
             }
         }
+        if (abstractionClasses.isEmpty()) {
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            List<Class> classByName = architecture.findClassByName(algorithmFamily.getNameCapitalized() + "Abstraction");
+            if (classByName != null) {
+                abstractionClasses.add(classByName.get(0));
+                abstractionClasses.addAll(ElementUtil.getAllSubElements(classByName.get(0)));
+            }
+        }
         return abstractionClasses;
     }
 
@@ -111,8 +127,8 @@ public class BridgeUtil {
 
                 boolean naArquitetura = packageName.equalsIgnoreCase("model");
                 if (naArquitetura) {
-                    abstractClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Abstraction", true);
-                    concreteClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "AbstractionImpl", false);
+                    abstractClass = architecture.createClass(algorithmFamily.getNameCapitalized() + "Abstraction", true);
+                    concreteClass = architecture.createClass(algorithmFamily.getNameCapitalized() + "AbstractionImpl", false);
 
                     architecture.removeClass(abstractClass);
                     architecture.removeClass(concreteClass);
@@ -121,8 +137,8 @@ public class BridgeUtil {
                 } else {
                     aPackage = architecture.findPackageByName(packageName);
 
-                    abstractClass = aPackage.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Abstraction", true);
-                    concreteClass = aPackage.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "AbstractionImpl", false);
+                    abstractClass = aPackage.createClass(algorithmFamily.getNameCapitalized() + "Abstraction", true);
+                    concreteClass = aPackage.createClass(algorithmFamily.getNameCapitalized() + "AbstractionImpl", false);
 
                     aPackage.removeClass(abstractClass);
                     aPackage.removeClass(concreteClass);

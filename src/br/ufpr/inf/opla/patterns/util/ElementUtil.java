@@ -108,6 +108,18 @@ public class ElementUtil {
         return implementedInterfaces;
     }
 
+    public static List<Interface> getAllSuperInterfaces(List<Element> elements) {
+        List<Interface> interfaces = new ArrayList<>();
+        for (Element element : elements) {
+            for (Interface anInterface : getAllSuperInterfaces(element)) {
+                if (!interfaces.contains(anInterface)) {
+                    interfaces.add(anInterface);
+                }
+            }
+        }
+        return interfaces;
+    }
+
     public static List<Interface> getAllCommonInterfaces(List<Element> participants) {
         List<Interface> interfaces = new ArrayList<>();
         boolean first = true;

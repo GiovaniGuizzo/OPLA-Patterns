@@ -25,6 +25,10 @@ public class AlgorithmFamily implements Comparable<AlgorithmFamily> {
         return name;
     }
 
+    public String getNameCapitalized() {
+        return Character.toUpperCase(name.charAt(0)) + name.substring(1);
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -56,7 +56,7 @@ public class BridgeUtilTest {
             PSBridge psBridge = (PSBridge) ps;
             AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
             if (algorithmFamily.getName().equals("Sort") && algorithmFamily.getType().equals(AlgorithmFamily.SUFFIX)) {
-                HashMap<Concern, List<Interface>> implementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily.getParticipants());
+                HashMap<Concern, List<Interface>> implementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily);
                 for (List<Interface> interfaces : implementationInterfaces.values()) {
                     assertEquals(1, interfaces.size());
                     foi = true;

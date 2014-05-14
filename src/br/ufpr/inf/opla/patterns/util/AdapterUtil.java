@@ -44,6 +44,13 @@ public class AdapterUtil {
                 }
             }
         }
+        if (adapterClass == null) {
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            List<Class> classByName = architecture.findClassByName(adaptee.getName() + "Adapter");
+            if (classByName != null) {
+                adapterClass = classByName.get(0);
+            }
+        }
         return adapterClass;
     }
 

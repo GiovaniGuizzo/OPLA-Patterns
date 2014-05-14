@@ -99,7 +99,7 @@ public class Bridge extends DesignPattern {
 
                 //Get or create Implementation Interfaces
                 HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(participants);
-                HashMap<Concern, List<Interface>> potentialImplementationInterfaces = BridgeUtil.getImplementationInterfaces(participants);
+                HashMap<Concern, List<Interface>> potentialImplementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily);
                 HashMap<Concern, Interface> implementationInterfaces = new HashMap<>();
                 for (Map.Entry<Concern, List<Interface>> entry : potentialImplementationInterfaces.entrySet()) {
                     Concern concern = entry.getKey();

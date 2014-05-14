@@ -33,20 +33,16 @@ public class StrategyUtil {
 
         if (!interfaces.isEmpty()) {
             Collections.sort(interfaces, SubElementsComparator.getDescendingOrderer());
-            for (Interface anInterface : interfaces) {
-                if (new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface)).containsAll(MethodUtil.getAllMethodsFromSetOfElements(participants))) {
-                    return anInterface;
-                }
-            }
             return interfaces.get(0);
         } else {
-            return null;
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            return architecture.findInterfaceByName(algorithmFamily.getNameCapitalized() + "Strategy");
         }
     }
 
     protected static List<Interface> getAllStrategyInterfacesFromSetOfElements(List<Element> elements) {
         List<Interface> strategyInterfaces = new ArrayList<>();
-        List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(elements);
+        List<Interface> interfaces = ElementUtil.getAllSuperInterfaces(elements);
 
         MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllCommonMethodsFromSetOfElements(elements));
         if (allMethodsFromAlgorithmFamily.isEmpty()) {
@@ -63,7 +59,7 @@ public class StrategyUtil {
     }
 
     public static Interface createStrategyInterfaceForAlgorithmFamily(AlgorithmFamily algorithmFamily) {
-        return InterfaceUtil.createInterfaceForSetOfElements(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Strategy", algorithmFamily.getParticipants());
+        return InterfaceUtil.createInterfaceForSetOfElements(algorithmFamily.getNameCapitalized() + "Strategy", algorithmFamily.getParticipants());
     }
 
     public static boolean areTheAlgorithmFamilyAndContextsPartOfAVariability(AlgorithmFamily algorithmFamily, List<Element> contexts) {

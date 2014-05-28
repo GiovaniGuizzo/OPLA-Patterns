@@ -1,10 +1,9 @@
 package br.ufpr.inf.opla.patterns.main;
 
+import arquitetura.io.ReaderConfig;
+import br.ufpr.inf.opla.patterns.factory.MutationOperatorFactory;
 import br.ufpr.inf.opla.patterns.indicadores.Hypervolume;
-import br.ufpr.inf.opla.patterns.operator.DesignPatternsAndPLAMutationOperator;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.ElementsWithSameDesignPatternSelection;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,42 +29,94 @@ public class NSGAII_OPLA {
 //--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException {
 
-        int runsNumber = 30; //30;
-        populationSize_ = 100; //100; 
-        maxEvaluations_ = 30000; //300 geraçõeshttp://loggr.net/
+        if (args.length < 7) {
+            System.out.println("You need to inform the following parameters:");
+            System.out.println("\t1 - Population Size (Integer);"
+                    + "\n\t2 - Max Evaluations (Integer);"
+                    + "\n\t3 - Mutation Probability (Double);"
+                    + "\n\t4 - PLA path;"
+                    + "\n\t5 - Context;"
+                    + "\n\t6 - Mutation Operator class simple name;"
+                    + "\n\t7 - If you want to write the variables (Boolean).");
+            System.exit(0);
+        }
 
+        int runsNumber = 30; //30;
+        if (args[0] == null || args[0].trim().equals("")) {
+            System.out.println("Missing population size argument.");
+            System.exit(1);
+        }
+        try {
+            populationSize_ = Integer.valueOf(args[0]); //100;
+        } catch (NumberFormatException ex) {
+            System.out.println("Population size argument not integer.");
+            System.exit(1);
+        }
+        if (args[1] == null || args[1].trim().equals("")) {
+            System.out.println("Missing max evaluations argument.");
+            System.exit(1);
+        }
+        try {
+            maxEvaluations_ = Integer.valueOf(args[1]); //300 geraçõeshttp://loggr.net/
+        } catch (NumberFormatException ex) {
+            System.out.println("Max evaluations argument not integer.");
+            System.exit(1);
+        }
         crossoverProbability_ = 0.0;
-        mutationProbability_ = 0.1;
+        if (args[2] == null || args[2].trim().equals("")) {
+            System.out.println("Missing mutation probability argument.");
+            System.exit(1);
+        }
+        try {
+            mutationProbability_ = Double.valueOf(args[2]);
+        } catch (NumberFormatException ex) {
+            System.out.println("Mutation probability argument not double.");
+            System.exit(1);
+        }
 
         HashMap parameters; // Operator parameters
         parameters = new HashMap();
         parameters.put("probability", mutationProbability_);
 
-//        Scope Strategy
-//        
-        ScopeSelectionStrategy scopeSelection = null;
-        scopeSelection = new ElementsWithSameDesignPatternSelection();
+        if (args[3] == null || args[3].trim().equals("")) {
+            System.out.println("Missing PLA Path argument.");
+            System.exit(1);
+        }
+        String pla = args[3];
 
-//        PLA
-//        
-//        String pla = ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE;
-//        String pla = ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM;
-        String pla = ArchitectureRepository.AGM;
+        if (args[4] == null || args[4].trim().equals("")) {
+            System.out.println("Missing context argument.");
+            System.exit(1);
+        }
+        String context = args[4];
 
-//        Type of Mutation
-//        
-//        String context = "PLAMutation";
-//        Mutation mutation = new PLAFeatureMutation(parameters);
-        String context = "PLAMutationWithPatterns";
-        Mutation mutation = new DesignPatternsAndPLAMutationOperator(parameters, scopeSelection, null);
-//        String context = "OnlyPatternsMutation";
-//        Mutation mutation = new DesignPatternsMutationOperator(parameters, scopeSelection, null);
+        if (args[5] == null || args[5].trim().equals("")) {
+            System.out.println("Missing mutation operator argument.");
+            System.exit(1);
+        }
+        Mutation mutation = MutationOperatorFactory.create(args[5], parameters);
+
+        if (args[6] == null || args[6].trim().equals("")) {
+            System.out.println("Missing print variables argument.");
+            System.exit(1);
+        }
+        boolean shouldPrintVariables = Boolean.valueOf(args[6]);
 
         String plaName = getPlaName(pla);
 
         File directory = ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/");
         ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/manipulation");
         ArchitectureRepository.getOrCreateDirectory("experiment/" + plaName + "/" + context + "/output");
+
+        ReaderConfig.setDirTarget("experiment/" + plaName + "/" + context + "/manipulation");
+        ReaderConfig.setDirExportTarget("experiment/" + plaName + "/" + context + "/output");
+
+        String plaDirectory = getPlaDirectory(pla);
+        ReaderConfig.setPathToTemplateModelsDirectory(plaDirectory);
+        ReaderConfig.setPathToProfileSMarty(plaDirectory + "smarty.profile.uml");
+        ReaderConfig.setPathToProfileConcerns(plaDirectory + "concerns.profile.uml");
+        ReaderConfig.setPathProfileRelationship(plaDirectory + "relationships.profile.uml");
+        ReaderConfig.setPathToProfilePatterns(plaDirectory + "patterns.profile.uml");
 
         String xmiFilePath = pla;
 
@@ -137,7 +188,9 @@ public class NSGAII_OPLA {
             //resultFront.printVariablesToFile(directory + "/VAR_" + runs);
             resultFront.printInformationToFile(directory + "/INFO_" + plaName + "_" + runs + ".txt");
             // resultFront.saveVariablesToFile(directory + "/VAR_" + runs + "_");
-            resultFront.saveVariablesToFile("VAR_" + runs + "_");
+            if (shouldPrintVariables) {
+                resultFront.saveVariablesToFile("VAR_" + runs + "_");
+            }
 
             Hypervolume.printFormatedHypervolumeFile(resultFront, directory + "/HYPERVOLUME.txt", true);
 
@@ -160,7 +213,9 @@ public class NSGAII_OPLA {
         //todasRuns.printVariablesToFile(directory + "/VAR_All");
         todasRuns.printInformationToFile(directory + "/INFO_All_" + plaName + ".txt");
         //todasRuns.saveVariablesToFile(directory + "/VAR_All_");
-        todasRuns.saveVariablesToFile("VAR_All_");
+        if (shouldPrintVariables) {
+            todasRuns.saveVariablesToFile("VAR_All_");
+        }
 
         //Thelma - Dez2013
         todasRuns.printMetricsToFile(directory + "/Metrics_All_" + plaName + ".txt");
@@ -168,10 +223,15 @@ public class NSGAII_OPLA {
 
     }
 
-    private static String getPlaName(String pla) {
+    public static String getPlaName(String pla) {
         int beginIndex = pla.lastIndexOf('/') + 1;
         int endIndex = pla.length() - 4;
         return pla.substring(beginIndex, endIndex);
+    }
+
+    public static String getPlaDirectory(String pla) {
+        int stop = pla.lastIndexOf('/');
+        return pla.substring(0, stop + 1);
     }
 
 }

@@ -9,6 +9,7 @@ import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ public class NSGAII_OPLA_Multithread {
     private static int MAX_THREADS = 4;
     private static int RUNNING_THREADS = 0;
     private static List<Thread> ACTIVE_THREADS;
+    private static List<Thread> QUEUED_THREADS;
 
     private static final String[] PLAS = {
         ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE,
@@ -55,6 +57,15 @@ public class NSGAII_OPLA_Multithread {
 
     private static void initialize() {
         ACTIVE_THREADS = new ArrayList<>();
+        QUEUED_THREADS = new ArrayList<>();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Inform the max number of threads, leave in blank for default (4):");
+        try {
+            MAX_THREADS = Integer.valueOf(scanner.nextLine());
+        } catch (Exception ex) {
+            MAX_THREADS = 4;
+        }
 
         new Thread(new Runnable() {
 
@@ -70,35 +81,51 @@ public class NSGAII_OPLA_Multithread {
                         case "-":
                             decrementMaxThreads();
                             break;
-                        case "print":
+                        case "m":
+                            System.out.println(MAX_THREADS);
+                            break;
+                        case "p":
                             System.out.println("There are " + getActiveThreadsSize() + " threads active now. They are:");
                             for (Thread thread : getActiveThreads()) {
                                 System.out.println(thread.getName());
                             }
                             break;
-                        case "exit":
-                            System.out.println("Are you sure? (true or false):");
-                            boolean sure = scanner.nextBoolean();
-                            if (sure) {
+                        case "q":
+                            System.out.println("Are you sure? (y or n):");
+                            String sure = scanner.nextLine();
+                            if ("y".equals(sure)) {
                                 killAllThreads();
                                 System.exit(0);
                             }
                             break;
+                        case "c":
+                            for (int i = 0; i < 50; i++) {
+                                System.out.println();
+                            }
+                            try {
+                                Runtime.getRuntime().exec("clear");
+                            } catch (IOException ex) {
+                            }
+                            break;
+                        case "r":
+                            System.out.println("There are " + getQueuedThreadsSize() + " remainign to be executed.");
+                            break;
+                        case "h":
                         default:
-                            System.out.println("Command not valid. Please, select one of the following:");
+                            System.out.println("Please, select one of the following:");
                             System.out.println("\t\"+\" - Increments the max number of threads;");
                             System.out.println("\t\"-\" - Decrements the max number of threads;");
-                            System.out.println("\t\"print\" - Prints the current running threads;");
-                            System.out.println("\t\"exit\" - Exits program and kills all running threads;");
+                            System.out.println("\t\"m\" - Prints the number of max threads;");
+                            System.out.println("\t\"p\" - Prints the current running threads;");
+                            System.out.println("\t\"r\" - Prints the remaining threads;");
+                            System.out.println("\t\"c\" - Clear the console;");
+                            System.out.println("\t\"h\" - Help;");
+                            System.out.println("\t\"q\" - Quits program and kills all running threads;");
                     }
                 }
             }
 
         }).start();
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        initialize();
 
         for (final int maxEvaluations : MAX_EVALUATIONS) {
             for (final int populationSize : POPULATION_SIZE) {
@@ -106,18 +133,13 @@ public class NSGAII_OPLA_Multithread {
                     for (final String mutationOperator : MUTATION_OPERATORS) {
                         for (final String pla : PLAS) {
                             final String context = getContext(pla, mutationOperator, String.valueOf(populationSize), String.valueOf(maxEvaluations), String.valueOf(mutationProbability));
-                            while (RUNNING_THREADS >= MAX_THREADS) {
-                                Thread.sleep(1000);
-                            }
-                            incrementRunningThreads();
-                            new Thread(new Runnable() {
+                            final Thread thread = new Thread(new Runnable() {
 
                                 private Process process = null;
 
                                 @Override
                                 public void run() {
                                     try {
-                                        System.out.println("Initializing: " + context);
                                         ProcessBuilder builder = new ProcessBuilder("java", "-jar", "dist/OPLA-Patterns.jar",
                                                 "" + populationSize,
                                                 "" + maxEvaluations,
@@ -137,22 +159,38 @@ public class NSGAII_OPLA_Multithread {
                                         builder.redirectOutput(destination);
                                         builder.redirectError(destination);
                                         process = builder.start();
-                                        int exitValue = process.waitFor();
-                                        System.out.println("Ending: " + context + " with exit value " + exitValue);
+                                        process.waitFor();
                                     } catch (IOException | InterruptedException ex) {
                                         Logger.getLogger(NSGAII_OPLA_Multithread.class.getName()).log(Level.SEVERE, null, ex);
                                     } finally {
                                         if (process != null) {
                                             process.destroy();
                                         }
+                                        removeThread(context);
                                         decrementRunningThreads();
                                     }
                                 }
-                            }, context).start();
+                            }, context);
+                            addThreadToQueue(thread);
                         }
                     }
                 }
             }
+        }
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        initialize();
+
+        for (Iterator<Thread> it = QUEUED_THREADS.iterator(); it.hasNext();) {
+            Thread thread = it.next();
+            while (RUNNING_THREADS >= MAX_THREADS) {
+                Thread.sleep(1000);
+            }
+            it.remove();
+            incrementRunningThreads();
+            addThread(thread);
+            thread.start();
         }
 
     }
@@ -184,12 +222,26 @@ public class NSGAII_OPLA_Multithread {
         ACTIVE_THREADS.add(thread);
     }
 
-    private static synchronized void removeThread(Thread thread) {
-        ACTIVE_THREADS.remove(thread);
+    private static synchronized void removeThread(String name) {
+        for (int i = 0; i < ACTIVE_THREADS.size(); i++) {
+            Thread thread = ACTIVE_THREADS.get(i);
+            if (thread.getName().equals(name)) {
+                ACTIVE_THREADS.remove(i);
+                return;
+            }
+        }
+    }
+
+    private static synchronized void addThreadToQueue(Thread thread) {
+        QUEUED_THREADS.add(thread);
     }
 
     private static synchronized int getActiveThreadsSize() {
         return ACTIVE_THREADS.size();
+    }
+
+    private static synchronized int getQueuedThreadsSize() {
+        return QUEUED_THREADS.size();
     }
 
     private static synchronized List<Thread> getActiveThreads() {

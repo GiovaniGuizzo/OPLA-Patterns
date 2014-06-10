@@ -17,20 +17,23 @@ public class GeraTudoAKAGodClass {
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            "MicrowaveOvenSoftware", 
-            "ServiceAndSupportSystem",
-//            "agm"
+            //            "MicrowaveOvenSoftware",
+            //            "ServiceAndSupportSystem",
+            "agm"
         };
 
         String[] contexts = {
             "PLAMutation",
-            "PLAMutationWithPatterns",
-            "OnlyPatternsMutation",
-            "PLAMutationWithMediator",
+            "OnlyBridgeMutation",
             "OnlyMediatorMutation",
-            "PLAMutationWithAllPatterns",
-            "OnlyAllPatternsMutation",
-//            "Original"
+            "OnlyPatternsMutation",
+            "OnlyPatternsMutationNR",
+            "OnlyStrategyMutation",
+            "PLAMutationWithBridge",
+            "PLAMutationWithMediator",
+            "PLAMutationWithPatterns",
+            "PLAMutationWithPatternsNR",
+            "PLAMutationWithStrategy"
         };
 
         MetricsUtil mu = new MetricsUtil();
@@ -69,6 +72,8 @@ public class GeraTudoAKAGodClass {
                     List<Integer> melhoresSolucoesPorContexto = new ArrayList<>();
                     double menorDistancia = Double.MAX_VALUE;
 
+//                    double[][] front = new double[quantidadeSolucoes][numObjetivos];
+//                    for(solucoes)for(objetivos)solucoes[solucaoI][numObjJ] = valor do banco;
                     double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_All_" + pla + ".txt");
                     for (int i = 0; i < front.length; i++) {
                         double distanciaEuclidiana = mu.distance(min, front[i]);

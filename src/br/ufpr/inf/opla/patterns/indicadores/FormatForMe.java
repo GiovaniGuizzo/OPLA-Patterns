@@ -17,15 +17,14 @@ public class FormatForMe {
 
     public static void main(String[] args) throws IOException {
         String[] plas = {
-            "agm",
-            "MicrowaveOvenSoftware",
-            "ServiceAndSupportSystem"
+            "agm", //            "MicrowaveOvenSoftware",
+        //            "ServiceAndSupportSystem"
         };
 
         String[] contexts = {
             "PLAMutation",
-            "PLAMutationWithPatterns0.1",
-            "OnlyPatternsMutation0.1", //            "Original"
+            "PLAMutationWithPatterns",
+            "OnlyPatternsMutation", //            "Original"
         };
 
         MetricsUtil mu = new MetricsUtil();

@@ -86,6 +86,19 @@ public class ArchitectureRepository {
         return null;
     }
 
+    public static String getPlaPath(String name) {
+        switch (name) {
+            case "agm":
+                return AGM;
+            case "MicrowaveOvenSoftware":
+                return MICROWAVE_OVEN_SOFTWARE;
+            case "ServiceAndSupportSystem":
+                return SERVICE_AND_SUPPORT_SYSTEM;
+            default:
+                return null;
+        }
+    }
+
     public static Architecture getCurrentArchitecture() {
         return CURRENT_ARCHITECTURE;
     }

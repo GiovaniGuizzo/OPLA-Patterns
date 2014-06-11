@@ -7,6 +7,7 @@ package br.ufpr.inf.opla.patterns.main;
 
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,8 @@ public class NSGAII_OPLA_Multithread {
     private static volatile int RUNNING_THREADS = 0;
     private static volatile List<Thread> ACTIVE_THREADS;
     private static volatile List<Thread> QUEUED_THREADS;
-    private static Thread console;
+    private static volatile List<String> FINISHED_THREADS;
+    private static volatile Thread console;
     private static volatile String consoleToken = ">";
 
     private static final String[] PLAS = {
@@ -56,9 +58,10 @@ public class NSGAII_OPLA_Multithread {
         0.9
     };
 
-    private static void initialize() {
+    private static synchronized void initialize() {
         ACTIVE_THREADS = new ArrayList<>();
         QUEUED_THREADS = new ArrayList<>();
+        FINISHED_THREADS = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Inform the max number of threads, leave in blank for default (4):");
@@ -100,6 +103,57 @@ public class NSGAII_OPLA_Multithread {
             }
         }
 
+        System.out.println("Inform the path for the file to store information, leave in blank for default (RunningInfo.txt in the work directory):");
+        printConsoleToken();
+
+        try {
+            String fileName = scanner.nextLine();
+
+            if (fileName.trim().isEmpty()) {
+                fileName = System.getProperty("user.dir") + "/RunningInfo.txt";
+            }
+            final File runningInfoFile = new File(fileName);
+            if (!runningInfoFile.exists()) {
+                if (!runningInfoFile.getParentFile().exists()) {
+                    runningInfoFile.getParentFile().mkdirs();
+                }
+                runningInfoFile.createNewFile();
+            }
+            new Thread(new Runnable() {
+
+                @Override
+                public void run() {
+
+                    while (true) {
+                        try (final FileWriter runningInfo = new FileWriter(runningInfoFile, false)) {
+                            runningInfo.append("# This file presents the current status of the execution.\n# It is updated every 10s.");
+                            runningInfo.append("\n\n");
+                            runningInfo.append("Number of Max Threads = " + String.valueOf(MAX_THREADS));
+                            runningInfo.append("\n");
+                            runningInfo.append("Number of Running Threads = " + String.valueOf(RUNNING_THREADS));
+                            runningInfo.append("\n");
+                            runningInfo.append("Number of Remaining Threads = " + String.valueOf(getQueuedThreadsSize()));
+                            runningInfo.append("\n");
+                            runningInfo.append("Number of Successfully Finished Threads = " + String.valueOf(getFinishedThreadsSize()));
+                            runningInfo.append("\n");
+                            runningInfo.append("Finished Threads = " + getFinishedThreads().toString());
+                            runningInfo.append("\n");
+                            runningInfo.append("Remaining Threads = " + getQueuedThreads().toString());
+                        } catch (Exception ex) {
+                        }
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(NSGAII_OPLA_Multithread.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                }
+            }).start();
+        } catch (IOException ex) {
+            System.err.println("There was a problem creating the file to store information. Skipping it.");
+        }
+
         console = new Thread(new Runnable() {
 
             @Override
@@ -136,8 +190,7 @@ public class NSGAII_OPLA_Multithread {
                             printConsoleToken();
                             String sure = scanner.nextLine();
                             if ("y".equals(sure)) {
-                                killAllThreads();
-                                System.exit(0);
+                                exit();
                             }
                             break;
                         case "c":
@@ -164,6 +217,12 @@ public class NSGAII_OPLA_Multithread {
                                 consoleToken = ">";
                             }
                             break;
+                        case "f":
+                            System.out.println("There are " + getFinishedThreadsSize() + " successfully finished threads. They are:");
+                            for (String string : getFinishedThreads()) {
+                                System.out.println(string);
+                            }
+                            break;
                         case "h":
                         default:
                             System.out.println("Select one of the following:");
@@ -172,7 +231,8 @@ public class NSGAII_OPLA_Multithread {
                             System.out.println("\t\"m\" - Prints the number of max threads;");
                             System.out.println("\t\"p\" - Prints the current running threads;");
                             System.out.println("\t\"P\" - Prints the remaining and current running threads;");
-                            System.out.println("\t\"r\" - Prints the remaining threads;");
+                            System.out.println("\t\"r\" - Prints the number of remaining threads;");
+                            System.out.println("\t\"f\" - Prints the finished threads;");
                             System.out.println("\t\"c\" - Clear the console;");
                             System.out.println("\t\"h\" - Help;");
                             System.out.println("\t\"t\" - Change the console token;");
@@ -186,11 +246,11 @@ public class NSGAII_OPLA_Multithread {
         console.start();
     }
 
-    private static void printConsoleToken() {
+    private static synchronized void printConsoleToken() {
         System.out.print(consoleToken + " ");
     }
 
-    private static void createThread(final String context) {
+    private static synchronized void createThread(final String context) {
         String[] split = context.split("_");
         final int populationSize = Integer.valueOf(split[2]);
         final int maxEvaluations = Integer.valueOf(split[3]);
@@ -200,12 +260,12 @@ public class NSGAII_OPLA_Multithread {
         createThread(populationSize, maxEvaluations, mutationProbability, pla, mutationOperator, context);
     }
 
-    private static void createThread(final int populationSize, final int maxEvaluations, final double mutationProbability, final String pla, final String mutationOperator) {
+    private static synchronized void createThread(final int populationSize, final int maxEvaluations, final double mutationProbability, final String pla, final String mutationOperator) {
         final String context = getContext(pla, mutationOperator, String.valueOf(populationSize), String.valueOf(maxEvaluations), String.valueOf(mutationProbability));
         createThread(populationSize, maxEvaluations, mutationProbability, pla, mutationOperator, context);
     }
 
-    private static void createThread(final int populationSize, final int maxEvaluations, final double mutationProbability, final String pla, final String mutationOperator, final String context) {
+    private static synchronized void createThread(final int populationSize, final int maxEvaluations, final double mutationProbability, final String pla, final String mutationOperator, final String context) {
         final Thread thread = new Thread(new Runnable() {
 
             private Process process = null;
@@ -237,6 +297,8 @@ public class NSGAII_OPLA_Multithread {
                     int exitStatus = process.waitFor();
                     if (exitStatus != 0) {
                         threadError(this, context, exitStatus);
+                    } else {
+                        FINISHED_THREADS.add(context);
                     }
                 } catch (IOException | InterruptedException ex) {
                     Logger.getLogger(NSGAII_OPLA_Multithread.class.getName()).log(Level.SEVERE, null, ex);
@@ -268,10 +330,14 @@ public class NSGAII_OPLA_Multithread {
         MAX_THREADS++;
     }
 
-    private static synchronized void killAllThreads() {
-        RUNNING_THREADS = Integer.MAX_VALUE;
-        for (Thread thread : ACTIVE_THREADS) {
-            thread.stop();
+    private static synchronized void exit() {
+        try {
+            RUNNING_THREADS = Integer.MAX_VALUE;
+            for (Thread thread : ACTIVE_THREADS) {
+                thread.stop();
+            }
+        } finally {
+            System.exit(0);
         }
     }
 
@@ -307,6 +373,10 @@ public class NSGAII_OPLA_Multithread {
         return QUEUED_THREADS.size();
     }
 
+    private static synchronized int getFinishedThreadsSize() {
+        return FINISHED_THREADS.size();
+    }
+
     private static synchronized List<Thread> getActiveThreads() {
         return new ArrayList<>(ACTIVE_THREADS);
     }
@@ -315,7 +385,11 @@ public class NSGAII_OPLA_Multithread {
         return new ArrayList<>(QUEUED_THREADS);
     }
 
-    public static String getContext(String pla, String mutationOperator, String populationSize, String maxEvaluations, String mutationProbability) {
+    private static synchronized List<String> getFinishedThreads() {
+        return new ArrayList<>(FINISHED_THREADS);
+    }
+
+    public static synchronized String getContext(String pla, String mutationOperator, String populationSize, String maxEvaluations, String mutationProbability) {
         return NSGAII_OPLA.getPlaName(pla) + "_" + mutationOperator + "_" + populationSize + "_" + maxEvaluations + "_" + mutationProbability;
     }
 
@@ -336,8 +410,8 @@ public class NSGAII_OPLA_Multithread {
                 Thread.sleep(1000);
             }
         }
-        console.interrupt();
         System.out.println("FIM de execução!");
+        System.exit(0);
     }
 
 }

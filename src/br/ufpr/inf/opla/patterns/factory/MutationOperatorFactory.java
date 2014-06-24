@@ -5,11 +5,12 @@
  */
 package br.ufpr.inf.opla.patterns.factory;
 
-import br.ufpr.inf.opla.patterns.operator.DesignPatternsAndPLAMutationOperator;
-import br.ufpr.inf.opla.patterns.operator.DesignPatternsMutationOperator;
+import br.ufpr.inf.opla.patterns.operator.impl.DesignPatternMutationOperator;
+import br.ufpr.inf.opla.patterns.operator.impl.DesignPatternsAndPLAMutationOperator;
+import br.ufpr.inf.opla.patterns.operator.impl.PLAMutation;
+import br.ufpr.inf.opla.patterns.operator.impl.PLAMutationThenDesignPatternsMutationOperator;
 import java.util.HashMap;
 import jmetal.operators.mutation.Mutation;
-import jmetal.operators.mutation.PLAFeatureMutation;
 
 /**
  *
@@ -20,11 +21,13 @@ public class MutationOperatorFactory {
     public static Mutation create(String operator, HashMap<String, Object> parameters) {
         switch (operator) {
             case "DesignPatternsMutationOperator":
-                return new DesignPatternsMutationOperator(parameters, null, null);
+                return new DesignPatternMutationOperator(parameters, null, null);
             case "DesignPatternsAndPLAMutationOperator":
                 return new DesignPatternsAndPLAMutationOperator(parameters, null, null);
             case "PLAMutation":
-                return new PLAFeatureMutation(parameters);
+                return new PLAMutation(parameters);
+            case "PLAMutationThenDesignPatternsMutationOperator":
+                return new PLAMutationThenDesignPatternsMutationOperator(parameters, null, null);
             default:
                 return null;
         }

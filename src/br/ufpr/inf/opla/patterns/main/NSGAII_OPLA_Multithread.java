@@ -37,7 +37,8 @@ public class NSGAII_OPLA_Multithread {
     private static final String[] MUTATION_OPERATORS = {
         "DesignPatternsMutationOperator",
         "DesignPatternsAndPLAMutationOperator",
-        "PLAMutation"
+        "PLAMutation",
+        "PLAMutationThenDesignPatternsMutationOperator"
     };
 
     private static final int[] POPULATION_SIZE = {
@@ -64,13 +65,27 @@ public class NSGAII_OPLA_Multithread {
         FINISHED_THREADS = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Inform the max number of threads, leave in blank for default (4):");
+        System.out.println("Inform the max number of threads (min = 1, max = 10), leave in blank for default (4):");
         printConsoleToken();
-        try {
-            MAX_THREADS = Integer.valueOf(scanner.nextLine());
-        } catch (Exception ex) {
-            MAX_THREADS = 4;
-        }
+        do {
+            try {
+                String nextLine = scanner.nextLine();
+                if (nextLine.trim().isEmpty()) {
+                    throw new Exception();
+                }
+                MAX_THREADS = Integer.valueOf(nextLine);
+                if (MAX_THREADS < 1 || MAX_THREADS > 10) {
+                    throw new NumberFormatException();
+                }
+                break;
+            } catch (NumberFormatException ex) {
+                System.out.println("Number higher/lower than max/min or format invalid! Type again:");
+                printConsoleToken();
+            } catch (Exception ex) {
+                MAX_THREADS = 4;
+                break;
+            }
+        } while (true);
 
         System.out.println("Inform the path for the file containing the name of the experiments you want to execute, leave in blank for default (all):");
         printConsoleToken();

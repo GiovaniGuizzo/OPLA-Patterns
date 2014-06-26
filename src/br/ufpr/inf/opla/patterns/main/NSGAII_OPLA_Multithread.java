@@ -31,7 +31,9 @@ public class NSGAII_OPLA_Multithread {
 
     private static final String[] PLAS = {
         ArchitectureRepository.MICROWAVE_OVEN_SOFTWARE,
-        ArchitectureRepository.AGM
+        ArchitectureRepository.AGM,
+        ArchitectureRepository.SERVICE_AND_SUPPORT_SYSTEM,
+        ArchitectureRepository.MOBILE_MEDIA
     };
 
     private static final String[] MUTATION_OPERATORS = {

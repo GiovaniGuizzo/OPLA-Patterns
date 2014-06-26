@@ -11,6 +11,7 @@ public class ArchitectureRepository {
     public static final String MICROWAVE_OVEN_SOFTWARE = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MicrowaveOvenSoftware/Papyrus/MicrowaveOvenSoftware.uml";
     public static final String SERVICE_AND_SUPPORT_SYSTEM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/ServiceAndSupportSystem/Papyrus/ServiceAndSupportSystem.uml";
     public static final String AGM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/agm/Papyrus/agm.uml";
+    public static final String MOBILE_MEDIA = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MobileMedia/Papyrus/MobileMedia.uml";
 
     //Arquivos de teste
     public static final String MICROWAVE_TEST = "test/br/ufpr/inf/opla/patterns/resources/microwave/MicrowaveOvenSoftware.uml";

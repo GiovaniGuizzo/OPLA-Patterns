@@ -1,6 +1,212 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Profile xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xmi:id="_9v_84HqaEeK1gM_kVgXLQw" name="concerns" metaclassReference="_ClV7MHqbEeK1gM_kVgXLQw _r2eLkBTiEeORY8N5zhv4gw _kia0QBWUEeObs-pQrJ2skQ">
   <eAnnotations xmi:id="_EgIM4HqbEeK1gM_kVgXLQw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_N8rWcP2DEeOFY93jb2lkbw" name="concerns" nsURI="http:///schemas/concerns/_N8qvYP2DEeOFY93jb2lkbw/26" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWcf2DEeOFY93jb2lkbw" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_N8rWcv2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_N8rWc_2DEeOFY93jb2lkbw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_N8rWdf2DEeOFY93jb2lkbw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_N8rWd_2DEeOFY93jb2lkbw" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWef2DEeOFY93jb2lkbw" name="AlbumManagement" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWev2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_kT0ewP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWfP2DEeOFY93jb2lkbw" name="Create_Delete" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWff2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4f4vcP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWf_2DEeOFY93jb2lkbw" name="ViewPlayMedia" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWgP2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_8LhTsP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWgv2DEeOFY93jb2lkbw" name="SMSTransfer" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWg_2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BJ1AwP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWhf2DEeOFY93jb2lkbw" name="LabelMedia" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWhv2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_CSFCQP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWiP2DEeOFY93jb2lkbw" name="LinkMedia" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWif2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_FdkG0P1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWi_2DEeOFY93jb2lkbw" name="Favourites" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWjP2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_HUqyYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWjv2DEeOFY93jb2lkbw" name="MM" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWj_2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_I9WAYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWkf2DEeOFY93jb2lkbw" name="Video" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWkv2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Lgn1cP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWlP2DEeOFY93jb2lkbw" name="Music" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWlf2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MqBGcP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWl_2DEeOFY93jb2lkbw" name="Photo" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWmP2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Nt2iAP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWmv2DEeOFY93jb2lkbw" name="CopyMedia" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWm_2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_9egMQP1gEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWnf2DEeOFY93jb2lkbw" name="Media" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWnv2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_95QNkP1rEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_N8rWoP2DEeOFY93jb2lkbw" name="GUI" eSuperTypes="_N8rWcf2DEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_N8rWof2DEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_HRwWkP2DEeOFY93jb2lkbw"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_CqnDwP1sEeOFY93jb2lkbw" name="concerns" nsURI="http:///schemas/concerns/_CqmcsP1sEeOFY93jb2lkbw/25" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnDwf1sEeOFY93jb2lkbw" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_CqnDwv1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CqnDw_1sEeOFY93jb2lkbw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CqnDxf1sEeOFY93jb2lkbw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CqnDx_1sEeOFY93jb2lkbw" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnDyf1sEeOFY93jb2lkbw" name="AlbumManagement" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnDyv1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_kT0ewP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnDzP1sEeOFY93jb2lkbw" name="Create_Delete" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnDzf1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4f4vcP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnDz_1sEeOFY93jb2lkbw" name="ViewPlayMedia" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD0P1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_8LhTsP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD0v1sEeOFY93jb2lkbw" name="SMSTransfer" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD0_1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BJ1AwP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD1f1sEeOFY93jb2lkbw" name="LabelMedia" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD1v1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_CSFCQP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD2P1sEeOFY93jb2lkbw" name="LinkMedia" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD2f1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_FdkG0P1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD2_1sEeOFY93jb2lkbw" name="Favourites" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD3P1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_HUqyYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD3v1sEeOFY93jb2lkbw" name="MM" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD3_1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_I9WAYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD4f1sEeOFY93jb2lkbw" name="Video" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD4v1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Lgn1cP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD5P1sEeOFY93jb2lkbw" name="Music" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD5f1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MqBGcP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD5_1sEeOFY93jb2lkbw" name="Photo" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD6P1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Nt2iAP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD6v1sEeOFY93jb2lkbw" name="CopyMedia" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD6_1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_9egMQP1gEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CqnD7f1sEeOFY93jb2lkbw" name="Media" eSuperTypes="_CqnDwf1sEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CqnD7v1sEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_95QNkP1rEeOFY93jb2lkbw"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_CzsIQf1hEeOFY93jb2lkbw" name="concerns" nsURI="http:///schemas/concerns/_CzsIQP1hEeOFY93jb2lkbw/24" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIQv1hEeOFY93jb2lkbw" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_CzsIQ_1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CzsIRP1hEeOFY93jb2lkbw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CzsIRv1hEeOFY93jb2lkbw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_CzsISP1hEeOFY93jb2lkbw" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsISv1hEeOFY93jb2lkbw" name="AlbumManagement" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIS_1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_kT0ewP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsITf1hEeOFY93jb2lkbw" name="Create_Delete" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsITv1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4f4vcP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIUP1hEeOFY93jb2lkbw" name="ViewPlayMedia" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIUf1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_8LhTsP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIU_1hEeOFY93jb2lkbw" name="SMSTransfer" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIVP1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BJ1AwP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIVv1hEeOFY93jb2lkbw" name="LabelMedia" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIV_1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_CSFCQP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIWf1hEeOFY93jb2lkbw" name="LinkMedia" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIWv1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_FdkG0P1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIXP1hEeOFY93jb2lkbw" name="Favourites" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIXf1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_HUqyYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIX_1hEeOFY93jb2lkbw" name="MM" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIYP1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_I9WAYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIYv1hEeOFY93jb2lkbw" name="Video" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIY_1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Lgn1cP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIZf1hEeOFY93jb2lkbw" name="Music" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIZv1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MqBGcP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIaP1hEeOFY93jb2lkbw" name="Photo" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIaf1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Nt2iAP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_CzsIa_1hEeOFY93jb2lkbw" name="CopyMedia" eSuperTypes="_CzsIQv1hEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_CzsIbP1hEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_9egMQP1gEeOFY93jb2lkbw"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_ahGyEP1cEeOFY93jb2lkbw" name="concerns" nsURI="http:///schemas/concerns/_ahEV0P1cEeOFY93jb2lkbw/23" nsPrefix="concerns">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyEf1cEeOFY93jb2lkbw" name="Concern" abstract="true">
+        <eAnnotations xmi:id="_ahGyEv1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ahGyE_1cEeOFY93jb2lkbw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ahGyFf1cEeOFY93jb2lkbw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Property"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_ahGyF_1cEeOFY93jb2lkbw" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/4.0.0/UML#//Operation"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyGf1cEeOFY93jb2lkbw" name="AlbumManagement" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyGv1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_kT0ewP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyHP1cEeOFY93jb2lkbw" name="Create_Delete" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyHf1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_4f4vcP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyH_1cEeOFY93jb2lkbw" name="ViewPlayMedia" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyIP1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_8LhTsP1bEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyIv1cEeOFY93jb2lkbw" name="SMSTransfer" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyI_1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_BJ1AwP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyJf1cEeOFY93jb2lkbw" name="LabelMedia" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyJv1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_CSFCQP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyKP1cEeOFY93jb2lkbw" name="LinkMedia" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyKf1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_FdkG0P1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyK_1cEeOFY93jb2lkbw" name="Favourites" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyLP1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_HUqyYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyLv1cEeOFY93jb2lkbw" name="MM" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyL_1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_I9WAYP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyMf1cEeOFY93jb2lkbw" name="Video" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyMv1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Lgn1cP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyNP1cEeOFY93jb2lkbw" name="Music" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyNf1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_MqBGcP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_ahGyN_1cEeOFY93jb2lkbw" name="Photo" eSuperTypes="_ahGyEf1cEeOFY93jb2lkbw">
+        <eAnnotations xmi:id="_ahGyOP1cEeOFY93jb2lkbw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Nt2iAP1cEeOFY93jb2lkbw"/>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_ySGrMOpaEeOlcq9vtNqGgw" name="concerns" nsURI="http:///schemas/concerns/_ySE2AOpaEeOlcq9vtNqGgw/22" nsPrefix="concerns">
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_ySGrMepaEeOlcq9vtNqGgw" name="Concern" abstract="true">
         <eAnnotations xmi:id="_ySGrMupaEeOlcq9vtNqGgw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_-WptMHqaEeK1gM_kVgXLQw"/>
@@ -708,5 +914,47 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Extension" xmi:id="_7PheUBWUEeObs-pQrJ2skQ" name="E_Concern_Operation" memberEnd="_BSpeYBWVEeObs-pQrJ2skQ _YQ_CYBWVEeObs-pQrJ2skQ" navigableOwnedEnd="_YQ_CYBWVEeObs-pQrJ2skQ">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_YQ_CYBWVEeObs-pQrJ2skQ" type="_-WptMHqaEeK1gM_kVgXLQw" association="_7PheUBWUEeObs-pQrJ2skQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_kT0ewP1bEeOFY93jb2lkbw" name="AlbumManagement">
+    <generalization xmi:id="_oqEGQP1bEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_4f4vcP1bEeOFY93jb2lkbw" name="Create_Delete">
+    <generalization xmi:id="_4f4vcf1bEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_8LhTsP1bEeOFY93jb2lkbw" name="ViewPlayMedia">
+    <generalization xmi:id="_8LhTsf1bEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_BJ1AwP1cEeOFY93jb2lkbw" name="SMSTransfer">
+    <generalization xmi:id="_BJ1Awf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_CSFCQP1cEeOFY93jb2lkbw" name="LabelMedia">
+    <generalization xmi:id="_CSFCQf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_FdkG0P1cEeOFY93jb2lkbw" name="LinkMedia">
+    <generalization xmi:id="_FdkG0f1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_HUqyYP1cEeOFY93jb2lkbw" name="Favourites">
+    <generalization xmi:id="_HUqyYf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_I9WAYP1cEeOFY93jb2lkbw" name="MM">
+    <generalization xmi:id="_I9WAYf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_Lgn1cP1cEeOFY93jb2lkbw" name="Video">
+    <generalization xmi:id="_Lgn1cf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_MqBGcP1cEeOFY93jb2lkbw" name="Music">
+    <generalization xmi:id="_MqBGcf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_Nt2iAP1cEeOFY93jb2lkbw" name="Photo">
+    <generalization xmi:id="_Nt2iAf1cEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_9egMQP1gEeOFY93jb2lkbw" name="CopyMedia">
+    <generalization xmi:id="__b5GAP1gEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_95QNkP1rEeOFY93jb2lkbw" name="Media">
+    <generalization xmi:id="__cb3kP1rEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_HRwWkP2DEeOFY93jb2lkbw" name="GUI">
+    <generalization xmi:id="_JdcyEP2DEeOFY93jb2lkbw" general="_-WptMHqaEeK1gM_kVgXLQw"/>
   </packagedElement>
 </uml:Profile>

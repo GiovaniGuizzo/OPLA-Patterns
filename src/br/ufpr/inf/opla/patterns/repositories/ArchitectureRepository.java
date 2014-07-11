@@ -12,6 +12,7 @@ public class ArchitectureRepository {
     public static final String SERVICE_AND_SUPPORT_SYSTEM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/ServiceAndSupportSystem/Papyrus/ServiceAndSupportSystem.uml";
     public static final String AGM = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/agm/Papyrus/agm.uml";
     public static final String MOBILE_MEDIA = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/MobileMedia/Papyrus/MobileMedia.uml";
+    public static final String BET = "/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/BeT/Papyrus/BeT.uml";
 
     //Arquivos de teste
     public static final String MICROWAVE_TEST = "test/br/ufpr/inf/opla/patterns/resources/microwave/MicrowaveOvenSoftware.uml";

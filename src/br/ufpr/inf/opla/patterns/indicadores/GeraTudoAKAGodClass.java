@@ -11,30 +11,45 @@ import java.util.Scanner;
 import jmetal.core.SolutionSet;
 import jmetal.qualityIndicator.util.MetricsUtil;
 import jmetal.util.JMException;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class GeraTudoAKAGodClass {
 
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            //            "MicrowaveOvenSoftware",
-            //            "ServiceAndSupportSystem",
-            "agm"
+            "MicrowaveOvenSoftware", //            "ServiceAndSupportSystem",
+        //            "agm,"
         };
 
         String[] contexts = {
-            "PLAMutation",
-            "OnlyBridgeMutation",
-            "OnlyMediatorMutation",
-            "OnlyPatternsMutation",
-            "OnlyPatternsMutationNR",
-            "OnlyStrategyMutation",
-            "PLAMutationWithBridge",
-            "PLAMutationWithMediator",
-            "PLAMutationWithPatterns",
-            "PLAMutationWithPatternsNR",
-            "PLAMutationWithStrategy"
-        };
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_300000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_300000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_30000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_30000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_3000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_3000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_300000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_300000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_30000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_30000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_3000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_3000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_3000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_3000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_3000_0.9",};
 
         MetricsUtil mu = new MetricsUtil();
 
@@ -132,6 +147,26 @@ public class GeraTudoAKAGodClass {
         ProcessBuilder processBuilder = new ProcessBuilder("sh", "./" + directoryPath + "run_hypervolume.sh");
         Process process = processBuilder.start();
         process.waitFor();
+
+        try (FileWriter hypervolumesFile = new FileWriter(directoryPath + "HYPERVOLUMES.txt")) {
+            hypervolumesFile.append("#\t / Context\t / Mean\t / Max\t / Std. Dev.\t / Time\n");
+            int count = 1;
+            for (String context : contexts) {
+                DescriptiveStatistics hypervolumes = new DescriptiveStatistics();
+                DescriptiveStatistics execTimes = new DescriptiveStatistics();
+                Scanner scanner = new Scanner(new File(directoryPath + context + "/HYPERVOLUME_RESULT.txt"));
+                Scanner scannerTime = new Scanner(new File(directoryPath + context + "/TIME_" + pla));
+                scannerTime.nextLine();
+                scannerTime.nextLine();
+                while (scanner.hasNextDouble()) {
+                    double hypervolume = scanner.nextDouble();
+                    hypervolumes.addValue(hypervolume);
+                    execTimes.addValue(scannerTime.nextLong());
+                }
+
+                hypervolumesFile.append(count++ + "\t" + context + "\t" + String.valueOf(hypervolumes.getMean()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getMax()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getStandardDeviation()).replace(".", ",") + "\t" + String.valueOf(execTimes.getMean()).replace(".", ",") + "\n");
+            }
+        }
     }
 
     public static void runFriedman(String directoryPath, String[] contexts) throws IOException, InterruptedException {

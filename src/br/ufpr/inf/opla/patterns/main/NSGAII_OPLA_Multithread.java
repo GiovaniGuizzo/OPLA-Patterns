@@ -144,7 +144,8 @@ public class NSGAII_OPLA_Multithread {
                     while (true) {
                         try (final FileWriter runningInfo = new FileWriter(runningInfoFile, false)) {
                             runningInfo.append("# This file presents the current status of the execution.\n# It is updated every 10s.");
-                            runningInfo.append("\n\n");
+                            runningInfo.append("\n");
+                            runningInfo.append("\n");
                             runningInfo.append("Number of Max Threads = " + String.valueOf(MAX_THREADS));
                             runningInfo.append("\n");
                             runningInfo.append("Number of Running Threads = " + String.valueOf(RUNNING_THREADS));
@@ -153,9 +154,14 @@ public class NSGAII_OPLA_Multithread {
                             runningInfo.append("\n");
                             runningInfo.append("Number of Successfully Finished Threads = " + String.valueOf(getFinishedThreadsSize()));
                             runningInfo.append("\n");
-                            runningInfo.append("Finished Threads = " + getFinishedThreads().toString());
                             runningInfo.append("\n");
-                            runningInfo.append("Remaining Threads = " + getQueuedThreads().toString());
+                            runningInfo.append("Active Threads = " + getActiveThreads().toString());
+                            runningInfo.append("\n");
+                            runningInfo.append("\n");
+                            runningInfo.append("Queued Threads = " + getQueuedThreads().toString());
+                            runningInfo.append("\n");
+                            runningInfo.append("\n");
+                            runningInfo.append("Finished Threads = " + getFinishedThreads().toString());
                         } catch (Exception ex) {
                         }
                         try {
@@ -290,7 +296,7 @@ public class NSGAII_OPLA_Multithread {
             @Override
             public void run() {
                 try {
-                    ProcessBuilder builder = new ProcessBuilder("java", "-jar", "dist/OPLA-Patterns.jar",
+                    ProcessBuilder builder = new ProcessBuilder("java", "-XX:MaxPermSize=1G" , "-jar", "dist/OPLA-Patterns.jar",
                             "" + populationSize,
                             "" + maxEvaluations,
                             "" + mutationProbability,

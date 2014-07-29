@@ -296,7 +296,7 @@ public class NSGAII_OPLA_Multithread {
             @Override
             public void run() {
                 try {
-                    ProcessBuilder builder = new ProcessBuilder("java", "-XX:MaxPermSize=1G" , "-jar", "dist/OPLA-Patterns.jar",
+                    ProcessBuilder builder = new ProcessBuilder("java", "-XX:MaxPermSize=1G", "-classpath", "dist/OPLA-Patterns.jar", "br.ufpr.inf.opla.patterns.main.NSGAII_OPLA",
                             "" + populationSize,
                             "" + maxEvaluations,
                             "" + mutationProbability,

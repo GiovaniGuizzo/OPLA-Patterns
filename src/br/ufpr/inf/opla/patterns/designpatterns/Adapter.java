@@ -1,26 +1,16 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
 import arquitetura.exceptions.ConcernNotFoundException;
-import arquitetura.exceptions.PackageNotFound;
-import arquitetura.helpers.UtilResources;
-import arquitetura.representation.Architecture;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
-import arquitetura.representation.Method;
-import arquitetura.representation.Package;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.Relationship;
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
+import br.ufpr.inf.opla.patterns.util.AdapterUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
-import br.ufpr.inf.opla.patterns.util.MethodUtil;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.collections4.CollectionUtils;
@@ -29,15 +19,15 @@ public class Adapter extends DesignPattern {
 
     private static volatile Adapter INSTANCE;
 
-    private Adapter() {
-        super("Adapter", "Structural");
-    }
-
-    public synchronized static Adapter getInstance() {
+    public static synchronized Adapter getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Adapter();
         }
         return INSTANCE;
+    }
+
+    private Adapter() {
+        super("Adapter", "Structural");
     }
 
     @Override
@@ -55,7 +45,6 @@ public class Adapter extends DesignPattern {
         return false;
     }
 
-    //TODO - Édipo - Adicionar estereótipos Adapter.
     public arquitetura.representation.Class applyAdapter(Element target, Element adaptee) {
         arquitetura.representation.Class adapterClass = null;
         if (target != null
@@ -63,62 +52,30 @@ public class Adapter extends DesignPattern {
                 && (target instanceof arquitetura.representation.Class || target instanceof Interface)
                 && (adaptee instanceof arquitetura.representation.Class || adaptee instanceof Interface)) {
             try {
-                arquitetura.representation.Package aPackage = null;
-                Architecture architecture = adaptee.getArchitecture();
 
-                List<Element> tempElements;
-
-                String namespace = adaptee.getNamespace();
-                String packageName = UtilResources.extractPackageName(namespace);
-
-                boolean naArquitetura = packageName.equalsIgnoreCase("model");
-                if (naArquitetura) {
-                    adapterClass = target.getArchitecture().createClass(adaptee.getName() + "Adapter", false);
-                    
-                    architecture.removeClass(adapterClass);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
-                } else {
-                    aPackage = architecture.findPackageByName(packageName);
-                    adapterClass = aPackage.createClass(adaptee.getName() + "Adapter", false);
-                    
-                    aPackage.removeClass(adapterClass);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
+                adapterClass = AdapterUtil.getAdapterClass(target, adaptee);
+                if (adapterClass == null) {
+                    adapterClass = AdapterUtil.createAdapterClass(adaptee);
                 }
-                
-                adapterClass.setNamespace(adaptee.getNamespace());
-                adapterClass.setVariant(adaptee.getVariant());
-
                 //Implements/Extends and add all methods.
                 if (target instanceof arquitetura.representation.Class) {
-                    arquitetura.representation.Class targetClass = (arquitetura.representation.Class) target;
-                    RelationshipUtil.createNewGeneralizationRelationship(adapterClass, target);
-                    Set<Method> clonedMethods = MethodUtil.cloneMethods(new HashSet<>(targetClass.getAllAbstractMethods()));
-                    for (Method method : clonedMethods) {
-                        adapterClass.addExternalMethod(method);
-                    }
+                    ElementUtil.extendClass(adapterClass, (arquitetura.representation.Class) target);
                 } else {
-                    Interface targetInterface = (Interface) target;
-                    RelationshipUtil.createNewRealizationRelationship("implements", adapterClass, target);
-                    Set<Method> clonedMethods = MethodUtil.cloneMethods(targetInterface.getOperations());
-                    for (Method method : clonedMethods) {
-                        adapterClass.addExternalMethod(method);
-                    }
+                    ElementUtil.implementInterface(adapterClass, (Interface) target);
                 }
 
                 RelationshipUtil.createNewUsageRelationship("adaptee", adapterClass, adaptee);
 
                 Relationship relationshipToBeExcluded = null;
                 if (adaptee.getClass().equals(target.getClass())) {
-                    for (Relationship relationship : adaptee.getRelationships()) {
-                        if (target.equals(RelationshipUtil.getExtendedElement(relationship))) {
+                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
+                        if (target.equals(RelationshipUtil.getSuperElement(relationship))) {
                             relationshipToBeExcluded = relationship;
                             break;
                         }
                     }
                 } else {
-                    for (Relationship relationship : adaptee.getRelationships()) {
+                    for (Relationship relationship : ElementUtil.getRelationships(adaptee)) {
                         if (target.equals(RelationshipUtil.getImplementedInterface(relationship))) {
                             relationshipToBeExcluded = relationship;
                             break;
@@ -127,9 +84,7 @@ public class Adapter extends DesignPattern {
                 }
 
                 if (relationshipToBeExcluded != null) {
-                    target.getRelationships().remove(relationshipToBeExcluded);
-                    adaptee.getRelationships().remove(relationshipToBeExcluded);
-                    architecture.getAllRelationships().remove(relationshipToBeExcluded);
+                    ArchitectureRepository.getCurrentArchitecture().removeRelationship(relationshipToBeExcluded);
                 }
 
                 //Copy concerns
@@ -142,26 +97,16 @@ public class Adapter extends DesignPattern {
                 }
 
                 //Move variants
-                Variant variant = adapterClass.getVariant();
+                Variant variant = adaptee.getVariant();
                 if (variant != null) {
-                    variant.setVariantElement(adapterClass);
                     adaptee.setVariant(null);
+                    adapterClass.setVariant(variant);
+                    variant.setVariantElement(adapterClass);
                 }
-                
-                int count = 1;
-                String name = adapterClass.getName();
-                while (tempElements.contains(adapterClass)) {
-                    count++;
-                    adapterClass.setName(name + Integer.toString(count));
-                }
-                
-                if (naArquitetura) {
-                    architecture.addExternalClass(adapterClass);
-                } else if (aPackage != null) {
-                    aPackage.addExternalClass(adapterClass);
-                }
-            } catch (PackageNotFound ex) {
-                Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
+
+                addStereotype(target);
+                addStereotype(adaptee);
+                addStereotype(adapterClass);
             } catch (Exception ex) {
                 Logger.getLogger(Adapter.class.getName()).log(Level.SEVERE, null, ex);
             }

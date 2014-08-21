@@ -5,21 +5,19 @@
  */
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import arquitetura.exceptions.ClassNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLABridge;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,11 +31,9 @@ public class BridgeTest {
 
     private final Bridge bridge;
     private final ScopeSelectionStrategy scopeSelectionStrategy;
-    private final ArchitectureRepository architectureRepository;
 
     public BridgeTest() {
         this.bridge = Bridge.getInstance();
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
     }
 
@@ -47,8 +43,8 @@ public class BridgeTest {
     @Test
     public void testVerifyPS() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -69,8 +65,8 @@ public class BridgeTest {
     @Test
     public void testVerifyPS2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[1];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -81,8 +77,8 @@ public class BridgeTest {
     @Test
     public void testVerifyPS3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[2];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(5, scope.getElements().size());
 
@@ -96,8 +92,8 @@ public class BridgeTest {
     @Test
     public void testVerifyPSPLA() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
 
         assertEquals(7, scope.getElements().size());
 
@@ -120,34 +116,23 @@ public class BridgeTest {
      */
     @Test
     public void testApply() {
-        try {
-            String model = ArchitectureRepository.BRIDGE_MODELS[0];
-            Architecture architecture = architectureRepository.getArchitecture(model);
-            Scope scope = scopeSelectionStrategy.selectScope(architecture);
-            
-            assertEquals(3, scope.getElements().size());
-            
-            boolean verifyPSPLA = bridge.verifyPSPLA(scope);
-            assertTrue(verifyPSPLA);
-            
-            assertTrue(bridge.apply(scope));
-            
-            Class abstractClass = architecture.findClassByName("BrickleAbstraction").get(0);
-            assertEquals(5, abstractClass.getRelationships().size());
-            assertEquals(3, abstractClass.getAllConcerns().size());
-            assertEquals(1, ElementUtil.getAllSubElements(abstractClass).size());
-            
-            Class stationary = architecture.findClassByName("StationaryBrickle").get(0);
-            assertEquals(2, stationary.getRelationships().size());
-            
-            Class movable = architecture.findClassByName("MovableBrickle").get(0);
-            assertEquals(2, movable.getRelationships().size());
-            
-            GenerateArchitecture generateArchitecture = new GenerateArchitecture();
-            generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[6]);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(BridgeTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String model = ArchitectureRepository.BRIDGE_MODELS[0];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.BRIDGE);
+        assertEquals(3, scope.getElements().size());
+        boolean verifyPSPLA = bridge.verifyPSPLA(scope);
+        assertTrue(verifyPSPLA);
+        assertTrue(bridge.apply(scope));
+        Class abstractClass = architecture.findClassByName("BrickleAbstraction").get(0);
+        assertEquals(5, abstractClass.getRelationships().size());
+        assertEquals(3, abstractClass.getAllConcerns().size());
+        assertEquals(1, ElementUtil.getAllSubElements(abstractClass).size());
+        Class stationary = architecture.findClassByName("StationaryBrickle").get(0);
+        assertEquals(2, stationary.getRelationships().size());
+        Class movable = architecture.findClassByName("MovableBrickle").get(0);
+        assertEquals(2, movable.getRelationships().size());
+        GenerateArchitecture generateArchitecture = new GenerateArchitecture();
+        generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[6]);
     }
 
 }

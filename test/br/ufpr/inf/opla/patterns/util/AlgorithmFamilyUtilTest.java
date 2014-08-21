@@ -6,10 +6,11 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.representation.Architecture;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.List;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -20,11 +21,9 @@ import org.junit.Test;
  */
 public class AlgorithmFamilyUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
 
     public AlgorithmFamilyUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
     }
 
@@ -33,8 +32,8 @@ public class AlgorithmFamilyUtilTest {
      */
     @Test
     public void testGetFamiliesFromScope() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         assertEquals(3, familiesFromScope.size());
     }

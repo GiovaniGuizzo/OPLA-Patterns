@@ -22,10 +22,7 @@ import org.junit.Test;
  */
 public class InterfaceUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
-
     public InterfaceUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
     }
 
     /**
@@ -34,7 +31,7 @@ public class InterfaceUtilTest {
     @Test
     public void testCreateInterfaceForSetOfElements() {
         String interfaceName = "TesteInterface";
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
         List<Element> participants = architecture.getElements();
         Interface result = InterfaceUtil.createInterfaceForSetOfElements(interfaceName, participants);
         assertEquals("Model::ClassPackage", result.getNamespace());

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smarty="http:///schemas/smarty/__xTzMJmFEeO-I6mIODL5Gg/8" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:smarty_1="http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/smarty/__xTzMJmFEeO-I6mIODL5Gg/8 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#__xTzMZmFEeO-I6mIODL5Gg http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw">
+  <uml:Model xmi:id="_9bzDkJf0EeOb9rmfNEo3dw" name="Model">
+    <packageImport xmi:type="uml:PackageImport" xmi:id="_9bzDkZf0EeOb9rmfNEo3dw">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_FPbX8Jf1EeOb9rmfNEo3dw" name="TargetII">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_eHv8YJf1EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_hQX6MJf1EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_H-m7AJf1EeOb9rmfNEo3dw" name="AdapteeII">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iZxLMJf1EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_l-DKQJf1EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_ntJJUJf1EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_I_phQJf1EeOb9rmfNEo3dw" clientDependency="_WyT_4Jf1EeOb9rmfNEo3dw __-8RMJ8EEeOynK50UizR3Q" name="AdapterII">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_0Slm4Jf1EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0Slm4Zf1EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0Slm4pf1EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9sNBoJf1EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_9sNBoZf1EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_WyT_4Jf1EeOb9rmfNEo3dw" name="Realization1" client="_I_phQJf1EeOb9rmfNEo3dw" supplier="_FPbX8Jf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ZbdMYJf1EeOb9rmfNEo3dw" clientDependency="_ayNj8Jf1EeOb9rmfNEo3dw _AaCRwJ8FEeOynK50UizR3Q" name="NoAdapterII">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_BNIKsJf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_BNIKsZf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_GdyzEJf2EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_GdyzEpf2EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_JyUe4Jf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_ayNj8Jf1EeOb9rmfNEo3dw" name="Realization3" client="_ZbdMYJf1EeOb9rmfNEo3dw" supplier="_FPbX8Jf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_R09foJf2EeOb9rmfNEo3dw" clientDependency="_h0yZYJf2EeOb9rmfNEo3dw _jHk28Jf2EeOb9rmfNEo3dw" name="NoAdapterIC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R09foZf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_R09fopf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_R0-GsJf2EeOb9rmfNEo3dw" clientDependency="_ha7H4Jf2EeOb9rmfNEo3dw _iqGQwJf2EeOb9rmfNEo3dw" name="AdapterIC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R0-GtJf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_R0-GtZf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_R0-twJf2EeOb9rmfNEo3dw" name="AdapteeIC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R0-twZf2EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_R0-twpf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_R0-tw5f2EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_R0_U0Jf2EeOb9rmfNEo3dw" name="TargetIC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_R0_U0Zf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_R0_U0pf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_ha7H4Jf2EeOb9rmfNEo3dw" name="Realization5" client="_R0-GsJf2EeOb9rmfNEo3dw" supplier="_R0_U0Jf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Realization" xmi:id="_h0yZYJf2EeOb9rmfNEo3dw" name="Realization6" client="_R09foJf2EeOb9rmfNEo3dw" supplier="_R0_U0Jf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_iqGQwJf2EeOb9rmfNEo3dw" name="Usage1" client="_R0-GsJf2EeOb9rmfNEo3dw" supplier="_R0-twJf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_jHk28Jf2EeOb9rmfNEo3dw" name="Usage2" client="_R09foJf2EeOb9rmfNEo3dw" supplier="_R0-twJf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0889EJf2EeOb9rmfNEo3dw" clientDependency="__ga70Jf2EeOb9rmfNEo3dw" name="NoAdapterCC">
+      <generalization xmi:type="uml:Generalization" xmi:id="_-P-AkJf2EeOb9rmfNEo3dw" general="_089kIJf2EeOb9rmfNEo3dw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_0889EZf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_0889Epf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_089kIJf2EeOb9rmfNEo3dw" name="TargetCC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_089kIZf2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_089kIpf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_089kI5f2EeOb9rmfNEo3dw" clientDependency="__DWlUJf2EeOb9rmfNEo3dw" name="AdapterCC">
+      <generalization xmi:type="uml:Generalization" xmi:id="_9xRSYJf2EeOb9rmfNEo3dw" general="_089kIJf2EeOb9rmfNEo3dw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_089kJ5f2EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_089kKJf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_08-LMJf2EeOb9rmfNEo3dw" name="AdapteeCC">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_08-LMZf2EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_08-LMpf2EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_08-LM5f2EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="__DWlUJf2EeOb9rmfNEo3dw" name="Usage3" client="_089kI5f2EeOb9rmfNEo3dw" supplier="_08-LMJf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="__ga70Jf2EeOb9rmfNEo3dw" name="Usage4" client="_0889EJf2EeOb9rmfNEo3dw" supplier="_08-LMJf2EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDnFwJf3EeOb9rmfNEo3dw" name="AdapteeCI">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RDnFwZf3EeOb9rmfNEo3dw" name="sort">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDnFwpf3EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDnFw5f3EeOb9rmfNEo3dw" name="param1">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDns0Jf3EeOb9rmfNEo3dw" name="TargetCI">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RDns0Zf3EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDns0pf3EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDns05f3EeOb9rmfNEo3dw" clientDependency="_DKtCkJ8FEeOynK50UizR3Q" name="NoAdapterCI">
+      <generalization xmi:type="uml:Generalization" xmi:id="_bBDmUJf3EeOb9rmfNEo3dw" general="_RDns0Jf3EeOb9rmfNEo3dw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RDns1Zf3EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDns1pf3EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_RDoT4Jf3EeOb9rmfNEo3dw" clientDependency="_CuwGYJ8FEeOynK50UizR3Q" name="AdapterCI">
+      <generalization xmi:type="uml:Generalization" xmi:id="_al3fIJf3EeOb9rmfNEo3dw" general="_RDns0Jf3EeOb9rmfNEo3dw"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_RDoT4pf3EeOb9rmfNEo3dw" name="sort" visibility="public">
+        <ownedParameter xmi:type="uml:Parameter" xmi:id="_RDoT45f3EeOb9rmfNEo3dw" name="" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Usage" xmi:id="__-8RMJ8EEeOynK50UizR3Q" name="Usage5" client="_I_phQJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_AaCRwJ8FEeOynK50UizR3Q" name="Usage6" client="_ZbdMYJf1EeOb9rmfNEo3dw" supplier="_H-m7AJf1EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_CuwGYJ8FEeOynK50UizR3Q" name="Usage7" client="_RDoT4Jf3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
+    <packagedElement xmi:type="uml:Usage" xmi:id="_DKtCkJ8FEeOynK50UizR3Q" name="Usage8" client="_RDns05f3EeOb9rmfNEo3dw" supplier="_RDnFwJf3EeOb9rmfNEo3dw"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_SBZOkJf1EeOb9rmfNEo3dw">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_SBq7YJf1EeOb9rmfNEo3dw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
+    </profileApplication>
+  </uml:Model>
+  <smartyProfile:interface xmi:id="_UvWpoJf1EeOb9rmfNEo3dw" base_Class="_FPbX8Jf1EeOb9rmfNEo3dw"/>
+  <smartyProfile:interface xmi:id="_Ver00Jf1EeOb9rmfNEo3dw" base_Class="_H-m7AJf1EeOb9rmfNEo3dw"/>
+  <smartyProfile:interface xmi:id="_R1BKAJf2EeOb9rmfNEo3dw" base_Class="_R0_U0Jf2EeOb9rmfNEo3dw"/>
+  <smartyProfile:interface xmi:id="_RDqJEJf3EeOb9rmfNEo3dw" base_Class="_RDnFwJf3EeOb9rmfNEo3dw"/>
+  <smarty:interface xmi:id="_fyahkJltEeO6xcuLaZE19Q" base_Class="_FPbX8Jf1EeOb9rmfNEo3dw"/>
+  <smarty:interface xmi:id="_gY7vAJltEeO6xcuLaZE19Q" base_Class="_H-m7AJf1EeOb9rmfNEo3dw"/>
+  <smarty:interface xmi:id="_hgU04JltEeO6xcuLaZE19Q" base_Class="_R0_U0Jf2EeOb9rmfNEo3dw"/>
+  <smarty:interface xmi:id="_iym8IJltEeO6xcuLaZE19Q" base_Class="_RDnFwJf3EeOb9rmfNEo3dw"/>
+  <smarty_1:interface xmi:id="_rNPGUJ1jEeOLoqRf7Zycww" base_Class="_FPbX8Jf1EeOb9rmfNEo3dw"/>
+  <smarty_1:interface xmi:id="_rwqjgJ1jEeOLoqRf7Zycww" base_Class="_H-m7AJf1EeOb9rmfNEo3dw"/>
+  <smarty_1:interface xmi:id="_sl6JcJ1jEeOLoqRf7Zycww" base_Class="_R0_U0Jf2EeOb9rmfNEo3dw"/>
+  <smarty_1:interface xmi:id="_uaH5EJ1jEeOLoqRf7Zycww" base_Class="_RDnFwJf3EeOb9rmfNEo3dw"/>
+</xmi:XMI>

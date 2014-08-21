@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -7,9 +8,11 @@ import arquitetura.representation.Method;
 import arquitetura.representation.relationship.AssociationEnd;
 import arquitetura.representation.relationship.AssociationRelationship;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.designpatterns.Adapter;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -19,15 +22,40 @@ import org.apache.commons.collections4.CollectionUtils;
 
 public class ElementUtil {
 
-    private ElementUtil() {
+    public static List<Relationship> getRelationships(Element element) {
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        if (element instanceof arquitetura.representation.Class) {
+            relationships.addAll(((arquitetura.representation.Class) element).getRelationships());
+        } else if (element instanceof Interface) {
+            relationships.addAll(((Interface) element).getRelationships());
+        }
+        return relationships;
+    }
+
+    public static List<Relationship> getRelationships(List<? extends Element> elements) {
+        ArrayList<Relationship> relationships = new ArrayList<>();
+        for (Element element : elements) {
+            Set<Relationship> tempRelationships;
+            if (element instanceof arquitetura.representation.Class) {
+                tempRelationships = ((arquitetura.representation.Class) element).getRelationships();
+            } else {
+                tempRelationships = ((Interface) element).getRelationships();
+            }
+            for (Relationship relationship : tempRelationships) {
+                if (!relationships.contains(relationship)) {
+                    relationships.add(relationship);
+                }
+            }
+        }
+        return relationships;
     }
 
     public static boolean isTypeOf(Element child, Element parent) {
         boolean isType = false;
-        for (Relationship relationship : child.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Element tempParent = RelationshipUtil.getImplementedInterface(relationship);
             if (tempParent == null) {
-                tempParent = RelationshipUtil.getExtendedElement(relationship);
+                tempParent = RelationshipUtil.getSuperElement(relationship);
                 if (tempParent == null) {
                     continue;
                 }
@@ -45,7 +73,7 @@ public class ElementUtil {
 
     public static List<Interface> getAllSuperInterfaces(Element child) {
         List<Interface> implementedInterfaces = new ArrayList<>();
-        for (Relationship relationship : child.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
             Interface tempInterface = RelationshipUtil.getImplementedInterface(relationship);
             if (tempInterface != null && !tempInterface.equals(child)) {
                 implementedInterfaces.add(tempInterface);
@@ -57,7 +85,7 @@ public class ElementUtil {
                 }
                 List<Element> parentSuperTypes = getAllExtendedElements(tempInterface);
                 for (Element parentSuperType : parentSuperTypes) {
-                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains((Interface) parentSuperType)) {
+                    if (parentSuperType instanceof Interface && !implementedInterfaces.contains(parentSuperType)) {
                         implementedInterfaces.add((Interface) parentSuperType);
                     }
                 }
@@ -72,7 +100,7 @@ public class ElementUtil {
                 }
             }
             if (child instanceof Interface && extendedElement instanceof Interface) {
-                if (!implementedInterfaces.contains((Interface) extendedElement)) {
+                if (!implementedInterfaces.contains(extendedElement)) {
                     implementedInterfaces.add((Interface) extendedElement);
                 }
             }
@@ -80,16 +108,31 @@ public class ElementUtil {
         return implementedInterfaces;
     }
 
+    public static List<Interface> getAllSuperInterfaces(List<Element> elements) {
+        List<Interface> interfaces = new ArrayList<>();
+        for (Element element : elements) {
+            for (Interface anInterface : getAllSuperInterfaces(element)) {
+                if (!interfaces.contains(anInterface)) {
+                    interfaces.add(anInterface);
+                }
+            }
+        }
+        return interfaces;
+    }
+
     public static List<Interface> getAllCommonInterfaces(List<Element> participants) {
         List<Interface> interfaces = new ArrayList<>();
+        boolean first = true;
         for (Element participant : participants) {
             List<Interface> elementInterfaces = ElementUtil.getAllSuperInterfaces(participant);
-            if (interfaces.isEmpty()) {
-                interfaces.addAll(elementInterfaces);
+            if (first) {
+                interfaces.addAll(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces(participant)));
                 if (participant instanceof Interface) {
                     interfaces.add((Interface) participant);
                 }
+                first = false;
             } else {
+                elementInterfaces = new ArrayList<>(CollectionUtils.union(elementInterfaces, AdapterUtil.getAllTargetInterfaces(participant)));
                 if (participant instanceof Interface) {
                     elementInterfaces.add((Interface) participant);
                 }
@@ -114,8 +157,8 @@ public class ElementUtil {
 
     public static List<Element> getAllExtendedElements(Element child) {
         List<Element> extendedElements = new ArrayList<>();
-        for (Relationship relationship : child.getRelationships()) {
-            Element tempParent = RelationshipUtil.getExtendedElement(relationship);
+        for (Relationship relationship : ElementUtil.getRelationships(child)) {
+            Element tempParent = RelationshipUtil.getSuperElement(relationship);
             if (tempParent != null && !tempParent.equals(child)) {
                 extendedElements.add(tempParent);
                 List<Element> parentSuperTypes = getAllExtendedElements(tempParent);
@@ -131,7 +174,7 @@ public class ElementUtil {
 
     public static List<Element> getAllSubElements(Element parent) {
         List<Element> subElements = new ArrayList<>();
-        for (Relationship relationship : parent.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(parent)) {
             Element tempChild = RelationshipUtil.getSubElement(relationship);
             if (tempChild != null && !tempChild.equals(parent)) {
                 subElements.add(tempChild);
@@ -198,7 +241,7 @@ public class ElementUtil {
 
     public static Set<Element> getAllAggregatedElements(Element element) {
         Set<Element> aggregatedElements = new HashSet<>();
-        for (Relationship relationship : element.getRelationships()) {
+        for (Relationship relationship : ElementUtil.getRelationships(element)) {
             if (relationship instanceof AssociationRelationship) {
                 AssociationRelationship association = (AssociationRelationship) relationship;
                 for (AssociationEnd end : association.getParticipants()) {
@@ -268,37 +311,73 @@ public class ElementUtil {
     }
 
     public static void implementInterface(List<Element> elements, Interface anInterface, List<Element> adapterList, List<Element> adapteeList) {
+        Collections.sort(elements, SubElementsComparator.getDescendingOrderer());
         for (Element participant : elements) {
-            if (!ElementUtil.isTypeOf(participant, anInterface)) {
-                if (participant instanceof arquitetura.representation.Class) {
-                    arquitetura.representation.Class participantClass = (arquitetura.representation.Class) participant;
-                    RelationshipUtil.createNewRealizationRelationship("implements", participantClass, anInterface);
-                } else if (participant instanceof Interface) {
-                    arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(anInterface, participant);
+            Class adapterClass = implementInterface(participant, anInterface);
+            if (adapterClass != null) {
+                if (!adapterList.contains(adapterClass)) {
                     adapterList.add(adapterClass);
-                    adapteeList.add(participant);
                 }
-            }
-            if (participant instanceof arquitetura.representation.Class) {
-                arquitetura.representation.Class participantClass = (arquitetura.representation.Class) participant;
-                if (!participantClass.isAbstract()) {
-                    MethodArrayList participantMethods = new MethodArrayList(new ArrayList<>(participantClass.getAllMethods()));
-                    for (Method interfaceMethod : anInterface.getOperations()) {
-                        int index = participantMethods.indexOf(interfaceMethod);
-                        if (index != -1) {
-                            MethodUtil.mergeMethodsToMethodA(participantMethods.get(index), interfaceMethod);
-                        } else {
-                            participantClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
-                        }
-                    }
+                if (!adapteeList.contains(participant)) {
+                    adapteeList.add(participant);
                 }
             }
         }
     }
 
+    public static arquitetura.representation.Class implementInterface(Element child, Interface anInterface) {
+        if (!ElementUtil.isTypeOf(child, anInterface) && !AdapterUtil.getAllTargetInterfaces(child).contains(anInterface)) {
+            if (child instanceof arquitetura.representation.Class) {
+                RelationshipUtil.createNewRealizationRelationship("implements", child, anInterface);
+            } else if (child instanceof Interface) {
+                return Adapter.getInstance().applyAdapter(anInterface, child);
+            }
+        }
+
+        if (ElementUtil.isTypeOf(child, anInterface) && child instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class childClass = (arquitetura.representation.Class) child;
+            if (!childClass.isAbstract()) {
+                MethodArrayList childMethods = new MethodArrayList(new ArrayList<>(childClass.getAllMethods()));
+                for (Method interfaceMethod : anInterface.getOperations()) {
+                    if (!childMethods.containsSameSignature(interfaceMethod)) {
+                        childClass.addExternalMethod(MethodUtil.cloneMethod(interfaceMethod));
+                    }
+                }
+            }
+        } else if (AdapterUtil.getAllTargetInterfaces(child).contains(anInterface)) {
+            return AdapterUtil.getAdapterClass(anInterface, child);
+        }
+        return null;
+    }
+
+    public static arquitetura.representation.Class extendClass(Element child, arquitetura.representation.Class aClass) {
+        if (!ElementUtil.isTypeOf(child, aClass)) {
+            if (child instanceof arquitetura.representation.Class) {
+                RelationshipUtil.createNewGeneralizationRelationship(child, aClass);
+            } else if (child instanceof Interface) {
+                arquitetura.representation.Class adapterClass = Adapter.getInstance().applyAdapter(aClass, child);
+                return adapterClass;
+            }
+        }
+        if (child instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class childClass = (arquitetura.representation.Class) child;
+            if (!childClass.isAbstract()) {
+                MethodArrayList childMethods = new MethodArrayList(new ArrayList<>(childClass.getAllMethods()));
+                for (Method classMethod : aClass.getAllMethods()) {
+                    if (!childMethods.containsSameSignature(classMethod)) {
+                        Method cloneMethod = MethodUtil.cloneMethod(classMethod);
+                        cloneMethod.setAbstract(false);
+                        childClass.addExternalMethod(cloneMethod);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
     public static void verifyAndRemoveRequiredInterface(Element client, Element supplier) {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
-            for (Relationship relationship : client.getRelationships()) {
+            for (Relationship relationship : ElementUtil.getRelationships(client)) {
                 Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationship);
                 if (supplier.equals(usedElementFromRelationship)) {
                     return;
@@ -310,7 +389,7 @@ public class ElementUtil {
 
     public static void verifyAndRemoveImplementedInterface(Element client, Element supplier) {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
-            if (!getAllSuperInterfaces((arquitetura.representation.Class) client).contains((Interface) supplier)) {
+            if (!getAllSuperInterfaces(client).contains(supplier)) {
                 ((arquitetura.representation.Class) client).removeImplementedInterface((Interface) supplier);
             }
         }
@@ -326,6 +405,72 @@ public class ElementUtil {
         if (client instanceof arquitetura.representation.Class && supplier instanceof Interface) {
             ((arquitetura.representation.Class) client).addImplementedInterface((Interface) supplier);
         }
+    }
+
+    public static List<Element> getAllSuperElements(Element element) {
+        return new ArrayList<>(CollectionUtils.union(getAllExtendedElements(element), getAllSuperInterfaces(element)));
+    }
+
+    public static List<Element> getChainOfRelatedElementsWithSameConcern(List<Element> mainElements, Concern concern) {
+        List<Element> elements = new ArrayList<>();
+        for (Element element : mainElements) {
+            if ((element instanceof Class || element instanceof Interface)
+                    && !elements.contains(element)) {
+                List<Element> tempElements = new ArrayList<>();
+                if (!tempElements.contains(element) && element.getAllConcerns().contains(concern)) {
+                    tempElements.add(element);
+                    getChainOfRelatedElementsWithSameConcern(element, concern, tempElements, mainElements);
+                }
+
+                if (tempElements.size() > elements.size()) {
+                    elements = tempElements;
+                }
+            }
+        }
+        return elements;
+    }
+
+    private static void getChainOfRelatedElementsWithSameConcern(Element element, Concern concern, List<Element> elements, List<Element> mainElements) {
+        List<Relationship> relationships = getRelationships(element);
+        for (Relationship relationship : relationships) {
+            Element chainedElement = RelationshipUtil.getUsedElementFromRelationship(relationship);
+            if (element.equals(chainedElement)) {
+                chainedElement = RelationshipUtil.getClientElementFromRelationship(relationship);
+            } else if (chainedElement == null) {
+                chainedElement = RelationshipUtil.getSubElement(relationship);
+                if (element.equals(chainedElement)) {
+                    chainedElement = RelationshipUtil.getSuperElement(relationship);
+                    if (chainedElement == null || element.equals(chainedElement)) {
+                        chainedElement = RelationshipUtil.getImplementedInterface(relationship);
+                    }
+                }
+            }
+            if (chainedElement != null
+                    && (chainedElement instanceof Class || chainedElement instanceof Interface)
+                    && !chainedElement.equals(element)
+                    && chainedElement.getAllConcerns().contains(concern)
+                    && !elements.contains(chainedElement)
+                    && mainElements.contains(chainedElement)) {
+                elements.add(chainedElement);
+                getChainOfRelatedElementsWithSameConcern(chainedElement, concern, elements, mainElements);
+            }
+
+        }
+    }
+
+    public static Set<String> getAppliedDesignPatterns(Element element) {
+        if (element instanceof arquitetura.representation.Class) {
+            arquitetura.representation.Class elementClass = (arquitetura.representation.Class) element;
+            return elementClass.getPatternsOperations().getAllPatterns();
+        } else if (element instanceof Interface) {
+            Interface elementInterface = (Interface) element;
+            return elementInterface.getPatternsOperations().getAllPatterns();
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    private ElementUtil() {
     }
 
 }

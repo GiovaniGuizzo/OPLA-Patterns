@@ -1,10 +1,9 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import arquitetura.exceptions.ClassNotFound;
-import arquitetura.exceptions.InterfaceNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import arquitetura.representation.Variant;
 import arquitetura.representation.relationship.RealizationRelationship;
 import arquitetura.representation.relationship.Relationship;
@@ -15,14 +14,12 @@ import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.ScopeSelectionStrategy;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.ScopeSelectionStrategy;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.MethodUtil;
-import br.ufpr.inf.opla.patterns.util.MethodUtilTest;
 import br.ufpr.inf.opla.patterns.util.RelationshipUtil;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -35,11 +32,9 @@ public class StrategyTest {
 
     private final Strategy strategy;
     private final ScopeSelectionStrategy scopeSelectionStrategy;
-    private final ArchitectureRepository architectureRepository;
 
     public StrategyTest() {
         this.strategy = Strategy.getInstance();
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.scopeSelectionStrategy = new WholeArchitectureScopeSelection();
     }
 
@@ -48,7 +43,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -71,7 +66,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSTest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
 
         assertTrue(strategy.verifyPS(scope));
 
@@ -88,7 +83,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -111,7 +106,7 @@ public class StrategyTest {
      */
     @Test
     public void verifyPSPLATest2() {
-        Scope scope = scopeSelectionStrategy.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        Scope scope = scopeSelectionStrategy.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -125,47 +120,31 @@ public class StrategyTest {
     @Test
     public void applyTest() {
         String model = ArchitectureRepository.STRATEGY_MODELS[3];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);
         assertTrue(apply);
         Element element = null;
-        try {
-            element = architecture.findClassByName("Class1").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        element = architecture.findClassByName("Class1").get(0);
         assertEquals("Class1", element.getName());
-        assertEquals(1, element.getRelationships().size());
+        assertEquals(1, ElementUtil.getRelationships(element).size());
 
         Interface strategyInterface = null;
-        try {
-            strategyInterface = architecture.findInterfaceByName("InterfaceDeTeste");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        strategyInterface = architecture.findInterfaceByName("InterfaceDeTeste");
         assertEquals("InterfaceDeTeste", strategyInterface.getName());
 
-        Relationship usage = element.getRelationships().get(0);
+        Relationship usage = ElementUtil.getRelationships(element).get(0);
         Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(usage);
         assertEquals(strategyInterface, usedElementFromRelationship);
 
         arquitetura.representation.Class element2 = null;
-        try {
-            element2 = architecture.findClassByName("BubbleSort").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        element2 = architecture.findClassByName("BubbleSort").get(0);
         assertEquals(1, element2.getAllMethods().size());
 
         arquitetura.representation.Class element3 = null;
-        try {
-            element3 = architecture.findClassByName("QuickSort").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        element3 = architecture.findClassByName("QuickSort").get(0);
         assertEquals(2, element3.getAllMethods().size());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
@@ -175,33 +154,25 @@ public class StrategyTest {
     @Test
     public void applyTest2() {
         String model = ArchitectureRepository.STRATEGY_MODELS[0];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);
         assertTrue(apply);
 
         Element element = null;
-        try {
-            element = architecture.findClassByName("ContextClass").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(MethodUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        element = architecture.findClassByName("ContextClass").get(0);
         assertEquals("ContextClass", element.getName());
-        assertEquals(1, element.getRelationships().size());
+        assertEquals(1, ElementUtil.getRelationships(element).size());
 
         Element strategyInterface = null;
-        try {
-            strategyInterface = architecture.findInterfaceByName("SortStrategy");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        strategyInterface = architecture.findInterfaceByName("SortStrategy");
         assertEquals("SortStrategy", strategyInterface.getName());
         assertEquals(1, MethodUtil.getAllMethodsFromElement(strategyInterface).size());
         assertEquals("model::PackageSort", strategyInterface.getNamespace());
 
-        Relationship usage = element.getRelationships().get(0);
+        Relationship usage = ElementUtil.getRelationships(element).get(0);
         Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(usage);
         assertEquals(strategyInterface, usedElementFromRelationship);
         assertEquals(1, strategyInterface.getOwnConcerns().size());
@@ -220,48 +191,43 @@ public class StrategyTest {
     @Test
     public void applyTest3() {
         String model = ArchitectureRepository.STRATEGY_MODELS[4];
-        Architecture architecture = architectureRepository.getArchitecture(model);
-        Scope scope = scopeSelectionStrategy.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
+        Scope scope = scopeSelectionStrategy.selectScope(architecture, Patterns.STRATEGY);
         boolean verifyPS = strategy.verifyPS(scope);
         assertTrue(verifyPS);
         boolean apply = strategy.apply(scope);
         assertTrue(apply);
 
-        Interface strategyInterface = null;
-        try {
-            strategyInterface = architecture.findInterfaceByName("SortStrategy");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Interface strategyInterface = architecture.findInterfaceByName("SortStrategy");
         assertEquals("SortStrategy", strategyInterface.getName());
         assertEquals(3, MethodUtil.getAllMethodsFromElement(strategyInterface).size());
         assertEquals(2, strategyInterface.getOwnConcerns().size());
 
-        arquitetura.representation.Class adapterClass = null;
-        try {
-            adapterClass = architecture.findClassByName("Sort2Adapter").get(0);
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        arquitetura.representation.Class adapterClass = architecture.findClassByName("Sort2Adapter").get(0);
         assertEquals("Sort2Adapter", adapterClass.getName());
         assertEquals(3, MethodUtil.getAllMethodsFromElement(adapterClass).size());
         assertEquals(2, adapterClass.getOwnConcerns().size());
 
-        Interface adaptee = null;
-        try {
-            adaptee = architecture.findInterfaceByName("Sort2");
-        } catch (InterfaceNotFound ex) {
-            Logger.getLogger(StrategyTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Interface adaptee = architecture.findInterfaceByName("Sort2");
         assertEquals("Sort2", adaptee.getName());
         assertEquals(1, MethodUtil.getAllMethodsFromElement(adaptee).size());
         assertEquals(1, adaptee.getOwnConcerns().size());
 
-        RealizationRelationship realization = (RealizationRelationship) adapterClass.getRelationships().get(0);
-        assertEquals(strategyInterface, realization.getSupplier());
+        UsageRelationship usage;
+        RealizationRelationship generalization;
 
-        UsageRelationship usage = (UsageRelationship) adapterClass.getRelationships().get(1);
+        final List<Relationship> relationships = ElementUtil.getRelationships(adapterClass);
+
+        if (relationships.get(0) instanceof UsageRelationship) {
+            usage = (UsageRelationship) relationships.get(0);
+            generalization = (RealizationRelationship) relationships.get(1);
+        } else {
+            usage = (UsageRelationship) relationships.get(1);
+            generalization = (RealizationRelationship) relationships.get(0);
+        }
+
         assertEquals(adaptee, usage.getSupplier());
+        assertEquals(strategyInterface, generalization.getSupplier());
 
         GenerateArchitecture generateArchitecture = new GenerateArchitecture();
         generateArchitecture.generate(architecture, ArchitectureRepository.OUTPUT[2]);

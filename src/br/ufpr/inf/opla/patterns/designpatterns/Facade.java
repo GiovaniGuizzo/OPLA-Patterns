@@ -1,21 +1,20 @@
 package br.ufpr.inf.opla.patterns.designpatterns;
 
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 
 public class Facade extends DesignPattern {
 
     private static volatile Facade INSTANCE;
 
-    private Facade() {
-        super("Facade", "Structural");
-    }
-
-    public synchronized static Facade getInstance() {
+    public static synchronized Facade getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Facade();
         }
         return INSTANCE;
+    }
+
+    private Facade() {
+        super("Facade", "Structural");
     }
 
     @Override

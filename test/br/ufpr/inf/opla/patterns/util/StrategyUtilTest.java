@@ -5,11 +5,11 @@
  */
 package br.ufpr.inf.opla.patterns.util;
 
-import arquitetura.exceptions.ClassNotFound;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.designpatterns.Strategy;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
@@ -17,16 +17,12 @@ import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSPLAStrategy;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureWithoutPackageScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -35,12 +31,10 @@ import org.junit.Test;
  */
 public class StrategyUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
     private final Strategy strategy;
 
     public StrategyUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
         this.strategy = Strategy.getInstance();
     }
@@ -50,8 +44,8 @@ public class StrategyUtilTest {
      */
     @Test
     public void testGetStrategyInterfaceFromAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         Interface aInterface = StrategyUtil.getStrategyInterfaceFromAlgorithmFamily(familiesFromScope.get(0));
         assertEquals("StrategyInterface", aInterface.getName());
@@ -62,8 +56,8 @@ public class StrategyUtilTest {
      */
     @Test
     public void testCreateStrategyInterfaceForAlgorithmFamily() {
-        Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[2]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY);
         List<AlgorithmFamily> familiesFromScope = AlgorithmFamilyUtil.getFamiliesFromScope(scope);
         AlgorithmFamily family = familiesFromScope.get(0);
         assertEquals("Class", family.getName());
@@ -77,7 +71,7 @@ public class StrategyUtilTest {
      */
     @Test
     public void testAreTheAlgorithmFamilyAndContextsPartOfAVariability() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]), Patterns.STRATEGY);
 
         assertEquals(7, scope.getElements().size());
 
@@ -98,7 +92,7 @@ public class StrategyUtilTest {
         boolean result = StrategyUtil.areTheAlgorithmFamilyAndContextsPartOfAVariability(psPLAStrategy.getAlgorithmFamily(), psPLAStrategy.getContexts());
         assertTrue(result);
 
-        scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]));
+        scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[1]), Patterns.STRATEGY);
         assertEquals(7, scope.getElements().size());
 
         verifyPSPLA = strategy.verifyPSPLA(scope);
@@ -117,18 +111,23 @@ public class StrategyUtilTest {
      */
     @Test
     public void testGetAllStrategyInterfacesFromSetOfElements() {
-        try {
-            Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[4]);
-            ArrayList<Element> elements = new ArrayList<>();
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[4]);
+        ArrayList<Element> elements = new ArrayList<>();
+        elements.add(architecture.findClassByName("Class1").get(0));
+        elements.add(architecture.findClassByName("Class2").get(0));
+        List<Interface> result = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(elements);
+        assertEquals(2, result.size());
+    }
 
-            elements.add(architecture.findClassByName("Class1").get(0));
-            elements.add(architecture.findClassByName("Class2").get(0));
+    @Test
+    public void testGetAllStrategyInterfacesFromSetOfElements2() {
+        String model = ArchitectureRepository.OTHER_MODELS[6];
+        Architecture architecture = ArchitectureRepository.getArchitecture(model);
 
-            List<Interface> result = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(elements);
-            assertEquals(2, result.size());
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(StrategyUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Interface target1 = architecture.findInterfaceByName("Target1");
+        List<Interface> strategyInterfaces = StrategyUtil.getAllStrategyInterfacesFromSetOfElements(wholeArchitectureScopeSelection.selectScope(architecture, Patterns.STRATEGY).getElements());
+
+        assertTrue(strategyInterfaces.contains(target1));
     }
 
     /**
@@ -136,28 +135,19 @@ public class StrategyUtilTest {
      */
     @Test
     public void testMoveContextsRelationshipWithSameTypeAndName() {
-        try {
-            Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[5]);
-
-            ArrayList<Element> contexts = new ArrayList<>();
-            final Class context = architecture.findClassByName("Context1").get(0);
-            contexts.add(context);
-
-            ArrayList<Element> participants = new ArrayList<>();
-            participants.add(architecture.findClassByName("Class1").get(0));
-            participants.add(architecture.findClassByName("Class2").get(0));
-            final Class target = architecture.findClassByName("Class3").get(0);
-
-            StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, participants, target);
-
-            assertEquals(5, target.getRelationships().size());
-            assertEquals(3, context.getRelationships().size());
-            assertEquals(1, architecture.findClassByName("Class1").get(0).getRelationships().size());
-            assertEquals(1, architecture.findClassByName("Class2").get(0).getRelationships().size());
-
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(StrategyUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.OTHER_MODELS[5]);
+        ArrayList<Element> contexts = new ArrayList<>();
+        final Class context = architecture.findClassByName("Context1").get(0);
+        contexts.add(context);
+        ArrayList<Element> participants = new ArrayList<>();
+        participants.add(architecture.findClassByName("Class1").get(0));
+        participants.add(architecture.findClassByName("Class2").get(0));
+        final Class target = architecture.findClassByName("Class3").get(0);
+        StrategyUtil.moveContextsRelationshipWithSameTypeAndName(contexts, participants, target);
+        assertEquals(4, target.getRelationships().size());
+        assertEquals(2, context.getRelationships().size());
+        assertEquals(1, architecture.findClassByName("Class1").get(0).getRelationships().size());
+        assertEquals(1, architecture.findClassByName("Class2").get(0).getRelationships().size());
     }
 
     /**
@@ -165,25 +155,17 @@ public class StrategyUtilTest {
      */
     @Test
     public void testMoveVariabilitiesFromContextsToTarget() {
-        try {
-            Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
-            
-            ArrayList<Element> contexts = new ArrayList<>();
-            contexts.add(architecture.findClassByName("ContextClass").get(0));
-            
-            ArrayList<Element> participants = new ArrayList<>();
-            participants.add(architecture.findClassByName("BubbleSort").get(0));
-            participants.add(architecture.findClassByName("QuickSort").get(0));
-            participants.add(architecture.findClassByName("ShellSort").get(0));
-            final Class target = architecture.findClassByName("NotAContext").get(0);
-            
-            StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, target);
-        
-            assertEquals("SortVariability", target.getVariationPoint().getVariabilities().get(0).getName());
-            assertEquals(3, target.getVariationPoint().getVariabilities().get(0).getVariants().size());
-            assertEquals("NotAContext", target.getVariationPoint().getVariabilities().get(0).getVariants().get(0).getVariationPoints().get(0).getVariationPointElement().getName());
-        } catch (ClassNotFound ex) {
-            Logger.getLogger(StrategyUtilTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.STRATEGY_MODELS[0]);
+        ArrayList<Element> contexts = new ArrayList<>();
+        contexts.add(architecture.findClassByName("ContextClass").get(0));
+        ArrayList<Element> participants = new ArrayList<>();
+        participants.add(architecture.findClassByName("BubbleSort").get(0));
+        participants.add(architecture.findClassByName("QuickSort").get(0));
+        participants.add(architecture.findClassByName("ShellSort").get(0));
+        final Class target = architecture.findClassByName("NotAContext").get(0);
+        StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, target);
+        assertEquals("Sort", target.getVariationPoint().getVariabilities().get(0).getName());
+        assertEquals(3, target.getVariationPoint().getVariabilities().get(0).getVariants().size());
+        assertEquals("NotAContext", target.getVariationPoint().getVariabilities().get(0).getVariants().get(0).getVariationPoints().get(0).getVariationPointElement().getName());
     }
 }

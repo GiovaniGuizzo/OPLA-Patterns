@@ -3,8 +3,8 @@ package br.ufpr.inf.opla.patterns.designpatterns;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
-import br.ufpr.inf.opla.patterns.models.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
@@ -13,7 +13,6 @@ import br.ufpr.inf.opla.patterns.models.ps.impl.PSStrategy;
 import br.ufpr.inf.opla.patterns.util.BridgeUtil;
 import br.ufpr.inf.opla.patterns.util.ElementUtil;
 import br.ufpr.inf.opla.patterns.util.StrategyUtil;
-import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,15 +25,15 @@ public class Bridge extends DesignPattern {
 
     private static volatile Bridge INSTANCE;
 
-    private Bridge() {
-        super("Bridge", "Structural");
-    }
-
-    public synchronized static Bridge getInstance() {
+    public static synchronized Bridge getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Bridge();
         }
         return INSTANCE;
+    }
+
+    private Bridge() {
+        super("Bridge", "Structural");
     }
 
     @Override
@@ -100,7 +99,7 @@ public class Bridge extends DesignPattern {
 
                 //Get or create Implementation Interfaces
                 HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(participants);
-                HashMap<Concern, List<Interface>> potentialImplementationInterfaces = BridgeUtil.getImplementationInterfaces(participants);
+                HashMap<Concern, List<Interface>> potentialImplementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily);
                 HashMap<Concern, Interface> implementationInterfaces = new HashMap<>();
                 for (Map.Entry<Concern, List<Interface>> entry : potentialImplementationInterfaces.entrySet()) {
                     Concern concern = entry.getKey();
@@ -149,9 +148,13 @@ public class Bridge extends DesignPattern {
                 //Varaibilities
                 StrategyUtil.moveVariabilitiesFromContextsToTarget(contexts, participants, abstractClass);
 
-                //TODO - Édipo - Adicionar estereótipo Bridge
                 participants.removeAll(adapteeList);
                 participants.addAll(adapterList);
+
+                addStereotype(abstractionClasses);
+                addStereotype(implementationInterfaces.values());
+                addStereotype(participants);
+                addStereotype(adapteeList);
             }
             applied = true;
         }

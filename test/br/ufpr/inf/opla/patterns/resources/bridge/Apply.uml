@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw">
+<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concerns="http:///schemas/concerns/_RL_yAJ1jEeOLoqRf7Zycww/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:perfilConcerns="http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17" xmlns:perfilConcerns_1="http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20" xmlns:smarty="http:///schemas/smarty/_1P82oJlsEeO6xcuLaZE19Q/7" xmlns:smartyProfile="http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5" xmlns:smarty_1="http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/concerns/_RL_yAJ1jEeOLoqRf7Zycww/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/concerns.profile.uml#_RMC1UJ1jEeOLoqRf7Zycww http:///schemas/perfilConcerns/_pLY1AFwVEeOhVoKAF-nMjA/17 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_pLY1AVwVEeOhVoKAF-nMjA http:///schemas/perfilConcerns/_2Vih0Gc8EeORYp21VRaP_A/20 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A http:///schemas/smarty/_1P82oJlsEeO6xcuLaZE19Q/7 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_1P82oZlsEeO6xcuLaZE19Q http:///schemas/smartyProfile/_EDPcYGdHEeO5t6Nyhkp5pw/5 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw http:///schemas/smarty/_cl6_wI9OEeO5S8PTmh49hw/3 file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw">
   <uml:Model xmi:id="_-WQF8Ft1EeO8GpjV6e9MCg" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_-WQF8Vt1EeO8GpjV6e9MCg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -59,15 +59,15 @@
     <packagedElement xmi:type="uml:Usage" xmi:id="_53qVUFwmEeOhVoKAF-nMjA" name="Usage2" client="_2BU88FwmEeOhVoKAF-nMjA" supplier="_DxV1oFt2EeO8GpjV6e9MCg"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojbn8Ft3EeO8GpjV6e9MCg">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojqRcFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_EDTt0GdHEeO5t6Nyhkp5pw"/>
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_cl7m0I9OEeO5S8PTmh49hw"/>
       </eAnnotations>
-      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_o5pOAMn3EeKFvPutDPHc0Q"/>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/smarty.profile.uml#_9ppH0MeqEeK-FvYCaEYIKA"/>
     </profileApplication>
-    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_ojrfkFt3EeO8GpjV6e9MCg">
-      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_ojsGoFt3EeO8GpjV6e9MCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_2VllIGc8EeORYp21VRaP_A"/>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_58rAIJ1sEeOLoqRf7Zycww">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_58rAIZ1sEeOLoqRf7Zycww" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/concerns.profile.uml#_RMC1UJ1jEeOLoqRf7Zycww"/>
       </eAnnotations>
-      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/perfilConcerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
+      <appliedProfile xmi:type="uml:Profile" href="file:/Users/giovaniguizzo/NetBeansProjects/OPLA-Patterns/config/concerns.profile.uml#_9v_84HqaEeK1gM_kVgXLQw"/>
     </profileApplication>
   </uml:Model>
   <smartyProfile:interface xmi:id="_sm5dYFt3EeO8GpjV6e9MCg" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
@@ -92,4 +92,18 @@
   <perfilConcerns_1:bowling xmi:id="_d9310HfDEeONGbxib0jvGA" base_Class="_DxV1oFt2EeO8GpjV6e9MCg"/>
   <perfilConcerns_1:brickles xmi:id="_ewciQHfDEeONGbxib0jvGA" base_Class="_FLHsAFt2EeO8GpjV6e9MCg"/>
   <perfilConcerns_1:brickles xmi:id="_fq3jIHfDEeONGbxib0jvGA" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+  <smarty:interface xmi:id="_TxSSAJltEeO6xcuLaZE19Q" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <smarty:interface xmi:id="_UsMbEJltEeO6xcuLaZE19Q" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+  <concerns:bowling xmi:id="_7wAmAJ1sEeOLoqRf7Zycww" base_Class="_DiqgcFt2EeO8GpjV6e9MCg"/>
+  <concerns:brickles xmi:id="_8XKsoJ1sEeOLoqRf7Zycww" base_Class="_FLHsAFt2EeO8GpjV6e9MCg"/>
+  <concerns:bowling xmi:id="_9AunAJ1sEeOLoqRf7Zycww" base_Operation="_DNOmgFt3EeO8GpjV6e9MCg"/>
+  <concerns:brickles xmi:id="_9nE1UJ1sEeOLoqRf7Zycww" base_Operation="_DgHtUFt3EeO8GpjV6e9MCg"/>
+  <concerns:brickles xmi:id="_-2aWQJ1sEeOLoqRf7Zycww" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
+  <concerns:bowling xmi:id="__Z0lUJ1sEeOLoqRf7Zycww" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <concerns:bowling xmi:id="_AE2fUJ1tEeOLoqRf7Zycww" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <concerns:brickles xmi:id="_AFIzMJ1tEeOLoqRf7Zycww" base_Class="__3NiYFt1EeO8GpjV6e9MCg"/>
+  <concerns:bowling xmi:id="_AzH6kJ1tEeOLoqRf7Zycww" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <concerns:brickles xmi:id="_Aza1gJ1tEeOLoqRf7Zycww" base_Class="_ALctAFt2EeO8GpjV6e9MCg"/>
+  <smarty_1:interface xmi:id="_4ot9kJ1vEeOLoqRf7Zycww" base_Class="_CUXhUFt2EeO8GpjV6e9MCg"/>
+  <smarty_1:interface xmi:id="_5e1GMJ1vEeOLoqRf7Zycww" base_Class="_CvYCUFt2EeO8GpjV6e9MCg"/>
 </xmi:XMI>

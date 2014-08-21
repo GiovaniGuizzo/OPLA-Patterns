@@ -1,22 +1,23 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.representation.Architecture;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Variability;
 import arquitetura.representation.Variant;
 import arquitetura.representation.VariationPoint;
 import arquitetura.representation.relationship.Relationship;
+import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StrategyUtil {
-
-    private StrategyUtil() {
-    }
 
     /**
      * Gets the Strategy interface from the algorithm family, if there is one.
@@ -27,27 +28,26 @@ public class StrategyUtil {
      * @return The Strategy interface, or null if there is not one.
      */
     public static Interface getStrategyInterfaceFromAlgorithmFamily(AlgorithmFamily algorithmFamily) {
-        Interface strategyInterface = null;
         List<Element> participants = algorithmFamily.getParticipants();
-        List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(participants);
+        List<Interface> interfaces = getAllStrategyInterfacesFromSetOfElements(participants);
 
-        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()));
-        for (Interface anInterface : interfaces) {
-            MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
-            if (interfaceMethods.containsAll(allMethodsFromAlgorithmFamily)) {
-                strategyInterface = anInterface;
-                break;
-            }
+        if (!interfaces.isEmpty()) {
+            Collections.sort(interfaces, SubElementsComparator.getDescendingOrderer());
+            return interfaces.get(0);
+        } else {
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            return architecture.findInterfaceByName(algorithmFamily.getNameCapitalized() + "Strategy");
         }
-
-        return strategyInterface;
     }
 
-    public static List<Interface> getAllStrategyInterfacesFromSetOfElements(List<Element> elements) {
+    protected static List<Interface> getAllStrategyInterfacesFromSetOfElements(List<Element> elements) {
         List<Interface> strategyInterfaces = new ArrayList<>();
-        List<Interface> interfaces = ElementUtil.getAllCommonInterfaces(elements);
+        List<Interface> interfaces = ElementUtil.getAllSuperInterfaces(elements);
 
-        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(elements));
+        MethodArrayList allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllCommonMethodsFromSetOfElements(elements));
+        if (allMethodsFromAlgorithmFamily.isEmpty()) {
+            allMethodsFromAlgorithmFamily = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(elements));
+        }
         for (Interface anInterface : interfaces) {
             MethodArrayList interfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
             if (interfaceMethods.containsAll(allMethodsFromAlgorithmFamily)) {
@@ -59,7 +59,7 @@ public class StrategyUtil {
     }
 
     public static Interface createStrategyInterfaceForAlgorithmFamily(AlgorithmFamily algorithmFamily) {
-        return InterfaceUtil.createInterfaceForSetOfElements(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Strategy", algorithmFamily.getParticipants());
+        return InterfaceUtil.createInterfaceForSetOfElements(algorithmFamily.getNameCapitalized() + "Strategy", algorithmFamily.getParticipants());
     }
 
     public static boolean areTheAlgorithmFamilyAndContextsPartOfAVariability(AlgorithmFamily algorithmFamily, List<Element> contexts) {
@@ -99,9 +99,11 @@ public class StrategyUtil {
     }
 
     public static void moveContextsRelationshipWithSameTypeAndName(List<Element> contexts, List<Element> participants, Element target) {
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
         for (Element context : contexts) {
             HashMap<String, HashMap<String, List<Relationship>>> usingRelationshipsFromAlgorithms = new HashMap<>();
-            for (Relationship relationShip : context.getRelationships()) {
+            for (Relationship relationShip : ElementUtil.getRelationships(context)) {
                 Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(relationShip);
                 if (usedElementFromRelationship != null
                         && !usedElementFromRelationship.equals(context)
@@ -127,13 +129,10 @@ public class StrategyUtil {
                     Relationship relationship = nameList.get(0);
 
                     for (Relationship tempRelationship : nameList) {
-                        Element usedElementFromRelationship = RelationshipUtil.getUsedElementFromRelationship(tempRelationship);
-                        usedElementFromRelationship.removeRelationship(tempRelationship);
-                        context.removeRelationship(tempRelationship);
-                        context.getArchitecture().removeRelationship(tempRelationship);
+                        architecture.removeRelationship(tempRelationship);
                     }
 
-                    context.getArchitecture().addRelationship(relationship);
+                    ArchitectureRepository.getCurrentArchitecture().addRelationship(relationship);
                     RelationshipUtil.moveRelationship(relationship, context, target);
                 }
             }
@@ -160,6 +159,9 @@ public class StrategyUtil {
                 }
             }
         }
+    }
+
+    private StrategyUtil() {
     }
 
 }

@@ -10,13 +10,14 @@ import arquitetura.representation.Class;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
+import arquitetura.representation.Patterns;
 import br.ufpr.inf.opla.patterns.designpatterns.Bridge;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
 import br.ufpr.inf.opla.patterns.models.Scope;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.impl.PSBridge;
 import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
-import br.ufpr.inf.opla.patterns.strategies.impl.WholeArchitectureScopeSelection;
+import br.ufpr.inf.opla.patterns.strategies.scopeselection.impl.WholeArchitectureScopeSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,7 +26,6 @@ import java.util.Map;
 import main.GenerateArchitecture;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import org.junit.Test;
 
 /**
@@ -34,12 +34,10 @@ import org.junit.Test;
  */
 public class BridgeUtilTest {
 
-    private final ArchitectureRepository architectureRepository;
     private final WholeArchitectureScopeSelection wholeArchitectureScopeSelection;
     private final Bridge bridge;
 
     public BridgeUtilTest() {
-        this.architectureRepository = ArchitectureRepository.getInstance();
         this.wholeArchitectureScopeSelection = new WholeArchitectureScopeSelection();
         this.bridge = Bridge.getInstance();
     }
@@ -49,7 +47,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetImplementationInterfaces() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]), Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -58,7 +56,7 @@ public class BridgeUtilTest {
             PSBridge psBridge = (PSBridge) ps;
             AlgorithmFamily algorithmFamily = psBridge.getAlgorithmFamily();
             if (algorithmFamily.getName().equals("Sort") && algorithmFamily.getType().equals(AlgorithmFamily.SUFFIX)) {
-                HashMap<Concern, List<Interface>> implementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily.getParticipants());
+                HashMap<Concern, List<Interface>> implementationInterfaces = BridgeUtil.getImplementationInterfaces(algorithmFamily);
                 for (List<Interface> interfaces : implementationInterfaces.values()) {
                     assertEquals(1, interfaces.size());
                     foi = true;
@@ -74,7 +72,7 @@ public class BridgeUtilTest {
      */
     @Test
     public void testGetAbstractionClasses() {
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]));
+        Scope scope = wholeArchitectureScopeSelection.selectScope(ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[1]), Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -95,8 +93,8 @@ public class BridgeUtilTest {
      */
     @Test
     public void testCreateAbstractionClasses() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -117,8 +115,8 @@ public class BridgeUtilTest {
      */
     @Test
     public void testCreateImplementationInterface() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -142,8 +140,8 @@ public class BridgeUtilTest {
      */
     @Test
     public void testAggregateAbstractionWithImplementation() {
-        final Architecture architecture = architectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
-        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture);
+        final Architecture architecture = ArchitectureRepository.getArchitecture(ArchitectureRepository.BRIDGE_MODELS[0]);
+        Scope scope = wholeArchitectureScopeSelection.selectScope(architecture, Patterns.BRIDGE);
 
         assertTrue(bridge.verifyPS(scope));
         List<PS> pSs = scope.getPSs(bridge);
@@ -155,7 +153,7 @@ public class BridgeUtilTest {
         final Class abstractClass = (arquitetura.representation.Class) result.get(0);
         assertEquals(5, abstractClass.getAllMethods().size());
         assertEquals(3, abstractClass.getAllConcerns().size());
-        
+
         HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(algorithmFamily.getParticipants());
         List<Interface> interfaces = new ArrayList<>();
         for (Map.Entry<Concern, List<Element>> entry : groupedElements.entrySet()) {
@@ -164,7 +162,7 @@ public class BridgeUtilTest {
             BridgeUtil.aggregateAbstractionWithImplementation(abstractClass, anInterface);
         }
         assertEquals(3, interfaces.size());
-        
+
         assertEquals(4, abstractClass.getRelationships().size());
         for (Interface anInterface : interfaces) {
             assertEquals(1, anInterface.getRelationships().size());

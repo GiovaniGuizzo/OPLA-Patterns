@@ -1,5 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
+import arquitetura.exceptions.ConcernNotFoundException;
 import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
@@ -11,12 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.collections4.CollectionUtils;
 
 public class MethodUtil {
-
-    private MethodUtil() {
-    }
 
     public static Set<Method> getMethodsFromElement(Element element) {
         Set<Method> iMethods;
@@ -53,6 +53,18 @@ public class MethodUtil {
             }
         }
         return iMethods;
+    }
+
+    public static List<Method> getAllMethodsFromElementByConcern(Element element, Concern concern) {
+        List<Method> methods = getAllMethodsFromElement(element);
+        for (int i = 0; i < methods.size(); i++) {
+            Method method = methods.get(i);
+            if (concern == null ? !method.getAllConcerns().isEmpty() : (!method.containsConcern(concern) && !element.getOwnConcerns().contains(concern))) {
+                methods.remove(i);
+                i--;
+            }
+        }
+        return methods;
     }
 
     public static List<Method> getAllMethodsFromSetOfElements(List<Element> elements) {
@@ -138,15 +150,29 @@ public class MethodUtil {
     }
 
     public static Method cloneMethod(Method method) {
-        Method newMethod = new Method(method.getArchitecture(), method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
+        Method newMethod = new Method(method.getName(), method.getReturnType(), "", method.isAbstract(), UUID.randomUUID().toString());
         newMethod.getParameters().addAll(method.getParameters());
-        newMethod.getOwnConcerns().addAll(method.getOwnConcerns());
+        for (Concern concern : method.getOwnConcerns()) {
+            try {
+                newMethod.addConcern(concern.getName());
+            } catch (ConcernNotFoundException ex) {
+                Logger.getLogger(MethodUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         newMethod.setNamespace(method.getNamespace());
         return newMethod;
     }
 
     public static Set<Method> cloneMethods(Set<Method> methodsToBeCloned) {
         Set<Method> methods = new HashSet<>();
+        for (Method method : methodsToBeCloned) {
+            methods.add(cloneMethod(method));
+        }
+        return methods;
+    }
+
+    public static List<Method> cloneMethods(List<Method> methodsToBeCloned) {
+        List<Method> methods = new ArrayList<>();
         for (Method method : methodsToBeCloned) {
             methods.add(cloneMethod(method));
         }
@@ -183,7 +209,60 @@ public class MethodUtil {
         }
 
         ArrayList<Concern> concerns = new ArrayList<>(methodA.getOwnConcerns());
-        methodA.getOwnConcerns().clear();
-        methodA.getOwnConcerns().addAll(CollectionUtils.union(concerns, methodB.getOwnConcerns()));
+        for (Concern concern : concerns) {
+            methodA.removeConcern(concern.getName());
+        }
+        for (Concern concern : CollectionUtils.union(concerns, methodB.getOwnConcerns())) {
+            try {
+                methodA.addConcern(concern.getName());
+            } catch (ConcernNotFoundException ex) {
+                Logger.getLogger(MethodUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public static List<Method> getAllCommonMethodsFromSetOfElements(List<Element> elements) {
+        List<Method> methods = new ArrayList<>();
+        if (!elements.isEmpty()) {
+            methods.addAll(cloneMethods(getAllMethodsFromElement(elements.get(0))));
+            for (int i = 1; i < elements.size(); i++) {
+                Element iElement = elements.get(i);
+                MethodArrayList iMethods = new MethodArrayList(getAllMethodsFromElement(iElement));
+                for (int j = 0; j < methods.size(); j++) {
+                    Method method = methods.get(j);
+                    if (iMethods.contains(method)) {
+                        mergeMethodsToMethodA(method, iMethods.get(iMethods.indexOf(method)));
+                    } else {
+                        methods.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+        return methods;
+    }
+
+    public static List<Method> getAllCommonMethodsFromSetOfElementsByConcern(List<Element> elements, Concern concern) {
+        List<Method> methods = new ArrayList<>();
+        if (!elements.isEmpty()) {
+            methods.addAll(cloneMethods(getAllMethodsFromElementByConcern(elements.get(0), concern)));
+            for (int i = 1; i < elements.size(); i++) {
+                Element iElement = elements.get(i);
+                MethodArrayList iMethods = new MethodArrayList(getAllMethodsFromElementByConcern(iElement, concern));
+                for (int j = 0; j < methods.size(); j++) {
+                    Method method = methods.get(j);
+                    if (iMethods.contains(method)) {
+                        mergeMethodsToMethodA(method, iMethods.get(iMethods.indexOf(method)));
+                    } else {
+                        methods.remove(j);
+                        j--;
+                    }
+                }
+            }
+        }
+        return methods;
+    }
+
+    private MethodUtil() {
     }
 }

@@ -10,9 +10,6 @@ import java.util.List;
 
 public class AlgorithmFamilyUtil {
 
-    private AlgorithmFamilyUtil() {
-    }
-
     public static List<AlgorithmFamily> getFamiliesFromScope(Scope scope) {
         List<AlgorithmFamily> familiesInScope = new ArrayList<>();
         addFamiliesWithSuffixAndPreffix(scope, familiesInScope);
@@ -104,5 +101,8 @@ public class AlgorithmFamilyUtil {
                 algorithmFamily.getParticipants().add(jElement);
             }
         }
+    }
+
+    private AlgorithmFamilyUtil() {
     }
 }

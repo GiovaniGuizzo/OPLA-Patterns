@@ -1,7 +1,6 @@
 package br.ufpr.inf.opla.patterns.util;
 
 import arquitetura.exceptions.ConcernNotFoundException;
-import arquitetura.exceptions.PackageNotFound;
 import arquitetura.helpers.UtilResources;
 import arquitetura.representation.Architecture;
 import arquitetura.representation.Class;
@@ -9,13 +8,13 @@ import arquitetura.representation.Concern;
 import arquitetura.representation.Element;
 import arquitetura.representation.Interface;
 import arquitetura.representation.Method;
-import arquitetura.representation.Package;
 import arquitetura.representation.relationship.AssociationEnd;
 import arquitetura.representation.relationship.AssociationRelationship;
 import arquitetura.representation.relationship.Multiplicity;
 import br.ufpr.inf.opla.patterns.comparators.SubElementsComparator;
 import br.ufpr.inf.opla.patterns.list.MethodArrayList;
 import br.ufpr.inf.opla.patterns.models.AlgorithmFamily;
+import br.ufpr.inf.opla.patterns.repositories.ArchitectureRepository;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,40 +26,52 @@ import java.util.logging.Logger;
 
 public class BridgeUtil {
 
-    private BridgeUtil() {
-    }
-
-    public static HashMap<Concern, List<Interface>> getImplementationInterfaces(List<Element> elements) {
+    public static HashMap<Concern, List<Interface>> getImplementationInterfaces(AlgorithmFamily algorithmFamily) {
+        List<Element> elements = algorithmFamily.getParticipants();
         HashMap<Concern, List<Interface>> implementationInterfaces = new HashMap<>();
         HashMap<Concern, List<Element>> groupedElements = ElementUtil.groupElementsByConcern(elements);
         for (Map.Entry<Concern, List<Element>> entry : groupedElements.entrySet()) {
             Concern concern = entry.getKey();
             List<Element> elementsByConcerns = entry.getValue();
-            List<Interface> allCommonInterfaces = ElementUtil.getAllCommonInterfaces(elementsByConcerns);
-            Collections.sort(allCommonInterfaces, SubElementsComparator.getDescendingOrderer());
-            List<Method> allMethods = MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
-            for (int i = 0; i < allCommonInterfaces.size(); i++) {
-                Interface anInterface = allCommonInterfaces.get(i);
+            List<Interface> allSuperInterfaces = ElementUtil.getAllSuperInterfaces(elementsByConcerns);
+            Collections.sort(allSuperInterfaces, SubElementsComparator.getDescendingOrderer());
+            List<Method> allMethods = MethodUtil.getAllCommonMethodsFromSetOfElementsByConcern(elementsByConcerns, concern);
+            if (allMethods.isEmpty()) {
+                allMethods = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElementsByConcern(elementsByConcerns, concern));
+            }
+            for (int i = 0; i < allSuperInterfaces.size(); i++) {
+                Interface anInterface = allSuperInterfaces.get(i);
                 MethodArrayList anInterfaceMethods = new MethodArrayList(MethodUtil.getAllMethodsFromElement(anInterface));
-                if (!anInterface.getAllConcerns().contains(concern) && !anInterfaceMethods.containsAll(allMethods)) {
-                    allCommonInterfaces.remove(anInterface);
+                if (concern != null ? !anInterface.getAllConcerns().contains(concern) && !anInterfaceMethods.containsAll(allMethods) : !anInterfaceMethods.containsAll(allMethods)) {
+                    allSuperInterfaces.remove(anInterface);
                     i--;
                 }
             }
-            implementationInterfaces.put(concern, allCommonInterfaces);
+            if (allSuperInterfaces.isEmpty()) {
+                String preffix = concern == null ? "Default" : Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1);
+                Interface anInterface = ArchitectureRepository.getCurrentArchitecture().findInterfaceByName(preffix + "Implementation");
+                if (anInterface != null) {
+                    allSuperInterfaces.add(anInterface);
+                }
+            }
+            implementationInterfaces.put(concern, allSuperInterfaces);
         }
         return implementationInterfaces;
     }
 
     public static List<Element> getAbstractionClasses(AlgorithmFamily algorithmFamily) {
         List<Element> abstractionClasses = new ArrayList<>();
-        Set<Class> elements = algorithmFamily.getParticipants().get(0).getArchitecture().getAllClasses();
+        Set<Class> elements = ArchitectureRepository.getCurrentArchitecture().getAllClasses();
         root:
         for (Class classElement : elements) {
             if (classElement.isAbstract()) {
                 Set<Concern> allConcernsFromSetOfElements = ElementUtil.getOwnAndMethodsConcerns(algorithmFamily.getParticipants());
                 MethodArrayList methodArrayList = new MethodArrayList(MethodUtil.getAllMethodsFromElement(classElement));
-                if (methodArrayList.containsAll(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()))) {
+                MethodArrayList allMethods = new MethodArrayList(MethodUtil.getAllCommonMethodsFromSetOfElements(algorithmFamily.getParticipants()));
+                if (allMethods.isEmpty()) {
+                    allMethods = new MethodArrayList(MethodUtil.getAllMethodsFromSetOfElements(algorithmFamily.getParticipants()));
+                }
+                if (methodArrayList.containsAll(allMethods)) {
                     if (ElementUtil.getOwnAndMethodsConcerns(classElement).containsAll(allConcernsFromSetOfElements)) {
                         Set<Element> aggregatedElements = ElementUtil.getAllAggregatedElements(classElement);
                         boolean contains = false;
@@ -88,6 +99,14 @@ public class BridgeUtil {
                 }
             }
         }
+        if (abstractionClasses.isEmpty()) {
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            List<Class> classByName = architecture.findClassByName(algorithmFamily.getNameCapitalized() + "Abstraction");
+            if (classByName != null) {
+                abstractionClasses.add(classByName.get(0));
+                abstractionClasses.addAll(ElementUtil.getAllSubElements(classByName.get(0)));
+            }
+        }
         return abstractionClasses;
     }
 
@@ -97,7 +116,7 @@ public class BridgeUtil {
         if (participants != null && !participants.isEmpty()) {
             try {
                 arquitetura.representation.Package aPackage = null;
-                Architecture architecture = participants.get(0).getArchitecture();
+                Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
 
                 Class abstractClass;
                 Class concreteClass;
@@ -108,8 +127,8 @@ public class BridgeUtil {
 
                 boolean naArquitetura = packageName.equalsIgnoreCase("model");
                 if (naArquitetura) {
-                    abstractClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Abstraction", true);
-                    concreteClass = architecture.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "AbstractionImpl", false);
+                    abstractClass = architecture.createClass(algorithmFamily.getNameCapitalized() + "Abstraction", true);
+                    concreteClass = architecture.createClass(algorithmFamily.getNameCapitalized() + "AbstractionImpl", false);
 
                     architecture.removeClass(abstractClass);
                     architecture.removeClass(concreteClass);
@@ -118,8 +137,8 @@ public class BridgeUtil {
                 } else {
                     aPackage = architecture.findPackageByName(packageName);
 
-                    abstractClass = aPackage.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "Abstraction", true);
-                    concreteClass = aPackage.createClass(Character.toUpperCase(algorithmFamily.getName().charAt(0)) + algorithmFamily.getName().substring(1) + "AbstractionImpl", false);
+                    abstractClass = aPackage.createClass(algorithmFamily.getNameCapitalized() + "Abstraction", true);
+                    concreteClass = aPackage.createClass(algorithmFamily.getNameCapitalized() + "AbstractionImpl", false);
 
                     aPackage.removeClass(abstractClass);
                     aPackage.removeClass(concreteClass);
@@ -177,8 +196,6 @@ public class BridgeUtil {
                 }
                 abstractionClasses.add(abstractClass);
                 abstractionClasses.add(concreteClass);
-            } catch (PackageNotFound ex) {
-                Logger.getLogger(BridgeUtil.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(BridgeUtil.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -189,58 +206,47 @@ public class BridgeUtil {
     public static Interface createImplementationInterface(Concern concern, List<Element> elements) {
         Interface anInterface = null;
         if (elements != null && !elements.isEmpty()) {
-            try {
-                arquitetura.representation.Package aPackage = null;
-                Architecture architecture = elements.get(0).getArchitecture();
+            arquitetura.representation.Package aPackage = null;
+            Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+            List<Element> tempElements;
+            String namespace = ElementUtil.getNameSpace(elements);
+            String packageName = UtilResources.extractPackageName(namespace);
+            boolean naArquitetura = packageName.equalsIgnoreCase("model");
+            if (naArquitetura) {
+                anInterface = architecture.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
+                architecture.removeInterface(anInterface);
 
-                List<Element> tempElements;
+                tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
+            } else {
+                aPackage = architecture.findPackageByName(UtilResources.extractPackageName(namespace));
 
-                String namespace = ElementUtil.getNameSpace(elements);
-                String packageName = UtilResources.extractPackageName(namespace);
+                anInterface = aPackage.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
+                aPackage.removeInterface(anInterface);
 
-                boolean naArquitetura = packageName.equalsIgnoreCase("model");
-                if (naArquitetura) {
-                    anInterface = architecture.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
-                    architecture.removeInterface(anInterface);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(architecture.getElements()));
-                } else {
-                    aPackage = architecture.findPackageByName(UtilResources.extractPackageName(namespace));
-
-                    anInterface = aPackage.createInterface((concern != null ? Character.toUpperCase(concern.getName().charAt(0)) + concern.getName().substring(1) : "Default") + "Implementation");
-                    aPackage.removeInterface(anInterface);
-
-                    tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
+                tempElements = Collections.unmodifiableList(new ArrayList<>(aPackage.getElements()));
+            }
+            List<Method> methodsFromSetOfElements = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);
+            for (Method method : methodsFromSetOfElements) {
+                anInterface.addExternalOperation(method);
+            }
+            if (concern != null) {
+                try {
+                    anInterface.addConcern(concern.getName());
+                } catch (ConcernNotFoundException ex) {
+                    Logger.getLogger(BridgeUtil.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
-                List<Method> methodsFromSetOfElements = MethodUtil.createMethodsFromSetOfElementsByConcern(elements, concern);
-                for (Method method : methodsFromSetOfElements) {
-                    anInterface.addExternalOperation(method);
-                }
-
-                if (concern != null) {
-                    try {
-                        anInterface.addConcern(concern.getName());
-                    } catch (ConcernNotFoundException ex) {
-                        Logger.getLogger(BridgeUtil.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-
-                anInterface.setNamespace(namespace);
-
-                int count = 1;
-                String name = anInterface.getName();
-                while (tempElements.contains(anInterface)) {
-                    count++;
-                    anInterface.setName(name + Integer.toString(count));
-                }
-                if (naArquitetura) {
-                    architecture.addExternalInterface(anInterface);
-                } else if(aPackage != null) {
-                    aPackage.addExternalInterface(anInterface);
-                }
-            } catch (PackageNotFound ex) {
-                Logger.getLogger(BridgeUtil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            anInterface.setNamespace(namespace);
+            int count = 1;
+            String name = anInterface.getName();
+            while (tempElements.contains(anInterface)) {
+                count++;
+                anInterface.setName(name + Integer.toString(count));
+            }
+            if (naArquitetura) {
+                architecture.addExternalInterface(anInterface);
+            } else if (aPackage != null) {
+                aPackage.addExternalInterface(anInterface);
             }
         }
         return anInterface;
@@ -254,6 +260,9 @@ public class BridgeUtil {
             AssociationEnd end2 = aggregation.getParticipants().get(0);
             end2.setMultiplicity(new Multiplicity("1", "1"));
         }
+    }
+
+    private BridgeUtil() {
     }
 
 }

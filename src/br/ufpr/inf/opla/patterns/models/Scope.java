@@ -1,6 +1,7 @@
 package br.ufpr.inf.opla.patterns.models;
 
 import arquitetura.representation.Element;
+import br.ufpr.inf.opla.patterns.designpatterns.DesignPattern;
 import br.ufpr.inf.opla.patterns.models.ps.PS;
 import br.ufpr.inf.opla.patterns.models.ps.PSPLA;
 import java.util.ArrayList;

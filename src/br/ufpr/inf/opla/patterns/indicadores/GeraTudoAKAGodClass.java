@@ -6,11 +6,16 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jmetal.core.Solution;
 import jmetal.core.SolutionSet;
 import jmetal.qualityIndicator.util.MetricsUtil;
 import jmetal.util.JMException;
+import jmetal.util.comparators.EqualSolutions;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class GeraTudoAKAGodClass {
@@ -18,92 +23,18 @@ public class GeraTudoAKAGodClass {
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            //            "MicrowaveOvenSoftware",
-            //            "ServiceAndSupportSystem",
-            "agm"
+            "MicrowaveOvenSoftware"
+        //  "ServiceAndSupportSystem"
+//            "agm"
         };
 
         String[] contexts = {
-            "agm_DesignPatternsAndPLAMutationOperator_100_300000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_100_300000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_100_300000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_100_30000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_100_30000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_100_30000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_100_3000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_100_3000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_100_3000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_200_300000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_200_300000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_200_300000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_200_3000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_200_3000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_200_3000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_50_300000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_50_300000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_50_300000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_50_30000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_50_30000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_50_30000_0.9",
-            "agm_DesignPatternsAndPLAMutationOperator_50_3000_0.1",
-            "agm_DesignPatternsAndPLAMutationOperator_50_3000_0.5",
-            "agm_DesignPatternsAndPLAMutationOperator_50_3000_0.9", //            "agm_DesignPatternsMutationOperator_100_300000_0.1",
-        //            "agm_DesignPatternsMutationOperator_100_300000_0.5",
-        //            "agm_DesignPatternsMutationOperator_100_300000_0.9",
-        //            "agm_DesignPatternsMutationOperator_100_30000_0.1",
-        //            "agm_DesignPatternsMutationOperator_100_30000_0.5",
-        //            "agm_DesignPatternsMutationOperator_100_30000_0.9",
-        //            "agm_DesignPatternsMutationOperator_100_3000_0.1",
-        //            "agm_DesignPatternsMutationOperator_100_3000_0.5",
-        //            "agm_DesignPatternsMutationOperator_100_3000_0.9",
-        //            "agm_DesignPatternsMutationOperator_200_300000_0.1",
-        //            "agm_DesignPatternsMutationOperator_200_300000_0.5",
-        //            "agm_DesignPatternsMutationOperator_200_300000_0.9",
-        //            "agm_DesignPatternsMutationOperator_200_30000_0.1",
-        //            "agm_DesignPatternsMutationOperator_200_30000_0.5",
-        //            "agm_DesignPatternsMutationOperator_200_30000_0.9",
-        //            "agm_DesignPatternsMutationOperator_200_3000_0.1",
-        //            "agm_DesignPatternsMutationOperator_200_3000_0.5",
-        //            "agm_DesignPatternsMutationOperator_200_3000_0.9",
-        //            "agm_DesignPatternsMutationOperator_50_300000_0.1",
-        //            "agm_DesignPatternsMutationOperator_50_300000_0.5",
-        //            "agm_DesignPatternsMutationOperator_50_300000_0.9",
-        //            "agm_DesignPatternsMutationOperator_50_30000_0.1",
-        //            "agm_DesignPatternsMutationOperator_50_30000_0.5",
-        //            "agm_DesignPatternsMutationOperator_50_30000_0.9",
-        //            "agm_DesignPatternsMutationOperator_50_3000_0.1",
-        //            "agm_DesignPatternsMutationOperator_50_3000_0.5",
-        //            "agm_DesignPatternsMutationOperator_50_3000_0.9",
-        //            "agm_PLAMutation_100_300000_0.1",
-        //            "agm_PLAMutation_100_300000_0.5",
-        //            "agm_PLAMutation_100_300000_0.9",
-        //            "agm_PLAMutation_100_30000_0.1",
-        //            "agm_PLAMutation_100_30000_0.5",
-        //            "agm_PLAMutation_100_30000_0.9",
-        //            "agm_PLAMutation_100_3000_0.1",
-        //            "agm_PLAMutation_100_3000_0.5",
-        //            "agm_PLAMutation_100_3000_0.9",
-        //            "agm_PLAMutation_200_300000_0.1",
-        //            "agm_PLAMutation_200_300000_0.5",
-        //            "agm_PLAMutation_200_300000_0.9",
-        //            "agm_PLAMutation_200_30000_0.1",
-        //            "agm_PLAMutation_200_30000_0.5",
-        //            "agm_PLAMutation_200_30000_0.9",
-        //            "agm_PLAMutation_200_3000_0.1",
-        //            "agm_PLAMutation_200_3000_0.5",
-        //            "agm_PLAMutation_200_3000_0.9",
-        //            "agm_PLAMutation_50_300000_0.1",
-        //            "agm_PLAMutation_50_300000_0.5",
-        //            "agm_PLAMutation_50_300000_0.9",
-        //            "agm_PLAMutation_50_30000_0.1",
-        //            "agm_PLAMutation_50_30000_0.5",
-        //            "agm_PLAMutation_50_30000_0.9",
-        //            "agm_PLAMutation_50_3000_0.1",
-        //            "agm_PLAMutation_50_3000_0.5",
-        //            "agm_PLAMutation_50_3000_0.9",
+            //            "agm_PLAMutation_200_30000_0.5",
+            //            "agm_DesignPatternsMutationOperator_100_30000_0.5",
+            //            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.5"
+            "MicrowaveOvenSoftware_PLAMutation_50_3000_0.1",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.5",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9"
         };
 
         MetricsUtil mu = new MetricsUtil();
@@ -125,6 +56,34 @@ public class GeraTudoAKAGodClass {
             runFriedman(directoryPath, contexts);
             runWilcoxon(directoryPath, contexts);
             executeEuclideanDistance(directoryPath, pla, contexts);
+            executeParetoStats(directoryPath, pla, contexts);
+        }
+    }
+
+    private static void executeParetoStats(String directoryPath, String pla, String[] contexts) {
+        MetricsUtil mu = new MetricsUtil();
+        EqualSolutions comparator = new EqualSolutions();
+        SolutionSet truePareto = mu.readNonDominatedSolutionSet(directoryPath + "FUN_All_" + pla + ".txt");
+        try (FileWriter fileWriter = new FileWriter(directoryPath + "PARETO.txt")) {
+            fileWriter.write("True Pareto:\t" + truePareto.size() + "\n");
+            for (String context : contexts) {
+                SolutionSet knownPareto = mu.readNonDominatedSolutionSet(directoryPath + context + "/FUN_ALL_" + pla + ".txt");
+                int count = 0;
+                knownFor:
+                for (Iterator<Solution> knownIterator = knownPareto.iterator(); knownIterator.hasNext();) {
+                    Solution knownSolution = knownIterator.next();
+                    for (Iterator<Solution> trueIterator = truePareto.iterator(); trueIterator.hasNext();) {
+                        Solution trueSolution = trueIterator.next();
+                        if (comparator.compare(trueSolution, knownSolution) == 0) {
+                            count++;
+                            continue knownFor;
+                        }
+                    }
+                }
+                fileWriter.write(context + "\t " + knownPareto.size() + " (" + count + ")\n");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GeraTudoAKAGodClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -258,7 +217,7 @@ public class GeraTudoAKAGodClass {
             stringBuilder.append("\n");
             stringBuilder.append("pos_teste<-friedmanmc(AR1)\n");
             stringBuilder.append("write.csv2(pos_teste,file=\"./").append(directoryPath).append("friedman-compara.csv\")\n");
-            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=1440, height=500)\n");
+            stringBuilder.append("png(file=\"./").append(directoryPath).append("friedman-boxplot.png\", width=400, height=400)\n");
             stringBuilder.append("boxplot(").append(contextNames.toString());
 
             contextNames = new StringBuilder();

@@ -41,8 +41,11 @@ public class Hypervolume {
         file.getParentFile().mkdirs();
         double[] max = new MetricsUtil().getMaximumValues(allSolutions, objectives);
         try (FileWriter fileWriter = new FileWriter(file)) {
-            for (double d : max) {
-                fileWriter.write(Double.toString(d + 0.1D) + " ");
+            for (int i = 0; i < max.length; i++) {
+                double d = max[i];
+                d = d * 1.01;
+                max[i] = d;
+                fileWriter.write(Double.toString(d) + " ");
             }
         }
         return max;

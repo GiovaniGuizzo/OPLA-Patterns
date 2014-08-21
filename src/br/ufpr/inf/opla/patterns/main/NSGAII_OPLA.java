@@ -35,10 +35,10 @@ public class NSGAII_OPLA {
             System.out.println("\t1 - Population Size (Integer);"
                     + "\n\t2 - Max Evaluations (Integer);"
                     + "\n\t3 - Mutation Probability (Double);"
-                    + "\n\t4 - PLA path;"
-                    + "\n\t5 - Context;"
-                    + "\n\t6 - Mutation Operator class simple name;"
-                    + "\n\t7 - If you want to write the variables (Boolean).");
+                    + "\n\t4 - PLA COMPLETE path;"
+                    + "\n\t5 - Context folder (where the results will be stored);"
+                    + "\n\t6 - Mutation Operator class simple name (PLAMutation, DesignPatternsMutationOperator, DesignPatternsAndPLAMutationOperator);"
+                    + "\n\t7 - If you want to write the variables (boolean).");
             System.exit(0);
         }
 

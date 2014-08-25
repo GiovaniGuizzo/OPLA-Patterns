@@ -25,16 +25,38 @@ public class GeraTudoAKAGodClass {
         String[] plas = {
             "MicrowaveOvenSoftware"
         //  "ServiceAndSupportSystem"
-//            "agm"
+        //            "agm"
+        //            "MobileMedia"
         };
 
         String[] contexts = {
-            //            "agm_PLAMutation_200_30000_0.5",
-            //            "agm_DesignPatternsMutationOperator_100_30000_0.5",
-            //            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.5"
-            "MicrowaveOvenSoftware_PLAMutation_50_3000_0.1",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.5",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9"
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_3000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_100_300000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_100_30000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_100_3000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_200_300000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_200_30000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_200_3000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_50_300000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_50_30000_0.9",
+            "MicrowaveOvenSoftware_PLAMutation_50_3000_0.9"
         };
 
         MetricsUtil mu = new MetricsUtil();
@@ -52,11 +74,52 @@ public class GeraTudoAKAGodClass {
                 }
             }
 
+            normalizaHypervolume(directoryPath, pla, contexts);
             executaHypervolume(directoryPath, pla, contexts);
             runFriedman(directoryPath, contexts);
             runWilcoxon(directoryPath, contexts);
             executeEuclideanDistance(directoryPath, pla, contexts);
             executeParetoStats(directoryPath, pla, contexts);
+        }
+    }
+
+    private static void normalizaHypervolume(String directoryPath, String pla, String[] contexts) throws IOException {
+        MetricsUtil mu = new MetricsUtil();
+
+        SolutionSet solutionSet = new SolutionSet();
+
+        for (String contexto : contexts) {
+            for (int i = 0; i < 30; i++) {
+                SolutionSet execution = mu.readNonDominatedSolutionSet(directoryPath + contexto + "/FUN_All_" + pla + ".txt");
+                solutionSet = solutionSet.union(execution);
+            }
+        }
+
+        double[] max = mu.getMaximumValues(solutionSet.writeObjectivesToMatrix(), 2);
+        double[] min = mu.getMinimumValues(solutionSet.writeObjectivesToMatrix(), 2);
+        try (FileWriter funAll = new FileWriter(directoryPath + "FUN_All_N_" + pla + ".txt")) {
+            for (String contexto : contexts) {
+                try (FileWriter fileWriter = new FileWriter(directoryPath + contexto + "/HYPERVOLUME_N.txt")) {
+                    for (int i = 0; i < 30; i++) {
+                        SolutionSet execution = mu.readNonDominatedSolutionSet(directoryPath + contexto + "/FUN_" + pla + "_" + i + ".txt");
+                        for (Iterator<Solution> it = execution.iterator(); it.hasNext();) {
+                            Solution solution = it.next();
+                            for (int j = 0; j < 2; j++) {
+                                double objective = solution.getObjective(j);
+                                objective = (objective - min[j]) / (max[j] - min[j]);
+                                fileWriter.append(objective + " ");
+                                funAll.write(objective + " ");
+                            }
+                            fileWriter.append("\n");
+                            funAll.write("\n");
+                        }
+                        if (i != 29) {
+                            fileWriter.append("\n");
+                        }
+                    }
+                }
+            }
+            //atual - menor / maior - menor
         }
     }
 
@@ -126,7 +189,7 @@ public class GeraTudoAKAGodClass {
 
     private static void executaHypervolume(String directoryPath, String pla, String[] contexts) throws IOException, InterruptedException {
         MetricsUtil mu = new MetricsUtil();
-        double[] referencePoint = Hypervolume.printReferencePoint(mu.readFront(directoryPath + "FUN_All_" + pla + ".txt"), directoryPath + "/HYPERVOLUME_REFERENCE.txt", 2);
+        double[] referencePoint = Hypervolume.printReferencePoint(mu.readFront(directoryPath + "FUN_All_N_" + pla + ".txt"), directoryPath + "/HYPERVOLUME_REFERENCE.txt", 2);
 
         try (FileWriter sh = new FileWriter(directoryPath + "run_hypervolume.sh")) {
             StringBuilder stringBuilder = new StringBuilder();
@@ -143,7 +206,7 @@ public class GeraTudoAKAGodClass {
                 stringBuilder.append("\"\n");
                 stringBuilder.append("\n");
                 stringBuilder.append("echo \"$system\"\n");
-                stringBuilder.append("FILES=./$system/HYPERVOLUME.txt\n");
+                stringBuilder.append("FILES=./$system/HYPERVOLUME_N.txt\n");
                 stringBuilder.append("for f in $FILES\n");
                 stringBuilder.append("do\n");
                 stringBuilder.append("\techo \"Processing $f\"\n");

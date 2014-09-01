@@ -23,40 +23,13 @@ public class GeraTudoAKAGodClass {
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            "MicrowaveOvenSoftware"
-        //  "ServiceAndSupportSystem"
-        //            "agm"
-        //            "MobileMedia"
+            "BeT"
         };
 
         String[] contexts = {
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_100_3000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_200_3000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_3000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_100_3000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_200_3000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_30000_0.9",
-            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_3000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_100_300000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_100_30000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_100_3000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_200_300000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_200_30000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_200_3000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_50_300000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_50_30000_0.9",
-            "MicrowaveOvenSoftware_PLAMutation_50_3000_0.9"
+            "BeT_PLAMutation_50_30000_0.9",
+            "BeT_DesignPatternsMutationOperator_100_30000_0.9",
+            "BeT_DesignPatternsAndPLAMutationOperator_200_30000_0.9"
         };
 
         MetricsUtil mu = new MetricsUtil();
@@ -90,7 +63,7 @@ public class GeraTudoAKAGodClass {
 
         for (String contexto : contexts) {
             for (int i = 0; i < 30; i++) {
-                SolutionSet execution = mu.readNonDominatedSolutionSet(directoryPath + contexto + "/FUN_All_" + pla + ".txt");
+                SolutionSet execution = mu.readNonDominatedSolutionSet(directoryPath + contexto + "/FUN_" + pla + "_" + i + ".txt");
                 solutionSet = solutionSet.union(execution);
             }
         }

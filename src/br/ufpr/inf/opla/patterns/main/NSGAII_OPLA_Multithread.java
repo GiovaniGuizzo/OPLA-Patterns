@@ -67,7 +67,9 @@ public class NSGAII_OPLA_Multithread {
         FINISHED_THREADS = new ArrayList<>();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Inform the max number of threads (min = 1, max = 10), leave in blank for default (4):");
+        System.out.println("OPLA-Tool Started!");
+        System.out.println();
+        System.out.println("Inform the max number of threads (min = 1, max = 32), leave in blank for default (4):");
         printConsoleToken();
         do {
             try {
@@ -76,7 +78,7 @@ public class NSGAII_OPLA_Multithread {
                     throw new Exception();
                 }
                 MAX_THREADS = Integer.valueOf(nextLine);
-                if (MAX_THREADS < 1 || MAX_THREADS > 10) {
+                if (MAX_THREADS < 1 || MAX_THREADS > 32) {
                     throw new NumberFormatException();
                 }
                 break;

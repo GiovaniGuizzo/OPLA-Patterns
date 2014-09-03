@@ -1,0 +1,35 @@
+# Generating AGM
+set terminal png size 400,400 enhanced font 'arial' 10 butt
+set output '~/Dropbox/Mestrado/Dissertação/Imagens/AGM_Pareto.png'
+set key
+set xlabel 'FM'
+set ylabel 'CM'
+plot "experiment/agm/agm_PLAMutation_200_30000_0.9/FUN_All_agm.txt" using 1:2 title "PLAM" pt 4, "experiment/agm/agm_DesignPatternsMutationOperator_50_30000_0.9/FUN_All_agm.txt" using 1:2 title "DPM" pt 3, "experiment/agm/agm_DesignPatternsAndPLAMutationOperator_200_30000_0.9/FUN_All_agm.txt" using 1:2 title "PLADPM" pt 2, "experiment/agm/Original.txt" using 1:2 title "ALP Original" pt 6
+clear
+
+# Generating MicrowaveOvenSoftware
+set terminal png size 400,400 enhanced font 'arial' 10 butt
+set output '~/Dropbox/Mestrado/Dissertação/Imagens/MOS_Pareto.png'
+set key
+set xlabel 'FM'
+set ylabel 'CM'
+plot "experiment/MicrowaveOvenSoftware/MicrowaveOvenSoftware_PLAMutation_50_3000_0.9/FUN_All_MicrowaveOvenSoftware.txt" using 1:2 title "PLAM" pt 4, "experiment/MicrowaveOvenSoftware/MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.9/FUN_All_MicrowaveOvenSoftware.txt" using 1:2 title "DPM" pt 3, "experiment/MicrowaveOvenSoftware/MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9/FUN_All_MicrowaveOvenSoftware.txt" using 1:2 title "PLADPM" pt 2, "experiment/MicrowaveOvenSoftware/Original.txt" using 1:2 title "ALP Original" pt 6
+clear
+
+# Generating BET
+set terminal png size 400,400 enhanced font 'arial' 10 butt
+set output '~/Dropbox/Mestrado/Dissertação/Imagens/BET_Pareto.png'
+set key
+set xlabel 'FM'
+set ylabel 'CM'
+plot "experiment/BeT/BeT_PLAMutation_50_30000_0.9/FUN_All_BeT.txt" using 1:2 title "PLAM" pt 4, "experiment/BeT/BeT_DesignPatternsMutationOperator_100_30000_0.9/FUN_All_BeT.txt" using 1:2 title "DPM" pt 3, "experiment/BeT/BeT_DesignPatternsAndPLAMutationOperator_200_30000_0.9/FUN_All_BeT.txt" using 1:2 title "PLADPM" pt 2, "experiment/BeT/Original.txt" using 1:2 title "ALP Original" pt 6
+clear
+
+# Generating MobileMedia
+set terminal png size 400,400 enhanced font 'arial' 10 butt
+set output '~/Dropbox/Mestrado/Dissertação/Imagens/MM_Pareto.png'
+set key
+set xlabel 'FM'
+set ylabel 'CM'
+plot "experiment/MobileMedia/MobileMedia_PLAMutation_50_30000_0.9/FUN_All_MobileMedia.txt" using 1:2 title "PLAM" pt 4, "experiment/MobileMedia/MobileMedia_DesignPatternsMutationOperator_50_30000_0.9/FUN_All_MobileMedia.txt" using 1:2 title "DPM" pt 3, "experiment/MobileMedia/MobileMedia_DesignPatternsAndPLAMutationOperator_50_30000_0.9/FUN_All_MobileMedia.txt" using 1:2 title "PLADPM" pt 2, "experiment/MobileMedia/Original.txt" using 1:2 title "ALP Original" pt 6
+clear

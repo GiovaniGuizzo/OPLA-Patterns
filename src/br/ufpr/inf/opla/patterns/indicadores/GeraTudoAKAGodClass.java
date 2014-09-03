@@ -23,13 +23,13 @@ public class GeraTudoAKAGodClass {
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
     public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
         String[] plas = {
-            "BeT"
+            "MobileMedia"
         };
 
         String[] contexts = {
-            "BeT_PLAMutation_50_30000_0.9",
-            "BeT_DesignPatternsMutationOperator_100_30000_0.9",
-            "BeT_DesignPatternsAndPLAMutationOperator_200_30000_0.9"
+            "MobileMedia_PLAMutation_50_30000_0.9",
+            "MobileMedia_DesignPatternsMutationOperator_50_30000_0.9",
+            "MobileMedia_DesignPatternsAndPLAMutationOperator_50_30000_0.9"
         };
 
         MetricsUtil mu = new MetricsUtil();

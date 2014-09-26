@@ -1,40 +1,63 @@
 package br.ufpr.inf.opla.patterns.indicadores;
 
+import arquitetura.builders.ArchitectureBuilder;
+import arquitetura.io.ReaderConfig;
+import arquitetura.representation.Architecture;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jmetal.core.Solution;
 import jmetal.core.SolutionSet;
 import jmetal.qualityIndicator.util.MetricsUtil;
-import jmetal.util.JMException;
 import jmetal.util.comparators.EqualSolutions;
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 
 public class GeraTudoAKAGodClass {
 
     //  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --
-    public static void main(String[] args) throws FileNotFoundException, IOException, JMException, ClassNotFoundException, InterruptedException {
-        String[] plas = {
-            "MobileMedia"
-        };
+    public static void main(String[] args) throws Exception {
 
-        String[] contexts = {
+        HashMap<String, String[]> experiments = new HashMap();
+
+        experiments.put("agm", new String[]{
+            "agm_PLAMutation_200_30000_0.9",
+            "agm_DesignPatternsMutationOperator_50_30000_0.9",
+            "agm_DesignPatternsAndPLAMutationOperator_200_30000_0.9"
+        });
+
+        experiments.put("MicrowaveOvenSoftware", new String[]{
+            "MicrowaveOvenSoftware_PLAMutation_50_3000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsMutationOperator_50_300000_0.9",
+            "MicrowaveOvenSoftware_DesignPatternsAndPLAMutationOperator_50_30000_0.9"
+        });
+
+        experiments.put("MobileMedia", new String[]{
             "MobileMedia_PLAMutation_50_30000_0.9",
             "MobileMedia_DesignPatternsMutationOperator_50_30000_0.9",
             "MobileMedia_DesignPatternsAndPLAMutationOperator_50_30000_0.9"
-        };
+        });
 
+        experiments.put("BeT", new String[]{
+            "BeT_PLAMutation_50_30000_0.9",
+            "BeT_DesignPatternsMutationOperator_100_30000_0.9",
+            "BeT_DesignPatternsAndPLAMutationOperator_200_30000_0.9"
+        });
+
+//        experiments.put("agm", new String[]{});
         MetricsUtil mu = new MetricsUtil();
 
-        for (String pla : plas) {
+        for (Map.Entry<String, String[]> entry : experiments.entrySet()) {
+            String pla = entry.getKey();
+            String[] contexts = entry.getValue();
 
             String directoryPath = "experiment/" + pla + "/";
 
@@ -46,13 +69,13 @@ public class GeraTudoAKAGodClass {
                     }
                 }
             }
-
             normalizaHypervolume(directoryPath, pla, contexts);
             executaHypervolume(directoryPath, pla, contexts);
             runFriedman(directoryPath, contexts);
             runWilcoxon(directoryPath, contexts);
             executeEuclideanDistance(directoryPath, pla, contexts);
             executeParetoStats(directoryPath, pla, contexts);
+//            executeArchitectureStats(directoryPath, pla, contexts);
         }
     }
 
@@ -91,6 +114,18 @@ public class GeraTudoAKAGodClass {
                         }
                     }
                 }
+                try (FileWriter funAllContext = new FileWriter(directoryPath + contexto + "/FUN_All_N_" + pla + ".txt")) {
+                    SolutionSet execution = mu.readNonDominatedSolutionSet(directoryPath + contexto + "/FUN_All_" + pla + ".txt");
+                    for (Iterator<Solution> it = execution.iterator(); it.hasNext();) {
+                        Solution solution = it.next();
+                        for (int j = 0; j < 2; j++) {
+                            double objective = solution.getObjective(j);
+                            objective = (objective - min[j]) / (max[j] - min[j]);
+                            funAllContext.append(objective + " ");
+                        }
+                        funAllContext.write("\n");
+                    }
+                }
             }
             //atual - menor / maior - menor
         }
@@ -125,9 +160,9 @@ public class GeraTudoAKAGodClass {
 
     private static void executeEuclideanDistance(String directoryPath, String pla, String[] contexts) throws IOException {
         MetricsUtil mu = new MetricsUtil();
-        SolutionSet ss = mu.readNonDominatedSolutionSet(directoryPath + "FUN_All_" + pla + ".txt");
+        SolutionSet ss = mu.readNonDominatedSolutionSet(directoryPath + "FUN_All_N_" + pla + ".txt");
         ss = removeDominadas(ss);
-        ss.printObjectivesToFile(directoryPath + "FUN_All_" + pla + ".txt");
+//        ss.printObjectivesToFile(directoryPath + "FUN_All_N_" + pla + ".txt");
 
         double[] min = mu.getMinimumValues(ss.writeObjectivesToMatrix(), 2);
         try (FileWriter todosEds = new FileWriter(directoryPath + "ALL_ED_" + pla + ".txt")) {
@@ -139,7 +174,7 @@ public class GeraTudoAKAGodClass {
 
 //                    double[][] front = new double[quantidadeSolucoes][numObjetivos];
 //                    for(solucoes)for(objetivos)solucoes[solucaoI][numObjJ] = valor do banco;
-                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_All_" + pla + ".txt");
+                    double[][] front = mu.readFront(directoryPath + contexto + "/" + "FUN_All_N_" + pla + ".txt");
                     for (int i = 0; i < front.length; i++) {
                         double distanciaEuclidiana = mu.distance(min, front[i]);
                         todosEds.write(distanciaEuclidiana + "\n");
@@ -173,7 +208,7 @@ public class GeraTudoAKAGodClass {
                 stringBuilder.append("system=").append(directoryPath).append(context).append("\n");
                 stringBuilder.append("reference=\"");
                 for (double d : referencePoint) {
-                    stringBuilder.append(Double.toString(d + 0.1D)).append(" ");
+                    stringBuilder.append(Double.toString(d)).append(" ");
                 }
                 stringBuilder.deleteCharAt(stringBuilder.length() - 1);
                 stringBuilder.append("\"\n");
@@ -199,7 +234,7 @@ public class GeraTudoAKAGodClass {
         process.waitFor();
 
         try (FileWriter hypervolumesFile = new FileWriter(directoryPath + "HYPERVOLUMES.txt")) {
-            hypervolumesFile.append("#\t / Context\t / Mean\t / Max\t / Std. Dev.\t / Time\n");
+            hypervolumesFile.append("#\t / Context\t / Mean\t / Max\t / Std. Dev.\t / Time\t / Std. Dev.\n");
             int count = 1;
             for (String context : contexts) {
                 DescriptiveStatistics hypervolumes = new DescriptiveStatistics();
@@ -214,7 +249,7 @@ public class GeraTudoAKAGodClass {
                     execTimes.addValue(scannerTime.nextLong());
                 }
 
-                hypervolumesFile.append(count++ + "\t" + context + "\t" + String.valueOf(hypervolumes.getMean()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getMax()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getStandardDeviation()).replace(".", ",") + "\t" + String.valueOf(execTimes.getMean()).replace(".", ",") + "\n");
+                hypervolumesFile.append(count++ + "\t" + context + "\t" + String.valueOf(hypervolumes.getMean()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getMax()).replace(".", ",") + "\t" + String.valueOf(hypervolumes.getStandardDeviation()).replace(".", ",") + "\t" + String.valueOf(execTimes.getMean()).replace(".", ",") + "\t" + String.valueOf(execTimes.getStandardDeviation()).replace(".", ",") + "\n");
             }
         }
     }
@@ -353,5 +388,67 @@ public class GeraTudoAKAGodClass {
         }
 
         return result;
+    }
+
+    private static void executeArchitectureStats(String directoryPath, String pla, String[] contexts) throws Exception {
+        ArchitectureBuilder architectureBuilder = new ArchitectureBuilder();
+
+//        String originalDirectory = pla + "/Papyrus/";
+//        ReaderConfig.setPathToProfileSMarty(originalDirectory + "smarty.profile.uml");
+//        ReaderConfig.setPathToProfileConcerns(originalDirectory + "concerns.profile.uml");
+//        ReaderConfig.setPathProfileRelationship(originalDirectory + "relationships.profile.uml");
+//        ReaderConfig.setPathToProfilePatterns(originalDirectory + "patterns.profile.uml");
+//
+//        Architecture original = architectureBuilder.create(ArchitectureRepository.getPlaPath(pla));
+        try (FileWriter statistics = new FileWriter(directoryPath + "/ELEMENTS_STATISTICS.txt")) {
+            statistics.write("\\toprule\n");
+            statistics.write("Experimento & Elementos / Relacionamentos & Elementos / Pacotes \\\\ \\midrule\n");
+
+            for (String context : contexts) {
+                DescriptiveStatistics classStatistics = new DescriptiveStatistics();
+                DescriptiveStatistics interfaceStatistics = new DescriptiveStatistics();
+                DescriptiveStatistics packageStatistics = new DescriptiveStatistics();
+                DescriptiveStatistics dependencyStatistics = new DescriptiveStatistics();
+                DescriptiveStatistics usageStatistics = new DescriptiveStatistics();
+                DescriptiveStatistics associationStatistics = new DescriptiveStatistics();
+
+                File outputFolder = new File(directoryPath + context + "/output/");
+
+                String resourcesDirectory = outputFolder.getAbsolutePath() + "/resources/";
+                ReaderConfig.setPathToProfileSMarty(resourcesDirectory + "smarty.profile.uml");
+                ReaderConfig.setPathToProfileConcerns(resourcesDirectory + "concerns.profile.uml");
+                ReaderConfig.setPathProfileRelationship(resourcesDirectory + "relationships.profile.uml");
+                ReaderConfig.setPathToProfilePatterns(resourcesDirectory + "patterns.profile.uml");
+
+                File[] files = outputFolder.listFiles();
+                for (File file : files) {
+                    if (file.getName().endsWith(".uml")) {
+                        try {
+                            Architecture architecture = architectureBuilder.create(file.getAbsolutePath());
+
+                            classStatistics.addValue(architecture.getAllClasses().size());
+                            interfaceStatistics.addValue(architecture.getAllInterfaces().size());
+                            packageStatistics.addValue(architecture.getAllPackages().size());
+                            dependencyStatistics.addValue(architecture.getRelationshipHolder().getAllDependencies().size());
+                            usageStatistics.addValue(architecture.getRelationshipHolder().getAllUsage().size());
+                            associationStatistics.addValue(architecture.getRelationshipHolder().getAllAssociations().size());
+                        } catch (Exception ex) {
+//                        ex.printStackTrace();
+                        }
+                    }
+                }
+
+                double elementos = classStatistics.getMean() + interfaceStatistics.getMean();
+                double relacionamentos = dependencyStatistics.getMean() + usageStatistics.getMean() + associationStatistics.getMean();
+
+                statistics.write(context);
+                statistics.write(" & ");
+                statistics.write("" + (elementos / relacionamentos));
+                statistics.write(" & ");
+                statistics.write("" + (elementos / packageStatistics.getMean()));
+                statistics.write(" \\\\ \\hline\n");
+
+            }
+        }
     }
 }

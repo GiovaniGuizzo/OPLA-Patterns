@@ -96,6 +96,10 @@ public class ArchitectureRepository {
                 return MICROWAVE_OVEN_SOFTWARE;
             case "ServiceAndSupportSystem":
                 return SERVICE_AND_SUPPORT_SYSTEM;
+            case "MobileMedia":
+                return MOBILE_MEDIA;
+            case "BeT":
+                return BET;
             default:
                 return null;
         }

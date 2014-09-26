@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20110701" xmlns:xmi="http://www.omg.org/spec/XMI/20110701" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concerns="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21" xmlns:concerns_1="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smarty="http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4" xmlns:uml="http://www.eclipse.org/uml2/4.0.0/UML" xsi:schemaLocation="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21 concerns.profile.uml#_kLy30JnJEeOxiNx1rb5-sA http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20 concerns.profile.uml#_H8ekYJmzEeOWoJCRiS1swg http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4 smarty.profile.uml#_li3_gJnJEeOxiNx1rb5-sA">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:concerns="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21" xmlns:concerns_1="http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:smarty="http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http:///schemas/concerns/_kLv0gJnJEeOxiNx1rb5-sA/21 concerns.profile.uml#_kLy30JnJEeOxiNx1rb5-sA http:///schemas/concerns/_H8bhEJmzEeOWoJCRiS1swg/20 concerns.profile.uml http:///schemas/smarty/_li2xYJnJEeOxiNx1rb5-sA/4 smarty.profile.uml#_li3_gJnJEeOxiNx1rb5-sA">
   <uml:Model xmi:id="_iVblMJmfEeOaWL3_pov7wg" name="Model">
     <packageImport xmi:type="uml:PackageImport" xmi:id="_iVblMZmfEeOaWL3_pov7wg">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
@@ -12,7 +12,7 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_-jJpEJmoEeOaWL3_pov7wg" name="initialize"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="__JWtcJmoEeOaWL3_pov7wg" name="beep"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="__7SgsJmoEeOaWL3_pov7wg" clientDependency="_F94VQJmpEeOaWL3_pov7wg" name="BeeperInterface">
+      <packagedElement xmi:type="uml:Class" xmi:id="__7SgsJmoEeOaWL3_pov7wg" name="BeeperInterface">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_D-Hc8JmpEeOaWL3_pov7wg" name="initialize"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_EoIqUJmpEeOaWL3_pov7wg" name="beep"/>
       </packagedElement>
@@ -22,7 +22,7 @@
       <ownedComment xmi:type="uml:Comment" xmi:id="_Jlz0UJmgEeOaWL3_pov7wg" annotatedElement="_4fyukJmfEeOaWL3_pov7wg">
         <body> </body>
       </ownedComment>
-      <packagedElement xmi:type="uml:Class" xmi:id="_4fyukJmfEeOaWL3_pov7wg" clientDependency="_0hg9UJmuEeOaWL3_pov7wg" name="WeightSensorInterface" isAbstract="true"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_4fyukJmfEeOaWL3_pov7wg" name="WeightSensorInterface" isAbstract="true"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_86_ukJmfEeOaWL3_pov7wg" name="BooleanWeightSensorInterface">
         <generalization xmi:type="uml:Generalization" xmi:id="_IYeegJmgEeOaWL3_pov7wg" general="_4fyukJmfEeOaWL3_pov7wg"/>
       </packagedElement>
@@ -44,7 +44,7 @@
         </ownedOperation>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_deG_AJmhEeOaWL3_pov7wg" name="stopCooking"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_kClYoJmhEeOaWL3_pov7wg" clientDependency="_0TQx0JmhEeOaWL3_pov7wg" name="HeatingElementInterface" isAbstract="true">
+      <packagedElement xmi:type="uml:Class" xmi:id="_kClYoJmhEeOaWL3_pov7wg" name="HeatingElementInterface" isAbstract="true">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_sZTL8JmhEeOaWL3_pov7wg" name="stopCooking" isAbstract="true"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_sZTL8ZmhEeOaWL3_pov7wg" name="initialize" isAbstract="true"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_sZTL8pmhEeOaWL3_pov7wg" name="startCooking" isAbstract="true">
@@ -76,7 +76,7 @@
       </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_sHxpAJmfEeOaWL3_pov7wg" name="DoorComponent">
-      <packagedElement xmi:type="uml:Class" xmi:id="_toJPkJmfEeOaWL3_pov7wg" clientDependency="_zLovgJmuEeOaWL3_pov7wg" name="DoorSensorInterface"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_toJPkJmfEeOaWL3_pov7wg" name="DoorSensorInterface"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_zLovgJmuEeOaWL3_pov7wg" name="Usage1" client="_toJPkJmfEeOaWL3_pov7wg" supplier="_XEk_MJmjEeOaWL3_pov7wg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_6LKKkJmnEeOaWL3_pov7wg" name="LampComponent">
@@ -88,7 +88,7 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_APWhoJmoEeOaWL3_pov7wg" name="switchOn"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_BB1ugJmoEeOaWL3_pov7wg" name="switchOff"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_CJ4UoJmoEeOaWL3_pov7wg" clientDependency="_FYOf8JmoEeOaWL3_pov7wg" name="LampInterface">
+      <packagedElement xmi:type="uml:Class" xmi:id="_CJ4UoJmoEeOaWL3_pov7wg" name="LampInterface">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_G7x9YJmoEeOaWL3_pov7wg" name="switchOff"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_G7x9YZmoEeOaWL3_pov7wg" name="initialize"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_G7x9YpmoEeOaWL3_pov7wg" name="switchOn"/>
@@ -104,7 +104,7 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hFyzMJmoEeOaWL3_pov7wg" name="startTurning"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_h6p-oJmoEeOaWL3_pov7wg" name="stopTurning"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_nSHLgJmoEeOaWL3_pov7wg" clientDependency="_rlKVEJmoEeOaWL3_pov7wg" name="TurntableInterface">
+      <packagedElement xmi:type="uml:Class" xmi:id="_nSHLgJmoEeOaWL3_pov7wg" name="TurntableInterface">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_sJX1YJmoEeOaWL3_pov7wg" name="initialize"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_s69qYJmoEeOaWL3_pov7wg" name="startTurning"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_tq5SgJmoEeOaWL3_pov7wg" name="stopTurning"/>
@@ -112,7 +112,7 @@
       <packagedElement xmi:type="uml:Realization" xmi:id="_rlKVEJmoEeOaWL3_pov7wg" name="Realization1" client="_nSHLgJmoEeOaWL3_pov7wg" supplier="_d1kYkJmoEeOaWL3_pov7wg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_Z5F1kJmgEeOaWL3_pov7wg" name="KeypadComponent">
-      <packagedElement xmi:type="uml:Class" xmi:id="_dAedQJmgEeOaWL3_pov7wg" clientDependency="_3UkTwJmuEeOaWL3_pov7wg" name="KeypadInterface"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dAedQJmgEeOaWL3_pov7wg" name="KeypadInterface"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_3UkTwJmuEeOaWL3_pov7wg" name="Usage1" client="_dAedQJmgEeOaWL3_pov7wg" supplier="_XEk_MJmjEeOaWL3_pov7wg"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_8CR2gJmiEeOaWL3_pov7wg" name="OvenTimer">
@@ -123,7 +123,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_HlW4IJmjEeOaWL3_pov7wg" clientDependency="_R6XkIJmjEeOaWL3_pov7wg _SPg3QJmvEeOaWL3_pov7wg _SzGsgJmvEeOaWL3_pov7wg _WReQ0JmvEeOaWL3_pov7wg _YiobIJmvEeOaWL3_pov7wg" name="OvenTimer">
+      <packagedElement xmi:type="uml:Class" xmi:id="_HlW4IJmjEeOaWL3_pov7wg" name="OvenTimer">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_PF54cJmjEeOaWL3_pov7wg" name="sendTimerRequest">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_PF54cZmjEeOaWL3_pov7wg" name="timerRequest">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -144,7 +144,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_mq3-oJmjEeOaWL3_pov7wg" clientDependency="_xcE3YJmjEeOaWL3_pov7wg _5yZBEJmuEeOaWL3_pov7wg _93U2IJmuEeOaWL3_pov7wg _CaPAoJmvEeOaWL3_pov7wg _C_lwcJmvEeOaWL3_pov7wg _G-BU4JmvEeOaWL3_pov7wg _LeEYoJmvEeOaWL3_pov7wg _MZmMwJmvEeOaWL3_pov7wg _NQQvAJmvEeOaWL3_pov7wg _OMGFIJmvEeOaWL3_pov7wg _PJ6YQJmvEeOaWL3_pov7wg _VPpAYJmvEeOaWL3_pov7wg _ZBGf0JmvEeOaWL3_pov7wg" name="MicrowaveOvenControl">
+      <packagedElement xmi:type="uml:Class" xmi:id="_mq3-oJmjEeOaWL3_pov7wg" name="MicrowaveOvenControl">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_vGmNwJmjEeOaWL3_pov7wg" name="sendControlRequest">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_vGmNwZmjEeOaWL3_pov7wg" name="controlRequest">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -227,7 +227,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_Ir27QJmlEeOaWL3_pov7wg" clientDependency="_SJ90cJmlEeOaWL3_pov7wg _SmcVEJmlEeOaWL3_pov7wg _TEIWoJmlEeOaWL3_pov7wg _TlQtwJmlEeOaWL3_pov7wg _UAYjgJmlEeOaWL3_pov7wg _d6oakJmvEeOaWL3_pov7wg" name="OvenData">
+      <packagedElement xmi:type="uml:Class" xmi:id="_Ir27QJmlEeOaWL3_pov7wg" name="OvenData">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_y8iSoJmlEeOaWL3_pov7wg" name="cookingTime" visibility="public">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zm0lwJmlEeOaWL3_pov7wg" value="1"/>
@@ -346,7 +346,7 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_ah8hIJmnEeOaWL3_pov7wg" name="startTOD"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_bM0qIJmnEeOaWL3_pov7wg" name="stopTOD"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_c1wW0JmnEeOaWL3_pov7wg" clientDependency="_scVDEJmnEeOaWL3_pov7wg _lKG5AJmvEeOaWL3_pov7wg _oM7JwJmvEeOaWL3_pov7wg" name="TODTimer">
+      <packagedElement xmi:type="uml:Class" xmi:id="_c1wW0JmnEeOaWL3_pov7wg" name="TODTimer">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_iLpdcJmnEeOaWL3_pov7wg" name="startTOD"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_jfCX8JmnEeOaWL3_pov7wg" name="stopTOD"/>
       </packagedElement>
@@ -376,7 +376,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_jlh28JmmEeOaWL3_pov7wg" clientDependency="_ubGSUJmmEeOaWL3_pov7wg" name="Recipes">
+      <packagedElement xmi:type="uml:Class" xmi:id="_jlh28JmmEeOaWL3_pov7wg" name="Recipes">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_-_sGAJmmEeOaWL3_pov7wg" name="recipe" type="_2chLEJmmEeOaWL3_pov7wg" aggregation="shared" association="_-_t7MJmmEeOaWL3_pov7wg">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-_sGAZmmEeOaWL3_pov7wg" value="1"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-_sGApmmEeOaWL3_pov7wg" value="*"/>
@@ -451,7 +451,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_zo9PkJmsEeOaWL3_pov7wg" clientDependency="_CkGZMJmtEeOaWL3_pov7wg" name="DisplayPrompts" isAbstract="true">
+      <packagedElement xmi:type="uml:Class" xmi:id="_zo9PkJmsEeOaWL3_pov7wg" name="DisplayPrompts" isAbstract="true">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_9GVI8JmsEeOaWL3_pov7wg" name="read" isAbstract="true">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_9GVI8ZmsEeOaWL3_pov7wg" name="promptID">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -618,7 +618,7 @@
           </ownedParameter>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_apL0wJmrEeOaWL3_pov7wg" clientDependency="_njfIAJmrEeOaWL3_pov7wg _qwQpMJmvEeOaWL3_pov7wg" name="DisplayInterface" isAbstract="true">
+      <packagedElement xmi:type="uml:Class" xmi:id="_apL0wJmrEeOaWL3_pov7wg" name="DisplayInterface" isAbstract="true">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_hJe5AJmrEeOaWL3_pov7wg" name="displayTOD" isAbstract="true">
           <ownedParameter xmi:type="uml:Parameter" xmi:id="_hJe5AZmrEeOaWL3_pov7wg" name="tod">
             <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
@@ -797,4 +797,12 @@
   <concerns:microwaveOvenKernel xmi:id="_-Z0q8JnJEeOxiNx1rb5-sA" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
   <smarty:mandatory xmi:id="_-aMeYJnJEeOxiNx1rb5-sA" base_Class="_toJPkJmfEeOaWL3_pov7wg"/>
   <smarty:mandatory xmi:id="_Iah64JnKEeOxiNx1rb5-sA" base_Class="_4fyukJmfEeOaWL3_pov7wg"/>
+  <concerns:heatingElement xmi:id="_W6L5oDg_EeSxOMFRiP4ohw" base_Class="_51ReUJmgEeOaWL3_pov7wg"/>
+  <concerns:light xmi:id="_Xz0QUDg_EeSxOMFRiP4ohw" base_Class="_8S0aoJmnEeOaWL3_pov7wg"/>
+  <concerns:weightSensor xmi:id="_ZrsX8Dg_EeSxOMFRiP4ohw" base_Class="_4fyukJmfEeOaWL3_pov7wg"/>
+  <concerns:turntable xmi:id="_cl104Dg_EeSxOMFRiP4ohw" base_Class="_d1kYkJmoEeOaWL3_pov7wg"/>
+  <concerns:beeper xmi:id="_d-S1kDg_EeSxOMFRiP4ohw" base_Class="_7uz5MJmoEeOaWL3_pov7wg"/>
+  <concerns:todClock xmi:id="_fQxKEDg_EeSxOMFRiP4ohw" base_Class="_WeZMIJmnEeOaWL3_pov7wg"/>
+  <concerns:displayLanguage xmi:id="_hYKUYDg_EeSxOMFRiP4ohw" base_Class="_e5dhsJmsEeOaWL3_pov7wg"/>
+  <concerns:displayUnit xmi:id="_ifl2gDg_EeSxOMFRiP4ohw" base_Class="_Qr9zIJmqEeOaWL3_pov7wg"/>
 </xmi:XMI>

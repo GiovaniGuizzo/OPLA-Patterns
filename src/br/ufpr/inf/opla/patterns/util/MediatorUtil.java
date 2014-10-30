@@ -138,7 +138,7 @@ public class MediatorUtil {
             operation.getParameters().add(new ParameterMethod("eventOfInterest", "Object", "in"));
             mediator.addExternalOperation(operation);
 
-            RelationshipUtil.createNewUsageRelationship("uses", mediator, eventOfInterest);
+            RelationshipUtil.createNewDependencyRelationship("uses", mediator, eventOfInterest);
         }
 
         return mediator;
@@ -228,8 +228,8 @@ public class MediatorUtil {
             operation.getParameters().add(new ParameterMethod("mediator", "Object", "in"));
             colleague.addExternalOperation(operation);
 
-            RelationshipUtil.createNewUsageRelationship("uses", colleague, eventOfInterest);
-            RelationshipUtil.createNewUsageRelationship("uses", colleague, mediatorInterface);
+            RelationshipUtil.createNewDependencyRelationship("uses", colleague, eventOfInterest);
+            RelationshipUtil.createNewDependencyRelationship("uses", colleague, mediatorInterface);
         }
 
         return colleague;

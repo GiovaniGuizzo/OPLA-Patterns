@@ -128,6 +128,15 @@ public class RelationshipUtil {
         return associationRelationship;
     }
 
+    public static DependencyRelationship createNewDependencyRelationship(String relationshipName, Element client, Element supplier) {
+        Architecture architecture = ArchitectureRepository.getCurrentArchitecture();
+
+        DependencyRelationship dependency = new DependencyRelationship(supplier, client, relationshipName);
+        architecture.addRelationship(dependency);
+        ElementUtil.addRequiredInterface(client, supplier);
+        return dependency;
+    }
+
     private RelationshipUtil() {
     }
 

@@ -128,7 +128,7 @@ public class Mediator extends DesignPattern {
 
                 // Usar colleagues
                 for (Element element : participants) {
-                    RelationshipUtil.createNewUsageRelationship("usesColleague", mediatorClass, element);
+                    RelationshipUtil.createNewDependencyRelationship("usesColleague", mediatorClass, element);
                 }
 
                 // Aplicar Estereótipo
